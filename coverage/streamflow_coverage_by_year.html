@@ -1,10 +1,10 @@
 <meta charset="utf-8">
-<title>East River Geochem by Year</title>
+<title>East River Streamflow gauges by Year</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one header band with summary + controls, then a single scrollable matrix (sticky row labels & analyte headers). */
+/* Layout: one header band with summary + controls, then a single scrollable matrix (sticky row labels & column headers). */
 :root{
   --bg:#f6f7f9; --surface:#ffffff; --empty:#eef0f3; --line:#dde1e7;
   --ink:#1b2129; --ink-2:#4a5463; --ink-3:#7a8494; --accent:#256abf;
@@ -49,12 +49,12 @@ input[type=search]{width:170px}
 
 .legend{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;font-size:12px;color:var(--ink-2)}
 .legend .ttl{font-weight:600;color:var(--ink);margin-right:2px}
-.legend .bins{display:flex;gap:2px;align-items:flex-end}
-.legend .bin{display:flex;flex-direction:column;align-items:center;gap:3px}
-.legend .sw{width:38px;height:12px;border-radius:2px}
+.legend .bins{display:flex;flex-wrap:wrap;gap:2px 4px;align-items:flex-end}
+.legend .bin{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:38px}
+.legend .sw{width:100%;height:12px;border-radius:2px}
 .legend .bl{font-family:var(--f-data);font-size:11px;color:var(--ink-3)}
 .legend .none{display:flex;align-items:center;gap:6px}
-.legend .none .sw{width:14px;background:var(--empty);border:1px solid var(--line)}
+.legend .none .sw{width:14px;flex:none;background:var(--empty);border:1px solid var(--line)}
 
 .frame{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:auto;max-height:78vh;position:relative}
 table{border-collapse:separate;border-spacing:0;font-variant-numeric:tabular-nums}
@@ -103,6 +103,7 @@ tbody tr.grp:first-child th, tbody tr.grp:first-child td{box-shadow:none}
 tr.grp.closed .chev{transform:rotate(-90deg)}
 tr.grp .code{font-weight:500}
 tr.yr th{padding-left:34px}
+.sum{font-family:var(--f-data);font-size:11px;color:var(--ink-3);margin-left:auto;padding-left:8px}
 .yl{font-family:var(--f-data);font-size:11px;color:var(--ink-2)}
 @media (prefers-reduced-motion:reduce){.chev{transition:none}}
 .empty{padding:40px 16px;color:var(--ink-3);text-align:center}
@@ -119,9 +120,9 @@ tr.yr th{padding-left:34px}
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">East River · SSI geochem export</div>
-    <h1>Data points per site, depth, year and analyte</h1>
-    <p class="lede">Each site and depth has one row per year with data. Each cell counts the measurements in <code style="font-family:var(--f-data);font-size:12.5px">geochemdata_all.tsv</code> for one analyte in that year. Click a site row to collapse or expand its years. The all-years version is <a href="geochem_coverage.html" style="color:var(--accent)">Geochem coverage</a>.</p>
+    <div class="eyebrow">East River · SSI streamflow gauges export</div>
+    <h1>Data points per site, depth, year and variable</h1>
+    <p class="lede">Each site and depth has one row per year with data. Each cell counts the measurements in <code style="font-family:var(--f-data);font-size:12.5px">streamflow_all.tsv</code> for one variable in that year.  Click a site row to collapse or expand its years. The all-years version is <a href="streamflow_coverage.html" style="color:var(--accent)">Streamflow gauges coverage</a>.</p>
     <div class="stats" id="stats"></div>
   </header>
 
@@ -143,14 +144,14 @@ tr.yr th{padding-left:34px}
 
   <div class="frame" id="frame"></div>
 
-  <p class="foot">Source: <code>geochemdata_all.tsv</code>, exported from the SSI database with <code>ssiexport.py export datastreams --family geochem</code>. Hover or tap a cell for the first and last sample date in that year. Years with no data at a site are not shown. Depths are in meters as recorded by the datastream.</p>
+  <p class="foot">Source: <code>streamflow_all.tsv</code>, exported from the SSI database with <code>ssiexport.py export datastreams --family streamflow</code>. Hover or tap a cell for the first and last sample date in that year. Years with no data at a site are not shown. Depths are in meters as recorded by the datastream.</p>
 </div>
 <div id="tip" hidden></div>
 
 <script>
-const D = __DATA__;
+const D = {"rows":[["CE-CMT0","Cement Creek CQ Station","waterQualityStation",null],["ER-AVY1","Avery Creek","waterQualityStation",null],["ER-BRD1","Bradley Creek","waterQualityStation",null],["ER-CPR1","Copper Creek","waterQualityStation",null],["ER-EAQ1","East River above Quigley Creek","waterQualityStation",null],["ER-EBC1","East River below Copper Creek","waterQualityStation",null],["ER-GTH1","Gothic Creek","waterQualityStation",null],["ER-MMT1","Marmot Creek","waterQualityStation",null],["ER-PHF0","Pumphouse ISCO","waterQualityStation",null],["ER-QLY1","Quigley Creek","waterQualityStation",null],["ER-RCK1","Rock Creek","borehole",null],["ER-RUS1","Rustlers Gulch","borehole",null],["LO-LOC1","Lottis Creek gauging station","waterQualityStation",null],["SG-SUF1","Snodgrass Upper Flume","waterQualityStation",null],["TR-TCG1","Trail Creek gauging station","waterQualityStation",null],["TR-TCG2","Upper Trail Creek gauging station","site",null]],"cols":["Stream Discharge"],"units":["m^3/s"],"groups":[["",1]],"total":2315465,"span":["2014-09-01","2025-11-14"],"yrows":[[0,2023],[0,2024],[0,2025],[1,2014],[1,2015],[1,2016],[1,2017],[2,2015],[2,2016],[2,2017],[2,2018],[2,2019],[2,2020],[2,2021],[3,2015],[3,2016],[3,2017],[3,2018],[3,2020],[3,2021],[3,2023],[3,2024],[3,2025],[4,2014],[4,2015],[4,2016],[4,2018],[4,2019],[4,2020],[4,2021],[5,2018],[5,2019],[5,2020],[5,2021],[5,2023],[5,2025],[6,2014],[6,2015],[6,2016],[7,2014],[7,2015],[7,2016],[8,2014],[8,2015],[8,2016],[8,2017],[8,2018],[8,2019],[8,2020],[8,2021],[8,2023],[8,2024],[8,2025],[9,2014],[9,2015],[9,2016],[10,2014],[10,2015],[10,2016],[10,2017],[10,2018],[10,2019],[10,2020],[10,2021],[11,2015],[11,2016],[11,2017],[11,2018],[11,2019],[11,2020],[11,2021],[12,2023],[13,2023],[13,2024],[13,2025],[14,2025],[15,2025]],"cells":[[0,0,13226,"06-30","09-30"],[1,0,20508,"04-30","10-28"],[2,0,27388,"04-16","10-24"],[3,0,4266,"09-01","12-31"],[4,0,37625,"01-01","12-31"],[5,0,52704,"01-01","12-31"],[6,0,39879,"01-01","10-04"],[7,0,17363,"09-01","12-31"],[8,0,52702,"01-01","12-31"],[9,0,32874,"01-01","08-17"],[10,0,18396,"05-01","12-31"],[11,0,52563,"01-01","12-31"],[12,0,52705,"01-01","12-31"],[13,0,39358,"01-01","10-01"],[14,0,16720,"09-06","12-31"],[15,0,52692,"01-01","12-31"],[16,0,46301,"01-01","12-31"],[17,0,39493,"01-01","10-02"],[18,0,2262,"12-16","12-31"],[19,0,39352,"01-01","10-01"],[20,0,24333,"05-09","10-25"],[21,0,2304,"04-20","10-01"],[22,0,31229,"04-11","11-14"],[23,0,2854,"09-01","12-31"],[24,0,32357,"01-01","12-31"],[25,0,41277,"01-01","10-13"],[26,0,10118,"10-22","12-31"],[27,0,52561,"01-01","12-31"],[28,0,52701,"01-01","12-31"],[29,0,35982,"01-01","10-01"],[30,0,9956,"10-23","12-31"],[31,0,73715,"01-01","12-31"],[32,0,40982,"01-01","12-31"],[33,0,37816,"01-01","10-01"],[34,0,2179,"05-09","10-01"],[35,0,15097,"04-11","11-14"],[36,0,4266,"09-01","12-31"],[37,0,37628,"01-01","12-31"],[38,0,41429,"01-01","10-14"],[39,0,4266,"09-01","12-31"],[40,0,37626,"01-01","12-31"],[41,0,41434,"01-01","10-14"],[42,0,1429,"10-01","12-31"],[43,0,31864,"01-01","12-31"],[44,0,50165,"01-01","12-31"],[45,0,34683,"01-01","12-31"],[46,0,27407,"01-01","10-16"],[47,0,22503,"05-14","12-31"],[48,0,29263,"01-01","12-31"],[49,0,24589,"01-01","10-01"],[50,0,92,"10-01","12-31"],[51,0,19221,"01-01","10-01"],[52,0,14763,"04-11","10-01"],[53,0,122,"09-01","12-31"],[54,0,26987,"01-01","12-31"],[55,0,41287,"01-01","10-13"],[56,0,4266,"09-01","12-31"],[57,0,37628,"01-01","12-31"],[58,0,52704,"01-01","12-31"],[59,0,39713,"01-01","10-03"],[60,0,10117,"10-22","12-31"],[61,0,50856,"01-01","12-31"],[62,0,52702,"01-01","12-31"],[63,0,39354,"01-01","10-01"],[64,0,10514,"10-19","12-31"],[65,0,52704,"01-01","12-31"],[66,0,52548,"01-01","12-31"],[67,0,51575,"01-01","12-31"],[68,0,52561,"01-01","12-31"],[69,0,52701,"01-01","12-31"],[70,0,39440,"01-01","10-01"],[71,0,23686,"05-01","10-13"],[72,0,19370,"05-19","10-01"],[73,0,3984,"04-18","10-01"],[74,0,23152,"04-20","10-01"],[75,0,15591,"05-08","10-01"],[76,0,15437,"05-08","10-01"]],"bins":[[1,5000,"1\u20135,000",0],[5001,20000,"5,001\u201320,000",1],[20001,25000,"20,001\u201325,000",3],[25001,50000,"25,001\u201350,000",4],[50001,100000,"50,001\u2013100,000",6],[100001,null,"100,001+",7]]};
 const TYPES = {waterQualityStation:"Water quality stations", borehole:"Boreholes", site:"Sites", fieldArea:"Field areas"};
-const BINS = [[1,1,"1"],[2,3,"2–3"],[4,6,"4–6"],[7,12,"7–12"],[13,25,"13–25"],[26,50,"26–50"],[51,100,"51–100"],[101,Infinity,"101+"]];
+const BINS = D.bins.map(([a,b,l,k]) => [a, b==null?Infinity:b, l, k]);
 const binOf = n => BINS.findIndex(b => n>=b[0] && n<=b[1]);
 const fmt = n => n.toLocaleString("en-US");
 const NC = D.cols.length;
@@ -164,9 +165,9 @@ const groupStart = new Set(); { let k=0; D.groups.forEach(([,n])=>{ groupStart.a
 
 const sites = new Set(D.rows.map(r=>r[0]));
 document.getElementById("stats").innerHTML =
-  `<span><b>${fmt(D.total)}</b> data points</span><span><b>${sites.size}</b> sites</span><span><b>${D.rows.length}</b> site × depth groups</span><span><b>${D.yrows.length}</b> year rows</span><span><b>${NC}</b> analytes</span><span><b>${D.span[0].slice(0,4)}–${D.span[1].slice(0,4)}</b></span>`;
+  `<span><b>${fmt(D.total)}</b> data points</span><span><b>${sites.size}</b> sites</span><span><b>${D.rows.length}</b> site × depth groups</span><span><b>${D.yrows.length}</b> year rows</span><span><b>${NC}</b> ${NC===1?"variable":"variables"}</span><span><b>${D.span[0].slice(0,4)}–${D.span[1].slice(0,4)}</b></span>`;
 document.getElementById("legend").innerHTML = `<span class="ttl">Data points per cell per year</span><div class="bins">${
-  BINS.map((b,i)=>`<div class="bin"><span class="sw" style="background:var(--s${i})"></span><span class="bl">${b[2]}</span></div>`).join("")
+  BINS.map((b,i)=>`<div class="bin"><span class="sw" style="background:var(--s${b[3]})"></span><span class="bl">${b[2]}</span></div>`).join("")
 }</div><span class="none"><span class="sw"></span>No data that year</span>`;
 
 const state = {types:new Set(Object.keys(TYPES)), sort:"site", q:"", nums:false, closed:new Set()};
@@ -214,14 +215,14 @@ function render(){
   idx.forEach(r => {
     const [code,name,,dep] = D.rows[r], ys = kids[r], closed = state.closed.has(r);
     const y0 = D.yrows[ys[0]][1], y1 = D.yrows[ys[ys.length-1]][1];
-    h += `<tr class="grp${closed?" closed":""}" data-g="${r}"><th><div class="rl" role="button" tabindex="0" aria-expanded="${!closed}"><span class="chev">▼</span><span class="code">${esc(code)}</span><span class="dep">${depLabel(dep)}</span><span class="nm">${esc(name)}</span></div></th>`;
-    h += `<td colspan="${NC}">${ys.length} year${ys.length===1?"":"s"} · ${y0===y1?y0:y0+"–"+y1}</td><td class="tot">${fmt(rowTot[r])}</td></tr>`;
+    h += `<tr class="grp${closed?" closed":""}" data-g="${r}"><th><div class="rl" role="button" tabindex="0" aria-expanded="${!closed}"><span class="chev">▼</span><span class="code">${esc(code)}</span><span class="dep">${depLabel(dep)}</span><span class="nm">${esc(name)}</span><span class="sum">${ys.length} yr${ys.length===1?"":"s"} · ${y0===y1?y0:y0+"–"+y1}</span></div></th>`;
+    h += `<td colspan="${NC}"></td><td class="tot">${fmt(rowTot[r])}</td></tr>`;
     if (closed) return;
     ys.forEach(y => {
       h += `<tr class="yr" data-y="${y}"><th><span class="yl">${D.yrows[y][1]}</span></th>`;
       M[y].forEach((x,c) => {
         const gs = groupStart.has(c)&&c ? " gs" : "";
-        h += x ? `<td class="c${gs}" data-c="${c}"><i class="b${binOf(x[0])}">${state.nums?x[0]:""}</i></td>`
+        h += x ? `<td class="c${gs}" data-c="${c}"><i class="b${BINS[binOf(x[0])][3]}">${state.nums?x[0]:""}</i></td>`
                : `<td class="c${gs}" data-c="${c}"><i></i></td>`;
       });
       h += `<td class="tot">${fmt(yTot[y])}</td></tr>`;

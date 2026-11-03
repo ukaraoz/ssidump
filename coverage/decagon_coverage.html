@@ -1,0 +1,242 @@
+<meta charset="utf-8">
+<title>East River Decagon sensors Coverage</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one header band with summary + controls, then a single scrollable matrix (sticky row labels & column headers). */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --empty:#eef0f3; --line:#dde1e7;
+  --ink:#1b2129; --ink-2:#4a5463; --ink-3:#7a8494; --accent:#256abf;
+  --s0:#cde2fb; --s1:#9ec5f4; --s2:#6da7ec; --s3:#5598e7; --s4:#3987e5; --s5:#256abf; --s6:#184f95; --s7:#0d366b;
+  --tip-bg:#1b2129; --tip-ink:#f2f4f7;
+  --f-ui:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-data:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --cell:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12161b; --surface:#191e25; --empty:#20262e; --line:#2c333d;
+  --ink:#e8ebf0; --ink-2:#aab3c0; --ink-3:#7c8695; --accent:#6da7ec;
+  --s0:#163a66; --s1:#184f95; --s2:#1c5cab; --s3:#256abf; --s4:#3987e5; --s5:#6da7ec; --s6:#9ec5f4; --s7:#cde2fb;
+  --tip-bg:#e8ebf0; --tip-ink:#12161b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12161b; --surface:#191e25; --empty:#20262e; --line:#2c333d;
+  --ink:#e8ebf0; --ink-2:#aab3c0; --ink-3:#7c8695; --accent:#6da7ec;
+  --s0:#163a66; --s1:#184f95; --s2:#1c5cab; --s3:#256abf; --s4:#3987e5; --s5:#6da7ec; --s6:#9ec5f4; --s7:#cde2fb;
+  --tip-bg:#e8ebf0; --tip-ink:#12161b; color-scheme:dark}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:14px;line-height:1.45}
+.wrap{max-width:1500px;margin:0 auto;padding-block:28px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+h1{font-size:26px;line-height:1.15;margin:0;font-weight:700;text-wrap:balance;letter-spacing:-.01em}
+.lede{color:var(--ink-2);margin:0;max-width:72ch}
+.stats{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:6px;font-size:13px;color:var(--ink-2)}
+.stats b{font-family:var(--f-data);font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+
+.controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:13px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip .k{font-family:var(--f-data);font-size:11.5px;opacity:.75;margin-left:4px}
+.field{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2)}
+select,input[type=search]{font:inherit;font-size:13px;padding:5px 8px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+input[type=search]{width:170px}
+.toggle{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2);cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;font-size:12px;color:var(--ink-2)}
+.legend .ttl{font-weight:600;color:var(--ink);margin-right:2px}
+.legend .bins{display:flex;flex-wrap:wrap;gap:2px 4px;align-items:flex-end}
+.legend .bin{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:38px}
+.legend .sw{width:100%;height:12px;border-radius:2px}
+.legend .bl{font-family:var(--f-data);font-size:11px;color:var(--ink-3)}
+.legend .none{display:flex;align-items:center;gap:6px}
+.legend .none .sw{width:14px;flex:none;background:var(--empty);border:1px solid var(--line)}
+
+.frame{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:auto;max-height:78vh;position:relative}
+table{border-collapse:separate;border-spacing:0;font-variant-numeric:tabular-nums}
+th,td{padding:0}
+thead th{position:sticky;background:var(--surface);z-index:2}
+thead tr.g th{top:0;height:24px;font-size:11px;font-weight:600;color:var(--ink-3);text-align:left;white-space:nowrap;letter-spacing:.04em;text-transform:uppercase;vertical-align:bottom;padding-bottom:3px}
+thead tr.g th.gh{border-bottom:1px solid var(--line);padding-left:2px;max-width:0}
+thead tr.g th.gh span{display:block;width:0;overflow:visible;white-space:nowrap}
+thead tr.a th{width:var(--cell);min-width:var(--cell);max-width:calc(var(--cell) + 8px)}
+thead tr.a th{top:24px;height:104px;vertical-align:bottom;border-bottom:1px solid var(--line)}
+.vlab{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11.5px;color:var(--ink-2);font-weight:500;white-space:nowrap;padding:6px 0;margin:0 auto;line-height:1}
+th.corner{left:0;z-index:4;text-align:left;vertical-align:bottom;padding:0 10px 6px 12px;font-size:11px;color:var(--ink-3);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+tbody th{position:sticky;left:0;z-index:1;background:var(--surface);text-align:left;font-weight:400;white-space:nowrap;padding:0 10px 0 12px;height:calc(var(--cell) + 2px);border-right:1px solid var(--line)}
+tbody tr.first th{box-shadow:inset 0 1px 0 var(--line)}
+tbody tr.first td{box-shadow:inset 0 1px 0 var(--line)}
+tbody tr:first-child th, tbody tr:first-child td{box-shadow:none}
+.rl{display:flex;gap:8px;align-items:baseline;font-size:12px;line-height:1}
+.code{font-family:var(--f-data);font-size:11.5px;color:var(--ink);min-width:74px}
+.code.rep{color:transparent}
+.dep{font-family:var(--f-data);font-size:11px;color:var(--ink-2);min-width:48px;text-align:right}
+.nm{color:var(--ink-3);font-size:11.5px;max-width:150px;overflow:hidden;text-overflow:ellipsis}
+td.c{width:var(--cell);min-width:var(--cell);height:calc(var(--cell) + 2px);padding:1px}
+td.c i{display:block;height:var(--cell);border-radius:2px;background:var(--empty)}
+td.c.gs{padding-left:6px}
+td.c i.b0{background:var(--s0)} td.c i.b1{background:var(--s1)} td.c i.b2{background:var(--s2)} td.c i.b3{background:var(--s3)}
+td.c i.b4{background:var(--s4)} td.c i.b5{background:var(--s5)} td.c i.b6{background:var(--s6)} td.c i.b7{background:var(--s7)}
+td.c:hover i{outline:2px solid var(--ink);outline-offset:-1px}
+td.tot{font-family:var(--f-data);font-size:11px;color:var(--ink-2);text-align:right;padding:0 12px 0 12px;white-space:nowrap}
+th.toth{vertical-align:bottom;text-align:right;padding:0 12px 6px;font-size:11px;color:var(--ink-3);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+tr.hl th, tr.hl td.tot{background:var(--empty)}
+.nums{--cell:30px}
+.nums td.c i{font-family:var(--f-data);font-style:normal;font-size:10px;line-height:var(--cell);text-align:center;color:var(--ink)}
+.nums td.c i.b4,.nums td.c i.b5,.nums td.c i.b6,.nums td.c i.b7{color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .nums td.c i.b5,:root:not([data-theme="light"]) .nums td.c i.b6,:root:not([data-theme="light"]) .nums td.c i.b7{color:#0d1a2b}}
+:root[data-theme="dark"] .nums td.c i.b5,:root[data-theme="dark"] .nums td.c i.b6,:root[data-theme="dark"] .nums td.c i.b7{color:#0d1a2b}
+tfoot td,tfoot th{position:sticky;bottom:0;background:var(--surface);border-top:1px solid var(--line);z-index:2}
+tfoot th{left:0;z-index:4;text-align:left;padding:4px 10px 4px 12px;font-size:11px;color:var(--ink-3);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+tfoot td.ct{height:46px;vertical-align:top;padding-top:4px}
+tfoot .vn{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--f-data);font-size:10px;color:var(--ink-2);margin:0 auto;white-space:nowrap}
+.empty{padding:40px 16px;color:var(--ink-3);text-align:center}
+.foot{font-size:12px;color:var(--ink-3);max-width:90ch}
+.foot code{font-family:var(--f-data);font-size:11.5px}
+
+#tip{position:fixed;z-index:20;pointer-events:none;background:var(--tip-bg);color:var(--tip-ink);border-radius:6px;padding:8px 10px;font-size:12px;line-height:1.4;max-width:280px;box-shadow:0 4px 16px rgba(0,0,0,.18)}
+#tip .t1{font-weight:600}
+#tip .t2{opacity:.75}
+#tip .n{font-family:var(--f-data);font-size:15px;font-weight:500;margin-top:4px}
+#tip .d{font-family:var(--f-data);font-size:11px;opacity:.8}
+@media (max-width:600px){h1{font-size:21px}.nm{display:none}input[type=search]{width:130px}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">East River · SSI decagon sensors export</div>
+    <h1>Data points per site, depth and variable</h1>
+    <p class="lede">Each cell counts the measurements in <code style="font-family:var(--f-data);font-size:12.5px">decagon_all.tsv.gz</code> for one variable at one site and sampling depth. Several sensors at one station can report the same variable (for example soil temperature from MPS-6, 5TE and ECT probes on different ports); their counts add up in one cell. The export records no sensor depths. The four Pumphouse and four Snodgrass towers also log weather and instrument readings. For a year-by-year breakdown see <a href="decagon_coverage_by_year.html" style="color:var(--accent)">Decagon sensors by year</a>.</p>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="controls">
+    <div class="chips" id="types" role="group" aria-label="Site type"></div>
+    <label class="field" for="sort">Sort
+      <select id="sort">
+        <option value="site">Site code, then depth</option>
+        <option value="total">Most data points first</option>
+        <option value="breadth">Most variables first</option>
+      </select>
+    </label>
+    <label class="field" for="q">Find <input id="q" type="search" placeholder="Site code or name"></label>
+    <label class="toggle" for="nums"><input id="nums" type="checkbox"> Show counts in cells</label>
+  </div>
+
+  <div class="legend" id="legend"></div>
+
+  <div class="frame" id="frame"></div>
+
+  <p class="foot">Source: <code>decagon_all.tsv.gz</code>, exported from the SSI database with <code>ssiexport.py export datastreams --family decagon</code>. Hover or tap a cell for its date range. Depths are in meters as recorded by the datastream.</p>
+</div>
+<div id="tip" hidden></div>
+
+<script>
+const D = {"rows":[["ER-LMA1-1","Pumphouse Snow Manipulation Plot sensor station A1-1","site",null],["ER-LMA1-2","Pumphouse Snow Manipulation Plot sensor station A1-2","site",null],["ER-LMA2-1","Pumphouse Snow Manipulation Plot sensor station A2-1","site",null],["ER-LMA2-2","Pumphouse Snow Manipulation Plot sensor station A2-2","site",null],["ER-LMB1-1","Pumphouse Snow Manipulation Plot sensor station B1-1","site",null],["ER-LMB1-2","Pumphouse Snow Manipulation Plot sensor station B1-2","site",null],["ER-LMB2-1","Pumphouse Snow Manipulation Plot sensor station B2-1","site",null],["ER-LMB2-2","Pumphouse Snow Manipulation Plot sensor station B2-2","site",null],["ER-LMC1-1","Pumphouse Snow Manipulation Plot sensor station C1-1","site",null],["ER-LMC1-2","Pumphouse Snow Manipulation Plot sensor station C1-2","site",null],["ER-LMC2-1","Pumphouse Snow Manipulation Plot sensor station C2-1","site",null],["ER-LMC2-2","Pumphouse Snow Manipulation Plot sensor station C2-2","site",null],["ER-LMF1-1","Pumphouse floodplan sensor station FP - 1","site",null],["ER-LMF2-2","Pumphouse floodplan sensor station FP - 2","site",null],["ER-LMF3-3","Pumphouse floodplan sensor station FP - 3","site",null],["ER-PHS1","PumpHouse sensor tower #1","site",null],["ER-PHS2","Pumphouse sensor tower #2","site",null],["ER-PHS3","Pumphouse sensor tower #3","site",null],["ER-PHS4","Pumphouse sensor tower #4","site",null],["SG-EHS5","Snodgrass tower #5","site",null],["SG-EHS6","Snodgrass tower #6","site",null],["SG-EHS7","Snodgrass tower #7","site",null],["SG-EHS8","Snodgrass tower #8","site",null]],"cols":["Soil Electrical Conductivity","Soil Temperature","Soil Volumetric Water Content","Soil Water Potential","Absolute Atmospheric Pressure","Air Temperature","Gust Speed","Incoming Broadband Solar Radiation","Lightning Average Distance","Lightning Strike Count","Precipitation Rate","Rain Precipitation","Relative Humidity","Vapor Pressure Deficit","Vapor Pressure in Air","Wind Direction","Wind Speed","Battery Charge","Battery Voltage","Instrument Orientation X","Instrument Orientation Y","Instrument Reference Pressure","Instrument Reference Temperature"],"units":["uS/cm","degC; Cel","m^3/m^3","KPa","KPa","degC; Cel","m/s","W/m^2","km","unknown","mm/hr","mm","degC; Cel","KPa","KPa","deg","m/s","%","mV","deg","deg","KPa","degC; Cel"],"groups":[["Soil",4],["Weather (tower)",13],["Instrument",6]],"total":12855914,"span":["2016-10-04","2024-07-31"],"cells":[[0,0,17269,"2017-03-08","2020-07-11"],[0,1,185212,"2016-10-22","2021-01-16"],[0,2,74171,"2016-10-22","2021-01-16"],[0,3,74166,"2016-10-22","2021-01-16"],[1,0,33665,"2016-10-22","2020-12-03"],[1,1,185415,"2016-10-22","2021-01-16"],[1,2,74198,"2016-10-22","2021-01-16"],[1,3,74198,"2016-10-22","2021-01-16"],[2,0,22606,"2016-10-18","2020-12-02"],[2,1,186170,"2016-10-04","2021-01-16"],[2,2,74511,"2016-10-04","2021-01-16"],[2,3,74509,"2016-10-04","2021-01-16"],[3,0,24479,"2016-10-22","2020-10-11"],[3,1,185335,"2016-10-22","2021-01-16"],[3,2,74155,"2016-10-22","2021-01-16"],[3,3,74148,"2016-10-22","2021-01-16"],[4,0,18136,"2016-10-22","2020-07-03"],[4,1,185433,"2016-10-22","2021-01-16"],[4,2,74186,"2016-10-22","2021-01-16"],[4,3,74183,"2016-10-22","2021-01-16"],[5,0,41540,"2016-10-22","2020-10-05"],[5,1,184624,"2016-10-22","2021-01-16"],[5,2,73848,"2016-10-22","2021-01-16"],[5,3,73846,"2016-10-22","2021-01-16"],[6,0,24603,"2017-03-08","2020-11-28"],[6,1,185427,"2016-10-22","2021-01-16"],[6,2,74184,"2016-10-22","2021-01-16"],[6,3,74182,"2016-10-22","2021-01-16"],[7,0,7630,"2016-10-22","2018-05-26"],[7,1,72076,"2016-10-22","2018-06-29"],[7,2,29505,"2016-10-22","2018-06-29"],[7,3,29503,"2016-10-22","2018-06-29"],[8,0,13908,"2016-10-22","2018-12-08"],[8,1,92968,"2016-10-22","2018-12-08"],[8,2,37192,"2016-10-22","2018-12-08"],[8,3,37184,"2016-10-22","2018-12-08"],[9,0,23804,"2016-10-22","2020-06-30"],[9,1,168417,"2016-10-22","2021-01-16"],[9,2,67375,"2016-10-22","2021-01-16"],[9,3,67369,"2016-10-22","2021-01-16"],[10,0,17762,"2016-10-22","2020-11-15"],[10,1,185323,"2016-10-22","2021-01-16"],[10,2,74167,"2016-10-22","2021-01-16"],[10,3,74157,"2016-10-22","2021-01-16"],[11,0,27658,"2016-10-22","2020-11-30"],[11,1,173994,"2016-10-22","2021-01-16"],[11,2,68508,"2016-10-22","2021-01-16"],[11,3,68509,"2016-10-22","2021-01-16"],[12,0,71174,"2016-10-22","2021-01-16"],[12,1,185291,"2016-10-22","2021-01-16"],[12,2,74127,"2016-10-22","2021-01-16"],[12,3,74124,"2016-10-22","2021-01-16"],[13,0,68301,"2016-10-22","2021-01-16"],[13,1,176009,"2016-10-22","2021-01-16"],[13,2,70405,"2016-10-22","2021-01-16"],[13,3,70400,"2016-10-22","2021-01-16"],[14,0,69282,"2016-10-22","2021-01-16"],[14,1,185051,"2016-10-22","2021-01-16"],[14,2,74023,"2016-10-22","2021-01-16"],[14,3,74014,"2016-10-22","2021-01-16"],[15,4,42118,"2019-10-11","2024-07-31"],[15,5,42118,"2019-10-11","2024-07-31"],[15,17,42118,"2019-10-11","2024-07-31"],[15,18,42118,"2019-10-11","2024-07-31"],[15,6,42016,"2019-10-11","2024-07-31"],[15,7,42118,"2019-10-11","2024-07-31"],[15,19,42118,"2019-10-11","2024-07-31"],[15,20,42118,"2019-10-11","2024-07-31"],[15,21,42118,"2019-10-11","2024-07-31"],[15,22,42118,"2019-10-11","2024-07-31"],[15,8,42118,"2019-10-11","2024-07-31"],[15,9,42118,"2019-10-11","2024-07-31"],[15,10,42114,"2019-10-11","2024-07-31"],[15,11,42115,"2019-10-11","2024-07-31"],[15,12,42118,"2019-10-11","2024-07-31"],[15,0,168472,"2019-10-11","2024-07-31"],[15,1,210590,"2019-10-11","2024-07-31"],[15,2,168472,"2019-10-11","2024-07-31"],[15,3,42118,"2019-10-11","2024-07-31"],[15,13,41995,"2019-10-11","2024-07-31"],[15,14,42118,"2019-10-11","2024-07-31"],[15,15,42023,"2019-10-11","2024-07-31"],[15,16,42016,"2019-10-11","2024-07-31"],[16,4,35113,"2019-10-09","2023-10-11"],[16,5,35113,"2019-10-09","2023-10-11"],[16,17,35113,"2019-10-09","2023-10-11"],[16,18,35113,"2019-10-09","2023-10-11"],[16,6,35083,"2019-10-09","2023-10-11"],[16,7,35113,"2019-10-09","2023-10-11"],[16,19,35113,"2019-10-09","2023-10-11"],[16,20,35113,"2019-10-09","2023-10-11"],[16,21,35113,"2019-10-09","2023-10-11"],[16,22,35113,"2019-10-09","2023-10-11"],[16,8,35113,"2019-10-09","2023-10-11"],[16,9,35113,"2019-10-09","2023-10-11"],[16,10,35111,"2019-10-09","2023-10-11"],[16,11,35111,"2019-10-09","2023-10-11"],[16,12,35113,"2019-10-09","2023-10-11"],[16,0,140452,"2019-10-09","2023-10-11"],[16,1,175565,"2019-10-09","2023-10-11"],[16,2,140452,"2019-10-09","2023-10-11"],[16,3,35113,"2019-10-09","2023-10-11"],[16,13,35113,"2019-10-09","2023-10-11"],[16,14,35113,"2019-10-09","2023-10-11"],[16,15,35087,"2019-10-09","2023-10-11"],[16,16,35081,"2019-10-09","2023-10-11"],[17,4,10693,"2019-10-10","2021-09-28"],[17,5,10693,"2019-10-10","2021-09-28"],[17,17,28525,"2019-10-10","2023-10-11"],[17,18,28525,"2019-10-10","2023-10-11"],[17,6,10693,"2019-10-10","2021-09-28"],[17,7,10693,"2019-10-10","2021-09-28"],[17,19,10693,"2019-10-10","2021-09-28"],[17,20,10693,"2019-10-10","2021-09-28"],[17,21,28525,"2019-10-10","2023-10-11"],[17,22,28525,"2019-10-10","2023-10-11"],[17,8,10693,"2019-10-10","2021-09-28"],[17,9,10693,"2019-10-10","2021-09-28"],[17,10,10693,"2019-10-10","2021-09-28"],[17,11,10693,"2019-10-10","2021-09-28"],[17,12,10693,"2019-10-10","2021-09-28"],[17,0,114100,"2019-10-10","2023-10-11"],[17,1,142625,"2019-10-10","2023-10-11"],[17,2,114100,"2019-10-10","2023-10-11"],[17,3,28525,"2019-10-10","2023-10-11"],[17,13,10640,"2019-10-10","2021-09-28"],[17,14,10693,"2019-10-10","2021-09-28"],[17,15,10693,"2019-10-10","2021-09-28"],[17,16,10693,"2019-10-10","2021-09-28"],[18,4,16161,"2019-10-11","2021-09-28"],[18,5,16161,"2019-10-11","2021-09-28"],[18,17,54061,"2019-10-11","2023-10-11"],[18,18,54061,"2019-10-11","2023-10-11"],[18,6,16161,"2019-10-11","2021-09-28"],[18,7,16161,"2019-10-11","2021-09-28"],[18,19,16161,"2019-10-11","2021-09-28"],[18,20,16161,"2019-10-11","2021-09-28"],[18,21,54061,"2019-10-11","2023-10-11"],[18,22,54061,"2019-10-11","2023-10-11"],[18,8,16161,"2019-10-11","2021-09-28"],[18,9,16161,"2019-10-11","2021-09-28"],[18,10,16161,"2019-10-11","2021-09-28"],[18,11,16161,"2019-10-11","2021-09-28"],[18,12,16161,"2019-10-11","2021-09-28"],[18,0,209579,"2019-10-11","2023-10-11"],[18,1,263517,"2019-10-11","2023-10-11"],[18,2,209579,"2019-10-11","2023-10-11"],[18,3,53938,"2019-10-16","2023-10-11"],[18,13,16119,"2019-10-11","2021-09-28"],[18,14,16161,"2019-10-11","2021-09-28"],[18,15,16161,"2019-10-11","2021-09-28"],[18,16,16161,"2019-10-11","2021-09-28"],[19,4,32172,"2020-10-07","2024-07-31"],[19,5,32172,"2020-10-07","2024-07-31"],[19,17,32198,"2020-10-05","2024-07-31"],[19,18,32198,"2020-10-05","2024-07-31"],[19,6,32172,"2020-10-07","2024-07-31"],[19,7,32172,"2020-10-07","2024-07-31"],[19,19,32172,"2020-10-07","2024-07-31"],[19,20,32172,"2020-10-07","2024-07-31"],[19,21,32198,"2020-10-05","2024-07-31"],[19,22,32198,"2020-10-05","2024-07-31"],[19,8,32172,"2020-10-07","2024-07-31"],[19,9,32172,"2020-10-07","2024-07-31"],[19,10,32172,"2020-10-07","2024-07-31"],[19,11,32172,"2020-10-07","2024-07-31"],[19,12,32172,"2020-10-07","2024-07-31"],[19,0,128792,"2020-10-05","2024-07-31"],[19,1,160990,"2020-10-05","2024-07-31"],[19,2,128792,"2020-10-05","2024-07-31"],[19,3,29666,"2020-10-05","2024-07-31"],[19,13,32165,"2020-10-07","2024-07-31"],[19,14,32172,"2020-10-07","2024-07-31"],[19,15,32172,"2020-10-07","2024-07-31"],[19,16,32172,"2020-10-07","2024-07-31"],[20,4,25242,"2020-10-06","2024-06-20"],[20,5,25242,"2020-10-06","2024-06-20"],[20,17,27609,"2020-10-06","2024-06-20"],[20,18,27609,"2020-10-06","2024-06-20"],[20,6,25242,"2020-10-06","2024-06-20"],[20,7,25242,"2020-10-06","2024-06-20"],[20,19,25242,"2020-10-06","2024-06-20"],[20,20,25242,"2020-10-06","2024-06-20"],[20,21,27609,"2020-10-06","2024-06-20"],[20,22,27609,"2020-10-06","2024-06-20"],[20,8,25242,"2020-10-06","2024-06-20"],[20,9,25242,"2020-10-06","2024-06-20"],[20,10,25242,"2020-10-06","2024-06-20"],[20,11,25242,"2020-10-06","2024-06-20"],[20,12,25242,"2020-10-06","2024-06-20"],[20,0,81703,"2020-10-06","2024-06-20"],[20,1,109312,"2020-10-06","2024-06-20"],[20,2,81703,"2020-10-06","2024-06-20"],[20,3,9807,"2020-10-06","2024-06-20"],[20,13,25229,"2020-10-06","2024-06-20"],[20,14,25242,"2020-10-06","2024-06-20"],[20,15,25242,"2020-10-06","2024-06-20"],[20,16,25241,"2020-10-06","2024-06-20"],[21,4,24830,"2021-10-01","2024-07-31"],[21,5,24830,"2021-10-01","2024-07-31"],[21,17,24830,"2021-10-01","2024-07-31"],[21,18,24830,"2021-10-01","2024-07-31"],[21,6,24829,"2021-10-01","2024-07-31"],[21,7,24830,"2021-10-01","2024-07-31"],[21,19,24830,"2021-10-01","2024-07-31"],[21,20,24830,"2021-10-01","2024-07-31"],[21,21,24830,"2021-10-01","2024-07-31"],[21,22,24830,"2021-10-01","2024-07-31"],[21,8,24830,"2021-10-01","2024-07-31"],[21,9,24830,"2021-10-01","2024-07-31"],[21,10,24830,"2021-10-01","2024-07-31"],[21,11,24830,"2021-10-01","2024-07-31"],[21,12,24830,"2021-10-01","2024-07-31"],[21,0,74490,"2021-10-01","2024-07-31"],[21,1,99320,"2021-10-01","2024-07-31"],[21,2,74490,"2021-10-01","2024-07-31"],[21,3,24830,"2021-10-01","2024-07-31"],[21,13,24812,"2021-10-01","2024-07-31"],[21,14,24830,"2021-10-01","2024-07-31"],[21,15,24830,"2021-10-01","2024-07-31"],[21,16,24820,"2021-10-01","2024-07-31"],[22,4,24858,"2021-09-29","2024-07-31"],[22,5,24858,"2021-09-29","2024-07-31"],[22,17,24859,"2021-09-29","2024-07-31"],[22,18,24859,"2021-09-29","2024-07-31"],[22,6,24858,"2021-09-29","2024-07-31"],[22,7,24858,"2021-09-29","2024-07-31"],[22,19,24858,"2021-09-29","2024-07-31"],[22,20,24858,"2021-09-29","2024-07-31"],[22,21,24859,"2021-09-29","2024-07-31"],[22,22,24859,"2021-09-29","2024-07-31"],[22,8,24858,"2021-09-29","2024-07-31"],[22,9,24858,"2021-09-29","2024-07-31"],[22,10,24858,"2021-09-29","2024-07-31"],[22,11,24858,"2021-09-29","2024-07-31"],[22,12,24858,"2021-09-29","2024-07-31"],[22,0,97705,"2021-09-29","2024-07-31"],[22,1,122557,"2021-09-29","2024-07-31"],[22,2,97705,"2021-09-29","2024-07-31"],[22,3,24857,"2021-09-30","2024-07-31"],[22,13,24856,"2021-09-29","2024-07-31"],[22,14,24858,"2021-09-29","2024-07-31"],[22,15,24858,"2021-09-29","2024-07-31"],[22,16,24858,"2021-09-29","2024-07-31"]],"bins":[[1,20000,"1\u201320,000",0],[20001,25000,"20,001\u201325,000",2],[25001,50000,"25,001\u201350,000",4],[50001,100000,"50,001\u2013100,000",5],[100001,null,"100,001+",7]]};
+const TYPES = {waterQualityStation:"Water quality stations", borehole:"Boreholes", site:"Sites", fieldArea:"Field areas"};
+const BINS = D.bins.map(([a,b,l,k]) => [a, b==null?Infinity:b, l, k]);
+const binOf = n => BINS.findIndex(b => n>=b[0] && n<=b[1]);
+const fmt = n => n.toLocaleString("en-US");
+
+// matrix
+const M = D.rows.map(() => new Array(D.cols.length).fill(null));
+D.cells.forEach(([r,c,n,t0,t1]) => { M[r][c] = [n,t0,t1]; });
+const rowTot = M.map(r => r.reduce((s,x)=>s+(x?x[0]:0),0));
+const rowBreadth = M.map(r => r.filter(Boolean).length);
+const groupStart = new Set(); { let k=0; D.groups.forEach(([,n])=>{ groupStart.add(k); k+=n; }); }
+
+// stats
+const sites = new Set(D.rows.map(r=>r[0]));
+document.getElementById("stats").innerHTML =
+  `<span><b>${fmt(D.total)}</b> data points</span><span><b>${sites.size}</b> sites</span><span><b>${D.rows.length}</b> site × depth rows</span><span><b>${D.cols.length}</b> ${D.cols.length===1?"variable":"variables"}</span><span><b>${D.span[0].slice(0,4)}–${D.span[1].slice(0,4)}</b></span>`;
+
+// legend
+document.getElementById("legend").innerHTML = `<span class="ttl">Data points per cell</span><div class="bins">${
+  BINS.map((b,i)=>`<div class="bin"><span class="sw" style="background:var(--s${b[3]})"></span><span class="bl">${b[2]}</span></div>`).join("")
+}</div><span class="none"><span class="sw"></span>No data</span>`;
+
+// type chips
+const state = {types:new Set(Object.keys(TYPES)), sort:"site", q:"", nums:false};
+const typeCount = {}; D.rows.forEach(r=>typeCount[r[2]]=(typeCount[r[2]]||0)+1);
+const chips = document.getElementById("types");
+chips.innerHTML = Object.entries(TYPES).filter(([k])=>typeCount[k]).map(([k,v]) =>
+  `<button class="chip" type="button" data-t="${k}" aria-pressed="true">${v}<span class="k">${typeCount[k]}</span></button>`).join("");
+chips.addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if(!b) return;
+  const t = b.dataset.t, on = state.types.has(t);
+  if (on && state.types.size===1) { // clicking the only active chip re-selects all
+    Object.keys(TYPES).forEach(k=>state.types.add(k));
+  } else if (on) state.types.delete(t); else state.types.add(t);
+  chips.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed", state.types.has(c.dataset.t)));
+  render();
+});
+document.getElementById("sort").addEventListener("change", e=>{state.sort=e.target.value; render();});
+document.getElementById("q").addEventListener("input", e=>{state.q=e.target.value.trim().toLowerCase(); render();});
+document.getElementById("nums").addEventListener("change", e=>{state.nums=e.target.checked; render();});
+
+const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const depLabel = d => d==null ? "—" : `${+d.toFixed(2)} m`;
+
+function render(){
+  let idx = D.rows.map((_,i)=>i).filter(i => state.types.has(D.rows[i][2]) &&
+    (!state.q || D.rows[i][0].toLowerCase().includes(state.q) || D.rows[i][1].toLowerCase().includes(state.q)));
+  if (state.sort==="total") idx.sort((a,b)=>rowTot[b]-rowTot[a]);
+  else if (state.sort==="breadth") idx.sort((a,b)=>rowBreadth[b]-rowBreadth[a] || rowTot[b]-rowTot[a]);
+  const frame = document.getElementById("frame");
+  frame.classList.toggle("nums", state.nums);
+  if (!idx.length){ frame.innerHTML = `<div class="empty">No site matches “${esc(state.q)}” in the selected site types.</div>`; return; }
+
+  const colTot = D.cols.map((_,c)=>idx.reduce((s,r)=>s+(M[r][c]?M[r][c][0]:0),0));
+  let h = `<table><thead><tr class="g"><th class="corner" rowspan="2">Site · depth · name</th>`;
+  D.groups.forEach(([name,n],gi)=>{ h += `<th class="gh" colspan="${n}"${gi?' style="padding-left:6px"':''}><span title="${esc(name)}">${esc(name)}</span></th>`; });
+  h += `<th class="toth" rowspan="2">Total</th></tr><tr class="a">`;
+  D.cols.forEach((c,i)=>{ h += `<th${groupStart.has(i)&&i?' style="padding-left:6px"':''}><div class="vlab" title="${esc(c)} (${esc(D.units[i])})">${esc(c)}</div></th>`; });
+  h += `</tr></thead><tbody>`;
+  let prev = null;
+  idx.forEach(r => {
+    const [code,name,,dep] = D.rows[r];
+    const rep = state.sort==="site" && code===prev;
+    h += `<tr data-r="${r}"${rep?"":' class="first"'}><th><div class="rl"><span class="code${rep?" rep":""}">${esc(code)}</span><span class="dep">${depLabel(dep)}</span><span class="nm">${rep?"":esc(name)}</span></div></th>`;
+    M[r].forEach((x,c) => {
+      const gs = groupStart.has(c)&&c ? " gs" : "";
+      h += x ? `<td class="c${gs}" data-c="${c}"><i class="b${BINS[binOf(x[0])][3]}">${state.nums?x[0]:""}</i></td>`
+             : `<td class="c${gs}" data-c="${c}"><i></i></td>`;
+    });
+    h += `<td class="tot">${fmt(rowTot[r])}</td></tr>`;
+    prev = code;
+  });
+  h += `</tbody><tfoot><tr><th>Total</th>`;
+  colTot.forEach((t,c)=>{ h += `<td class="ct${groupStart.has(c)&&c?" c gs":""}"><div class="vn">${fmt(t)}</div></td>`; });
+  h += `<td class="tot">${fmt(colTot.reduce((a,b)=>a+b,0))}</td></tr></tfoot></table>`;
+  frame.innerHTML = h;
+}
+render();
+
+// tooltip
+const tip = document.getElementById("tip");
+function show(td, x, y){
+  const tr = td.closest("tr"), r = +tr.dataset.r, c = +td.dataset.c;
+  const [code,name,type,dep] = D.rows[r], v = M[r][c];
+  tip.innerHTML = `<div class="t1">${esc(D.cols[c])} <span class="t2">· ${esc(D.units[c])}</span></div>
+    <div>${esc(name)} <span class="t2">(${esc(code)})</span></div>
+    <div class="t2">${TYPES[type]||type} · depth ${dep==null?"not recorded":depLabel(dep)}</div>
+    <div class="n">${v?fmt(v[0])+" data point"+(v[0]===1?"":"s"):"No data"}</div>
+    ${v?`<div class="d">${v[1]===v[2]?v[1]:v[1]+" → "+v[2]}</div>`:""}`;
+  tip.hidden = false;
+  const w = tip.offsetWidth, hh = tip.offsetHeight;
+  let lx = x+14, ly = y+14;
+  if (lx+w > innerWidth-8) lx = x-w-14;
+  if (ly+hh > innerHeight-8) ly = y-hh-14;
+  tip.style.left = Math.max(8,lx)+"px"; tip.style.top = Math.max(8,ly)+"px";
+  document.querySelectorAll("tr.hl").forEach(t=>t.classList.remove("hl")); tr.classList.add("hl");
+}
+function hide(){ tip.hidden = true; document.querySelectorAll("tr.hl").forEach(t=>t.classList.remove("hl")); }
+const frameEl = document.getElementById("frame");
+frameEl.addEventListener("pointermove", e => { const td = e.target.closest("tbody td.c"); td ? show(td,e.clientX,e.clientY) : hide(); });
+frameEl.addEventListener("pointerleave", hide);
+frameEl.addEventListener("scroll", hide, {passive:true});
+</script>

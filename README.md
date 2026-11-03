@@ -12,9 +12,11 @@ The dumps are written by pg_dump 16 (archive format 1.15). The system `pg_restor
 **[Browse the schema map](https://ukaraoz.github.io/ssidump/schema_map/ssi_schemas.html)**:
 an interactive map of every schema and table in the 2026-10-26 dump. See [Schema map](#schema-map).
 
-**[Browse geochem coverage](https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage.html)**:
-data-point counts for every site, depth and analyte in the geochem export
-([by year](https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage_by_year.html)). See [Geochem coverage](#geochem-coverage).
+**Browse data coverage**: data-point counts per site, depth, year and variable for
+[geochem](https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage.html),
+[decagon sensors](https://ukaraoz.github.io/ssidump/coverage/decagon_coverage.html) and
+[streamflow gauges](https://ukaraoz.github.io/ssidump/coverage/streamflow_coverage.html).
+See [Coverage pages](#coverage-pages).
 
 ## Quick start
 
@@ -196,22 +198,33 @@ The built page is published with GitHub Pages from the `main` branch at
 <https://ukaraoz.github.io/ssidump/schema_map/ssi_schemas.html>. Commit and push a
 rebuilt `schema_map/ssi_schemas.html` to update it.
 
-## Geochem coverage
+## Coverage pages
 
-`geochem_coverage/` builds two heatmap pages of data-point counts from a geochem
-datastreams export: one with a row per site × depth (`geochem_coverage.html`), and one
-that adds a row for each year under every site × depth (`geochem_coverage_by_year.html`).
-Columns are analytes in both. It needs Python 3 with pandas, not a running server:
+`coverage/` builds heatmap pages of data-point counts from a datastreams export made
+with `ssiexport.py`. Each dataset gets two pages: one row per site × depth
+(`<dataset>_coverage.html`), and one that adds a row for each year under every
+site × depth (`<dataset>_coverage_by_year.html`). Columns are variables (analytes for
+geochem). It needs Python 3 with pandas, not a running server:
 
 ```bash
-ssiexport.py export datastreams --family geochem --out geochemdata_all.tsv
-geochem_coverage/build.sh geochemdata_all.tsv geochem_coverage/
+ssiexport.py export datastreams --family geochem    --out geochemdata_all.tsv
+ssiexport.py export datastreams --family decagon    --drop-nan --out decagon_all.tsv.gz
+ssiexport.py export datastreams --family streamflow --drop-nan --out streamflow_all.tsv
+coverage/build.sh geochem    geochemdata_all.tsv  geochem_coverage/
+coverage/build.sh decagon    decagon_all.tsv.gz   coverage/
+coverage/build.sh streamflow streamflow_all.tsv   coverage/
 ```
 
-Analyte column groups are set in `build_data.py`; any analyte not named there falls
-under metals & trace elements. Both pages are published with GitHub Pages:
+Datasets, their page text, column groups and colour bins are defined in
+`coverage/build_data.py` (`DATASETS`). Datasets without fixed bins get bins from the
+quantiles of their cell counts. To add a family, add an entry there and run `build.sh`.
 
-- <https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage.html>
-- <https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage_by_year.html>
+Published with GitHub Pages:
+
+| Dataset | All years | By year |
+|---|---|---|
+| Geochem | [geochem_coverage.html](https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage.html) | [geochem_coverage_by_year.html](https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage_by_year.html) |
+| Decagon sensors | [decagon_coverage.html](https://ukaraoz.github.io/ssidump/coverage/decagon_coverage.html) | [decagon_coverage_by_year.html](https://ukaraoz.github.io/ssidump/coverage/decagon_coverage_by_year.html) |
+| Streamflow gauges | [streamflow_coverage.html](https://ukaraoz.github.io/ssidump/coverage/streamflow_coverage.html) | [streamflow_coverage_by_year.html](https://ukaraoz.github.io/ssidump/coverage/streamflow_coverage_by_year.html) |
 
 Commit and push the rebuilt HTML files to update them.
