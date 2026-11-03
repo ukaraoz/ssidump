@@ -12,6 +12,9 @@ The dumps are written by pg_dump 16 (archive format 1.15). The system `pg_restor
 **[Browse the schema map](https://ukaraoz.github.io/ssidump/schema_map/ssi_schemas.html)**:
 an interactive map of every schema and table in the 2026-10-26 dump. See [Schema map](#schema-map).
 
+**[Browse geochem coverage](https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage.html)**:
+data-point counts for every site, depth and analyte in the geochem export. See [Geochem coverage](#geochem-coverage).
+
 ## Quick start
 
 ```bash
@@ -98,6 +101,38 @@ which maps sites to their `datastreams` tables.
 Data quirk: `sampling_features.feature_geometry_wkt` stores `POINT(lat lon)`, which
 is reversed from the usual order. Use the `latitude`/`longitude` columns or `feature_geometry` instead.
 
+## Summaries and exports by table family (`ssiexport.py`)
+
+`ssiexport.py` (standard library only; needs the server running) writes text summaries and
+TSV exports for groups of tables. It knows three sources:
+
+| Source | What it reads |
+|---|---|
+| `feeder` | wide raw tables in `feeder` (one per logger/source) |
+| `datastreams` | per-variable tables in `datastreams`, joined to site / variable / units / depth from `odmx.sampling_feature_timeseries_datastreams`. Geochem is here as the `geochem` family; it has **no** feeder tables. |
+| `samples` | the original geochem specimen results in `odmx` (value + standard deviation + nonDetect/quality codes, specimen and site) |
+
+```bash
+ssiexport.py families                                           # families, table counts, sizes
+ssiexport.py summary feeder --family influxdb -o influxdb_summary.txt     # stats, column stats, 15 sample rows
+ssiexport.py summary datastreams --family geochem -o geochem_datastreams_summary.txt
+ssiexport.py summary samples --geochem-only -o geochem_samples_summary.txt
+ssiexport.py export feeder --family snotel --out snotel_tables/            # one TSV per table + _manifest.tsv
+ssiexport.py export feeder --family snotel --layout long --out snotel.tsv.gz   # table,index,timestamp,column,value
+ssiexport.py export datastreams --family geochem --out geochemdata_all.tsv
+ssiexport.py export datastreams --family geochem --variables Calcium --sites Evans --fill blank --out ca.tsv
+ssiexport.py export samples --geochem-only --fill blank --out geochem_samples.tsv
+```
+
+Families: `geochem sentinel influxdb decagon ess_dive phenocam flux_stations streamflow nwis snotel
+gradient_sm cr1000` (see `ssiexport.py families` for the patterns). Instead of `--family` you can
+use `--pattern REGEX` or `--table NAME`. Other options: `--rows N` (sample rows, default 15),
+`--start/--end` (time window), `--drop-empty-rows`, `--drop-nan`, `--fill keep|blank|drop` (-9999 codes),
+`--nondetect keep|blank`. Output names ending in `.gz` are compressed. `ssiexport.py <cmd> <source> -h` for all options.
+
+Geochem caveats: non-detects are stored as 0 (only `samples` carries `censor_code`); -9999 is a
+fill code in some values and SDs; datastream times are local sample time + 7 h.
+
 ## The server: rules to know
 
 - **Run it on one node at a time.** It accepts connections only through a socket file
@@ -116,6 +151,7 @@ is reversed from the usual order. Use the `latitude`/`longitude` columns or `fea
 
 ```
 ssidump.py              the tool (Python 3 standard library only)
+ssiexport.py            family summaries and TSV exports (feeder / datastreams / odmx samples)
 modulefiles/ssidump.lua Lmod module: PATH + PG* connection variables
 ssi_*.dump              dumps (input)
 pgenv/                  conda env with PostgreSQL 17 + PostGIS
@@ -158,3 +194,19 @@ for `odmx` tables are name rules in `build_data.py`.
 The built page is published with GitHub Pages from the `main` branch at
 <https://ukaraoz.github.io/ssidump/schema_map/ssi_schemas.html>. Commit and push a
 rebuilt `schema_map/ssi_schemas.html` to update it.
+
+## Geochem coverage
+
+`geochem_coverage/` builds a heatmap page of data-point counts per site × depth (rows)
+and analyte (columns) from a geochem datastreams export. It needs Python 3 with pandas,
+not a running server:
+
+```bash
+ssiexport.py export datastreams --family geochem --out geochemdata_all.tsv
+geochem_coverage/build.sh geochemdata_all.tsv geochem_coverage/geochem_coverage.html
+```
+
+Analyte column groups are set in `build_data.py`; any analyte not named there falls
+under metals & trace elements. The page is published with GitHub Pages at
+<https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage.html>. Commit and
+push a rebuilt `geochem_coverage/geochem_coverage.html` to update it.
