@@ -29,7 +29,7 @@ k, label, col, cols = m['key'], m['label'], m['col'], m['cols']
 code = lambda s: f'<code style="font-family:var(--f-data);font-size:12.5px">{html.escape(s)}</code>'
 all_page, year_page = f'{k}_coverage.html', f'{k}_coverage_by_year.html'
 link = lambda href, text: f'<a href="{href}" style="color:var(--accent)">{html.escape(text)}</a>'
-cmd = f'ssiexport.py export datastreams --family {m["family"]}'
+cmd = f'ssiexport.py export datastreams {m["select"]}'
 note = html.escape(m['note'])
 pages = {
     'all': dict(tpl='template.html', data='all.json', out=all_page,

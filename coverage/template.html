@@ -138,6 +138,8 @@ tfoot .vn{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--f-
 <script>
 const D = __DATA__;
 const TYPES = {waterQualityStation:"Water quality stations", borehole:"Boreholes", site:"Sites", fieldArea:"Field areas"};
+// any other site type gets a readable label, so no site is hidden by the type filter
+D.rows.forEach(r => { if (!(r[2] in TYPES)) TYPES[r[2]] = r[2].replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, c => c.toUpperCase()) + "s"; });
 const BINS = D.bins.map(([a,b,l,k]) => [a, b==null?Infinity:b, l, k]);
 const binOf = n => BINS.findIndex(b => n>=b[0] && n<=b[1]);
 const fmt = n => n.toLocaleString("en-US");

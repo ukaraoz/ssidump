@@ -1,0 +1,244 @@
+<meta charset="utf-8">
+<title>East River Sensor towers Coverage</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one header band with summary + controls, then a single scrollable matrix (sticky row labels & column headers). */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --empty:#eef0f3; --line:#dde1e7;
+  --ink:#1b2129; --ink-2:#4a5463; --ink-3:#7a8494; --accent:#256abf;
+  --s0:#cde2fb; --s1:#9ec5f4; --s2:#6da7ec; --s3:#5598e7; --s4:#3987e5; --s5:#256abf; --s6:#184f95; --s7:#0d366b;
+  --tip-bg:#1b2129; --tip-ink:#f2f4f7;
+  --f-ui:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-data:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --cell:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12161b; --surface:#191e25; --empty:#20262e; --line:#2c333d;
+  --ink:#e8ebf0; --ink-2:#aab3c0; --ink-3:#7c8695; --accent:#6da7ec;
+  --s0:#163a66; --s1:#184f95; --s2:#1c5cab; --s3:#256abf; --s4:#3987e5; --s5:#6da7ec; --s6:#9ec5f4; --s7:#cde2fb;
+  --tip-bg:#e8ebf0; --tip-ink:#12161b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12161b; --surface:#191e25; --empty:#20262e; --line:#2c333d;
+  --ink:#e8ebf0; --ink-2:#aab3c0; --ink-3:#7c8695; --accent:#6da7ec;
+  --s0:#163a66; --s1:#184f95; --s2:#1c5cab; --s3:#256abf; --s4:#3987e5; --s5:#6da7ec; --s6:#9ec5f4; --s7:#cde2fb;
+  --tip-bg:#e8ebf0; --tip-ink:#12161b; color-scheme:dark}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:14px;line-height:1.45}
+.wrap{max-width:1500px;margin:0 auto;padding-block:28px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+h1{font-size:26px;line-height:1.15;margin:0;font-weight:700;text-wrap:balance;letter-spacing:-.01em}
+.lede{color:var(--ink-2);margin:0;max-width:72ch}
+.stats{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:6px;font-size:13px;color:var(--ink-2)}
+.stats b{font-family:var(--f-data);font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+
+.controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:13px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip .k{font-family:var(--f-data);font-size:11.5px;opacity:.75;margin-left:4px}
+.field{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2)}
+select,input[type=search]{font:inherit;font-size:13px;padding:5px 8px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+input[type=search]{width:170px}
+.toggle{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2);cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;font-size:12px;color:var(--ink-2)}
+.legend .ttl{font-weight:600;color:var(--ink);margin-right:2px}
+.legend .bins{display:flex;flex-wrap:wrap;gap:2px 4px;align-items:flex-end}
+.legend .bin{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:38px}
+.legend .sw{width:100%;height:12px;border-radius:2px}
+.legend .bl{font-family:var(--f-data);font-size:11px;color:var(--ink-3)}
+.legend .none{display:flex;align-items:center;gap:6px}
+.legend .none .sw{width:14px;flex:none;background:var(--empty);border:1px solid var(--line)}
+
+.frame{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:auto;max-height:78vh;position:relative}
+table{border-collapse:separate;border-spacing:0;font-variant-numeric:tabular-nums}
+th,td{padding:0}
+thead th{position:sticky;background:var(--surface);z-index:2}
+thead tr.g th{top:0;height:24px;font-size:11px;font-weight:600;color:var(--ink-3);text-align:left;white-space:nowrap;letter-spacing:.04em;text-transform:uppercase;vertical-align:bottom;padding-bottom:3px}
+thead tr.g th.gh{border-bottom:1px solid var(--line);padding-left:2px;max-width:0}
+thead tr.g th.gh span{display:block;width:0;overflow:visible;white-space:nowrap}
+thead tr.a th{width:var(--cell);min-width:var(--cell);max-width:calc(var(--cell) + 8px)}
+thead tr.a th{top:24px;height:104px;vertical-align:bottom;border-bottom:1px solid var(--line)}
+.vlab{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11.5px;color:var(--ink-2);font-weight:500;white-space:nowrap;padding:6px 0;margin:0 auto;line-height:1}
+th.corner{left:0;z-index:4;text-align:left;vertical-align:bottom;padding:0 10px 6px 12px;font-size:11px;color:var(--ink-3);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+tbody th{position:sticky;left:0;z-index:1;background:var(--surface);text-align:left;font-weight:400;white-space:nowrap;padding:0 10px 0 12px;height:calc(var(--cell) + 2px);border-right:1px solid var(--line)}
+tbody tr.first th{box-shadow:inset 0 1px 0 var(--line)}
+tbody tr.first td{box-shadow:inset 0 1px 0 var(--line)}
+tbody tr:first-child th, tbody tr:first-child td{box-shadow:none}
+.rl{display:flex;gap:8px;align-items:baseline;font-size:12px;line-height:1}
+.code{font-family:var(--f-data);font-size:11.5px;color:var(--ink);min-width:74px}
+.code.rep{color:transparent}
+.dep{font-family:var(--f-data);font-size:11px;color:var(--ink-2);min-width:48px;text-align:right}
+.nm{color:var(--ink-3);font-size:11.5px;max-width:150px;overflow:hidden;text-overflow:ellipsis}
+td.c{width:var(--cell);min-width:var(--cell);height:calc(var(--cell) + 2px);padding:1px}
+td.c i{display:block;height:var(--cell);border-radius:2px;background:var(--empty)}
+td.c.gs{padding-left:6px}
+td.c i.b0{background:var(--s0)} td.c i.b1{background:var(--s1)} td.c i.b2{background:var(--s2)} td.c i.b3{background:var(--s3)}
+td.c i.b4{background:var(--s4)} td.c i.b5{background:var(--s5)} td.c i.b6{background:var(--s6)} td.c i.b7{background:var(--s7)}
+td.c:hover i{outline:2px solid var(--ink);outline-offset:-1px}
+td.tot{font-family:var(--f-data);font-size:11px;color:var(--ink-2);text-align:right;padding:0 12px 0 12px;white-space:nowrap}
+th.toth{vertical-align:bottom;text-align:right;padding:0 12px 6px;font-size:11px;color:var(--ink-3);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+tr.hl th, tr.hl td.tot{background:var(--empty)}
+.nums{--cell:30px}
+.nums td.c i{font-family:var(--f-data);font-style:normal;font-size:10px;line-height:var(--cell);text-align:center;color:var(--ink)}
+.nums td.c i.b4,.nums td.c i.b5,.nums td.c i.b6,.nums td.c i.b7{color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .nums td.c i.b5,:root:not([data-theme="light"]) .nums td.c i.b6,:root:not([data-theme="light"]) .nums td.c i.b7{color:#0d1a2b}}
+:root[data-theme="dark"] .nums td.c i.b5,:root[data-theme="dark"] .nums td.c i.b6,:root[data-theme="dark"] .nums td.c i.b7{color:#0d1a2b}
+tfoot td,tfoot th{position:sticky;bottom:0;background:var(--surface);border-top:1px solid var(--line);z-index:2}
+tfoot th{left:0;z-index:4;text-align:left;padding:4px 10px 4px 12px;font-size:11px;color:var(--ink-3);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+tfoot td.ct{height:46px;vertical-align:top;padding-top:4px}
+tfoot .vn{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--f-data);font-size:10px;color:var(--ink-2);margin:0 auto;white-space:nowrap}
+.empty{padding:40px 16px;color:var(--ink-3);text-align:center}
+.foot{font-size:12px;color:var(--ink-3);max-width:90ch}
+.foot code{font-family:var(--f-data);font-size:11.5px}
+
+#tip{position:fixed;z-index:20;pointer-events:none;background:var(--tip-bg);color:var(--tip-ink);border-radius:6px;padding:8px 10px;font-size:12px;line-height:1.4;max-width:280px;box-shadow:0 4px 16px rgba(0,0,0,.18)}
+#tip .t1{font-weight:600}
+#tip .t2{opacity:.75}
+#tip .n{font-family:var(--f-data);font-size:15px;font-weight:500;margin-top:4px}
+#tip .d{font-family:var(--f-data);font-size:11px;opacity:.8}
+@media (max-width:600px){h1{font-size:21px}.nm{display:none}input[type=search]{width:130px}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">East River · SSI sensor towers export</div>
+    <h1>Data points per site, depth and variable</h1>
+    <p class="lede">Each cell counts the measurements in <code style="font-family:var(--f-data);font-size:12.5px">towers_all.tsv.gz</code> for one variable at one site and sampling depth. The Pumphouse (ER-PHS1–4), Snodgrass (SG-EHS5–8) and Trail Creek (TR-EHS1–2) towers. Their Decagon soil sensors are on the Decagon page. For a year-by-year breakdown see <a href="towers_coverage_by_year.html" style="color:var(--accent)">Sensor towers by year</a>.</p>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="controls">
+    <div class="chips" id="types" role="group" aria-label="Site type"></div>
+    <label class="field" for="sort">Sort
+      <select id="sort">
+        <option value="site">Site code, then depth</option>
+        <option value="total">Most data points first</option>
+        <option value="breadth">Most variables first</option>
+      </select>
+    </label>
+    <label class="field" for="q">Find <input id="q" type="search" placeholder="Site code or name"></label>
+    <label class="toggle" for="nums"><input id="nums" type="checkbox"> Show counts in cells</label>
+  </div>
+
+  <div class="legend" id="legend"></div>
+
+  <div class="frame" id="frame"></div>
+
+  <p class="foot">Source: <code>towers_all.tsv.gz</code>, exported from the SSI database with <code>ssiexport.py export datastreams --pattern "^feeder_(er|sg|tr)_"</code>. Hover or tap a cell for its date range. Depths are in meters as recorded by the datastream.</p>
+</div>
+<div id="tip" hidden></div>
+
+<script>
+const D = {"rows":[["ER-PHS1","PumpHouse sensor tower #1","site",null],["ER-PHS2","Pumphouse sensor tower #2","site",null],["ER-PHS3","Pumphouse sensor tower #3","site",null],["ER-PHS4","Pumphouse sensor tower #4","site",null],["SG-EHS5","Snodgrass tower #5","site",null],["SG-EHS6","Snodgrass tower #6","site",null],["SG-EHS7","Snodgrass tower #7","site",null],["SG-EHS8","Snodgrass tower #8","site",null],["TR-EHS1","Trail Creek ET Tower #1","site",null],["TR-EHS2","Trail Creek ET Tower #2","site",null]],"cols":["Absolute Atmospheric Pressure","Air Temperature","Gust Speed","Incoming LWIR Solar Radiation","Incoming PAR Solar Radiation","Incoming SWIR Solar Radiation","Net Broadband Solar Radiation","Net LWIR Solar Radiation","Net SWIR Solar Radiation","Rain Precipitation","Reflected LWIR Solar Radiation","Reflected SWIR Solar Radiation","Relative Humidity","Snow Thickness","Solar Radiation","Sonic Ranging Distance","Surface Temperature","Vapor Pressure Deficit","Vapor Pressure in Air","Wind Direction","Wind Speed","Carbon Dioxide Concentration","Evapotranspiration","Latent Heat Flux","Sensible Heat Flux","Soil CO2 Concentration","Soil CO2 Flux","Soil Heat Flux","Soil Oxygen Concentration Percent","Soil Temperature"],"units":["KPa","degC; Cel","m/s","W/m^2","mol/(m^2*s)","W/m^2","W/m^2","W/m^2","W/m^2","m","W/m^2","W/m^2","%","m","W/m^2","m","degC; Cel","KPa","KPa","rad","m/s","unitless","m/s","W/m^2","W/m^2","unitless","mol/(m^2*s)","W/m^2","unitless","degC; Cel"],"groups":[["Weather & radiation",21],["Fluxes",4],["Soil",5]],"total":3342440,"span":["2019-10-10","2026-03-06"],"cells":[[0,1,34244,"2019-10-10","2024-09-29"],[0,3,41821,"2019-10-10","2024-09-29"],[0,4,41704,"2019-10-10","2024-09-29"],[0,5,41821,"2019-10-10","2024-09-29"],[0,6,41821,"2019-10-10","2024-09-29"],[0,7,41821,"2019-10-10","2024-09-29"],[0,8,41821,"2019-10-10","2024-09-29"],[0,10,41821,"2019-10-10","2024-09-29"],[0,11,41821,"2019-10-10","2024-09-29"],[0,13,33584,"2020-10-04","2024-09-29"],[0,25,9968,"2019-10-12","2024-09-29"],[0,26,9968,"2019-10-12","2024-09-29"],[0,27,37684,"2019-10-10","2024-09-29"],[0,28,28416,"2019-10-10","2024-09-29"],[0,15,33584,"2020-10-04","2024-09-29"],[1,1,28857,"2019-10-10","2023-10-05"],[1,3,34144,"2019-10-10","2023-10-05"],[1,4,34330,"2019-10-10","2023-10-05"],[1,5,34152,"2019-10-10","2023-10-05"],[1,6,34140,"2019-10-10","2023-10-05"],[1,7,34140,"2019-10-10","2023-10-05"],[1,8,34152,"2019-10-10","2023-10-05"],[1,10,34148,"2019-10-10","2023-10-05"],[1,11,34152,"2019-10-10","2023-10-05"],[1,13,21550,"2020-10-04","2024-09-29"],[1,25,7177,"2019-10-12","2023-09-26"],[1,26,7177,"2019-10-12","2023-09-26"],[1,27,40567,"2019-10-10","2024-09-29"],[1,28,24438,"2019-10-10","2023-10-05"],[1,15,21550,"2020-10-04","2024-09-29"],[2,1,13482,"2019-10-10","2021-09-28"],[2,3,15229,"2019-10-10","2021-09-28"],[2,4,15230,"2019-10-10","2021-09-28"],[2,5,15227,"2019-10-10","2021-09-28"],[2,6,15227,"2019-10-10","2021-09-28"],[2,7,15229,"2019-10-10","2021-09-28"],[2,8,15227,"2019-10-10","2021-09-28"],[2,10,15229,"2019-10-10","2021-09-28"],[2,11,15229,"2019-10-10","2021-09-28"],[2,25,398,"2019-10-13","2019-12-01"],[2,26,398,"2019-10-13","2019-12-01"],[2,27,16783,"2019-10-10","2021-09-28"],[2,28,15229,"2019-10-10","2021-09-28"],[3,1,12746,"2019-10-11","2021-06-14"],[3,3,14676,"2019-10-11","2021-06-14"],[3,4,14676,"2019-10-11","2021-06-14"],[3,5,14676,"2019-10-11","2021-06-14"],[3,6,14676,"2019-10-11","2021-06-14"],[3,7,14676,"2019-10-11","2021-06-14"],[3,8,14676,"2019-10-11","2021-06-14"],[3,10,14676,"2019-10-11","2021-06-14"],[3,11,14676,"2019-10-11","2021-06-14"],[3,13,5970,"2020-10-08","2021-06-14"],[3,25,3136,"2019-10-14","2020-11-09"],[3,26,3136,"2019-10-14","2020-11-09"],[3,27,14675,"2019-10-11","2021-06-14"],[3,28,14668,"2019-10-11","2021-06-14"],[3,15,5970,"2020-10-08","2021-06-14"],[4,1,35242,"2020-10-10","2025-10-08"],[4,3,34175,"2020-10-10","2025-10-08"],[4,4,28290,"2020-10-10","2025-10-08"],[4,5,34175,"2020-10-10","2025-10-08"],[4,6,34174,"2020-10-10","2025-10-08"],[4,7,34174,"2020-10-10","2025-10-08"],[4,8,34175,"2020-10-10","2025-10-08"],[4,10,34174,"2020-10-10","2025-10-08"],[4,11,34175,"2020-10-10","2025-10-08"],[4,13,35680,"2020-10-10","2025-10-08"],[4,25,10694,"2020-10-10","2025-08-08"],[4,26,10694,"2020-10-10","2025-08-08"],[4,27,28061,"2020-10-10","2025-02-08"],[4,28,26951,"2020-10-10","2025-10-08"],[4,15,35680,"2020-10-10","2025-10-08"],[5,1,43233,"2020-10-10","2025-10-08"],[5,3,43234,"2020-10-10","2025-10-08"],[5,4,43787,"2020-10-10","2025-10-08"],[5,5,43234,"2020-10-10","2025-10-08"],[5,6,43234,"2020-10-10","2025-10-08"],[5,7,43234,"2020-10-10","2025-10-08"],[5,8,43234,"2020-10-10","2025-10-08"],[5,10,43234,"2020-10-10","2025-10-08"],[5,11,43234,"2020-10-10","2025-10-08"],[5,13,42922,"2020-10-10","2025-10-08"],[5,25,6893,"2020-10-10","2023-02-19"],[5,26,6893,"2020-10-10","2023-02-19"],[5,27,30683,"2020-10-10","2025-10-08"],[5,28,32257,"2020-10-10","2024-07-29"],[5,15,42922,"2020-10-10","2025-10-08"],[6,1,19868,"2021-10-01","2025-10-04"],[6,3,19869,"2021-10-01","2025-10-04"],[6,4,18371,"2021-10-01","2024-08-21"],[6,5,19869,"2021-10-01","2025-10-04"],[6,6,19869,"2021-10-01","2025-10-04"],[6,7,19869,"2021-10-01","2025-10-04"],[6,8,19869,"2021-10-01","2025-10-04"],[6,10,19869,"2021-10-01","2025-10-04"],[6,11,19869,"2021-10-01","2025-10-04"],[6,25,5423,"2021-10-03","2023-11-02"],[6,26,5423,"2021-10-03","2023-11-02"],[6,27,18707,"2021-10-01","2024-09-30"],[6,28,20361,"2021-10-01","2025-10-04"],[6,15,11,"2023-09-05","2025-05-25"],[7,1,23615,"2021-10-15","2025-10-08"],[7,3,27850,"2021-10-15","2025-10-08"],[7,4,28763,"2021-10-15","2025-10-08"],[7,5,27850,"2021-10-15","2025-10-08"],[7,6,27850,"2021-10-15","2025-10-08"],[7,7,27850,"2021-10-15","2025-10-08"],[7,8,27850,"2021-10-15","2025-10-08"],[7,10,27850,"2021-10-15","2025-10-08"],[7,11,27850,"2021-10-15","2025-10-08"],[7,13,22010,"2021-10-15","2025-03-18"],[7,25,3947,"2021-10-17","2023-11-17"],[7,26,3947,"2021-10-17","2023-11-17"],[7,27,20875,"2021-10-15","2025-06-23"],[7,28,26311,"2021-10-15","2025-10-08"],[7,15,22010,"2021-10-15","2025-03-18"],[8,0,17007,"2025-09-05","2026-03-06"],[8,1,25477,"2025-09-05","2026-03-06"],[8,21,8451,"2025-09-04","2026-03-06"],[8,22,6245,"2025-09-05","2026-03-06"],[8,2,8531,"2025-09-05","2026-03-06"],[8,3,8541,"2025-09-04","2026-03-06"],[8,4,8580,"2025-09-04","2026-03-06"],[8,5,8541,"2025-09-04","2026-03-06"],[8,23,8476,"2025-09-05","2026-03-06"],[8,9,8531,"2025-09-05","2026-03-06"],[8,10,8541,"2025-09-04","2026-03-06"],[8,11,8541,"2025-09-04","2026-03-06"],[8,12,17007,"2025-09-05","2026-03-06"],[8,24,8476,"2025-09-05","2026-03-06"],[8,13,8470,"2025-09-05","2026-03-06"],[8,26,8451,"2025-09-04","2026-03-06"],[8,27,8515,"2025-09-04","2026-03-06"],[8,28,8521,"2025-09-05","2026-03-06"],[8,29,8521,"2025-09-05","2026-03-06"],[8,14,8531,"2025-09-05","2026-03-06"],[8,16,8528,"2025-09-05","2026-03-06"],[8,17,8476,"2025-09-05","2026-03-06"],[8,18,8531,"2025-09-05","2026-03-06"],[8,19,8531,"2025-09-05","2026-03-06"],[8,20,8531,"2025-09-05","2026-03-06"],[9,0,15828,"2025-09-05","2026-03-06"],[9,1,23680,"2025-09-05","2026-03-06"],[9,21,7888,"2025-09-05","2026-03-06"],[9,22,7911,"2025-09-05","2026-03-06"],[9,2,7917,"2025-09-05","2026-03-06"],[9,3,7906,"2025-09-05","2026-03-06"],[9,4,7854,"2025-09-05","2026-03-06"],[9,5,7906,"2025-09-05","2026-03-06"],[9,23,7911,"2025-09-05","2026-03-06"],[9,9,7917,"2025-09-05","2026-03-06"],[9,10,7906,"2025-09-05","2026-03-06"],[9,11,7906,"2025-09-05","2026-03-06"],[9,12,15828,"2025-09-05","2026-03-06"],[9,24,7911,"2025-09-05","2026-03-06"],[9,13,7852,"2025-09-05","2026-03-06"],[9,26,7888,"2025-09-05","2026-03-06"],[9,27,7894,"2025-09-05","2026-03-06"],[9,28,7893,"2025-09-05","2026-03-06"],[9,29,7893,"2025-09-05","2026-03-06"],[9,14,7917,"2025-09-05","2026-03-06"],[9,16,7805,"2025-09-05","2026-03-06"],[9,17,7911,"2025-09-05","2026-03-06"],[9,18,7917,"2025-09-05","2026-03-06"],[9,19,7917,"2025-09-05","2026-03-06"],[9,20,7917,"2025-09-05","2026-03-06"]],"bins":[[1,10000,"1\u201310,000",0],[10001,20000,"10,001\u201320,000",2],[20001,25000,"20,001\u201325,000",4],[25001,50000,"25,001\u201350,000",5],[50001,null,"50,001+",7]]};
+const TYPES = {waterQualityStation:"Water quality stations", borehole:"Boreholes", site:"Sites", fieldArea:"Field areas"};
+// any other site type gets a readable label, so no site is hidden by the type filter
+D.rows.forEach(r => { if (!(r[2] in TYPES)) TYPES[r[2]] = r[2].replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, c => c.toUpperCase()) + "s"; });
+const BINS = D.bins.map(([a,b,l,k]) => [a, b==null?Infinity:b, l, k]);
+const binOf = n => BINS.findIndex(b => n>=b[0] && n<=b[1]);
+const fmt = n => n.toLocaleString("en-US");
+
+// matrix
+const M = D.rows.map(() => new Array(D.cols.length).fill(null));
+D.cells.forEach(([r,c,n,t0,t1]) => { M[r][c] = [n,t0,t1]; });
+const rowTot = M.map(r => r.reduce((s,x)=>s+(x?x[0]:0),0));
+const rowBreadth = M.map(r => r.filter(Boolean).length);
+const groupStart = new Set(); { let k=0; D.groups.forEach(([,n])=>{ groupStart.add(k); k+=n; }); }
+
+// stats
+const sites = new Set(D.rows.map(r=>r[0]));
+document.getElementById("stats").innerHTML =
+  `<span><b>${fmt(D.total)}</b> data points</span><span><b>${sites.size}</b> sites</span><span><b>${D.rows.length}</b> site × depth rows</span><span><b>${D.cols.length}</b> ${D.cols.length===1?"variable":"variables"}</span><span><b>${D.span[0].slice(0,4)}–${D.span[1].slice(0,4)}</b></span>`;
+
+// legend
+document.getElementById("legend").innerHTML = `<span class="ttl">Data points per cell</span><div class="bins">${
+  BINS.map((b,i)=>`<div class="bin"><span class="sw" style="background:var(--s${b[3]})"></span><span class="bl">${b[2]}</span></div>`).join("")
+}</div><span class="none"><span class="sw"></span>No data</span>`;
+
+// type chips
+const state = {types:new Set(Object.keys(TYPES)), sort:"site", q:"", nums:false};
+const typeCount = {}; D.rows.forEach(r=>typeCount[r[2]]=(typeCount[r[2]]||0)+1);
+const chips = document.getElementById("types");
+chips.innerHTML = Object.entries(TYPES).filter(([k])=>typeCount[k]).map(([k,v]) =>
+  `<button class="chip" type="button" data-t="${k}" aria-pressed="true">${v}<span class="k">${typeCount[k]}</span></button>`).join("");
+chips.addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if(!b) return;
+  const t = b.dataset.t, on = state.types.has(t);
+  if (on && state.types.size===1) { // clicking the only active chip re-selects all
+    Object.keys(TYPES).forEach(k=>state.types.add(k));
+  } else if (on) state.types.delete(t); else state.types.add(t);
+  chips.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed", state.types.has(c.dataset.t)));
+  render();
+});
+document.getElementById("sort").addEventListener("change", e=>{state.sort=e.target.value; render();});
+document.getElementById("q").addEventListener("input", e=>{state.q=e.target.value.trim().toLowerCase(); render();});
+document.getElementById("nums").addEventListener("change", e=>{state.nums=e.target.checked; render();});
+
+const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const depLabel = d => d==null ? "—" : `${+d.toFixed(2)} m`;
+
+function render(){
+  let idx = D.rows.map((_,i)=>i).filter(i => state.types.has(D.rows[i][2]) &&
+    (!state.q || D.rows[i][0].toLowerCase().includes(state.q) || D.rows[i][1].toLowerCase().includes(state.q)));
+  if (state.sort==="total") idx.sort((a,b)=>rowTot[b]-rowTot[a]);
+  else if (state.sort==="breadth") idx.sort((a,b)=>rowBreadth[b]-rowBreadth[a] || rowTot[b]-rowTot[a]);
+  const frame = document.getElementById("frame");
+  frame.classList.toggle("nums", state.nums);
+  if (!idx.length){ frame.innerHTML = `<div class="empty">No site matches “${esc(state.q)}” in the selected site types.</div>`; return; }
+
+  const colTot = D.cols.map((_,c)=>idx.reduce((s,r)=>s+(M[r][c]?M[r][c][0]:0),0));
+  let h = `<table><thead><tr class="g"><th class="corner" rowspan="2">Site · depth · name</th>`;
+  D.groups.forEach(([name,n],gi)=>{ h += `<th class="gh" colspan="${n}"${gi?' style="padding-left:6px"':''}><span title="${esc(name)}">${esc(name)}</span></th>`; });
+  h += `<th class="toth" rowspan="2">Total</th></tr><tr class="a">`;
+  D.cols.forEach((c,i)=>{ h += `<th${groupStart.has(i)&&i?' style="padding-left:6px"':''}><div class="vlab" title="${esc(c)} (${esc(D.units[i])})">${esc(c)}</div></th>`; });
+  h += `</tr></thead><tbody>`;
+  let prev = null;
+  idx.forEach(r => {
+    const [code,name,,dep] = D.rows[r];
+    const rep = state.sort==="site" && code===prev;
+    h += `<tr data-r="${r}"${rep?"":' class="first"'}><th><div class="rl"><span class="code${rep?" rep":""}">${esc(code)}</span><span class="dep">${depLabel(dep)}</span><span class="nm">${rep?"":esc(name)}</span></div></th>`;
+    M[r].forEach((x,c) => {
+      const gs = groupStart.has(c)&&c ? " gs" : "";
+      h += x ? `<td class="c${gs}" data-c="${c}"><i class="b${BINS[binOf(x[0])][3]}">${state.nums?x[0]:""}</i></td>`
+             : `<td class="c${gs}" data-c="${c}"><i></i></td>`;
+    });
+    h += `<td class="tot">${fmt(rowTot[r])}</td></tr>`;
+    prev = code;
+  });
+  h += `</tbody><tfoot><tr><th>Total</th>`;
+  colTot.forEach((t,c)=>{ h += `<td class="ct${groupStart.has(c)&&c?" c gs":""}"><div class="vn">${fmt(t)}</div></td>`; });
+  h += `<td class="tot">${fmt(colTot.reduce((a,b)=>a+b,0))}</td></tr></tfoot></table>`;
+  frame.innerHTML = h;
+}
+render();
+
+// tooltip
+const tip = document.getElementById("tip");
+function show(td, x, y){
+  const tr = td.closest("tr"), r = +tr.dataset.r, c = +td.dataset.c;
+  const [code,name,type,dep] = D.rows[r], v = M[r][c];
+  tip.innerHTML = `<div class="t1">${esc(D.cols[c])} <span class="t2">· ${esc(D.units[c])}</span></div>
+    <div>${esc(name)} <span class="t2">(${esc(code)})</span></div>
+    <div class="t2">${TYPES[type]||type} · depth ${dep==null?"not recorded":depLabel(dep)}</div>
+    <div class="n">${v?fmt(v[0])+" data point"+(v[0]===1?"":"s"):"No data"}</div>
+    ${v?`<div class="d">${v[1]===v[2]?v[1]:v[1]+" → "+v[2]}</div>`:""}`;
+  tip.hidden = false;
+  const w = tip.offsetWidth, hh = tip.offsetHeight;
+  let lx = x+14, ly = y+14;
+  if (lx+w > innerWidth-8) lx = x-w-14;
+  if (ly+hh > innerHeight-8) ly = y-hh-14;
+  tip.style.left = Math.max(8,lx)+"px"; tip.style.top = Math.max(8,ly)+"px";
+  document.querySelectorAll("tr.hl").forEach(t=>t.classList.remove("hl")); tr.classList.add("hl");
+}
+function hide(){ tip.hidden = true; document.querySelectorAll("tr.hl").forEach(t=>t.classList.remove("hl")); }
+const frameEl = document.getElementById("frame");
+frameEl.addEventListener("pointermove", e => { const td = e.target.closest("tbody td.c"); td ? show(td,e.clientX,e.clientY) : hide(); });
+frameEl.addEventListener("pointerleave", hide);
+frameEl.addEventListener("scroll", hide, {passive:true});
+</script>

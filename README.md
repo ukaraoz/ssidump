@@ -12,11 +12,8 @@ The dumps are written by pg_dump 16 (archive format 1.15). The system `pg_restor
 **[Browse the schema map](https://ukaraoz.github.io/ssidump/schema_map/ssi_schemas.html)**:
 an interactive map of every schema and table in the 2026-10-26 dump. See [Schema map](#schema-map).
 
-**Browse data coverage**: data-point counts per site, depth, year and variable for
-[geochem](https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage.html),
-[decagon sensors](https://ukaraoz.github.io/ssidump/coverage/decagon_coverage.html) and
-[streamflow gauges](https://ukaraoz.github.io/ssidump/coverage/streamflow_coverage.html).
-See [Coverage pages](#coverage-pages).
+**[Browse data coverage](https://ukaraoz.github.io/ssidump/coverage/index.html)**: data-point counts per
+site, depth, year and variable for geochem and 11 sensor sources. See [Coverage pages](#coverage-pages).
 
 ## Quick start
 
@@ -200,31 +197,40 @@ rebuilt `schema_map/ssi_schemas.html` to update it.
 
 ## Coverage pages
 
-`coverage/` builds heatmap pages of data-point counts from a datastreams export made
-with `ssiexport.py`. Each dataset gets two pages: one row per site × depth
+`coverage/` builds heatmap pages of data-point counts from datastreams exports made
+with `ssiexport.py`. Each source gets two pages: one row per site × depth
 (`<dataset>_coverage.html`), and one that adds a row for each year under every
 site × depth (`<dataset>_coverage_by_year.html`). Columns are variables (analytes for
-geochem). It needs Python 3 with pandas, not a running server:
+geochem). **Start at the index: <https://ukaraoz.github.io/ssidump/coverage/index.html>**.
+
+It needs Python 3 with pandas, not a running server. Exports are read in chunks, so the
+58–65 million row exports build in about 1.5 minutes each.
 
 ```bash
-ssiexport.py export datastreams --family geochem    --out geochemdata_all.tsv
-ssiexport.py export datastreams --family decagon    --drop-nan --out decagon_all.tsv.gz
-ssiexport.py export datastreams --family streamflow --drop-nan --out streamflow_all.tsv
-coverage/build.sh geochem    geochemdata_all.tsv  geochem_coverage/
-coverage/build.sh decagon    decagon_all.tsv.gz   coverage/
-coverage/build.sh streamflow streamflow_all.tsv   coverage/
+# on Perlmutter (server running)
+ssiexport.py export datastreams --family decagon --drop-nan --out decagon_all.tsv.gz
+# locally, after copying the export
+coverage/build.sh decagon decagon_all.tsv.gz coverage/
+python3 coverage/build_index.py          # rebuild coverage/index.html
 ```
 
-Datasets, their page text, column groups and colour bins are defined in
-`coverage/build_data.py` (`DATASETS`). Datasets without fixed bins get bins from the
-quantiles of their cell counts. To add a family, add an entry there and run `build.sh`.
-
-Published with GitHub Pages:
-
-| Dataset | All years | By year |
+| Dataset | Export selection | Local export file |
 |---|---|---|
-| Geochem | [geochem_coverage.html](https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage.html) | [geochem_coverage_by_year.html](https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage_by_year.html) |
-| Decagon sensors | [decagon_coverage.html](https://ukaraoz.github.io/ssidump/coverage/decagon_coverage.html) | [decagon_coverage_by_year.html](https://ukaraoz.github.io/ssidump/coverage/decagon_coverage_by_year.html) |
-| Streamflow gauges | [streamflow_coverage.html](https://ukaraoz.github.io/ssidump/coverage/streamflow_coverage.html) | [streamflow_coverage_by_year.html](https://ukaraoz.github.io/ssidump/coverage/streamflow_coverage_by_year.html) |
+| `geochem` | `--family geochem` (no `--drop-nan`) | `geochemdata_all.tsv` → pages in `geochem_coverage/` |
+| `decagon` | `--family decagon` | `decagon_all.tsv.gz` |
+| `streamflow` | `--family streamflow` | `streamflow_all.tsv` |
+| `mloggers` | `--pattern "^m[1-4]_"` | `mloggers_all.tsv.gz` |
+| `cr1000` | `--pattern "^(am\|bb\|jf\|kp\|sm\|mc\|cb)_"` | `cr1000_all.tsv.gz` |
+| `metstation` | `--pattern "^metstation_"` | `metstation_all.tsv.gz` |
+| `towers` | `--pattern "^feeder_(er\|sg\|tr)_"` | `towers_all.tsv.gz` |
+| `snotel` | `--family snotel` | `snotel_all.tsv.gz` |
+| `gradient` | `--family gradient_sm` | `gradient_all.tsv.gz` |
+| `essdive` | `--family ess_dive` | `essdive_all.tsv.gz` |
+| `phenocam` | `--family phenocam` | `phenocam_all.tsv.gz` |
+| `nwis` | `--family nwis` | `nwis_all.tsv.gz` |
 
-Commit and push the rebuilt HTML files to update them.
+All but geochem use `--drop-nan`. Sentinel and InfluxDB have no pages yet. Page text,
+column groups and colour bins per dataset are in `coverage/build_data.py` (`DATASETS`);
+datasets without fixed bins get bins from the quantiles of their cell counts. To add a
+source, add an entry there, export it, and run `build.sh` and `build_index.py`. Commit
+and push the rebuilt HTML to update GitHub Pages.

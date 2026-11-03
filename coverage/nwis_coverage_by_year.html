@@ -1,0 +1,266 @@
+<meta charset="utf-8">
+<title>East River USGS NWIS gauges by Year</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one header band with summary + controls, then a single scrollable matrix (sticky row labels & column headers). */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --empty:#eef0f3; --line:#dde1e7;
+  --ink:#1b2129; --ink-2:#4a5463; --ink-3:#7a8494; --accent:#256abf;
+  --s0:#cde2fb; --s1:#9ec5f4; --s2:#6da7ec; --s3:#5598e7; --s4:#3987e5; --s5:#256abf; --s6:#184f95; --s7:#0d366b;
+  --tip-bg:#1b2129; --tip-ink:#f2f4f7;
+  --f-ui:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-data:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --cell:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12161b; --surface:#191e25; --empty:#20262e; --line:#2c333d;
+  --ink:#e8ebf0; --ink-2:#aab3c0; --ink-3:#7c8695; --accent:#6da7ec;
+  --s0:#163a66; --s1:#184f95; --s2:#1c5cab; --s3:#256abf; --s4:#3987e5; --s5:#6da7ec; --s6:#9ec5f4; --s7:#cde2fb;
+  --tip-bg:#e8ebf0; --tip-ink:#12161b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12161b; --surface:#191e25; --empty:#20262e; --line:#2c333d;
+  --ink:#e8ebf0; --ink-2:#aab3c0; --ink-3:#7c8695; --accent:#6da7ec;
+  --s0:#163a66; --s1:#184f95; --s2:#1c5cab; --s3:#256abf; --s4:#3987e5; --s5:#6da7ec; --s6:#9ec5f4; --s7:#cde2fb;
+  --tip-bg:#e8ebf0; --tip-ink:#12161b; color-scheme:dark}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:14px;line-height:1.45}
+.wrap{max-width:1500px;margin:0 auto;padding-block:28px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+h1{font-size:26px;line-height:1.15;margin:0;font-weight:700;text-wrap:balance;letter-spacing:-.01em}
+.lede{color:var(--ink-2);margin:0;max-width:72ch}
+.stats{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:6px;font-size:13px;color:var(--ink-2)}
+.stats b{font-family:var(--f-data);font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+
+.controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:13px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip .k{font-family:var(--f-data);font-size:11.5px;opacity:.75;margin-left:4px}
+.field{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2)}
+select,input[type=search]{font:inherit;font-size:13px;padding:5px 8px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+input[type=search]{width:170px}
+.toggle{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2);cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;font-size:12px;color:var(--ink-2)}
+.legend .ttl{font-weight:600;color:var(--ink);margin-right:2px}
+.legend .bins{display:flex;flex-wrap:wrap;gap:2px 4px;align-items:flex-end}
+.legend .bin{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:38px}
+.legend .sw{width:100%;height:12px;border-radius:2px}
+.legend .bl{font-family:var(--f-data);font-size:11px;color:var(--ink-3)}
+.legend .none{display:flex;align-items:center;gap:6px}
+.legend .none .sw{width:14px;flex:none;background:var(--empty);border:1px solid var(--line)}
+
+.frame{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:auto;max-height:78vh;position:relative}
+table{border-collapse:separate;border-spacing:0;font-variant-numeric:tabular-nums}
+th,td{padding:0}
+thead th{position:sticky;background:var(--surface);z-index:2}
+thead tr.g th{top:0;height:24px;font-size:11px;font-weight:600;color:var(--ink-3);text-align:left;white-space:nowrap;letter-spacing:.04em;text-transform:uppercase;vertical-align:bottom;padding-bottom:3px}
+thead tr.g th.gh{border-bottom:1px solid var(--line);padding-left:2px;max-width:0}
+thead tr.g th.gh span{display:block;width:0;overflow:visible;white-space:nowrap}
+thead tr.a th{width:var(--cell);min-width:var(--cell);max-width:calc(var(--cell) + 8px)}
+thead tr.a th{top:24px;height:104px;vertical-align:bottom;border-bottom:1px solid var(--line)}
+.vlab{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11.5px;color:var(--ink-2);font-weight:500;white-space:nowrap;padding:6px 0;margin:0 auto;line-height:1}
+th.corner{left:0;z-index:4;text-align:left;vertical-align:bottom;padding:0 10px 6px 12px;font-size:11px;color:var(--ink-3);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+tbody th{position:sticky;left:0;z-index:1;background:var(--surface);text-align:left;font-weight:400;white-space:nowrap;padding:0 10px 0 12px;height:calc(var(--cell) + 2px);border-right:1px solid var(--line)}
+tbody tr.first th{box-shadow:inset 0 1px 0 var(--line)}
+tbody tr.first td{box-shadow:inset 0 1px 0 var(--line)}
+tbody tr:first-child th, tbody tr:first-child td{box-shadow:none}
+.rl{display:flex;gap:8px;align-items:baseline;font-size:12px;line-height:1}
+.code{font-family:var(--f-data);font-size:11.5px;color:var(--ink);min-width:74px}
+.code.rep{color:transparent}
+.dep{font-family:var(--f-data);font-size:11px;color:var(--ink-2);min-width:48px;text-align:right}
+.nm{color:var(--ink-3);font-size:11.5px;max-width:150px;overflow:hidden;text-overflow:ellipsis}
+td.c{width:var(--cell);min-width:var(--cell);height:calc(var(--cell) + 2px);padding:1px}
+td.c i{display:block;height:var(--cell);border-radius:2px;background:var(--empty)}
+td.c.gs{padding-left:6px}
+td.c i.b0{background:var(--s0)} td.c i.b1{background:var(--s1)} td.c i.b2{background:var(--s2)} td.c i.b3{background:var(--s3)}
+td.c i.b4{background:var(--s4)} td.c i.b5{background:var(--s5)} td.c i.b6{background:var(--s6)} td.c i.b7{background:var(--s7)}
+td.c:hover i{outline:2px solid var(--ink);outline-offset:-1px}
+td.tot{font-family:var(--f-data);font-size:11px;color:var(--ink-2);text-align:right;padding:0 12px 0 12px;white-space:nowrap}
+th.toth{vertical-align:bottom;text-align:right;padding:0 12px 6px;font-size:11px;color:var(--ink-3);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+tr.hl th, tr.hl td.tot{background:var(--empty)}
+.nums{--cell:30px}
+.nums td.c i{font-family:var(--f-data);font-style:normal;font-size:10px;line-height:var(--cell);text-align:center;color:var(--ink)}
+.nums td.c i.b4,.nums td.c i.b5,.nums td.c i.b6,.nums td.c i.b7{color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .nums td.c i.b5,:root:not([data-theme="light"]) .nums td.c i.b6,:root:not([data-theme="light"]) .nums td.c i.b7{color:#0d1a2b}}
+:root[data-theme="dark"] .nums td.c i.b5,:root[data-theme="dark"] .nums td.c i.b6,:root[data-theme="dark"] .nums td.c i.b7{color:#0d1a2b}
+tfoot td,tfoot th{position:sticky;bottom:0;background:var(--surface);border-top:1px solid var(--line);z-index:2}
+tfoot th{left:0;z-index:4;text-align:left;padding:4px 10px 4px 12px;font-size:11px;color:var(--ink-3);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+tfoot td.ct{height:46px;vertical-align:top;padding-top:4px}
+tfoot .vn{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--f-data);font-size:10px;color:var(--ink-2);margin:0 auto;white-space:nowrap}
+
+tr.grp th{height:24px;padding-top:6px;cursor:pointer;box-shadow:inset 0 1px 0 var(--line)}
+tr.grp td{box-shadow:inset 0 1px 0 var(--line);vertical-align:bottom;padding:0 0 2px 2px;font-size:11.5px;color:var(--ink-3);white-space:nowrap;cursor:pointer}
+tr.grp td.tot{color:var(--ink);font-weight:500}
+tbody tr.grp:first-child th, tbody tr.grp:first-child td{box-shadow:none}
+.chev{display:inline-block;width:10px;color:var(--ink-3);font-size:10px;transition:transform .12s}
+tr.grp.closed .chev{transform:rotate(-90deg)}
+tr.grp .code{font-weight:500}
+tr.yr th{padding-left:34px}
+.sum{font-family:var(--f-data);font-size:11px;color:var(--ink-3);margin-left:auto;padding-left:8px}
+.yl{font-family:var(--f-data);font-size:11px;color:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){.chev{transition:none}}
+.empty{padding:40px 16px;color:var(--ink-3);text-align:center}
+.foot{font-size:12px;color:var(--ink-3);max-width:90ch}
+.foot code{font-family:var(--f-data);font-size:11.5px}
+
+#tip{position:fixed;z-index:20;pointer-events:none;background:var(--tip-bg);color:var(--tip-ink);border-radius:6px;padding:8px 10px;font-size:12px;line-height:1.4;max-width:280px;box-shadow:0 4px 16px rgba(0,0,0,.18)}
+#tip .t1{font-weight:600}
+#tip .t2{opacity:.75}
+#tip .n{font-family:var(--f-data);font-size:15px;font-weight:500;margin-top:4px}
+#tip .d{font-family:var(--f-data);font-size:11px;opacity:.8}
+@media (max-width:600px){h1{font-size:21px}.nm{display:none}input[type=search]{width:130px}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">East River · SSI usgs nwis gauges export</div>
+    <h1>Data points per site, depth, year and variable</h1>
+    <p class="lede">Each site and depth has one row per year with data. Each cell counts the measurements in <code style="font-family:var(--f-data);font-size:12.5px">nwis_all.tsv.gz</code> for one variable in that year. USGS National Water Information System gauges ingested into the SSI database. Click a site row to collapse or expand its years. The all-years version is <a href="nwis_coverage.html" style="color:var(--accent)">USGS NWIS gauges coverage</a>.</p>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="controls">
+    <div class="chips" id="types" role="group" aria-label="Site type"></div>
+    <label class="field" for="sort">Sort
+      <select id="sort">
+        <option value="site">Site code, then depth</option>
+        <option value="total">Most data points first</option>
+        <option value="years">Most years first</option>
+      </select>
+    </label>
+    <label class="field" for="q">Find <input id="q" type="search" placeholder="Site code or name"></label>
+    <button class="chip" type="button" id="expand">Collapse all</button>
+    <label class="toggle" for="nums"><input id="nums" type="checkbox"> Show counts in cells</label>
+  </div>
+
+  <div class="legend" id="legend"></div>
+
+  <div class="frame" id="frame"></div>
+
+  <p class="foot">Source: <code>nwis_all.tsv.gz</code>, exported from the SSI database with <code>ssiexport.py export datastreams --family nwis</code>. Hover or tap a cell for the first and last sample date in that year. Years with no data at a site are not shown. Depths are in meters as recorded by the datastream.</p>
+</div>
+<div id="tip" hidden></div>
+
+<script>
+const D = {"rows":[["NWIS-09110990","nwis_elk_creek","streamGage",null],["NWIS-09111250","nwis_coal_creek","streamGage",null],["NWIS-385106106571000","nwis_slate_river","streamGage",null]],"cols":["Stream Discharge","Water Height","Water Specific Conductance","Water Temperature"],"units":["m^3/s","m","uS/cm","degC; Cel"],"groups":[["",4]],"total":1491006,"span":["2007-10-01","2026-07-22"],"yrows":[[0,2017],[0,2018],[0,2019],[0,2020],[0,2021],[0,2022],[0,2023],[0,2024],[0,2025],[0,2026],[1,2014],[1,2015],[1,2016],[1,2017],[1,2018],[1,2019],[1,2020],[1,2021],[1,2022],[1,2023],[1,2024],[1,2025],[1,2026],[2,2007],[2,2008],[2,2009],[2,2010],[2,2011],[2,2012],[2,2013],[2,2014],[2,2015],[2,2016],[2,2017],[2,2018],[2,2019],[2,2020],[2,2021],[2,2022],[2,2023],[2,2024],[2,2025],[2,2026]],"cells":[[0,0,60,"10-17","11-16"],[1,0,18146,"04-01","11-16"],[1,1,19030,"04-25","11-16"],[2,0,17916,"05-01","11-16"],[2,1,18526,"05-01","11-16"],[3,0,21221,"04-01","11-16"],[3,1,21714,"04-01","11-16"],[4,0,15563,"06-01","11-16"],[4,1,15725,"06-01","11-16"],[5,0,21121,"04-01","11-16"],[5,1,21458,"04-01","11-16"],[6,0,21328,"04-01","11-16"],[6,1,21533,"04-01","11-16"],[7,0,18716,"05-01","11-16"],[7,1,18857,"05-01","11-16"],[8,0,18756,"05-01","11-16"],[8,1,19019,"05-01","11-16"],[9,0,10544,"04-03","07-22"],[9,1,10538,"04-03","07-22"],[10,0,3263,"10-01","11-04"],[11,0,20738,"04-01","11-06"],[12,0,21316,"04-07","11-16"],[13,0,21890,"03-31","11-17"],[14,0,19849,"04-01","11-15"],[15,0,17598,"04-01","11-16"],[16,0,16463,"04-01","11-15"],[17,0,19798,"04-01","11-16"],[17,1,20945,"04-06","11-16"],[18,0,18370,"04-01","11-16"],[18,1,21761,"04-01","11-16"],[19,0,18667,"04-01","11-16"],[19,1,20297,"04-17","11-16"],[20,0,20890,"04-01","11-09"],[20,1,21313,"04-01","11-09"],[21,0,21027,"04-01","11-16"],[21,1,21531,"04-01","11-16"],[22,0,10787,"04-01","07-22"],[22,1,10787,"04-01","07-22"],[23,0,3936,"10-01","11-22"],[24,0,21025,"04-17","12-05"],[25,0,22180,"03-30","12-08"],[26,0,22079,"03-31","11-23"],[27,0,22275,"03-27","11-23"],[28,0,24480,"03-25","12-08"],[29,0,22275,"03-31","11-26"],[30,0,21220,"04-07","11-15"],[31,0,23428,"03-13","11-21"],[32,0,24658,"03-12","11-28"],[33,0,24806,"03-09","12-31"],[34,0,22750,"01-01","12-31"],[35,0,33752,"01-01","12-31"],[35,3,17918,"04-23","11-01"],[36,0,23253,"01-01","12-31"],[36,3,16391,"05-01","11-01"],[37,0,23302,"01-01","12-31"],[37,1,25172,"03-19","12-08"],[37,3,17541,"05-01","10-31"],[38,0,21842,"01-01","12-31"],[38,1,21718,"03-27","11-09"],[38,2,18518,"04-20","10-31"],[38,3,17568,"05-01","10-31"],[39,0,22090,"01-01","12-31"],[39,1,21658,"04-12","11-24"],[39,2,17624,"05-01","11-01"],[39,3,17668,"05-01","11-01"],[40,0,27825,"01-01","12-31"],[40,1,28755,"03-07","12-31"],[40,2,17438,"05-01","11-01"],[40,3,17663,"05-01","11-01"],[41,0,29846,"01-01","12-31"],[41,1,33075,"01-01","12-31"],[41,2,16171,"05-01","10-16"],[41,3,17506,"05-01","10-30"],[42,0,19313,"01-01","07-22"],[42,1,19455,"01-01","07-22"],[42,2,7863,"04-15","07-22"],[42,3,7908,"05-01","07-22"]],"bins":[[1,20000,"1\u201320,000",0],[20001,25000,"20,001\u201325,000",4],[25001,null,"25,001+",7]]};
+const TYPES = {waterQualityStation:"Water quality stations", borehole:"Boreholes", site:"Sites", fieldArea:"Field areas"};
+// any other site type gets a readable label, so no site is hidden by the type filter
+D.rows.forEach(r => { if (!(r[2] in TYPES)) TYPES[r[2]] = r[2].replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, c => c.toUpperCase()) + "s"; });
+const BINS = D.bins.map(([a,b,l,k]) => [a, b==null?Infinity:b, l, k]);
+const binOf = n => BINS.findIndex(b => n>=b[0] && n<=b[1]);
+const fmt = n => n.toLocaleString("en-US");
+const NC = D.cols.length;
+
+const M = D.yrows.map(() => new Array(NC).fill(null));
+D.cells.forEach(([y,c,n,t0,t1]) => { M[y][c] = [n,t0,t1]; });
+const yTot = M.map(r => r.reduce((s,x)=>s+(x?x[0]:0),0));
+const kids = D.rows.map(()=>[]); D.yrows.forEach(([r],y)=>kids[r].push(y));
+const rowTot = kids.map(ys => ys.reduce((s,y)=>s+yTot[y],0));
+const groupStart = new Set(); { let k=0; D.groups.forEach(([,n])=>{ groupStart.add(k); k+=n; }); }
+
+const sites = new Set(D.rows.map(r=>r[0]));
+document.getElementById("stats").innerHTML =
+  `<span><b>${fmt(D.total)}</b> data points</span><span><b>${sites.size}</b> sites</span><span><b>${D.rows.length}</b> site × depth groups</span><span><b>${D.yrows.length}</b> year rows</span><span><b>${NC}</b> ${NC===1?"variable":"variables"}</span><span><b>${D.span[0].slice(0,4)}–${D.span[1].slice(0,4)}</b></span>`;
+document.getElementById("legend").innerHTML = `<span class="ttl">Data points per cell per year</span><div class="bins">${
+  BINS.map((b,i)=>`<div class="bin"><span class="sw" style="background:var(--s${b[3]})"></span><span class="bl">${b[2]}</span></div>`).join("")
+}</div><span class="none"><span class="sw"></span>No data that year</span>`;
+
+const state = {types:new Set(Object.keys(TYPES)), sort:"site", q:"", nums:false, closed:new Set()};
+const typeCount = {}; D.rows.forEach(r=>typeCount[r[2]]=(typeCount[r[2]]||0)+1);
+const chips = document.getElementById("types");
+chips.innerHTML = Object.entries(TYPES).filter(([k])=>typeCount[k]).map(([k,v]) =>
+  `<button class="chip" type="button" data-t="${k}" aria-pressed="true">${v}<span class="k">${typeCount[k]}</span></button>`).join("");
+chips.addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if(!b) return;
+  const t = b.dataset.t, on = state.types.has(t);
+  if (on && state.types.size===1) Object.keys(TYPES).forEach(k=>state.types.add(k));
+  else if (on) state.types.delete(t); else state.types.add(t);
+  chips.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed", state.types.has(c.dataset.t)));
+  render();
+});
+document.getElementById("sort").addEventListener("change", e=>{state.sort=e.target.value; render();});
+document.getElementById("q").addEventListener("input", e=>{state.q=e.target.value.trim().toLowerCase(); render();});
+document.getElementById("nums").addEventListener("change", e=>{state.nums=e.target.checked; render();});
+const expBtn = document.getElementById("expand");
+expBtn.addEventListener("click", () => {
+  if (state.closed.size) state.closed.clear(); else D.rows.forEach((_,i)=>state.closed.add(i));
+  render();
+});
+
+const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const depLabel = d => d==null ? "—" : `${+d.toFixed(2)} m`;
+
+function render(){
+  let idx = D.rows.map((_,i)=>i).filter(i => state.types.has(D.rows[i][2]) &&
+    (!state.q || D.rows[i][0].toLowerCase().includes(state.q) || D.rows[i][1].toLowerCase().includes(state.q)));
+  if (state.sort==="total") idx.sort((a,b)=>rowTot[b]-rowTot[a]);
+  else if (state.sort==="years") idx.sort((a,b)=>kids[b].length-kids[a].length || rowTot[b]-rowTot[a]);
+  expBtn.textContent = state.closed.size ? "Expand all" : "Collapse all";
+  const frame = document.getElementById("frame");
+  frame.classList.toggle("nums", state.nums);
+  if (!idx.length){ frame.innerHTML = `<div class="empty">No site matches “${esc(state.q)}” in the selected site types.</div>`; return; }
+
+  const colTot = new Array(NC).fill(0);
+  idx.forEach(r=>kids[r].forEach(y=>M[y].forEach((x,c)=>{ if(x) colTot[c]+=x[0]; })));
+  let h = `<table><thead><tr class="g"><th class="corner" rowspan="2">Site · depth · name / year</th>`;
+  D.groups.forEach(([name,n],gi)=>{ h += `<th class="gh" colspan="${n}"${gi?' style="padding-left:6px"':''}><span title="${esc(name)}">${esc(name)}</span></th>`; });
+  h += `<th class="toth" rowspan="2">Total</th></tr><tr class="a">`;
+  D.cols.forEach((c,i)=>{ h += `<th${groupStart.has(i)&&i?' style="padding-left:6px"':''}><div class="vlab" title="${esc(c)} (${esc(D.units[i])})">${esc(c)}</div></th>`; });
+  h += `</tr></thead><tbody>`;
+  idx.forEach(r => {
+    const [code,name,,dep] = D.rows[r], ys = kids[r], closed = state.closed.has(r);
+    const y0 = D.yrows[ys[0]][1], y1 = D.yrows[ys[ys.length-1]][1];
+    h += `<tr class="grp${closed?" closed":""}" data-g="${r}"><th><div class="rl" role="button" tabindex="0" aria-expanded="${!closed}"><span class="chev">▼</span><span class="code">${esc(code)}</span><span class="dep">${depLabel(dep)}</span><span class="nm">${esc(name)}</span><span class="sum">${ys.length} yr${ys.length===1?"":"s"} · ${y0===y1?y0:y0+"–"+y1}</span></div></th>`;
+    h += `<td colspan="${NC}"></td><td class="tot">${fmt(rowTot[r])}</td></tr>`;
+    if (closed) return;
+    ys.forEach(y => {
+      h += `<tr class="yr" data-y="${y}"><th><span class="yl">${D.yrows[y][1]}</span></th>`;
+      M[y].forEach((x,c) => {
+        const gs = groupStart.has(c)&&c ? " gs" : "";
+        h += x ? `<td class="c${gs}" data-c="${c}"><i class="b${BINS[binOf(x[0])][3]}">${state.nums?x[0]:""}</i></td>`
+               : `<td class="c${gs}" data-c="${c}"><i></i></td>`;
+      });
+      h += `<td class="tot">${fmt(yTot[y])}</td></tr>`;
+    });
+  });
+  h += `</tbody><tfoot><tr><th>Total</th>`;
+  colTot.forEach((t,c)=>{ h += `<td class="ct${groupStart.has(c)&&c?" c gs":""}"><div class="vn">${fmt(t)}</div></td>`; });
+  h += `<td class="tot">${fmt(colTot.reduce((a,b)=>a+b,0))}</td></tr></tfoot></table>`;
+  frame.innerHTML = h;
+}
+render();
+
+const frameEl = document.getElementById("frame");
+function toggle(tr){ const r=+tr.dataset.g; state.closed.has(r)?state.closed.delete(r):state.closed.add(r); render(); }
+frameEl.addEventListener("click", e => { const tr = e.target.closest("tr.grp"); if (tr) toggle(tr); });
+frameEl.addEventListener("keydown", e => { if ((e.key==="Enter"||e.key===" ") && e.target.closest("tr.grp")) { e.preventDefault(); const r=e.target.closest("tr.grp").dataset.g; toggle(e.target.closest("tr.grp")); frameEl.querySelector(`tr.grp[data-g="${r}"] .rl`)?.focus(); } });
+
+const tip = document.getElementById("tip");
+function show(td, x, y){
+  const tr = td.closest("tr"), yi = +tr.dataset.y, c = +td.dataset.c;
+  const [r, year] = D.yrows[yi], [code,name,type,dep] = D.rows[r], v = M[yi][c];
+  tip.innerHTML = `<div class="t1">${esc(D.cols[c])} <span class="t2">· ${esc(D.units[c])}</span></div>
+    <div>${esc(name)} <span class="t2">(${esc(code)})</span></div>
+    <div class="t2">${TYPES[type]||type} · depth ${dep==null?"not recorded":depLabel(dep)}</div>
+    <div class="n">${year}: ${v?fmt(v[0])+" data point"+(v[0]===1?"":"s"):"no data"}</div>
+    ${v?`<div class="d">${v[1]===v[2]?year+"-"+v[1]:year+"-"+v[1]+" → "+year+"-"+v[2]}</div>`:""}`;
+  tip.hidden = false;
+  const w = tip.offsetWidth, hh = tip.offsetHeight;
+  let lx = x+14, ly = y+14;
+  if (lx+w > innerWidth-8) lx = x-w-14;
+  if (ly+hh > innerHeight-8) ly = y-hh-14;
+  tip.style.left = Math.max(8,lx)+"px"; tip.style.top = Math.max(8,ly)+"px";
+  document.querySelectorAll("tr.hl").forEach(t=>t.classList.remove("hl")); tr.classList.add("hl");
+}
+function hide(){ tip.hidden = true; document.querySelectorAll("tr.hl").forEach(t=>t.classList.remove("hl")); }
+frameEl.addEventListener("pointermove", e => { const td = e.target.closest("tbody tr.yr td.c"); td ? show(td,e.clientX,e.clientY) : hide(); });
+frameEl.addEventListener("pointerleave", hide);
+frameEl.addEventListener("scroll", hide, {passive:true});
+</script>

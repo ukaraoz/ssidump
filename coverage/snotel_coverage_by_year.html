@@ -1,0 +1,266 @@
+<meta charset="utf-8">
+<title>East River SNOTEL sites by Year</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one header band with summary + controls, then a single scrollable matrix (sticky row labels & column headers). */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --empty:#eef0f3; --line:#dde1e7;
+  --ink:#1b2129; --ink-2:#4a5463; --ink-3:#7a8494; --accent:#256abf;
+  --s0:#cde2fb; --s1:#9ec5f4; --s2:#6da7ec; --s3:#5598e7; --s4:#3987e5; --s5:#256abf; --s6:#184f95; --s7:#0d366b;
+  --tip-bg:#1b2129; --tip-ink:#f2f4f7;
+  --f-ui:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-data:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --cell:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12161b; --surface:#191e25; --empty:#20262e; --line:#2c333d;
+  --ink:#e8ebf0; --ink-2:#aab3c0; --ink-3:#7c8695; --accent:#6da7ec;
+  --s0:#163a66; --s1:#184f95; --s2:#1c5cab; --s3:#256abf; --s4:#3987e5; --s5:#6da7ec; --s6:#9ec5f4; --s7:#cde2fb;
+  --tip-bg:#e8ebf0; --tip-ink:#12161b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12161b; --surface:#191e25; --empty:#20262e; --line:#2c333d;
+  --ink:#e8ebf0; --ink-2:#aab3c0; --ink-3:#7c8695; --accent:#6da7ec;
+  --s0:#163a66; --s1:#184f95; --s2:#1c5cab; --s3:#256abf; --s4:#3987e5; --s5:#6da7ec; --s6:#9ec5f4; --s7:#cde2fb;
+  --tip-bg:#e8ebf0; --tip-ink:#12161b; color-scheme:dark}
+
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:14px;line-height:1.45}
+.wrap{max-width:1500px;margin:0 auto;padding-block:28px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+h1{font-size:26px;line-height:1.15;margin:0;font-weight:700;text-wrap:balance;letter-spacing:-.01em}
+.lede{color:var(--ink-2);margin:0;max-width:72ch}
+.stats{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:6px;font-size:13px;color:var(--ink-2)}
+.stats b{font-family:var(--f-data);font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+
+.controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:13px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip .k{font-family:var(--f-data);font-size:11.5px;opacity:.75;margin-left:4px}
+.field{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2)}
+select,input[type=search]{font:inherit;font-size:13px;padding:5px 8px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+input[type=search]{width:170px}
+.toggle{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2);cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.legend{display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px;font-size:12px;color:var(--ink-2)}
+.legend .ttl{font-weight:600;color:var(--ink);margin-right:2px}
+.legend .bins{display:flex;flex-wrap:wrap;gap:2px 4px;align-items:flex-end}
+.legend .bin{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:38px}
+.legend .sw{width:100%;height:12px;border-radius:2px}
+.legend .bl{font-family:var(--f-data);font-size:11px;color:var(--ink-3)}
+.legend .none{display:flex;align-items:center;gap:6px}
+.legend .none .sw{width:14px;flex:none;background:var(--empty);border:1px solid var(--line)}
+
+.frame{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:auto;max-height:78vh;position:relative}
+table{border-collapse:separate;border-spacing:0;font-variant-numeric:tabular-nums}
+th,td{padding:0}
+thead th{position:sticky;background:var(--surface);z-index:2}
+thead tr.g th{top:0;height:24px;font-size:11px;font-weight:600;color:var(--ink-3);text-align:left;white-space:nowrap;letter-spacing:.04em;text-transform:uppercase;vertical-align:bottom;padding-bottom:3px}
+thead tr.g th.gh{border-bottom:1px solid var(--line);padding-left:2px;max-width:0}
+thead tr.g th.gh span{display:block;width:0;overflow:visible;white-space:nowrap}
+thead tr.a th{width:var(--cell);min-width:var(--cell);max-width:calc(var(--cell) + 8px)}
+thead tr.a th{top:24px;height:104px;vertical-align:bottom;border-bottom:1px solid var(--line)}
+.vlab{writing-mode:vertical-rl;transform:rotate(180deg);font-size:11.5px;color:var(--ink-2);font-weight:500;white-space:nowrap;padding:6px 0;margin:0 auto;line-height:1}
+th.corner{left:0;z-index:4;text-align:left;vertical-align:bottom;padding:0 10px 6px 12px;font-size:11px;color:var(--ink-3);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+tbody th{position:sticky;left:0;z-index:1;background:var(--surface);text-align:left;font-weight:400;white-space:nowrap;padding:0 10px 0 12px;height:calc(var(--cell) + 2px);border-right:1px solid var(--line)}
+tbody tr.first th{box-shadow:inset 0 1px 0 var(--line)}
+tbody tr.first td{box-shadow:inset 0 1px 0 var(--line)}
+tbody tr:first-child th, tbody tr:first-child td{box-shadow:none}
+.rl{display:flex;gap:8px;align-items:baseline;font-size:12px;line-height:1}
+.code{font-family:var(--f-data);font-size:11.5px;color:var(--ink);min-width:74px}
+.code.rep{color:transparent}
+.dep{font-family:var(--f-data);font-size:11px;color:var(--ink-2);min-width:48px;text-align:right}
+.nm{color:var(--ink-3);font-size:11.5px;max-width:150px;overflow:hidden;text-overflow:ellipsis}
+td.c{width:var(--cell);min-width:var(--cell);height:calc(var(--cell) + 2px);padding:1px}
+td.c i{display:block;height:var(--cell);border-radius:2px;background:var(--empty)}
+td.c.gs{padding-left:6px}
+td.c i.b0{background:var(--s0)} td.c i.b1{background:var(--s1)} td.c i.b2{background:var(--s2)} td.c i.b3{background:var(--s3)}
+td.c i.b4{background:var(--s4)} td.c i.b5{background:var(--s5)} td.c i.b6{background:var(--s6)} td.c i.b7{background:var(--s7)}
+td.c:hover i{outline:2px solid var(--ink);outline-offset:-1px}
+td.tot{font-family:var(--f-data);font-size:11px;color:var(--ink-2);text-align:right;padding:0 12px 0 12px;white-space:nowrap}
+th.toth{vertical-align:bottom;text-align:right;padding:0 12px 6px;font-size:11px;color:var(--ink-3);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+tr.hl th, tr.hl td.tot{background:var(--empty)}
+.nums{--cell:30px}
+.nums td.c i{font-family:var(--f-data);font-style:normal;font-size:10px;line-height:var(--cell);text-align:center;color:var(--ink)}
+.nums td.c i.b4,.nums td.c i.b5,.nums td.c i.b6,.nums td.c i.b7{color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .nums td.c i.b5,:root:not([data-theme="light"]) .nums td.c i.b6,:root:not([data-theme="light"]) .nums td.c i.b7{color:#0d1a2b}}
+:root[data-theme="dark"] .nums td.c i.b5,:root[data-theme="dark"] .nums td.c i.b6,:root[data-theme="dark"] .nums td.c i.b7{color:#0d1a2b}
+tfoot td,tfoot th{position:sticky;bottom:0;background:var(--surface);border-top:1px solid var(--line);z-index:2}
+tfoot th{left:0;z-index:4;text-align:left;padding:4px 10px 4px 12px;font-size:11px;color:var(--ink-3);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+tfoot td.ct{height:46px;vertical-align:top;padding-top:4px}
+tfoot .vn{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--f-data);font-size:10px;color:var(--ink-2);margin:0 auto;white-space:nowrap}
+
+tr.grp th{height:24px;padding-top:6px;cursor:pointer;box-shadow:inset 0 1px 0 var(--line)}
+tr.grp td{box-shadow:inset 0 1px 0 var(--line);vertical-align:bottom;padding:0 0 2px 2px;font-size:11.5px;color:var(--ink-3);white-space:nowrap;cursor:pointer}
+tr.grp td.tot{color:var(--ink);font-weight:500}
+tbody tr.grp:first-child th, tbody tr.grp:first-child td{box-shadow:none}
+.chev{display:inline-block;width:10px;color:var(--ink-3);font-size:10px;transition:transform .12s}
+tr.grp.closed .chev{transform:rotate(-90deg)}
+tr.grp .code{font-weight:500}
+tr.yr th{padding-left:34px}
+.sum{font-family:var(--f-data);font-size:11px;color:var(--ink-3);margin-left:auto;padding-left:8px}
+.yl{font-family:var(--f-data);font-size:11px;color:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){.chev{transition:none}}
+.empty{padding:40px 16px;color:var(--ink-3);text-align:center}
+.foot{font-size:12px;color:var(--ink-3);max-width:90ch}
+.foot code{font-family:var(--f-data);font-size:11.5px}
+
+#tip{position:fixed;z-index:20;pointer-events:none;background:var(--tip-bg);color:var(--tip-ink);border-radius:6px;padding:8px 10px;font-size:12px;line-height:1.4;max-width:280px;box-shadow:0 4px 16px rgba(0,0,0,.18)}
+#tip .t1{font-weight:600}
+#tip .t2{opacity:.75}
+#tip .n{font-family:var(--f-data);font-size:15px;font-weight:500;margin-top:4px}
+#tip .d{font-family:var(--f-data);font-size:11px;opacity:.8}
+@media (max-width:600px){h1{font-size:21px}.nm{display:none}input[type=search]{width:130px}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">East River · SSI snotel sites export</div>
+    <h1>Data points per site, depth, year and variable</h1>
+    <p class="lede">Each site and depth has one row per year with data. Each cell counts the measurements in <code style="font-family:var(--f-data);font-size:12.5px">snotel_all.tsv.gz</code> for one variable in that year. NRCS SNOTEL stations ingested into the SSI database. Records start in 1997. Click a site row to collapse or expand its years. The all-years version is <a href="snotel_coverage.html" style="color:var(--accent)">SNOTEL sites coverage</a>.</p>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="controls">
+    <div class="chips" id="types" role="group" aria-label="Site type"></div>
+    <label class="field" for="sort">Sort
+      <select id="sort">
+        <option value="site">Site code, then depth</option>
+        <option value="total">Most data points first</option>
+        <option value="years">Most years first</option>
+      </select>
+    </label>
+    <label class="field" for="q">Find <input id="q" type="search" placeholder="Site code or name"></label>
+    <button class="chip" type="button" id="expand">Collapse all</button>
+    <label class="toggle" for="nums"><input id="nums" type="checkbox"> Show counts in cells</label>
+  </div>
+
+  <div class="legend" id="legend"></div>
+
+  <div class="frame" id="frame"></div>
+
+  <p class="foot">Source: <code>snotel_all.tsv.gz</code>, exported from the SSI database with <code>ssiexport.py export datastreams --family snotel</code>. Hover or tap a cell for the first and last sample date in that year. Years with no data at a site are not shown. Depths are in meters as recorded by the datastream.</p>
+</div>
+<div id="tip" hidden></div>
+
+<script>
+const D = {"rows":[["NRCS-1141","snotel_upper_taylor","site",null],["NRCS-380","snotel_butte","site",null],["NRCS-669","snotel_north_lost_trail","site",null],["NRCS-680","snotel_park_cone","site",null],["NRCS-737","snotel_schofield_pass","site",null]],"cols":["Air Temperature","Incoming Broadband Solar Radiation","Rain Precipitation","Wind Direction","Wind Speed","Precipitation Snow Adjusted, daily","Snow Thickness","Snow Water Equivalent"],"units":["degC; Cel","W/m^2","m","rad","m/s","m","m","m"],"groups":[["Weather",5],["Snow",3]],"total":2948891,"span":["1997-10-01","2026-07-22"],"yrows":[[0,2009],[0,2010],[0,2011],[0,2012],[0,2013],[0,2014],[0,2015],[0,2016],[0,2017],[0,2018],[0,2019],[0,2020],[0,2021],[0,2022],[0,2023],[0,2024],[0,2025],[0,2026],[1,2002],[1,2003],[1,2004],[1,2005],[1,2006],[1,2007],[1,2008],[1,2009],[1,2010],[1,2011],[1,2012],[1,2013],[1,2014],[1,2015],[1,2016],[1,2017],[1,2018],[1,2019],[1,2020],[1,2021],[1,2022],[1,2023],[1,2024],[1,2025],[1,2026],[2,2003],[2,2004],[2,2005],[2,2006],[2,2007],[2,2008],[2,2009],[2,2010],[2,2011],[2,2012],[2,2013],[2,2014],[2,2015],[2,2016],[2,2017],[2,2018],[2,2019],[2,2020],[2,2021],[2,2022],[2,2023],[2,2024],[2,2025],[2,2026],[3,2003],[3,2004],[3,2005],[3,2006],[3,2007],[3,2008],[3,2009],[3,2010],[3,2011],[3,2012],[3,2013],[3,2014],[3,2015],[3,2016],[3,2017],[3,2018],[3,2019],[3,2020],[3,2021],[3,2022],[3,2023],[3,2024],[3,2025],[3,2026],[4,1997],[4,1998],[4,1999],[4,2000],[4,2001],[4,2002],[4,2003],[4,2004],[4,2005],[4,2006],[4,2007],[4,2008],[4,2009],[4,2010],[4,2011],[4,2012],[4,2013],[4,2014],[4,2015],[4,2016],[4,2017],[4,2018],[4,2019],[4,2020],[4,2021],[4,2022],[4,2023],[4,2024],[4,2025],[4,2026]],"cells":[[0,0,2896,"09-02","12-31"],[0,5,92,"10-01","12-31"],[0,2,3,"10-01","12-01"],[0,6,2898,"09-02","12-31"],[0,7,2868,"09-02","12-31"],[1,0,8733,"01-01","12-31"],[1,5,365,"01-01","12-31"],[1,2,12,"01-01","12-01"],[1,6,8733,"01-01","12-31"],[1,7,8733,"01-01","12-31"],[2,0,8758,"01-01","12-31"],[2,5,365,"01-01","12-31"],[2,2,12,"01-01","12-01"],[2,6,8759,"01-01","12-31"],[2,7,8759,"01-01","12-31"],[3,0,8782,"01-01","12-31"],[3,5,366,"01-01","12-31"],[3,2,12,"01-01","12-01"],[3,6,8782,"01-01","12-31"],[3,7,8782,"01-01","12-31"],[4,0,8759,"01-01","12-31"],[4,5,365,"01-01","12-31"],[4,2,12,"01-01","12-01"],[4,6,8759,"01-01","12-31"],[4,7,8759,"01-01","12-31"],[5,0,8755,"01-01","12-31"],[5,5,365,"01-01","12-31"],[5,2,12,"01-01","12-01"],[5,6,8554,"01-01","12-31"],[5,7,8717,"01-01","12-31"],[6,0,8629,"01-01","12-31"],[6,5,365,"01-01","12-31"],[6,2,12,"01-01","12-01"],[6,6,5391,"01-01","12-31"],[6,7,8671,"01-01","12-31"],[7,0,8671,"01-01","12-31"],[7,5,366,"01-01","12-31"],[7,2,12,"01-01","12-01"],[7,6,6879,"01-01","12-31"],[7,7,8736,"01-01","12-31"],[8,0,8678,"01-01","12-31"],[8,5,365,"01-01","12-31"],[8,2,12,"01-01","12-01"],[8,6,7310,"01-01","12-31"],[8,7,8618,"01-01","12-31"],[9,0,8628,"01-01","12-31"],[9,5,365,"01-01","12-31"],[9,2,12,"01-01","12-01"],[9,6,7264,"01-01","12-31"],[9,7,8685,"01-01","12-31"],[10,0,8709,"01-01","12-31"],[10,5,365,"01-01","12-31"],[10,2,12,"01-01","12-01"],[10,6,7196,"01-01","12-31"],[10,7,8603,"01-01","12-31"],[11,0,8588,"01-01","12-31"],[11,5,366,"01-01","12-31"],[11,2,12,"01-01","12-01"],[11,6,8075,"01-01","12-31"],[11,7,8697,"01-01","12-31"],[12,0,8672,"01-01","12-31"],[12,5,365,"01-01","12-31"],[12,2,12,"01-01","12-01"],[12,6,8741,"01-01","12-31"],[12,7,8759,"01-01","12-31"],[13,0,8645,"01-01","12-31"],[13,5,365,"01-01","12-31"],[13,2,12,"01-01","12-01"],[13,6,7093,"01-01","12-31"],[13,7,7990,"01-01","12-31"],[14,0,8536,"01-01","12-31"],[14,5,365,"01-01","12-31"],[14,2,12,"01-01","12-01"],[14,6,7270,"01-01","12-31"],[14,7,5551,"01-01","12-31"],[15,0,8692,"01-01","12-31"],[15,5,366,"01-01","12-31"],[15,2,12,"01-01","12-01"],[15,6,6921,"01-01","12-31"],[15,7,5522,"01-01","12-31"],[16,0,8760,"01-01","12-31"],[16,5,349,"01-01","12-31"],[16,2,12,"01-01","12-01"],[16,6,7789,"01-01","12-31"],[16,7,7989,"01-01","12-31"],[17,0,4865,"01-01","07-22"],[17,5,195,"01-01","07-21"],[17,2,7,"01-01","07-01"],[17,6,4050,"01-01","07-22"],[17,7,4021,"01-01","07-22"],[18,0,1810,"08-27","12-31"],[18,5,174,"07-11","12-31"],[18,2,6,"07-01","12-01"],[18,6,2485,"07-11","12-31"],[18,7,2527,"07-11","12-31"],[19,0,6866,"01-01","12-31"],[19,5,365,"01-01","12-31"],[19,2,12,"01-01","12-01"],[19,6,8215,"01-01","12-31"],[19,7,8261,"01-01","12-31"],[20,0,7659,"01-01","11-30"],[20,5,366,"01-01","12-31"],[20,2,12,"01-01","12-01"],[20,6,7643,"01-01","11-30"],[20,7,7705,"01-01","12-31"],[21,0,8281,"01-20","12-31"],[21,5,365,"01-01","12-31"],[21,2,12,"01-01","12-01"],[21,6,8268,"01-20","12-31"],[21,7,8300,"01-01","12-31"],[22,0,8758,"01-01","12-31"],[22,5,365,"01-01","12-31"],[22,2,12,"01-01","12-01"],[22,6,7953,"01-01","12-31"],[22,7,8356,"01-01","12-31"],[23,0,8756,"01-01","12-31"],[23,5,365,"01-01","12-31"],[23,2,12,"01-01","12-01"],[23,6,8120,"01-01","12-31"],[23,7,8386,"01-01","12-31"],[24,0,8783,"01-01","12-31"],[24,5,366,"01-01","12-31"],[24,2,12,"01-01","12-01"],[24,6,7866,"01-01","12-31"],[24,7,8460,"01-01","12-31"],[25,0,8758,"01-01","12-31"],[25,5,365,"01-01","12-31"],[25,2,12,"01-01","12-01"],[25,6,8502,"01-01","12-31"],[25,7,8498,"01-01","12-31"],[26,0,8748,"01-01","12-31"],[26,5,365,"01-01","12-31"],[26,2,12,"01-01","12-01"],[26,6,8480,"01-01","12-31"],[26,7,7552,"01-01","12-31"],[27,0,8651,"01-01","12-31"],[27,5,365,"01-01","12-31"],[27,2,12,"01-01","12-01"],[27,6,8260,"01-01","12-31"],[27,7,8340,"01-01","12-31"],[28,0,8726,"01-01","12-31"],[28,5,366,"01-01","12-31"],[28,2,12,"01-01","12-01"],[28,6,8263,"01-01","12-31"],[28,7,7829,"01-01","12-31"],[29,0,8707,"01-01","12-31"],[29,5,365,"01-01","12-31"],[29,2,12,"01-01","12-01"],[29,6,8047,"01-01","12-31"],[29,7,8417,"01-01","12-31"],[30,0,8678,"01-01","12-31"],[30,5,365,"01-01","12-31"],[30,2,12,"01-01","12-01"],[30,6,7460,"01-01","12-31"],[30,7,8444,"01-01","12-31"],[31,0,8759,"01-01","12-31"],[31,5,365,"01-01","12-31"],[31,2,12,"01-01","12-01"],[31,6,7774,"01-01","12-31"],[31,7,8524,"01-01","12-31"],[32,0,8778,"01-01","12-31"],[32,5,366,"01-01","12-31"],[32,2,12,"01-01","12-01"],[32,6,7723,"01-01","12-31"],[32,7,8518,"01-01","12-31"],[33,0,8080,"01-01","12-31"],[33,5,365,"01-01","12-31"],[33,2,12,"01-01","12-01"],[33,6,7200,"01-01","12-31"],[33,7,6987,"01-01","12-31"],[34,0,8757,"01-01","12-31"],[34,5,365,"01-01","12-31"],[34,2,12,"01-01","12-01"],[34,6,7805,"01-01","12-31"],[34,7,8712,"01-01","12-31"],[35,0,8756,"01-01","12-31"],[35,5,365,"01-01","12-31"],[35,2,12,"01-01","12-01"],[35,6,8062,"01-01","12-31"],[35,7,8752,"01-01","12-31"],[36,0,8784,"01-01","12-31"],[36,5,366,"01-01","12-31"],[36,2,12,"01-01","12-01"],[36,6,8153,"01-01","12-31"],[36,7,8651,"01-01","12-31"],[37,0,8760,"01-01","12-31"],[37,5,365,"01-01","12-31"],[37,2,12,"01-01","12-01"],[37,6,8728,"01-01","12-31"],[37,7,8757,"01-01","12-31"],[38,0,8760,"01-01","12-31"],[38,5,365,"01-01","12-31"],[38,2,12,"01-01","12-01"],[38,6,6133,"01-01","12-31"],[38,7,8746,"01-01","12-31"],[39,0,8751,"01-01","12-31"],[39,5,365,"01-01","12-31"],[39,2,12,"01-01","12-01"],[39,6,6667,"01-01","12-31"],[39,7,7790,"01-01","12-31"],[40,0,8783,"01-01","12-31"],[40,5,366,"01-01","12-31"],[40,2,12,"01-01","12-01"],[40,6,5578,"01-01","12-31"],[40,7,6438,"01-01","12-31"],[41,0,8759,"01-01","12-31"],[41,5,349,"01-01","12-31"],[41,2,12,"01-01","12-01"],[41,6,6403,"01-01","12-31"],[41,7,7976,"01-01","12-31"],[42,0,4865,"01-01","07-22"],[42,5,195,"01-01","07-21"],[42,2,7,"01-01","07-01"],[42,6,4750,"01-01","07-22"],[42,7,3422,"01-01","07-22"],[43,0,1329,"07-18","12-31"],[43,5,167,"07-18","12-31"],[43,2,6,"07-01","12-01"],[43,6,1327,"07-18","12-31"],[43,7,1315,"07-18","12-31"],[44,0,4629,"01-01","12-31"],[44,5,366,"01-01","12-31"],[44,2,12,"01-01","12-01"],[44,6,5122,"01-01","12-31"],[44,7,5171,"01-01","12-31"],[45,0,6072,"01-01","12-31"],[45,5,365,"01-01","12-31"],[45,2,12,"01-01","12-01"],[45,6,6415,"01-01","12-31"],[45,7,6413,"01-01","12-31"],[46,0,5705,"01-01","12-31"],[46,5,365,"01-01","12-31"],[46,2,12,"01-01","12-01"],[46,6,5238,"01-01","12-31"],[46,7,5352,"01-01","12-31"],[47,0,7630,"01-01","12-22"],[47,5,365,"01-01","12-31"],[47,2,12,"01-01","12-01"],[47,6,7260,"01-01","12-22"],[47,7,7280,"01-01","12-31"],[48,0,6807,"01-10","12-31"],[48,5,366,"01-01","12-31"],[48,2,12,"01-01","12-01"],[48,6,6250,"01-10","12-31"],[48,7,6769,"01-01","12-31"],[49,0,8757,"01-01","12-31"],[49,5,365,"01-01","12-31"],[49,2,12,"01-01","12-01"],[49,6,8041,"01-01","12-31"],[49,7,8432,"01-01","12-31"],[50,0,8447,"01-01","12-31"],[50,5,365,"01-01","12-31"],[50,2,12,"01-01","12-01"],[50,6,7223,"01-01","12-31"],[50,7,8164,"01-01","12-31"],[51,0,8746,"01-01","12-31"],[51,5,365,"01-01","12-31"],[51,2,12,"01-01","12-01"],[51,6,8252,"01-01","12-31"],[51,7,8488,"01-01","12-31"],[52,0,7802,"01-01","12-31"],[52,5,366,"01-01","12-31"],[52,2,12,"01-01","12-01"],[52,6,7147,"01-01","12-31"],[52,7,7373,"01-01","12-31"],[53,0,8743,"01-01","12-31"],[53,5,365,"01-01","12-31"],[53,2,12,"01-01","12-01"],[53,6,7999,"01-01","12-31"],[53,7,8414,"01-01","12-31"],[54,0,8758,"01-01","12-31"],[54,5,365,"01-01","12-31"],[54,2,12,"01-01","12-01"],[54,6,8126,"01-01","12-31"],[54,7,8352,"01-01","12-31"],[55,0,8759,"01-01","12-31"],[55,5,365,"01-01","12-31"],[55,2,12,"01-01","12-01"],[55,6,8217,"01-01","12-31"],[55,7,8400,"01-01","12-31"],[56,0,8583,"01-01","12-31"],[56,5,366,"01-01","12-31"],[56,2,12,"01-01","12-01"],[56,6,7960,"01-01","12-31"],[56,7,8431,"01-01","12-31"],[57,0,7688,"01-01","12-31"],[57,5,365,"01-01","12-31"],[57,2,12,"01-01","12-01"],[57,6,7274,"01-01","12-31"],[57,7,7684,"01-01","12-31"],[58,0,8755,"01-01","12-31"],[58,5,365,"01-01","12-31"],[58,2,12,"01-01","12-01"],[58,6,7911,"01-01","12-31"],[58,7,8736,"01-01","12-31"],[59,0,8756,"01-01","12-31"],[59,5,365,"01-01","12-31"],[59,2,12,"01-01","12-01"],[59,6,7805,"01-01","12-31"],[59,7,8753,"01-01","12-31"],[60,0,8774,"01-01","12-31"],[60,5,366,"01-01","12-31"],[60,2,12,"01-01","12-01"],[60,6,7488,"01-01","12-31"],[60,7,8743,"01-01","12-31"],[61,0,8758,"01-01","12-31"],[61,5,365,"01-01","12-31"],[61,2,12,"01-01","12-01"],[61,6,5895,"01-01","12-31"],[61,7,8627,"01-01","12-31"],[62,0,8754,"01-01","12-31"],[62,5,365,"01-01","12-31"],[62,2,12,"01-01","12-01"],[62,6,7223,"01-01","12-31"],[62,7,8619,"01-01","12-31"],[63,0,8759,"01-01","12-31"],[63,5,365,"01-01","12-31"],[63,2,12,"01-01","12-01"],[63,6,7830,"01-01","12-31"],[63,7,8759,"01-01","12-31"],[64,0,8759,"01-01","12-31"],[64,5,366,"01-01","12-31"],[64,2,12,"01-01","12-01"],[64,6,7376,"01-01","12-31"],[64,7,8753,"01-01","12-31"],[65,0,8760,"01-01","12-31"],[65,5,349,"01-01","12-31"],[65,2,12,"01-01","12-01"],[65,6,7509,"01-01","12-31"],[65,7,8755,"01-01","12-31"],[66,0,4864,"01-01","07-22"],[66,5,194,"01-01","07-20"],[66,2,7,"01-01","07-01"],[66,6,4597,"01-01","07-22"],[66,7,4863,"01-01","07-22"],[67,0,1344,"07-15","12-31"],[67,5,170,"07-15","12-31"],[67,2,6,"07-01","12-01"],[67,6,1343,"07-15","12-31"],[67,7,1347,"07-15","12-31"],[68,0,2920,"01-01","12-31"],[68,5,366,"01-01","12-31"],[68,2,12,"01-01","12-01"],[68,6,2918,"01-01","12-31"],[68,7,2925,"01-01","12-31"],[69,0,5868,"01-01","12-31"],[69,5,365,"01-01","12-31"],[69,2,12,"01-01","12-01"],[69,6,5872,"01-01","12-31"],[69,7,5876,"01-01","12-31"],[70,0,8748,"01-01","12-31"],[70,5,365,"01-01","12-31"],[70,2,12,"01-01","12-01"],[70,6,7449,"01-01","12-31"],[70,7,8719,"01-01","12-31"],[71,0,8756,"01-01","12-31"],[71,5,365,"01-01","12-31"],[71,2,12,"01-01","12-01"],[71,6,7428,"01-01","12-31"],[71,7,8623,"01-01","12-31"],[72,0,866,"01-01","12-31"],[72,5,366,"01-01","12-31"],[72,2,12,"01-01","12-01"],[72,6,858,"01-01","12-31"],[72,7,871,"01-01","12-31"],[73,0,3127,"01-01","12-31"],[73,5,365,"01-01","12-31"],[73,2,12,"01-01","12-01"],[73,6,2906,"01-01","12-31"],[73,7,3128,"01-01","12-31"],[74,0,8756,"01-01","12-31"],[74,5,365,"01-01","12-31"],[74,2,12,"01-01","12-01"],[74,6,6908,"01-01","12-31"],[74,7,8553,"01-01","12-31"],[75,0,8733,"01-01","12-31"],[75,5,365,"01-01","12-31"],[75,2,12,"01-01","12-01"],[75,6,7097,"01-01","12-31"],[75,7,8743,"01-01","12-31"],[76,0,8782,"01-01","12-31"],[76,5,366,"01-01","12-31"],[76,2,12,"01-01","12-01"],[76,6,7154,"01-01","12-31"],[76,7,8733,"01-01","12-31"],[77,0,8730,"01-01","12-31"],[77,5,365,"01-01","12-31"],[77,2,12,"01-01","12-01"],[77,6,7551,"01-01","12-31"],[77,7,8750,"01-01","12-31"],[78,0,8758,"01-01","12-31"],[78,5,365,"01-01","12-31"],[78,2,12,"01-01","12-01"],[78,6,7513,"01-01","12-31"],[78,7,8697,"01-01","12-31"],[79,0,8752,"01-01","12-31"],[79,5,365,"01-01","12-31"],[79,2,12,"01-01","12-01"],[79,6,7374,"01-01","12-31"],[79,7,8754,"01-01","12-31"],[80,0,8771,"01-01","12-31"],[80,5,366,"01-01","12-31"],[80,2,12,"01-01","12-01"],[80,6,6529,"01-01","12-31"],[80,7,8776,"01-01","12-31"],[81,0,8753,"01-01","12-31"],[81,5,365,"01-01","12-31"],[81,2,12,"01-01","12-01"],[81,6,6295,"01-01","12-31"],[81,7,8731,"01-01","12-31"],[82,0,8755,"01-01","12-31"],[82,5,365,"01-01","12-31"],[82,2,12,"01-01","12-01"],[82,6,6032,"01-01","12-31"],[82,7,8624,"01-01","12-31"],[83,0,8753,"01-01","12-31"],[83,5,365,"01-01","12-31"],[83,2,12,"01-01","12-01"],[83,6,6673,"01-01","12-31"],[83,7,8759,"01-01","12-31"],[84,0,8358,"01-01","12-31"],[84,5,366,"01-01","12-31"],[84,2,12,"01-01","12-01"],[84,6,7806,"01-01","12-31"],[84,7,8286,"01-01","12-31"],[85,0,7542,"01-01","12-31"],[85,5,365,"01-01","12-31"],[85,2,12,"01-01","12-01"],[85,6,7270,"01-01","12-31"],[85,7,7543,"01-01","12-31"],[86,0,8752,"01-01","12-31"],[86,5,365,"01-01","12-31"],[86,2,12,"01-01","12-01"],[86,6,8208,"01-01","12-31"],[86,7,8752,"01-01","12-31"],[87,0,8723,"01-01","12-31"],[87,5,365,"01-01","12-31"],[87,2,12,"01-01","12-01"],[87,6,7661,"01-01","12-31"],[87,7,8721,"01-01","12-31"],[88,0,8784,"01-01","12-31"],[88,5,366,"01-01","12-31"],[88,2,12,"01-01","12-01"],[88,6,6641,"01-01","12-31"],[88,7,6484,"01-01","12-31"],[89,0,8755,"01-01","12-31"],[89,5,349,"01-01","12-31"],[89,2,12,"01-01","12-01"],[89,6,6751,"01-01","12-31"],[89,7,7348,"01-01","12-31"],[90,0,4778,"01-01","07-22"],[90,5,195,"01-01","07-21"],[90,2,7,"01-01","07-01"],[90,6,4743,"01-01","07-22"],[90,7,4425,"01-01","07-22"],[91,0,2141,"10-03","12-31"],[91,5,90,"10-03","12-31"],[91,2,3,"10-01","12-01"],[91,6,2133,"10-03","12-31"],[91,7,1982,"10-03","12-31"],[92,0,8752,"01-01","12-31"],[92,5,365,"01-01","12-31"],[92,2,12,"01-01","12-01"],[92,6,8743,"01-01","12-31"],[92,7,8753,"01-01","12-31"],[93,0,8734,"01-01","12-31"],[93,5,365,"01-01","12-31"],[93,2,12,"01-01","12-01"],[93,6,8725,"01-01","12-31"],[93,7,8703,"01-01","12-31"],[94,0,8771,"01-01","12-31"],[94,5,366,"01-01","12-31"],[94,2,12,"01-01","12-01"],[94,6,8767,"01-01","12-31"],[94,7,8537,"01-01","12-31"],[95,0,8753,"01-01","12-31"],[95,5,365,"01-01","12-31"],[95,2,12,"01-01","12-01"],[95,6,8749,"01-01","12-31"],[95,7,8597,"01-01","12-31"],[96,0,8739,"01-01","12-31"],[96,5,365,"01-01","12-31"],[96,2,12,"01-01","12-01"],[96,6,8735,"01-01","12-31"],[96,7,8758,"01-01","12-31"],[97,0,6593,"01-01","12-31"],[97,5,365,"01-01","12-31"],[97,2,12,"01-01","12-01"],[97,6,6558,"01-01","12-31"],[97,7,6617,"01-01","12-31"],[98,0,4016,"01-01","12-31"],[98,5,366,"01-01","12-31"],[98,2,12,"01-01","12-01"],[98,6,4017,"01-01","12-31"],[98,7,4153,"01-01","12-31"],[99,0,8029,"01-01","12-31"],[99,5,365,"01-01","12-31"],[99,2,12,"01-01","12-01"],[99,6,8024,"01-01","12-31"],[99,7,8054,"01-01","12-31"],[100,0,8758,"01-01","12-31"],[100,5,365,"01-01","12-31"],[100,2,12,"01-01","12-01"],[100,6,8287,"01-01","12-31"],[100,7,8364,"01-01","12-31"],[101,0,8759,"01-01","12-31"],[101,5,365,"01-01","12-31"],[101,2,12,"01-01","12-01"],[101,6,8185,"01-01","12-31"],[101,7,8379,"01-01","12-31"],[102,0,8782,"01-01","12-31"],[102,5,366,"01-01","12-31"],[102,2,12,"01-01","12-01"],[102,6,7979,"01-01","12-31"],[102,7,8345,"01-01","12-31"],[103,0,8758,"01-01","12-31"],[103,5,365,"01-01","12-31"],[103,2,12,"01-01","12-01"],[103,6,8177,"01-01","12-31"],[103,7,6226,"01-01","12-31"],[104,0,8755,"01-01","12-31"],[104,5,365,"01-01","12-31"],[104,2,12,"01-01","12-01"],[104,6,7474,"01-01","12-31"],[104,7,8083,"01-01","12-31"],[105,0,8756,"01-01","12-31"],[105,5,365,"01-01","12-31"],[105,2,12,"01-01","12-01"],[105,6,5439,"01-01","12-31"],[105,7,8634,"01-01","12-31"],[106,0,8783,"01-01","12-31"],[106,5,366,"01-01","12-31"],[106,2,12,"01-01","12-01"],[106,6,6652,"01-01","12-31"],[106,7,7845,"01-01","12-31"],[107,0,8755,"01-01","12-31"],[107,5,365,"01-01","12-31"],[107,2,12,"01-01","12-01"],[107,6,8025,"01-01","12-31"],[107,7,8401,"01-01","12-31"],[108,0,8760,"01-01","12-31"],[108,5,365,"01-01","12-31"],[108,2,12,"01-01","12-01"],[108,6,8042,"01-01","12-31"],[108,7,8613,"01-01","12-31"],[109,0,8759,"01-01","12-31"],[109,5,365,"01-01","12-31"],[109,2,12,"01-01","12-01"],[109,6,7572,"01-01","12-31"],[109,7,8551,"01-01","12-31"],[110,0,8779,"01-01","12-31"],[110,5,366,"01-01","12-31"],[110,2,12,"01-01","12-01"],[110,6,7720,"01-01","12-31"],[110,7,8715,"01-01","12-31"],[110,3,4440,"06-29","12-31"],[110,4,4440,"06-29","12-31"],[111,0,8754,"01-01","12-31"],[111,5,365,"01-01","12-31"],[111,2,12,"01-01","12-01"],[111,6,7010,"01-01","12-31"],[111,7,8393,"01-01","12-31"],[111,3,8754,"01-01","12-31"],[111,4,8754,"01-01","12-31"],[112,0,8758,"01-01","12-31"],[112,5,365,"01-01","12-31"],[112,2,12,"01-01","12-01"],[112,6,6788,"01-01","12-31"],[112,7,8540,"01-01","12-31"],[112,3,8757,"01-01","12-31"],[112,4,8757,"01-01","12-31"],[113,0,8759,"01-01","12-31"],[113,5,365,"01-01","12-31"],[113,2,12,"01-01","12-01"],[113,6,7248,"01-01","12-31"],[113,7,8759,"01-01","12-31"],[113,3,8754,"01-01","12-31"],[113,4,8754,"01-01","12-31"],[114,0,8775,"01-01","12-31"],[114,5,366,"01-01","12-31"],[114,2,12,"01-01","12-01"],[114,6,6006,"01-01","12-31"],[114,7,8657,"01-01","12-31"],[114,3,8770,"01-01","12-31"],[114,4,8770,"01-01","12-31"],[115,0,8759,"01-01","12-31"],[115,5,365,"01-01","12-31"],[115,2,12,"01-01","12-01"],[115,6,7274,"01-01","12-31"],[115,7,8759,"01-01","12-31"],[115,3,8760,"01-01","12-31"],[115,4,8760,"01-01","12-31"],[116,0,8711,"01-01","12-31"],[116,1,4225,"07-07","12-31"],[116,5,365,"01-01","12-31"],[116,2,12,"01-01","12-01"],[116,6,7872,"01-01","12-31"],[116,7,8695,"01-01","12-31"],[116,3,8718,"01-01","12-31"],[116,4,8718,"01-01","12-31"],[117,0,8760,"01-01","12-31"],[117,1,8760,"01-01","12-31"],[117,5,365,"01-01","12-31"],[117,2,12,"01-01","12-01"],[117,6,7438,"01-01","12-31"],[117,7,7603,"01-01","12-31"],[117,3,8760,"01-01","12-31"],[117,4,8760,"01-01","12-31"],[118,0,8783,"01-01","12-31"],[118,1,4627,"01-01","07-11"],[118,5,366,"01-01","12-31"],[118,2,12,"01-01","12-01"],[118,6,6557,"01-01","12-31"],[118,7,7484,"01-01","12-31"],[118,3,8779,"01-01","12-31"],[118,4,8779,"01-01","12-31"],[119,0,8760,"01-01","12-31"],[119,5,310,"01-01","12-31"],[119,2,12,"01-01","12-01"],[119,6,6624,"01-01","12-31"],[119,7,7317,"01-01","12-31"],[119,3,8739,"01-01","12-31"],[119,4,8739,"01-01","12-31"],[120,0,4864,"01-01","07-22"],[120,5,195,"01-01","07-21"],[120,2,7,"01-01","07-01"],[120,6,3625,"01-01","07-22"],[120,7,4191,"01-01","07-21"],[120,3,4845,"01-01","07-22"],[120,4,4845,"01-01","07-22"]],"bins":[[1,20,"1\u201320",0],[21,500,"21\u2013500",2],[501,10000,"501\u201310,000",5],[10001,null,"10,001+",7]]};
+const TYPES = {waterQualityStation:"Water quality stations", borehole:"Boreholes", site:"Sites", fieldArea:"Field areas"};
+// any other site type gets a readable label, so no site is hidden by the type filter
+D.rows.forEach(r => { if (!(r[2] in TYPES)) TYPES[r[2]] = r[2].replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, c => c.toUpperCase()) + "s"; });
+const BINS = D.bins.map(([a,b,l,k]) => [a, b==null?Infinity:b, l, k]);
+const binOf = n => BINS.findIndex(b => n>=b[0] && n<=b[1]);
+const fmt = n => n.toLocaleString("en-US");
+const NC = D.cols.length;
+
+const M = D.yrows.map(() => new Array(NC).fill(null));
+D.cells.forEach(([y,c,n,t0,t1]) => { M[y][c] = [n,t0,t1]; });
+const yTot = M.map(r => r.reduce((s,x)=>s+(x?x[0]:0),0));
+const kids = D.rows.map(()=>[]); D.yrows.forEach(([r],y)=>kids[r].push(y));
+const rowTot = kids.map(ys => ys.reduce((s,y)=>s+yTot[y],0));
+const groupStart = new Set(); { let k=0; D.groups.forEach(([,n])=>{ groupStart.add(k); k+=n; }); }
+
+const sites = new Set(D.rows.map(r=>r[0]));
+document.getElementById("stats").innerHTML =
+  `<span><b>${fmt(D.total)}</b> data points</span><span><b>${sites.size}</b> sites</span><span><b>${D.rows.length}</b> site × depth groups</span><span><b>${D.yrows.length}</b> year rows</span><span><b>${NC}</b> ${NC===1?"variable":"variables"}</span><span><b>${D.span[0].slice(0,4)}–${D.span[1].slice(0,4)}</b></span>`;
+document.getElementById("legend").innerHTML = `<span class="ttl">Data points per cell per year</span><div class="bins">${
+  BINS.map((b,i)=>`<div class="bin"><span class="sw" style="background:var(--s${b[3]})"></span><span class="bl">${b[2]}</span></div>`).join("")
+}</div><span class="none"><span class="sw"></span>No data that year</span>`;
+
+const state = {types:new Set(Object.keys(TYPES)), sort:"site", q:"", nums:false, closed:new Set()};
+const typeCount = {}; D.rows.forEach(r=>typeCount[r[2]]=(typeCount[r[2]]||0)+1);
+const chips = document.getElementById("types");
+chips.innerHTML = Object.entries(TYPES).filter(([k])=>typeCount[k]).map(([k,v]) =>
+  `<button class="chip" type="button" data-t="${k}" aria-pressed="true">${v}<span class="k">${typeCount[k]}</span></button>`).join("");
+chips.addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if(!b) return;
+  const t = b.dataset.t, on = state.types.has(t);
+  if (on && state.types.size===1) Object.keys(TYPES).forEach(k=>state.types.add(k));
+  else if (on) state.types.delete(t); else state.types.add(t);
+  chips.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed", state.types.has(c.dataset.t)));
+  render();
+});
+document.getElementById("sort").addEventListener("change", e=>{state.sort=e.target.value; render();});
+document.getElementById("q").addEventListener("input", e=>{state.q=e.target.value.trim().toLowerCase(); render();});
+document.getElementById("nums").addEventListener("change", e=>{state.nums=e.target.checked; render();});
+const expBtn = document.getElementById("expand");
+expBtn.addEventListener("click", () => {
+  if (state.closed.size) state.closed.clear(); else D.rows.forEach((_,i)=>state.closed.add(i));
+  render();
+});
+
+const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const depLabel = d => d==null ? "—" : `${+d.toFixed(2)} m`;
+
+function render(){
+  let idx = D.rows.map((_,i)=>i).filter(i => state.types.has(D.rows[i][2]) &&
+    (!state.q || D.rows[i][0].toLowerCase().includes(state.q) || D.rows[i][1].toLowerCase().includes(state.q)));
+  if (state.sort==="total") idx.sort((a,b)=>rowTot[b]-rowTot[a]);
+  else if (state.sort==="years") idx.sort((a,b)=>kids[b].length-kids[a].length || rowTot[b]-rowTot[a]);
+  expBtn.textContent = state.closed.size ? "Expand all" : "Collapse all";
+  const frame = document.getElementById("frame");
+  frame.classList.toggle("nums", state.nums);
+  if (!idx.length){ frame.innerHTML = `<div class="empty">No site matches “${esc(state.q)}” in the selected site types.</div>`; return; }
+
+  const colTot = new Array(NC).fill(0);
+  idx.forEach(r=>kids[r].forEach(y=>M[y].forEach((x,c)=>{ if(x) colTot[c]+=x[0]; })));
+  let h = `<table><thead><tr class="g"><th class="corner" rowspan="2">Site · depth · name / year</th>`;
+  D.groups.forEach(([name,n],gi)=>{ h += `<th class="gh" colspan="${n}"${gi?' style="padding-left:6px"':''}><span title="${esc(name)}">${esc(name)}</span></th>`; });
+  h += `<th class="toth" rowspan="2">Total</th></tr><tr class="a">`;
+  D.cols.forEach((c,i)=>{ h += `<th${groupStart.has(i)&&i?' style="padding-left:6px"':''}><div class="vlab" title="${esc(c)} (${esc(D.units[i])})">${esc(c)}</div></th>`; });
+  h += `</tr></thead><tbody>`;
+  idx.forEach(r => {
+    const [code,name,,dep] = D.rows[r], ys = kids[r], closed = state.closed.has(r);
+    const y0 = D.yrows[ys[0]][1], y1 = D.yrows[ys[ys.length-1]][1];
+    h += `<tr class="grp${closed?" closed":""}" data-g="${r}"><th><div class="rl" role="button" tabindex="0" aria-expanded="${!closed}"><span class="chev">▼</span><span class="code">${esc(code)}</span><span class="dep">${depLabel(dep)}</span><span class="nm">${esc(name)}</span><span class="sum">${ys.length} yr${ys.length===1?"":"s"} · ${y0===y1?y0:y0+"–"+y1}</span></div></th>`;
+    h += `<td colspan="${NC}"></td><td class="tot">${fmt(rowTot[r])}</td></tr>`;
+    if (closed) return;
+    ys.forEach(y => {
+      h += `<tr class="yr" data-y="${y}"><th><span class="yl">${D.yrows[y][1]}</span></th>`;
+      M[y].forEach((x,c) => {
+        const gs = groupStart.has(c)&&c ? " gs" : "";
+        h += x ? `<td class="c${gs}" data-c="${c}"><i class="b${BINS[binOf(x[0])][3]}">${state.nums?x[0]:""}</i></td>`
+               : `<td class="c${gs}" data-c="${c}"><i></i></td>`;
+      });
+      h += `<td class="tot">${fmt(yTot[y])}</td></tr>`;
+    });
+  });
+  h += `</tbody><tfoot><tr><th>Total</th>`;
+  colTot.forEach((t,c)=>{ h += `<td class="ct${groupStart.has(c)&&c?" c gs":""}"><div class="vn">${fmt(t)}</div></td>`; });
+  h += `<td class="tot">${fmt(colTot.reduce((a,b)=>a+b,0))}</td></tr></tfoot></table>`;
+  frame.innerHTML = h;
+}
+render();
+
+const frameEl = document.getElementById("frame");
+function toggle(tr){ const r=+tr.dataset.g; state.closed.has(r)?state.closed.delete(r):state.closed.add(r); render(); }
+frameEl.addEventListener("click", e => { const tr = e.target.closest("tr.grp"); if (tr) toggle(tr); });
+frameEl.addEventListener("keydown", e => { if ((e.key==="Enter"||e.key===" ") && e.target.closest("tr.grp")) { e.preventDefault(); const r=e.target.closest("tr.grp").dataset.g; toggle(e.target.closest("tr.grp")); frameEl.querySelector(`tr.grp[data-g="${r}"] .rl`)?.focus(); } });
+
+const tip = document.getElementById("tip");
+function show(td, x, y){
+  const tr = td.closest("tr"), yi = +tr.dataset.y, c = +td.dataset.c;
+  const [r, year] = D.yrows[yi], [code,name,type,dep] = D.rows[r], v = M[yi][c];
+  tip.innerHTML = `<div class="t1">${esc(D.cols[c])} <span class="t2">· ${esc(D.units[c])}</span></div>
+    <div>${esc(name)} <span class="t2">(${esc(code)})</span></div>
+    <div class="t2">${TYPES[type]||type} · depth ${dep==null?"not recorded":depLabel(dep)}</div>
+    <div class="n">${year}: ${v?fmt(v[0])+" data point"+(v[0]===1?"":"s"):"no data"}</div>
+    ${v?`<div class="d">${v[1]===v[2]?year+"-"+v[1]:year+"-"+v[1]+" → "+year+"-"+v[2]}</div>`:""}`;
+  tip.hidden = false;
+  const w = tip.offsetWidth, hh = tip.offsetHeight;
+  let lx = x+14, ly = y+14;
+  if (lx+w > innerWidth-8) lx = x-w-14;
+  if (ly+hh > innerHeight-8) ly = y-hh-14;
+  tip.style.left = Math.max(8,lx)+"px"; tip.style.top = Math.max(8,ly)+"px";
+  document.querySelectorAll("tr.hl").forEach(t=>t.classList.remove("hl")); tr.classList.add("hl");
+}
+function hide(){ tip.hidden = true; document.querySelectorAll("tr.hl").forEach(t=>t.classList.remove("hl")); }
+frameEl.addEventListener("pointermove", e => { const td = e.target.closest("tbody tr.yr td.c"); td ? show(td,e.clientX,e.clientY) : hide(); });
+frameEl.addEventListener("pointerleave", hide);
+frameEl.addEventListener("scroll", hide, {passive:true});
+</script>
