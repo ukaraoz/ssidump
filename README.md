@@ -144,7 +144,7 @@ a running server:
 
 ```bash
 pg_restore -s -f schema_only.sql ssi_2026-10-26_083001Z.dump   # from pgenv/bin on Perlmutter
-schema_map/build.sh schema_only.sql ssi_schemas.html
+schema_map/build.sh schema_only.sql schema_map/ssi_schemas.html
 ```
 
 Table lists, columns, keys and counts all come from the dump. The schema-flow diagram

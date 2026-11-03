@@ -8,6 +8,5 @@ logs/
 restore.log
 odmx_csv/
 claude_history/
-ssi_schemas.html
 .DS_Store
 __pycache__/
