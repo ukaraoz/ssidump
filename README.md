@@ -13,7 +13,8 @@ The dumps are written by pg_dump 16 (archive format 1.15). The system `pg_restor
 an interactive map of every schema and table in the 2026-10-26 dump. See [Schema map](#schema-map).
 
 **[Browse geochem coverage](https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage.html)**:
-data-point counts for every site, depth and analyte in the geochem export. See [Geochem coverage](#geochem-coverage).
+data-point counts for every site, depth and analyte in the geochem export
+([by year](https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage_by_year.html)). See [Geochem coverage](#geochem-coverage).
 
 ## Quick start
 
@@ -197,16 +198,20 @@ rebuilt `schema_map/ssi_schemas.html` to update it.
 
 ## Geochem coverage
 
-`geochem_coverage/` builds a heatmap page of data-point counts per site × depth (rows)
-and analyte (columns) from a geochem datastreams export. It needs Python 3 with pandas,
-not a running server:
+`geochem_coverage/` builds two heatmap pages of data-point counts from a geochem
+datastreams export: one with a row per site × depth (`geochem_coverage.html`), and one
+that adds a row for each year under every site × depth (`geochem_coverage_by_year.html`).
+Columns are analytes in both. It needs Python 3 with pandas, not a running server:
 
 ```bash
 ssiexport.py export datastreams --family geochem --out geochemdata_all.tsv
-geochem_coverage/build.sh geochemdata_all.tsv geochem_coverage/geochem_coverage.html
+geochem_coverage/build.sh geochemdata_all.tsv geochem_coverage/
 ```
 
 Analyte column groups are set in `build_data.py`; any analyte not named there falls
-under metals & trace elements. The page is published with GitHub Pages at
-<https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage.html>. Commit and
-push a rebuilt `geochem_coverage/geochem_coverage.html` to update it.
+under metals & trace elements. Both pages are published with GitHub Pages:
+
+- <https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage.html>
+- <https://ukaraoz.github.io/ssidump/geochem_coverage/geochem_coverage_by_year.html>
+
+Commit and push the rebuilt HTML files to update them.
