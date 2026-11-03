@@ -9,6 +9,9 @@ Tools for opening the nightly `ssi_*.dump` files of the `odmx_lbnlsfa` database
 The dumps are written by pg_dump 16 (archive format 1.15). The system `pg_restore`
 (version 12) can't read them, so these tools ship their own PostgreSQL 17 in `pgenv/`.
 
+**[Browse the schema map](https://ukaraoz.github.io/ssidump/schema_map/ssi_schemas.html)**:
+an interactive map of every schema and table in the 2026-10-26 dump. See [Schema map](#schema-map).
+
 ## Quick start
 
 ```bash
@@ -151,3 +154,7 @@ Table lists, columns, keys and counts all come from the dump. The schema-flow di
 and its stream counts at the top of `template.html` are written by hand for the
 2026-10-26 dump, so update them if a new dump changes the structure. Theme groupings
 for `odmx` tables are name rules in `build_data.py`.
+
+The built page is published with GitHub Pages from the `main` branch at
+<https://ukaraoz.github.io/ssidump/schema_map/ssi_schemas.html>. Commit and push a
+rebuilt `schema_map/ssi_schemas.html` to update it.
