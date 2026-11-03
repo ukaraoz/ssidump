@@ -1,0 +1,13 @@
+# Data and runtime state: never commit
+*.dump
+schema_only.sql
+pgenv/
+pgdata/
+pgrun/
+logs/
+restore.log
+odmx_csv/
+claude_history/
+ssi_schemas.html
+.DS_Store
+__pycache__/
