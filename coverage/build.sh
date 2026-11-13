@@ -2,7 +2,7 @@
 # Build the two coverage pages (all years, and by year) for one datastreams export.
 #
 #   ssiexport.py export datastreams --family geochem --out geochemdata_all.tsv
-#   coverage/build.sh geochem    geochemdata_all.tsv       geochem_coverage/
+#   coverage/build.sh geochem    geochemdata_all.tsv       coverage/
 #   coverage/build.sh decagon    decagon_all.tsv.gz        coverage/
 #   coverage/build.sh streamflow streamflow_all.tsv        coverage/
 #

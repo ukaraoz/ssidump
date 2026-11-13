@@ -2,8 +2,8 @@
 
     python3 coverage/build_index.py
 
-Reads the data embedded in each built <dataset>_coverage.html (in coverage/ and
-geochem_coverage/), so run it after coverage/build.sh.
+Reads the data embedded in each built <dataset>_coverage.html in coverage/, so run it
+after coverage/build.sh.
 """
 import html, json, re
 from pathlib import Path
@@ -14,15 +14,13 @@ root = Path(__file__).resolve().parent
 repo = root.parent
 rows = []
 for key, cfg in DATASETS.items():
-    folder = 'geochem_coverage' if key == 'geochem' else 'coverage'
-    page = repo / folder / f'{key}_coverage.html'
+    page = root / f'{key}_coverage.html'
     if not page.exists():
         continue
     s = page.read_text(encoding='utf-8')
     D = json.loads(re.search(r'const D = (\{.*?\});\n', s, re.S).group(1).replace('<\\/', '</'))
-    prefix = '' if folder == 'coverage' else '../geochem_coverage/'
-    rows.append(dict(key=key, label=cfg['label'], href=f'{prefix}{key}_coverage.html',
-                     yhref=f'{prefix}{key}_coverage_by_year.html', total=D['total'],
+    rows.append(dict(key=key, label=cfg['label'], href=f'{key}_coverage.html',
+                     yhref=f'{key}_coverage_by_year.html', total=D['total'],
                      sites=len({r[0] for r in D['rows']}), cols=len(D['cols']), colword=cfg['cols'],
                      span=f"{D['span'][0][:4]}–{D['span'][1][:4]}",
                      sel=cfg.get('select') or f"--family {cfg['family']}"))
