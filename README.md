@@ -6,6 +6,11 @@ Tools for opening the nightly `ssi_*.dump` files of the `odmx_lbnlsfa` database
 - **restore** a dump into a private local PostgreSQL 17 + PostGIS server and query it with SQL;
 - **export** tables from a dump straight to CSV, with no server needed.
 
+**On Perlmutter everything lives in one self-contained folder on CFS:
+`/global/cfs/cdirs/m4915/roelef_ssidump`** (the dump, these scripts, the module file, its own
+PostgreSQL install in `pgenv/`, the database in `pgdata/`, and the exports in `exports/`). Nothing in
+it is a symlink to anywhere else.
+
 The dumps are written by pg_dump 16 (archive format 1.15). The system `pg_restore`
 (version 12) can't read them, so these tools ship their own PostgreSQL 17 in `pgenv/`.
 
@@ -15,10 +20,14 @@ an interactive map of every schema and table in the 2026-10-26 dump. See [Schema
 **[Browse data coverage](https://ukaraoz.github.io/ssidump/coverage/index.html)**: data-point counts per
 site, depth, year and variable for geochem and 11 sensor sources. See [Coverage pages](#coverage-pages).
 
+**[Related ESS-DIVE datasets](resources/FY27Q1_SSI_Data_Stream_Datasets.md)**: published ESS-DIVE
+packages that hold some of the data in this dump, by source, with open questions on publication
+status. Copied from a Google Doc in November 2026. See [Resources](#resources).
+
 ## Quick start
 
 ```bash
-module use /pscratch/sd/u/ukaraoz/roelef_ssidump/modulefiles
+module use /global/cfs/cdirs/m4915/roelef_ssidump/modulefiles
 module load ssidump
 
 ssidump.py status        # is the server up?
@@ -80,7 +89,7 @@ conn = psycopg.connect("")          # picks up the PG* variables
 If you don't load the module, use this connection string:
 
 ```
-postgresql://ssi@/odmx_lbnlsfa?host=/pscratch/sd/u/ukaraoz/roelef_ssidump/pgrun&port=54329
+postgresql://ssi@/odmx_lbnlsfa?host=/global/cfs/cdirs/m4915/roelef_ssidump/pgrun&port=54329
 ```
 
 You can also open a shell with `ssidump.py psql`. Arguments after `psql` are passed
@@ -133,6 +142,74 @@ use `--pattern REGEX` or `--table NAME`. Other options: `--rows N` (sample rows,
 Geochem caveats: non-detects are stored as 0 (only `samples` carries `censor_code`); -9999 is a
 fill code in some values and SDs; datastream times are local sample time + 7 h.
 
+## Selecting data by owner, data type and sensor (`ssiselect.py`)
+
+`ssiselect.py` (standard library only; needs the server running) picks datastreams by who owns
+the equipment, what it measures and what sensor made it, and exports them in long format: one
+row per measurement with its site, logger, sensor, owner and feeder table beside it. Every
+export writes three files, so it can be checked and rerun:
+
+| File | Contents |
+|---|---|
+| `NAME.tsv.gz` | the measurements: `datetime_utc`, `utc_time`, `value`, `qa_flag`, then the catalog columns |
+| `NAME.catalog.tsv` | one row per selected datastream with all its metadata |
+| `NAME.manifest.json` | the command, selection, SQL filters, database, host, script SHA-256, row count and file checksums |
+
+```bash
+ssiselect.py options --owner Wielandt                     # what this owner has: data types, sensors, sites
+ssiselect.py catalog --owner Wielandt -o stijn_catalog.tsv
+ssiselect.py hierarchy --owner Wielandt -o exports/stijn_wielandt/hierarchy.json   # site -> device -> sensors
+ssiselect.py export  --owner Wielandt --data-type soilTemperature --sensor-type "TMP 117" \
+                     -o exports/stijn_wielandt/soil_temperature.tsv.gz
+ssiselect.py export  --config exports/stijn_wielandt/soil_temperature.manifest.json -o rerun.tsv.gz
+```
+
+Selection options are repeatable (OR within an option, AND between options):
+`--owner` (person_id or name substring), `--data-type` (variable term or name, exact or glob such as
+`'soil*'`), `--sensor-type` (sensor model, part number, equipment code or type; substring or glob),
+`--site`, and `--role` (default `owner`). Export options: `--start`/`--end` (UTC), `--qa z`,
+`--drop-missing`, `--valid-min`/`--valid-max`, `--slim` (only `datastream_id` beside each value).
+Rows with no value (feeder NaN, `qa_flag` `c`, empty `value`) are **kept by default**; `--drop-missing`
+removes them. The manifest counts rows per `qa_flag`.
+
+How a datastream is tied to equipment: its `equipment_id` is the **logger** (e.g. a SNOD1 node);
+the **sensor** is the device attached to that logger (`odmx.related_equipment`, `isAttachedTo`)
+whose `equipment_name` equals the datastream's feeder column (e.g. probe `Temp05`). If none
+matches, the logger is the sensor. `--owner` matches owners of either.
+
+Things the database does not fix for you: each datastream table repeats every timestamp of its
+feeder table, with empty values flagged `c` (kept by default; `--drop-missing` removes them); real values are all flagged `z`
+(good), including known bad readings such as the SNOD1 error code 127.99 and a burst of
+latitude/longitude/elevation values written into SNOD1 temperature columns on 2023-01-07
+(off-minute timestamps). Filter those with `--valid-min/--valid-max` or after export.
+
+## Full database export (`ssiexportall.py`, `run_restore_export.sh`)
+
+`ssiexportall.py` writes every table of the chosen schemas to its own gzipped CSV, in parallel, with
+row counts and checksums. `run_restore_export.sh` does the whole job from the dump in this folder:
+set up PostgreSQL, restore the dump (skipped if the database already exists), export, stop the server.
+
+```bash
+cd /global/cfs/cdirs/m4915/roelef_ssidump
+./run_restore_export.sh                # log in run.log; JOBS=16 ./run_restore_export.sh for fewer parallel tables
+```
+
+It exports `datastreams`, `odmx`, `knowledge` and `feeder` to `exports/full_<dump date>/`, skips the
+Sentinel tables (`^sentinel_`) in `datastreams` and `feeder`, and exports InfluxDB tables first. Each
+schema folder has `<table>.csv.gz` files (header row; NULL = empty field, empty string = `""`,
+NaN = `NaN`, geometry = hex WKB) and a `_tables.tsv` of rows, bytes and SHA-256; `manifest.json` records
+the command, dump, host and per-schema totals. A table that gives no result for 15 minutes is skipped
+and listed as failed; rerunning resumes and retries only what is missing.
+
+```bash
+ssiexportall.py --schema odmx --out exports/odmx_only -j 8          # any subset by hand
+ssiexportall.py --schema datastreams --exclude 'datastreams:^sentinel_' \
+                --first 'datastreams:^influxdb_' --out exports/ds -j 40
+```
+
+The 2026-10-26 dump restored and exported in about 10 minutes on a login node with 40 parallel tables:
+8,962 datastreams tables (338 M rows), 247 odmx, 4 knowledge and 150 feeder tables (22.6 M rows), 1.9 GB.
+
 ## The server: rules to know
 
 - **Run it on one node at a time.** It accepts connections only through a socket file
@@ -152,13 +229,16 @@ fill code in some values and SDs; datastream times are local sample time + 7 h.
 ```
 ssidump.py              the tool (Python 3 standard library only)
 ssiexport.py            family summaries and TSV exports (feeder / datastreams / odmx samples)
+ssiselect.py            selection by owner / data type / sensor type, long-format exports with manifests
+ssiexportall.py         every table of chosen schemas to gzipped CSV, with row counts and checksums
+run_restore_export.sh   setup + restore + full export + stop, from the dump in this folder (log: run.log)
+exports/                ssiselect.py outputs (not in git)
 modulefiles/ssidump.lua Lmod module: PATH + PG* connection variables
 ssi_*.dump              dumps (input)
 pgenv/                  conda env with PostgreSQL 17 + PostGIS
 pgdata/                 database cluster (server.log is in here)
 pgrun/                  server socket
 logs/                   restore logs
-odmx_csv/               CSV export of the odmx schema
 ```
 
 ## Setting up from scratch / for someone else
@@ -184,6 +264,16 @@ a running server:
 ```bash
 pg_restore -s -f schema_only.sql ssi_2026-10-26_083001Z.dump   # from pgenv/bin on Perlmutter
 schema_map/build.sh schema_only.sql schema_map/ssi_schemas.html
+```
+
+`schema_map/table_inventory.py` writes per-schema table inventories (TSV): one row per table
+with its description, columns and keys, and for `datastreams` the site, variable, units and dates
+of each stream. It reads the schema file and a table export from `ssiexportall.py` (for the `odmx`
+lookup tables and each schema's `_tables.tsv` row counts); tables missing from the export get an
+empty row count.
+
+```bash
+python3 schema_map/table_inventory.py schema_only.sql exports/full_2026-10-26/ table_inventory/
 ```
 
 Table lists, columns, keys and counts all come from the dump. The schema-flow diagram
@@ -214,9 +304,12 @@ coverage/build.sh decagon decagon_all.tsv.gz coverage/
 python3 coverage/build_index.py          # rebuild coverage/index.html
 ```
 
+The export files named below were made on 2026-11-02 and have since been deleted; rebuilding a
+page means re-exporting on Perlmutter (`ssiexport.py`, or the tables in `exports/full_<date>/`).
+
 | Dataset | Export selection | Local export file |
 |---|---|---|
-| `geochem` | `--family geochem` (no `--drop-nan`) | `geochemdata_all.tsv` → pages in `geochem_coverage/` |
+| `geochem` | `--family geochem` (no `--drop-nan`) | `geochemdata_all.tsv` |
 | `decagon` | `--family decagon` | `decagon_all.tsv.gz` |
 | `streamflow` | `--family streamflow` | `streamflow_all.tsv` |
 | `mloggers` | `--pattern "^m[1-4]_"` | `mloggers_all.tsv.gz` |
@@ -234,3 +327,10 @@ column groups and colour bins per dataset are in `coverage/build_data.py` (`DATA
 datasets without fixed bins get bins from the quantiles of their cell counts. To add a
 source, add an entry there, export it, and run `build.sh` and `build_index.py`. Commit
 and push the rebuilt HTML to update GitHub Pages.
+
+## Resources
+
+| File | Contents |
+|---|---|
+| [`resources/FY27Q1_SSI_Data_Stream_Datasets.md`](resources/FY27Q1_SSI_Data_Stream_Datasets.md) | Potential ESS-DIVE datasets that hold data from the SSI dump, grouped by source (CR1000, M1–M4, Decagon, met station, towers, streamflow, ESS-DIVE, PhenoCam, gradient, geochem). Each source links to its coverage page and the matching ESS-DIVE DOIs, and notes locations or publication status still to confirm. Markdown copy of the FY27Q1 Google Doc, November 2026; the Google Doc is the live version. |
+| [East-Taylor Watershed Community Observatory Sensors](https://docs.google.com/spreadsheets/d/1bo6cMNUiqaIpHKeiXn_2ttl9FGDUw5Go70WRkmZ1iYM/edit) (Google Sheet) | Sensor registry for the Watershed Function SFA in the East River and Taylor River watersheds: one row per deployed sensor with its location, instrument model and the variables it records (`sensor_registration_template` sheet). The `data_dictionary` sheet defines each column and says whether it is required. Use it to look up the instruments behind the `feeder` and `datastreams` tables. |
