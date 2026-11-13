@@ -10,3 +10,7 @@ odmx_csv/
 claude_history/
 .DS_Store
 __pycache__/
+*_all.tsv
+*_all.tsv.gz
+exports/
+resources/
