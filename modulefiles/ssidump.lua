@@ -1,4 +1,4 @@
--- module use /pscratch/sd/u/ukaraoz/roelef_ssidump/modulefiles; module load ssidump
+-- module use /global/cfs/cdirs/m4915/roelef_ssidump/modulefiles; module load ssidump
 whatis("Local PostgreSQL 17 + PostGIS server for SSI odmx_lbnlsfa dumps")
 help([[
 Puts ssidump.py and the PostgreSQL 17 client tools on PATH and sets PGHOST/PGPORT/
@@ -9,7 +9,7 @@ PGUSER/PGDATABASE so plain `psql` connects to odmx_lbnlsfa.
   ssidump.py export-csv --schema odmx
 ]])
 
-local root = "/pscratch/sd/u/ukaraoz/roelef_ssidump"
+local root = "/global/cfs/cdirs/m4915/roelef_ssidump"
 setenv("SSIDUMP_ROOT", root)
 prepend_path("PATH", pathJoin(root, "pgenv/bin"))
 prepend_path("PATH", root)
