@@ -1,0 +1,12 @@
+table_name	category_sensor	datastream	variable	units
+influxdb_OTT_SS_PH_disdrometer_rain_amount_abs_meas	OTT disdrometer — Precipitation amount	rain_amount_abs	rainPrecipitation	m
+influxdb_OTT_SS_PH_disdrometer_rain_amount_acc_meas	OTT disdrometer — Precipitation amount	rain_amount_acc	rainPrecipitationCumulative	m
+influxdb_OTT_SS_PH_disdrometer_rain_intensity_meas	OTT disdrometer — Precipitation intensity	rain_intensity	rainIntensity	m/s
+influxdb_OTT_SS_PH_disdrometer_snow_depth_intensity_meas	OTT disdrometer — Precipitation intensity	snow_depth_intensity	snowDepthIntensity	m/s
+influxdb_OTT_SS_PH_disdrometer_number_particles_meas	OTT disdrometer — Particle / drop counts	number_particles	numberParticles	mol
+influxdb_OTT_SS_PH_disdrometer_field_N_meas	OTT disdrometer — Particle / drop counts	field_N	rainDropCount	mol
+influxdb_OTT_SS_PH_disdrometer_field_v_meas	OTT disdrometer — Drop velocity	field_v	rainDropVelocity	m/s
+influxdb_OTT_SS_PH_disdrometer_kinetic_energy_meas	OTT disdrometer — Drop kinetic energy	kinetic_energy	rainDropKineticEngergy	J
+influxdb_OTT_SS_PH_disdrometer_MOR_visibility_meas	OTT disdrometer — Visibility	MOR_visibility	meteorologicalOpticalRange	m
+influxdb_OTT_SS_PH_disdrometer_radar_reflectivity_meas	OTT disdrometer — Radar reflectivity	radar_reflectivity	radarReflectivity	dB
+influxdb_OTT_SS_PH_disdrometer_signal_amplitude_meas	OTT disdrometer — Instrument signal	signal_amplitude	signalAmplitude	unitless

@@ -1,0 +1,2072 @@
+{
+  "tool": "ssi2essdive.py (essdive 0.1.0)",
+  "tool_sha256": "7cc5630dc9bfe96bd18666c1463195d17cc671ff467c9d716f6ac08ee2a31e04",
+  "command": "ssi2essdive.py sensor-full --export exports/tables_2026-10-26 --owner Wielandt --site =SG-DTP26 --site =SG-DTP28 --site =SG-DTP30 --prefix influxdb_SNOD1_soil_nodes --title 'SNOD1 soil temperature and battery voltage, 3 soil profile nodes (026, 028, 030)' --config configs/snod1_soil_temperature.json --column-names table --file-names feeder-site --split-variables --overwrite -o exports/essdive/stijn_wielandt/influxdb_SNOD1_soil_nodes",
+  "created_utc": "2026-11-16 23:31:23",
+  "host": "34-b1-eb-e9-83-b3.dhcp.lbnl.us",
+  "source": {
+    "export": "exports/tables_2026-10-26",
+    "manifest.json": {
+      "sha256": "ac742e6eb36ea38278b6f1a2a00f7e9d3c18a155990369ebd426d5e1b89c8a56"
+    },
+    "dump": "ssi_2026-10-26_083001Z.dump",
+    "database": "odmx_lbnlsfa",
+    "DOWNLOAD.json": {
+      "sha256": "7ea1f9a32ff1a2f531dd87fb28717cc6105ab12feb644ce9213f91419595a600"
+    }
+  },
+  "selection": {
+    "owner": [
+      "Wielandt"
+    ],
+    "site": [
+      "=SG-DTP26",
+      "=SG-DTP28",
+      "=SG-DTP30"
+    ]
+  },
+  "start": null,
+  "end": null,
+  "config": {
+    "methods": {
+      "method_soil_temperature_lbnl_tmp_117_temperature_probe": {
+        "description": "Soil temperature profiles from the SNOD1 sensor network at the Snodgrass lower ERT transect (sites SG-DTP26, SG-DTP28 and SG-DTP30; equipment owner Stijn Wielandt). Each site has one node with 13 TMP 117 temperature probes built by LBNL, mounted from 0.05 m above to 0.75 m below the ground surface: +0.05 and 0.00 m, then every 0.05 m down to -0.35 m, then every 0.10 m down to -0.75 m. Readings reach the SSI ODMX database through InfluxDB (feeder tables influxdb_SNOD1_Node026, _Node028 and _Node030). Most timestamps have values for only some probes; missing values are reported as -9999 with flag qa_c. Known issue under review: in rows where only Temp01 to Temp05 (sometimes also Temp06) have values, those values match Temp09 to Temp13 of the nearest reading in which all 13 probes report, and the Temp06 value matches the node battery voltage, which suggests these partial readings were stored in the wrong columns. Values are reported here exactly as stored in the database. Values are the SSI datastream values in degrees Celsius, unaltered. Probe heights come from odmx.equipment_position. The two probes at +0.05 and 0.00 m sit at or above the ground surface but are labelled soil temperature in the database. Text compiled from the SSI database metadata; to be reviewed by the data provider before publication."
+      },
+      "method_battery_voltage_unknown_sensor": {
+        "description": "Battery voltage of the SNOD1 sensor node (feeder column V_batt), in volts, as stored in the SSI ODMX database. The database registers it to the node logger (equipment model \"unknown sensor\"); it is a housekeeping value, not an environmental measurement. Text compiled from the SSI database metadata; to be reviewed by the data provider before publication."
+      }
+    }
+  },
+  "column_names": "table",
+  "file_names": "feeder-site",
+  "split_variables": true,
+  "reporting_format": "ESS-DIVE Sensor Time Series - Full v1.0.0 + Location Metadata v2.0.0",
+  "datastreams": 42,
+  "rows": {
+    "influxdb_SNOD1_Node026_SG-DTP26_soil_temperature.csv": 100240,
+    "influxdb_SNOD1_Node026_SG-DTP26_battery_voltage.csv": 100240,
+    "influxdb_SNOD1_Node028_SG-DTP28_soil_temperature.csv": 119710,
+    "influxdb_SNOD1_Node028_SG-DTP28_battery_voltage.csv": 119710,
+    "influxdb_SNOD1_Node030_SG-DTP30_soil_temperature.csv": 28937,
+    "influxdb_SNOD1_Node030_SG-DTP30_battery_voltage.csv": 28937
+  },
+  "flags_used": [
+    "qa_c",
+    "qa_f",
+    "qa_z"
+  ],
+  "validation": {
+    "errors": [],
+    "warnings": [
+      "influxdb_SNOD1_Node026_SG-DTP26_battery_voltage_dd.csv:3: influxdb_SNOD1_Node026_V_batt_meas_data_value: unit 'V' not in the unit vocabulary",
+      "influxdb_SNOD1_Node028_SG-DTP28_battery_voltage_dd.csv:3: influxdb_SNOD1_Node028_V_batt_meas_data_value: unit 'V' not in the unit vocabulary",
+      "influxdb_SNOD1_Node030_SG-DTP30_battery_voltage_dd.csv:3: influxdb_SNOD1_Node030_V_batt_meas_data_value: unit 'V' not in the unit vocabulary"
+    ]
+  },
+  "files": {
+    "influxdb_SNOD1_Node026_SG-DTP26_soil_temperature.csv": {
+      "bytes": 17932473,
+      "sha256": "7fd3e41258e145bcd3bf8fc3c00c32d10a2d4e6bc3d986dff68822596d4471be"
+    },
+    "influxdb_SNOD1_Node026_SG-DTP26_soil_temperature_dd.csv": {
+      "bytes": 9865,
+      "sha256": "a7c900e6614eb6a6039c613c76a29a928ab8f0e7034b0c373e20a8aa345a4234"
+    },
+    "influxdb_SNOD1_Node026_SG-DTP26_battery_voltage.csv": {
+      "bytes": 3220408,
+      "sha256": "2e915aef53c313e1d48d213f9e30a56c6e962da57fa660644bd86a30977e4b29"
+    },
+    "influxdb_SNOD1_Node026_SG-DTP26_battery_voltage_dd.csv": {
+      "bytes": 1200,
+      "sha256": "b872965510f93980b0852e2e48001ef70856e4a245c0ebb3152555ac35359c54"
+    },
+    "influxdb_SNOD1_Node028_SG-DTP28_soil_temperature.csv": {
+      "bytes": 21322052,
+      "sha256": "773a8231edacee13edfd39f68ca08ad60ffa1f88d7ddf722e781ff43044907f3"
+    },
+    "influxdb_SNOD1_Node028_SG-DTP28_soil_temperature_dd.csv": {
+      "bytes": 9865,
+      "sha256": "0d683f4497e876fefb434852a1618f2ad1659a9b4fcebf39d54d379bcf81aba6"
+    },
+    "influxdb_SNOD1_Node028_SG-DTP28_battery_voltage.csv": {
+      "bytes": 3845395,
+      "sha256": "c5e541eb4db6e6f155cc3ba6dd08c65d8877112054f319e51a7b56f60a499454"
+    },
+    "influxdb_SNOD1_Node028_SG-DTP28_battery_voltage_dd.csv": {
+      "bytes": 1200,
+      "sha256": "f4fa3d902aade2b01f8959649e041ac8e81f9cfc72eb7c33c16528e32456c25a"
+    },
+    "influxdb_SNOD1_Node030_SG-DTP30_soil_temperature.csv": {
+      "bytes": 4944263,
+      "sha256": "96b1a76432ab428d66ec2b509ac1241251b201c2852b46ef490512c99bbe12da"
+    },
+    "influxdb_SNOD1_Node030_SG-DTP30_soil_temperature_dd.csv": {
+      "bytes": 9865,
+      "sha256": "d111992f2e1f333447f32b15d8233b6009a62ee3692bd7209ba6b5635d4ce93e"
+    },
+    "influxdb_SNOD1_Node030_SG-DTP30_battery_voltage.csv": {
+      "bytes": 931428,
+      "sha256": "286f1ab7c4c32d1d3a1c08b82be17b99318a273995ca254ce1ca6d8e457acc43"
+    },
+    "influxdb_SNOD1_Node030_SG-DTP30_battery_voltage_dd.csv": {
+      "bytes": 1200,
+      "sha256": "1392788d4a3d857518a65613b1124659b40ea8188f7766635146b079d1f632e0"
+    },
+    "influxdb_SNOD1_soil_nodes_sensor_attr.csv": {
+      "bytes": 17059,
+      "sha256": "078e8a66a8f984a95e474c1f56670ff86320836d5fa1424ce6fa55b312b0591c"
+    },
+    "influxdb_SNOD1_soil_nodes_sensor_attr_dd.csv": {
+      "bytes": 2248,
+      "sha256": "4ef0857f51575cce8a3c1891a6efa5215516f2a55f75e863a62253d65f8eaf8b"
+    },
+    "influxdb_SNOD1_soil_nodes_locations.csv": {
+      "bytes": 12277,
+      "sha256": "9771647bf7d3a912a8b3c7028f00bb66ebbf8b15de7a1c61aae22706f7758ae6"
+    },
+    "influxdb_SNOD1_soil_nodes_flmd.csv": {
+      "bytes": 4500,
+      "sha256": "557d38062838a43d08d634cd1ee124382ed721c54d9af447ab7d4537b607850b"
+    }
+  },
+  "source_tables": [
+    "influxdb_SNOD1_Node026_Temp01_meas",
+    "influxdb_SNOD1_Node026_Temp02_meas",
+    "influxdb_SNOD1_Node026_Temp03_meas",
+    "influxdb_SNOD1_Node026_Temp04_meas",
+    "influxdb_SNOD1_Node026_Temp05_meas",
+    "influxdb_SNOD1_Node026_Temp06_meas",
+    "influxdb_SNOD1_Node026_Temp07_meas",
+    "influxdb_SNOD1_Node026_Temp08_meas",
+    "influxdb_SNOD1_Node026_Temp09_meas",
+    "influxdb_SNOD1_Node026_Temp10_meas",
+    "influxdb_SNOD1_Node026_Temp11_meas",
+    "influxdb_SNOD1_Node026_Temp12_meas",
+    "influxdb_SNOD1_Node026_Temp13_meas",
+    "influxdb_SNOD1_Node026_V_batt_meas",
+    "influxdb_SNOD1_Node028_Temp01_meas",
+    "influxdb_SNOD1_Node028_Temp02_meas",
+    "influxdb_SNOD1_Node028_Temp03_meas",
+    "influxdb_SNOD1_Node028_Temp04_meas",
+    "influxdb_SNOD1_Node028_Temp05_meas",
+    "influxdb_SNOD1_Node028_Temp06_meas",
+    "influxdb_SNOD1_Node028_Temp07_meas",
+    "influxdb_SNOD1_Node028_Temp08_meas",
+    "influxdb_SNOD1_Node028_Temp09_meas",
+    "influxdb_SNOD1_Node028_Temp10_meas",
+    "influxdb_SNOD1_Node028_Temp11_meas",
+    "influxdb_SNOD1_Node028_Temp12_meas",
+    "influxdb_SNOD1_Node028_Temp13_meas",
+    "influxdb_SNOD1_Node028_V_batt_meas",
+    "influxdb_SNOD1_Node030_Temp01_meas",
+    "influxdb_SNOD1_Node030_Temp02_meas",
+    "influxdb_SNOD1_Node030_Temp03_meas",
+    "influxdb_SNOD1_Node030_Temp04_meas",
+    "influxdb_SNOD1_Node030_Temp05_meas",
+    "influxdb_SNOD1_Node030_Temp06_meas",
+    "influxdb_SNOD1_Node030_Temp07_meas",
+    "influxdb_SNOD1_Node030_Temp08_meas",
+    "influxdb_SNOD1_Node030_Temp09_meas",
+    "influxdb_SNOD1_Node030_Temp10_meas",
+    "influxdb_SNOD1_Node030_Temp11_meas",
+    "influxdb_SNOD1_Node030_Temp12_meas",
+    "influxdb_SNOD1_Node030_Temp13_meas",
+    "influxdb_SNOD1_Node030_V_batt_meas"
+  ],
+  "problem_flags": null,
+  "problems_summary": {
+    "error": 13,
+    "warning": 8,
+    "info": 25
+  },
+  "problems": [
+    {
+      "id": "partial_rows_shifted_by_8",
+      "severity": "error",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node026_SG-DTP26_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node026_Temp01_meas_data_value",
+        "influxdb_SNOD1_Node026_Temp02_meas_data_value",
+        "influxdb_SNOD1_Node026_Temp03_meas_data_value",
+        "influxdb_SNOD1_Node026_Temp04_meas_data_value",
+        "influxdb_SNOD1_Node026_Temp05_meas_data_value"
+      ],
+      "count": 34072,
+      "description": "Rows in which only the first probe columns have values: the values match the probes 8 positions further down the profile in the nearest complete reading (e.g. the value stored in influxdb_SNOD1_Node026_Temp01_meas_data_value is the reading of influxdb_SNOD1_Node026_Temp09_meas_data_value). The partial readings appear to have been stored in the wrong columns by the ingest. Of 69,230 such rows, 34,072 match this shift; 35,156 have no complete reading within 1 h to compare with (probably affected the same way).",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-03T01:15:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node026_Temp01_meas_data_value": "9.0078125",
+            "influxdb_SNOD1_Node026_Temp02_meas_data_value": "9.5",
+            "influxdb_SNOD1_Node026_Temp03_meas_data_value": "9.890625",
+            "influxdb_SNOD1_Node026_Temp04_meas_data_value": "10.0390625",
+            "influxdb_SNOD1_Node026_Temp05_meas_data_value": "10.125",
+            "influxdb_SNOD1_Node026_Temp06_meas_data_value": "3.420703125"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node026_Temp09_meas_data_value": 9.015625,
+            "influxdb_SNOD1_Node026_Temp10_meas_data_value": 9.5078125,
+            "influxdb_SNOD1_Node026_Temp11_meas_data_value": 9.890625,
+            "influxdb_SNOD1_Node026_Temp12_meas_data_value": 10.0390625,
+            "influxdb_SNOD1_Node026_Temp13_meas_data_value": 10.1328125
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2022-10-03T01:30:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node026_Temp01_meas_data_value": "9.0078125",
+            "influxdb_SNOD1_Node026_Temp02_meas_data_value": "9.4921875",
+            "influxdb_SNOD1_Node026_Temp03_meas_data_value": "9.8828125",
+            "influxdb_SNOD1_Node026_Temp04_meas_data_value": "10.03125",
+            "influxdb_SNOD1_Node026_Temp05_meas_data_value": "10.125",
+            "influxdb_SNOD1_Node026_Temp06_meas_data_value": "3.420703125"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node026_Temp09_meas_data_value": 9.015625,
+            "influxdb_SNOD1_Node026_Temp10_meas_data_value": 9.5078125,
+            "influxdb_SNOD1_Node026_Temp11_meas_data_value": 9.890625,
+            "influxdb_SNOD1_Node026_Temp12_meas_data_value": 10.0390625,
+            "influxdb_SNOD1_Node026_Temp13_meas_data_value": 10.1328125
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2022-10-03T01:45:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node026_Temp01_meas_data_value": "9",
+            "influxdb_SNOD1_Node026_Temp02_meas_data_value": "9.484375",
+            "influxdb_SNOD1_Node026_Temp03_meas_data_value": "9.875",
+            "influxdb_SNOD1_Node026_Temp04_meas_data_value": "10.0234375",
+            "influxdb_SNOD1_Node026_Temp05_meas_data_value": "10.1171875",
+            "influxdb_SNOD1_Node026_Temp06_meas_data_value": "3.420703125"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node026_Temp09_meas_data_value": 9.015625,
+            "influxdb_SNOD1_Node026_Temp10_meas_data_value": 9.5078125,
+            "influxdb_SNOD1_Node026_Temp11_meas_data_value": 9.890625,
+            "influxdb_SNOD1_Node026_Temp12_meas_data_value": 10.0390625,
+            "influxdb_SNOD1_Node026_Temp13_meas_data_value": 10.1328125
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2022-10-03T02:00:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node026_Temp01_meas_data_value": "9.0078125",
+            "influxdb_SNOD1_Node026_Temp02_meas_data_value": "9.4765625",
+            "influxdb_SNOD1_Node026_Temp03_meas_data_value": "9.8671875",
+            "influxdb_SNOD1_Node026_Temp04_meas_data_value": "10.0234375",
+            "influxdb_SNOD1_Node026_Temp05_meas_data_value": "10.1171875",
+            "influxdb_SNOD1_Node026_Temp06_meas_data_value": "3.403125"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node026_Temp09_meas_data_value": 9.015625,
+            "influxdb_SNOD1_Node026_Temp10_meas_data_value": 9.5078125,
+            "influxdb_SNOD1_Node026_Temp11_meas_data_value": 9.890625,
+            "influxdb_SNOD1_Node026_Temp12_meas_data_value": 10.0390625,
+            "influxdb_SNOD1_Node026_Temp13_meas_data_value": 10.1328125
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2022-10-03T06:30:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node026_Temp01_meas_data_value": "8.9921875",
+            "influxdb_SNOD1_Node026_Temp02_meas_data_value": "9.3984375",
+            "influxdb_SNOD1_Node026_Temp03_meas_data_value": "9.7890625",
+            "influxdb_SNOD1_Node026_Temp04_meas_data_value": "9.9609375",
+            "influxdb_SNOD1_Node026_Temp05_meas_data_value": "10.0703125",
+            "influxdb_SNOD1_Node026_Temp06_meas_data_value": "3.41015625"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node026_Temp09_meas_data_value": 8.9765625,
+            "influxdb_SNOD1_Node026_Temp10_meas_data_value": 9.3828125,
+            "influxdb_SNOD1_Node026_Temp11_meas_data_value": 9.765625,
+            "influxdb_SNOD1_Node026_Temp12_meas_data_value": 9.9375,
+            "influxdb_SNOD1_Node026_Temp13_meas_data_value": 10.0625
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        }
+      ],
+      "should_be": [
+        "influxdb_SNOD1_Node026_Temp09_meas_data_value",
+        "influxdb_SNOD1_Node026_Temp10_meas_data_value",
+        "influxdb_SNOD1_Node026_Temp11_meas_data_value",
+        "influxdb_SNOD1_Node026_Temp12_meas_data_value",
+        "influxdb_SNOD1_Node026_Temp13_meas_data_value"
+      ],
+      "rows_checked": 69230,
+      "rows_without_reference": 35156,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "battery_voltage_in_temperature_column",
+      "severity": "error",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node026_SG-DTP26_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node026_Temp06_meas_data_value"
+      ],
+      "count": 9939,
+      "description": "In the shifted partial rows, the value after the last shifted probe lies in the range of the node battery voltage (2.774 to 3.540 V) and is most likely the battery voltage, stored in a temperature column. Counted only in shifted rows that have a complete reading within 1 h to compare with; rows without one are probably affected the same way.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-03T01:15:00Z",
+          "columns": [
+            "influxdb_SNOD1_Node026_Temp06_meas_data_value"
+          ],
+          "values": [
+            "3.420703125"
+          ]
+        },
+        {
+          "datetime_measured": "2022-10-03T01:30:00Z",
+          "columns": [
+            "influxdb_SNOD1_Node026_Temp06_meas_data_value"
+          ],
+          "values": [
+            "3.420703125"
+          ]
+        },
+        {
+          "datetime_measured": "2022-10-03T01:45:00Z",
+          "columns": [
+            "influxdb_SNOD1_Node026_Temp06_meas_data_value"
+          ],
+          "values": [
+            "3.420703125"
+          ]
+        },
+        {
+          "datetime_measured": "2022-10-03T02:00:00Z",
+          "columns": [
+            "influxdb_SNOD1_Node026_Temp06_meas_data_value"
+          ],
+          "values": [
+            "3.403125"
+          ]
+        },
+        {
+          "datetime_measured": "2022-10-03T06:30:00Z",
+          "columns": [
+            "influxdb_SNOD1_Node026_Temp06_meas_data_value"
+          ],
+          "values": [
+            "3.41015625"
+          ]
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "location_packet_values",
+      "severity": "error",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node026_SG-DTP26_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node026_Temp07_meas_data_value",
+        "influxdb_SNOD1_Node026_Temp08_meas_data_value",
+        "influxdb_SNOD1_Node026_Temp09_meas_data_value"
+      ],
+      "count": 12,
+      "description": "Rows in which temperature columns hold the site latitude, longitude or an elevation (a GPS / location message stored as temperatures). 4 of the 12 cells are flagged good (qa_z), the rest qa_f. Latitude and longitude swap columns between messages. The reported elevation (3127.788 m) differs from the registered site elevation (3151.38 m).",
+      "examples": [
+        {
+          "datetime_measured": "2023-01-07T08:51:07Z",
+          "cells": [
+            {
+              "column": "influxdb_SNOD1_Node026_Temp07_meas_data_value",
+              "value": "3127.788",
+              "looks_like": "elevation",
+              "flag": "qa_f"
+            },
+            {
+              "column": "influxdb_SNOD1_Node026_Temp08_meas_data_value",
+              "value": "-106.98027",
+              "looks_like": "longitude",
+              "flag": "qa_f"
+            },
+            {
+              "column": "influxdb_SNOD1_Node026_Temp09_meas_data_value",
+              "value": "38.926127",
+              "looks_like": "latitude",
+              "flag": "qa_z"
+            }
+          ]
+        },
+        {
+          "datetime_measured": "2023-01-07T09:02:07Z",
+          "cells": [
+            {
+              "column": "influxdb_SNOD1_Node026_Temp07_meas_data_value",
+              "value": "3127.788",
+              "looks_like": "elevation",
+              "flag": "qa_f"
+            },
+            {
+              "column": "influxdb_SNOD1_Node026_Temp08_meas_data_value",
+              "value": "38.926127",
+              "looks_like": "latitude",
+              "flag": "qa_z"
+            },
+            {
+              "column": "influxdb_SNOD1_Node026_Temp09_meas_data_value",
+              "value": "-106.98027",
+              "looks_like": "longitude",
+              "flag": "qa_f"
+            }
+          ]
+        },
+        {
+          "datetime_measured": "2023-01-07T09:18:11Z",
+          "cells": [
+            {
+              "column": "influxdb_SNOD1_Node026_Temp07_meas_data_value",
+              "value": "3127.788",
+              "looks_like": "elevation",
+              "flag": "qa_f"
+            },
+            {
+              "column": "influxdb_SNOD1_Node026_Temp08_meas_data_value",
+              "value": "38.926127",
+              "looks_like": "latitude",
+              "flag": "qa_z"
+            },
+            {
+              "column": "influxdb_SNOD1_Node026_Temp09_meas_data_value",
+              "value": "-106.98027",
+              "looks_like": "longitude",
+              "flag": "qa_f"
+            }
+          ]
+        },
+        {
+          "datetime_measured": "2023-01-07T09:18:53Z",
+          "cells": [
+            {
+              "column": "influxdb_SNOD1_Node026_Temp07_meas_data_value",
+              "value": "3127.788",
+              "looks_like": "elevation",
+              "flag": "qa_f"
+            },
+            {
+              "column": "influxdb_SNOD1_Node026_Temp08_meas_data_value",
+              "value": "38.926127",
+              "looks_like": "latitude",
+              "flag": "qa_z"
+            },
+            {
+              "column": "influxdb_SNOD1_Node026_Temp09_meas_data_value",
+              "value": "-106.98027",
+              "looks_like": "longitude",
+              "flag": "qa_f"
+            }
+          ]
+        }
+      ],
+      "rows": 4,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "partial_rows_shifted_by_7",
+      "severity": "error",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node028_SG-DTP28_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node028_Temp01_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp02_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp03_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp04_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp05_meas_data_value"
+      ],
+      "count": 6,
+      "description": "Rows in which only the first probe columns have values: the values match the probes 7 positions further down the profile in the nearest complete reading (e.g. the value stored in influxdb_SNOD1_Node028_Temp01_meas_data_value is the reading of influxdb_SNOD1_Node028_Temp08_meas_data_value). The partial readings appear to have been stored in the wrong columns by the ingest. Of 80,810 such rows, 6 match this shift; 39,992 have no complete reading within 1 h to compare with (probably affected the same way).",
+      "examples": [
+        {
+          "datetime_measured": "2023-04-10T22:45:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node028_Temp01_meas_data_value": "0.03125",
+            "influxdb_SNOD1_Node028_Temp02_meas_data_value": "0.046875",
+            "influxdb_SNOD1_Node028_Temp03_meas_data_value": "0.109375",
+            "influxdb_SNOD1_Node028_Temp04_meas_data_value": "0.203125",
+            "influxdb_SNOD1_Node028_Temp05_meas_data_value": "0.421875"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node028_Temp08_meas_data_value": 0.0,
+            "influxdb_SNOD1_Node028_Temp09_meas_data_value": 0.0390625,
+            "influxdb_SNOD1_Node028_Temp10_meas_data_value": 0.046875,
+            "influxdb_SNOD1_Node028_Temp11_meas_data_value": 0.1640625,
+            "influxdb_SNOD1_Node028_Temp12_meas_data_value": 0.3125
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2023-04-11T20:45:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node028_Temp01_meas_data_value": "0.0546875",
+            "influxdb_SNOD1_Node028_Temp02_meas_data_value": "0.078125",
+            "influxdb_SNOD1_Node028_Temp03_meas_data_value": "0.140625",
+            "influxdb_SNOD1_Node028_Temp04_meas_data_value": "0.21875",
+            "influxdb_SNOD1_Node028_Temp05_meas_data_value": "0.2890625"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node028_Temp08_meas_data_value": 0.0234375,
+            "influxdb_SNOD1_Node028_Temp09_meas_data_value": 0.09375,
+            "influxdb_SNOD1_Node028_Temp10_meas_data_value": 0.1328125,
+            "influxdb_SNOD1_Node028_Temp11_meas_data_value": 0.1953125,
+            "influxdb_SNOD1_Node028_Temp12_meas_data_value": 0.234375
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2023-04-17T23:30:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node028_Temp01_meas_data_value": "0.0390625",
+            "influxdb_SNOD1_Node028_Temp02_meas_data_value": "0.0703125",
+            "influxdb_SNOD1_Node028_Temp03_meas_data_value": "0.1171875"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node028_Temp08_meas_data_value": 0.015625,
+            "influxdb_SNOD1_Node028_Temp09_meas_data_value": 0.046875,
+            "influxdb_SNOD1_Node028_Temp10_meas_data_value": 0.0859375
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2023-04-17T23:45:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node028_Temp01_meas_data_value": "0.0390625",
+            "influxdb_SNOD1_Node028_Temp02_meas_data_value": "0.0546875",
+            "influxdb_SNOD1_Node028_Temp03_meas_data_value": "0.1015625"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node028_Temp08_meas_data_value": 0.015625,
+            "influxdb_SNOD1_Node028_Temp09_meas_data_value": 0.046875,
+            "influxdb_SNOD1_Node028_Temp10_meas_data_value": 0.0859375
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2023-09-21T13:30:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node028_Temp01_meas_data_value": "6.8046875",
+            "influxdb_SNOD1_Node028_Temp02_meas_data_value": "6.796875",
+            "influxdb_SNOD1_Node028_Temp03_meas_data_value": "6.78125",
+            "influxdb_SNOD1_Node028_Temp04_meas_data_value": "6.7734375",
+            "influxdb_SNOD1_Node028_Temp05_meas_data_value": "6.78125"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node028_Temp08_meas_data_value": 6.8046875,
+            "influxdb_SNOD1_Node028_Temp09_meas_data_value": 6.8046875,
+            "influxdb_SNOD1_Node028_Temp10_meas_data_value": 6.7890625,
+            "influxdb_SNOD1_Node028_Temp11_meas_data_value": 6.7734375,
+            "influxdb_SNOD1_Node028_Temp12_meas_data_value": 6.78125
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        }
+      ],
+      "should_be": [
+        "influxdb_SNOD1_Node028_Temp08_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp09_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp10_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp11_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp12_meas_data_value"
+      ],
+      "rows_checked": 80810,
+      "rows_without_reference": 39992,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "partial_rows_shifted_by_8",
+      "severity": "error",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node028_SG-DTP28_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node028_Temp01_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp02_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp03_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp04_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp05_meas_data_value"
+      ],
+      "count": 40807,
+      "description": "Rows in which only the first probe columns have values: the values match the probes 8 positions further down the profile in the nearest complete reading (e.g. the value stored in influxdb_SNOD1_Node028_Temp01_meas_data_value is the reading of influxdb_SNOD1_Node028_Temp09_meas_data_value). The partial readings appear to have been stored in the wrong columns by the ingest. Of 80,810 such rows, 40,807 match this shift; 39,992 have no complete reading within 1 h to compare with (probably affected the same way).",
+      "examples": [
+        {
+          "datetime_measured": "2022-09-29T23:15:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node028_Temp01_meas_data_value": "7.8125",
+            "influxdb_SNOD1_Node028_Temp02_meas_data_value": "7.828125",
+            "influxdb_SNOD1_Node028_Temp03_meas_data_value": "7.765625",
+            "influxdb_SNOD1_Node028_Temp04_meas_data_value": "7.71875",
+            "influxdb_SNOD1_Node028_Temp05_meas_data_value": "7.671875",
+            "influxdb_SNOD1_Node028_Temp06_meas_data_value": "3.55078125"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node028_Temp09_meas_data_value": 7.8125,
+            "influxdb_SNOD1_Node028_Temp10_meas_data_value": 7.8125,
+            "influxdb_SNOD1_Node028_Temp11_meas_data_value": 7.7578125,
+            "influxdb_SNOD1_Node028_Temp12_meas_data_value": 7.71875,
+            "influxdb_SNOD1_Node028_Temp13_meas_data_value": 7.671875
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2022-09-29T23:30:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node028_Temp01_meas_data_value": "7.8125",
+            "influxdb_SNOD1_Node028_Temp02_meas_data_value": "7.8203125",
+            "influxdb_SNOD1_Node028_Temp03_meas_data_value": "7.765625",
+            "influxdb_SNOD1_Node028_Temp04_meas_data_value": "7.71875",
+            "influxdb_SNOD1_Node028_Temp05_meas_data_value": "7.671875",
+            "influxdb_SNOD1_Node028_Temp06_meas_data_value": "3.55078125"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node028_Temp09_meas_data_value": 7.8125,
+            "influxdb_SNOD1_Node028_Temp10_meas_data_value": 7.8125,
+            "influxdb_SNOD1_Node028_Temp11_meas_data_value": 7.7578125,
+            "influxdb_SNOD1_Node028_Temp12_meas_data_value": 7.71875,
+            "influxdb_SNOD1_Node028_Temp13_meas_data_value": 7.671875
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2022-09-29T23:45:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node028_Temp01_meas_data_value": "7.8125",
+            "influxdb_SNOD1_Node028_Temp02_meas_data_value": "7.8203125",
+            "influxdb_SNOD1_Node028_Temp03_meas_data_value": "7.765625",
+            "influxdb_SNOD1_Node028_Temp04_meas_data_value": "7.71875",
+            "influxdb_SNOD1_Node028_Temp05_meas_data_value": "7.671875",
+            "influxdb_SNOD1_Node028_Temp06_meas_data_value": "3.55078125"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node028_Temp09_meas_data_value": 7.8125,
+            "influxdb_SNOD1_Node028_Temp10_meas_data_value": 7.8125,
+            "influxdb_SNOD1_Node028_Temp11_meas_data_value": 7.7578125,
+            "influxdb_SNOD1_Node028_Temp12_meas_data_value": 7.71875,
+            "influxdb_SNOD1_Node028_Temp13_meas_data_value": 7.671875
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2022-09-30T00:00:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node028_Temp01_meas_data_value": "7.8125",
+            "influxdb_SNOD1_Node028_Temp02_meas_data_value": "7.8125",
+            "influxdb_SNOD1_Node028_Temp03_meas_data_value": "7.7578125",
+            "influxdb_SNOD1_Node028_Temp04_meas_data_value": "7.7109375",
+            "influxdb_SNOD1_Node028_Temp05_meas_data_value": "7.6640625",
+            "influxdb_SNOD1_Node028_Temp06_meas_data_value": "3.547265625"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node028_Temp09_meas_data_value": 7.8125,
+            "influxdb_SNOD1_Node028_Temp10_meas_data_value": 7.8125,
+            "influxdb_SNOD1_Node028_Temp11_meas_data_value": 7.7578125,
+            "influxdb_SNOD1_Node028_Temp12_meas_data_value": 7.71875,
+            "influxdb_SNOD1_Node028_Temp13_meas_data_value": 7.671875
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2022-09-30T00:30:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node028_Temp01_meas_data_value": "7.8046875",
+            "influxdb_SNOD1_Node028_Temp02_meas_data_value": "7.8125",
+            "influxdb_SNOD1_Node028_Temp03_meas_data_value": "7.7578125",
+            "influxdb_SNOD1_Node028_Temp04_meas_data_value": "7.7109375",
+            "influxdb_SNOD1_Node028_Temp05_meas_data_value": "7.671875",
+            "influxdb_SNOD1_Node028_Temp06_meas_data_value": "3.547265625"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node028_Temp09_meas_data_value": 7.8125,
+            "influxdb_SNOD1_Node028_Temp10_meas_data_value": 7.8125,
+            "influxdb_SNOD1_Node028_Temp11_meas_data_value": 7.7578125,
+            "influxdb_SNOD1_Node028_Temp12_meas_data_value": 7.71875,
+            "influxdb_SNOD1_Node028_Temp13_meas_data_value": 7.671875
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        }
+      ],
+      "should_be": [
+        "influxdb_SNOD1_Node028_Temp09_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp10_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp11_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp12_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp13_meas_data_value"
+      ],
+      "rows_checked": 80810,
+      "rows_without_reference": 39992,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "partial_rows_shifted_by_9",
+      "severity": "error",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node028_SG-DTP28_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node028_Temp01_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp02_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp03_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp04_meas_data_value"
+      ],
+      "count": 4,
+      "description": "Rows in which only the first probe columns have values: the values match the probes 9 positions further down the profile in the nearest complete reading (e.g. the value stored in influxdb_SNOD1_Node028_Temp01_meas_data_value is the reading of influxdb_SNOD1_Node028_Temp10_meas_data_value). The partial readings appear to have been stored in the wrong columns by the ingest. Of 80,810 such rows, 4 match this shift; 39,992 have no complete reading within 1 h to compare with (probably affected the same way).",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-01T19:00:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node028_Temp01_meas_data_value": "7.484375",
+            "influxdb_SNOD1_Node028_Temp02_meas_data_value": "7.625",
+            "influxdb_SNOD1_Node028_Temp03_meas_data_value": "7.6171875",
+            "influxdb_SNOD1_Node028_Temp04_meas_data_value": "7.609375",
+            "influxdb_SNOD1_Node028_Temp05_meas_data_value": "7.578125",
+            "influxdb_SNOD1_Node028_Temp06_meas_data_value": "3.491015625"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node028_Temp10_meas_data_value": 7.453125,
+            "influxdb_SNOD1_Node028_Temp11_meas_data_value": 7.59375,
+            "influxdb_SNOD1_Node028_Temp12_meas_data_value": 7.6015625,
+            "influxdb_SNOD1_Node028_Temp13_meas_data_value": 7.5703125
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2022-10-01T19:15:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node028_Temp01_meas_data_value": "7.34375",
+            "influxdb_SNOD1_Node028_Temp02_meas_data_value": "7.5625",
+            "influxdb_SNOD1_Node028_Temp03_meas_data_value": "7.6171875",
+            "influxdb_SNOD1_Node028_Temp04_meas_data_value": "7.6015625",
+            "influxdb_SNOD1_Node028_Temp05_meas_data_value": "7.578125",
+            "influxdb_SNOD1_Node028_Temp06_meas_data_value": "3.491015625"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node028_Temp10_meas_data_value": 7.453125,
+            "influxdb_SNOD1_Node028_Temp11_meas_data_value": 7.59375,
+            "influxdb_SNOD1_Node028_Temp12_meas_data_value": 7.6015625,
+            "influxdb_SNOD1_Node028_Temp13_meas_data_value": 7.5703125
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2023-04-11T08:45:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node028_Temp01_meas_data_value": "0.0703125",
+            "influxdb_SNOD1_Node028_Temp02_meas_data_value": "0.1015625",
+            "influxdb_SNOD1_Node028_Temp03_meas_data_value": "0.109375",
+            "influxdb_SNOD1_Node028_Temp04_meas_data_value": "0.1328125",
+            "influxdb_SNOD1_Node028_Temp05_meas_data_value": "0.15625"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node028_Temp10_meas_data_value": 0.0859375,
+            "influxdb_SNOD1_Node028_Temp11_meas_data_value": 0.0859375,
+            "influxdb_SNOD1_Node028_Temp12_meas_data_value": 0.1171875,
+            "influxdb_SNOD1_Node028_Temp13_meas_data_value": 0.1484375
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2023-04-11T21:15:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node028_Temp01_meas_data_value": "0.0390625",
+            "influxdb_SNOD1_Node028_Temp02_meas_data_value": "0.0546875",
+            "influxdb_SNOD1_Node028_Temp04_meas_data_value": "0.171875",
+            "influxdb_SNOD1_Node028_Temp05_meas_data_value": "0.265625"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node028_Temp10_meas_data_value": 0.046875,
+            "influxdb_SNOD1_Node028_Temp11_meas_data_value": 0.0546875,
+            "influxdb_SNOD1_Node028_Temp13_meas_data_value": 0.2265625
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        }
+      ],
+      "should_be": [
+        "influxdb_SNOD1_Node028_Temp10_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp11_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp12_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp13_meas_data_value"
+      ],
+      "rows_checked": 80810,
+      "rows_without_reference": 39992,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "partial_rows_shifted_by_10",
+      "severity": "error",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node028_SG-DTP28_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node028_Temp01_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp02_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp03_meas_data_value"
+      ],
+      "count": 1,
+      "description": "Rows in which only the first probe columns have values: the values match the probes 10 positions further down the profile in the nearest complete reading (e.g. the value stored in influxdb_SNOD1_Node028_Temp01_meas_data_value is the reading of influxdb_SNOD1_Node028_Temp11_meas_data_value). The partial readings appear to have been stored in the wrong columns by the ingest. Of 80,810 such rows, 1 match this shift; 39,992 have no complete reading within 1 h to compare with (probably affected the same way).",
+      "examples": [
+        {
+          "datetime_measured": "2024-10-14T17:45:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node028_Temp01_meas_data_value": "6.609375",
+            "influxdb_SNOD1_Node028_Temp02_meas_data_value": "6.6328125",
+            "influxdb_SNOD1_Node028_Temp03_meas_data_value": "6.625",
+            "influxdb_SNOD1_Node028_Temp04_meas_data_value": "6.515625",
+            "influxdb_SNOD1_Node028_Temp05_meas_data_value": "6.390625"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node028_Temp11_meas_data_value": 6.6328125,
+            "influxdb_SNOD1_Node028_Temp12_meas_data_value": 6.6484375,
+            "influxdb_SNOD1_Node028_Temp13_meas_data_value": 6.6484375
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        }
+      ],
+      "should_be": [
+        "influxdb_SNOD1_Node028_Temp11_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp12_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp13_meas_data_value"
+      ],
+      "rows_checked": 80810,
+      "rows_without_reference": 39992,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "battery_voltage_in_temperature_column",
+      "severity": "error",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node028_SG-DTP28_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node028_Temp06_meas_data_value"
+      ],
+      "count": 11473,
+      "description": "In the shifted partial rows, the value after the last shifted probe lies in the range of the node battery voltage (3.192 to 3.561 V) and is most likely the battery voltage, stored in a temperature column. Counted only in shifted rows that have a complete reading within 1 h to compare with; rows without one are probably affected the same way.",
+      "examples": [
+        {
+          "datetime_measured": "2022-09-29T23:15:00Z",
+          "columns": [
+            "influxdb_SNOD1_Node028_Temp06_meas_data_value"
+          ],
+          "values": [
+            "3.55078125"
+          ]
+        },
+        {
+          "datetime_measured": "2022-09-29T23:30:00Z",
+          "columns": [
+            "influxdb_SNOD1_Node028_Temp06_meas_data_value"
+          ],
+          "values": [
+            "3.55078125"
+          ]
+        },
+        {
+          "datetime_measured": "2022-09-29T23:45:00Z",
+          "columns": [
+            "influxdb_SNOD1_Node028_Temp06_meas_data_value"
+          ],
+          "values": [
+            "3.55078125"
+          ]
+        },
+        {
+          "datetime_measured": "2022-09-30T00:00:00Z",
+          "columns": [
+            "influxdb_SNOD1_Node028_Temp06_meas_data_value"
+          ],
+          "values": [
+            "3.547265625"
+          ]
+        },
+        {
+          "datetime_measured": "2022-09-30T00:30:00Z",
+          "columns": [
+            "influxdb_SNOD1_Node028_Temp06_meas_data_value"
+          ],
+          "values": [
+            "3.547265625"
+          ]
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "location_packet_values",
+      "severity": "error",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node028_SG-DTP28_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node028_Temp07_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp08_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp09_meas_data_value"
+      ],
+      "count": 9,
+      "description": "Rows in which temperature columns hold the site latitude, longitude or an elevation (a GPS / location message stored as temperatures). 3 of the 9 cells are flagged good (qa_z), the rest qa_f. Latitude and longitude swap columns between messages. The reported elevation (3140.492262 m) differs from the registered site elevation (3151.06 m).",
+      "examples": [
+        {
+          "datetime_measured": "2023-01-07T08:51:07Z",
+          "cells": [
+            {
+              "column": "influxdb_SNOD1_Node028_Temp07_meas_data_value",
+              "value": "3140.492262",
+              "looks_like": "elevation",
+              "flag": "qa_f"
+            },
+            {
+              "column": "influxdb_SNOD1_Node028_Temp08_meas_data_value",
+              "value": "-106.9802471",
+              "looks_like": "longitude",
+              "flag": "qa_f"
+            },
+            {
+              "column": "influxdb_SNOD1_Node028_Temp09_meas_data_value",
+              "value": "38.92611709",
+              "looks_like": "latitude",
+              "flag": "qa_z"
+            }
+          ]
+        },
+        {
+          "datetime_measured": "2023-01-07T09:02:07Z",
+          "cells": [
+            {
+              "column": "influxdb_SNOD1_Node028_Temp07_meas_data_value",
+              "value": "3140.492262",
+              "looks_like": "elevation",
+              "flag": "qa_f"
+            },
+            {
+              "column": "influxdb_SNOD1_Node028_Temp08_meas_data_value",
+              "value": "38.92611709",
+              "looks_like": "latitude",
+              "flag": "qa_z"
+            },
+            {
+              "column": "influxdb_SNOD1_Node028_Temp09_meas_data_value",
+              "value": "-106.9802471",
+              "looks_like": "longitude",
+              "flag": "qa_f"
+            }
+          ]
+        },
+        {
+          "datetime_measured": "2023-01-07T09:18:11Z",
+          "cells": [
+            {
+              "column": "influxdb_SNOD1_Node028_Temp07_meas_data_value",
+              "value": "3140.492262",
+              "looks_like": "elevation",
+              "flag": "qa_f"
+            },
+            {
+              "column": "influxdb_SNOD1_Node028_Temp08_meas_data_value",
+              "value": "38.92611709",
+              "looks_like": "latitude",
+              "flag": "qa_z"
+            },
+            {
+              "column": "influxdb_SNOD1_Node028_Temp09_meas_data_value",
+              "value": "-106.9802471",
+              "looks_like": "longitude",
+              "flag": "qa_f"
+            }
+          ]
+        }
+      ],
+      "rows": 3,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "partial_rows_shifted_by_8",
+      "severity": "error",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node030_SG-DTP30_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node030_Temp01_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp02_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp03_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp04_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp05_meas_data_value"
+      ],
+      "count": 3672,
+      "description": "Rows in which only the first probe columns have values: the values match the probes 8 positions further down the profile in the nearest complete reading (e.g. the value stored in influxdb_SNOD1_Node030_Temp01_meas_data_value is the reading of influxdb_SNOD1_Node030_Temp09_meas_data_value). The partial readings appear to have been stored in the wrong columns by the ingest. Of 11,877 such rows, 3,672 match this shift; 8,203 have no complete reading within 1 h to compare with (probably affected the same way).",
+      "examples": [
+        {
+          "datetime_measured": "2022-09-30T01:15:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node030_Temp01_meas_data_value": "6.875",
+            "influxdb_SNOD1_Node030_Temp02_meas_data_value": "6.7578125",
+            "influxdb_SNOD1_Node030_Temp03_meas_data_value": "6.6484375",
+            "influxdb_SNOD1_Node030_Temp04_meas_data_value": "6.515625",
+            "influxdb_SNOD1_Node030_Temp05_meas_data_value": "6.359375",
+            "influxdb_SNOD1_Node030_Temp06_meas_data_value": "3.4453125"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node030_Temp09_meas_data_value": 6.875,
+            "influxdb_SNOD1_Node030_Temp10_meas_data_value": 6.7578125,
+            "influxdb_SNOD1_Node030_Temp11_meas_data_value": 6.65625,
+            "influxdb_SNOD1_Node030_Temp12_meas_data_value": 6.5234375,
+            "influxdb_SNOD1_Node030_Temp13_meas_data_value": 6.359375
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2022-09-30T01:30:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node030_Temp01_meas_data_value": "6.8828125",
+            "influxdb_SNOD1_Node030_Temp02_meas_data_value": "6.7578125",
+            "influxdb_SNOD1_Node030_Temp03_meas_data_value": "6.6484375",
+            "influxdb_SNOD1_Node030_Temp04_meas_data_value": "6.515625",
+            "influxdb_SNOD1_Node030_Temp05_meas_data_value": "6.359375",
+            "influxdb_SNOD1_Node030_Temp06_meas_data_value": "3.4453125"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node030_Temp09_meas_data_value": 6.875,
+            "influxdb_SNOD1_Node030_Temp10_meas_data_value": 6.7578125,
+            "influxdb_SNOD1_Node030_Temp11_meas_data_value": 6.65625,
+            "influxdb_SNOD1_Node030_Temp12_meas_data_value": 6.5234375,
+            "influxdb_SNOD1_Node030_Temp13_meas_data_value": 6.359375
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2022-09-30T01:45:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node030_Temp01_meas_data_value": "6.890625",
+            "influxdb_SNOD1_Node030_Temp02_meas_data_value": "6.7578125",
+            "influxdb_SNOD1_Node030_Temp03_meas_data_value": "6.6484375",
+            "influxdb_SNOD1_Node030_Temp04_meas_data_value": "6.515625",
+            "influxdb_SNOD1_Node030_Temp05_meas_data_value": "6.359375",
+            "influxdb_SNOD1_Node030_Temp06_meas_data_value": "3.4453125"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node030_Temp09_meas_data_value": 6.875,
+            "influxdb_SNOD1_Node030_Temp10_meas_data_value": 6.7578125,
+            "influxdb_SNOD1_Node030_Temp11_meas_data_value": 6.65625,
+            "influxdb_SNOD1_Node030_Temp12_meas_data_value": 6.5234375,
+            "influxdb_SNOD1_Node030_Temp13_meas_data_value": 6.359375
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2022-09-30T02:00:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node030_Temp01_meas_data_value": "6.890625",
+            "influxdb_SNOD1_Node030_Temp02_meas_data_value": "6.75",
+            "influxdb_SNOD1_Node030_Temp03_meas_data_value": "6.6484375",
+            "influxdb_SNOD1_Node030_Temp04_meas_data_value": "6.515625",
+            "influxdb_SNOD1_Node030_Temp05_meas_data_value": "6.359375",
+            "influxdb_SNOD1_Node030_Temp06_meas_data_value": "3.43828125"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node030_Temp09_meas_data_value": 6.875,
+            "influxdb_SNOD1_Node030_Temp10_meas_data_value": 6.7578125,
+            "influxdb_SNOD1_Node030_Temp11_meas_data_value": 6.65625,
+            "influxdb_SNOD1_Node030_Temp12_meas_data_value": 6.5234375,
+            "influxdb_SNOD1_Node030_Temp13_meas_data_value": 6.359375
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        },
+        {
+          "datetime_measured": "2022-09-30T05:00:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node030_Temp01_meas_data_value": "6.921875",
+            "influxdb_SNOD1_Node030_Temp02_meas_data_value": "6.765625",
+            "influxdb_SNOD1_Node030_Temp03_meas_data_value": "6.6484375",
+            "influxdb_SNOD1_Node030_Temp04_meas_data_value": "6.5078125",
+            "influxdb_SNOD1_Node030_Temp05_meas_data_value": "6.3515625",
+            "influxdb_SNOD1_Node030_Temp06_meas_data_value": "3.43828125"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node030_Temp09_meas_data_value": 6.9375,
+            "influxdb_SNOD1_Node030_Temp10_meas_data_value": 6.7734375,
+            "influxdb_SNOD1_Node030_Temp11_meas_data_value": 6.640625,
+            "influxdb_SNOD1_Node030_Temp12_meas_data_value": 6.515625,
+            "influxdb_SNOD1_Node030_Temp13_meas_data_value": 6.3515625
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        }
+      ],
+      "should_be": [
+        "influxdb_SNOD1_Node030_Temp09_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp10_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp11_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp12_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp13_meas_data_value"
+      ],
+      "rows_checked": 11877,
+      "rows_without_reference": 8203,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "partial_rows_shifted_by_9",
+      "severity": "error",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node030_SG-DTP30_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node030_Temp01_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp02_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp03_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp04_meas_data_value"
+      ],
+      "count": 1,
+      "description": "Rows in which only the first probe columns have values: the values match the probes 9 positions further down the profile in the nearest complete reading (e.g. the value stored in influxdb_SNOD1_Node030_Temp01_meas_data_value is the reading of influxdb_SNOD1_Node030_Temp10_meas_data_value). The partial readings appear to have been stored in the wrong columns by the ingest. Of 11,877 such rows, 1 match this shift; 8,203 have no complete reading within 1 h to compare with (probably affected the same way).",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-07T22:45:00Z",
+          "stored_as": {
+            "influxdb_SNOD1_Node030_Temp01_meas_data_value": "5.828125",
+            "influxdb_SNOD1_Node030_Temp02_meas_data_value": "5.8984375",
+            "influxdb_SNOD1_Node030_Temp03_meas_data_value": "5.9296875",
+            "influxdb_SNOD1_Node030_Temp04_meas_data_value": "5.9140625",
+            "influxdb_SNOD1_Node030_Temp05_meas_data_value": "6.25",
+            "influxdb_SNOD1_Node030_Temp06_meas_data_value": "3.43828125"
+          },
+          "matches": {
+            "influxdb_SNOD1_Node030_Temp10_meas_data_value": 5.8984375,
+            "influxdb_SNOD1_Node030_Temp11_meas_data_value": 5.921875,
+            "influxdb_SNOD1_Node030_Temp12_meas_data_value": 5.9140625,
+            "influxdb_SNOD1_Node030_Temp13_meas_data_value": 5.875
+          },
+          "reference": "nearest row in which every probe reports, within 1 h"
+        }
+      ],
+      "should_be": [
+        "influxdb_SNOD1_Node030_Temp10_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp11_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp12_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp13_meas_data_value"
+      ],
+      "rows_checked": 11877,
+      "rows_without_reference": 8203,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "battery_voltage_in_temperature_column",
+      "severity": "error",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node030_SG-DTP30_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node030_Temp06_meas_data_value"
+      ],
+      "count": 2325,
+      "description": "In the shifted partial rows, the value after the last shifted probe lies in the range of the node battery voltage (2.883 to 3.452 V) and is most likely the battery voltage, stored in a temperature column. Counted only in shifted rows that have a complete reading within 1 h to compare with; rows without one are probably affected the same way.",
+      "examples": [
+        {
+          "datetime_measured": "2022-09-30T01:15:00Z",
+          "columns": [
+            "influxdb_SNOD1_Node030_Temp06_meas_data_value"
+          ],
+          "values": [
+            "3.4453125"
+          ]
+        },
+        {
+          "datetime_measured": "2022-09-30T01:30:00Z",
+          "columns": [
+            "influxdb_SNOD1_Node030_Temp06_meas_data_value"
+          ],
+          "values": [
+            "3.4453125"
+          ]
+        },
+        {
+          "datetime_measured": "2022-09-30T01:45:00Z",
+          "columns": [
+            "influxdb_SNOD1_Node030_Temp06_meas_data_value"
+          ],
+          "values": [
+            "3.4453125"
+          ]
+        },
+        {
+          "datetime_measured": "2022-09-30T02:00:00Z",
+          "columns": [
+            "influxdb_SNOD1_Node030_Temp06_meas_data_value"
+          ],
+          "values": [
+            "3.43828125"
+          ]
+        },
+        {
+          "datetime_measured": "2022-09-30T05:00:00Z",
+          "columns": [
+            "influxdb_SNOD1_Node030_Temp06_meas_data_value"
+          ],
+          "values": [
+            "3.43828125"
+          ]
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "location_packet_values",
+      "severity": "error",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node030_SG-DTP30_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node030_Temp07_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp08_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp09_meas_data_value"
+      ],
+      "count": 9,
+      "description": "Rows in which temperature columns hold the site latitude, longitude or an elevation (a GPS / location message stored as temperatures). 3 of the 9 cells are flagged good (qa_z), the rest qa_f. Latitude and longitude swap columns between messages. The reported elevation (3141.465727 m) differs from the registered site elevation (3136.15 m).",
+      "examples": [
+        {
+          "datetime_measured": "2023-01-07T09:02:07Z",
+          "cells": [
+            {
+              "column": "influxdb_SNOD1_Node030_Temp07_meas_data_value",
+              "value": "3141.465727",
+              "looks_like": "elevation",
+              "flag": "qa_f"
+            },
+            {
+              "column": "influxdb_SNOD1_Node030_Temp08_meas_data_value",
+              "value": "38.92589266",
+              "looks_like": "latitude",
+              "flag": "qa_z"
+            },
+            {
+              "column": "influxdb_SNOD1_Node030_Temp09_meas_data_value",
+              "value": "-106.9791384",
+              "looks_like": "longitude",
+              "flag": "qa_f"
+            }
+          ]
+        },
+        {
+          "datetime_measured": "2023-01-07T09:18:11Z",
+          "cells": [
+            {
+              "column": "influxdb_SNOD1_Node030_Temp07_meas_data_value",
+              "value": "3141.465727",
+              "looks_like": "elevation",
+              "flag": "qa_f"
+            },
+            {
+              "column": "influxdb_SNOD1_Node030_Temp08_meas_data_value",
+              "value": "38.92589266",
+              "looks_like": "latitude",
+              "flag": "qa_z"
+            },
+            {
+              "column": "influxdb_SNOD1_Node030_Temp09_meas_data_value",
+              "value": "-106.9791384",
+              "looks_like": "longitude",
+              "flag": "qa_f"
+            }
+          ]
+        },
+        {
+          "datetime_measured": "2023-01-07T09:18:53Z",
+          "cells": [
+            {
+              "column": "influxdb_SNOD1_Node030_Temp07_meas_data_value",
+              "value": "3141.465727",
+              "looks_like": "elevation",
+              "flag": "qa_f"
+            },
+            {
+              "column": "influxdb_SNOD1_Node030_Temp08_meas_data_value",
+              "value": "38.92589266",
+              "looks_like": "latitude",
+              "flag": "qa_z"
+            },
+            {
+              "column": "influxdb_SNOD1_Node030_Temp09_meas_data_value",
+              "value": "-106.9791384",
+              "looks_like": "longitude",
+              "flag": "qa_f"
+            }
+          ]
+        }
+      ],
+      "rows": 3,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "format_warning_1",
+      "severity": "warning",
+      "category": "format",
+      "description": "influxdb_SNOD1_Node026_SG-DTP26_battery_voltage_dd.csv:3: influxdb_SNOD1_Node026_V_batt_meas_data_value: unit 'V' not in the unit vocabulary. The Sensor Time Series - Full unit vocabulary (controlled_vocabulary.md, based on UCUM) has no entry for this unit; ESS-DIVE would need to add one, or the unit must be described otherwise.",
+      "action": "Unit written as stored in the database."
+    },
+    {
+      "id": "format_warning_2",
+      "severity": "warning",
+      "category": "format",
+      "description": "influxdb_SNOD1_Node028_SG-DTP28_battery_voltage_dd.csv:3: influxdb_SNOD1_Node028_V_batt_meas_data_value: unit 'V' not in the unit vocabulary. The Sensor Time Series - Full unit vocabulary (controlled_vocabulary.md, based on UCUM) has no entry for this unit; ESS-DIVE would need to add one, or the unit must be described otherwise.",
+      "action": "Unit written as stored in the database."
+    },
+    {
+      "id": "format_warning_3",
+      "severity": "warning",
+      "category": "format",
+      "description": "influxdb_SNOD1_Node030_SG-DTP30_battery_voltage_dd.csv:3: influxdb_SNOD1_Node030_V_batt_meas_data_value: unit 'V' not in the unit vocabulary. The Sensor Time Series - Full unit vocabulary (controlled_vocabulary.md, based on UCUM) has no entry for this unit; ESS-DIVE would need to add one, or the unit must be described otherwise.",
+      "action": "Unit written as stored in the database."
+    },
+    {
+      "id": "all_zero_rows",
+      "severity": "warning",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node026_SG-DTP26_soil_temperature.csv",
+      "count": 35,
+      "description": "Rows in which every value present (at least two columns) is exactly 0, flagged good (qa_z). Probably empty or corrupted packets rather than real temperatures of 0 degC.",
+      "examples": [
+        {
+          "datetime_measured": "2023-06-23T13:15:00Z",
+          "columns_equal_to_0": 5
+        },
+        {
+          "datetime_measured": "2023-06-23T13:30:00Z",
+          "columns_equal_to_0": 5
+        },
+        {
+          "datetime_measured": "2023-07-08T09:15:00Z",
+          "columns_equal_to_0": 13
+        },
+        {
+          "datetime_measured": "2023-07-12T01:15:00Z",
+          "columns_equal_to_0": 5
+        },
+        {
+          "datetime_measured": "2023-07-12T01:30:00Z",
+          "columns_equal_to_0": 5
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "implausible_good_value_Node026_Temp02",
+      "severity": "warning",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node026_SG-DTP26_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node026_Temp02_meas_data_value"
+      ],
+      "count": 1,
+      "description": "Values flagged good (qa_z) outside the plausible range -40 to 60 degC; Cel for soilTemperature.",
+      "examples": [
+        {
+          "datetime_measured": "2023-09-08T16:30:00Z",
+          "value": "63.875"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "all_zero_rows",
+      "severity": "warning",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node030_SG-DTP30_soil_temperature.csv",
+      "count": 11,
+      "description": "Rows in which every value present (at least two columns) is exactly 0, flagged good (qa_z). Probably empty or corrupted packets rather than real temperatures of 0 degC.",
+      "examples": [
+        {
+          "datetime_measured": "2023-06-02T14:00:00Z",
+          "columns_equal_to_0": 6
+        },
+        {
+          "datetime_measured": "2023-06-02T14:15:00Z",
+          "columns_equal_to_0": 13
+        },
+        {
+          "datetime_measured": "2023-06-08T18:15:00Z",
+          "columns_equal_to_0": 2
+        },
+        {
+          "datetime_measured": "2023-06-11T22:30:00Z",
+          "columns_equal_to_0": 2
+        },
+        {
+          "datetime_measured": "2023-06-13T00:00:00Z",
+          "columns_equal_to_0": 6
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "datastream_attribute_elevation",
+      "severity": "warning",
+      "category": "metadata",
+      "count": 36,
+      "description": "odmx.sampling_feature_timeseries_datastreams.datastream_attribute gives a sensor_elevation that differs from the sensor position in odmx.equipment_position. The package uses equipment_position.",
+      "examples": [
+        {
+          "table": "influxdb_SNOD1_Node026_Temp01_meas",
+          "datastream_attribute.sensor_elevation": 0.0,
+          "equipment_position.equipment_z_offset_m": "0.05"
+        },
+        {
+          "table": "influxdb_SNOD1_Node026_Temp03_meas",
+          "datastream_attribute.sensor_elevation": 0.0,
+          "equipment_position.equipment_z_offset_m": "-0.05"
+        },
+        {
+          "table": "influxdb_SNOD1_Node026_Temp04_meas",
+          "datastream_attribute.sensor_elevation": 0.0,
+          "equipment_position.equipment_z_offset_m": "-0.1"
+        },
+        {
+          "table": "influxdb_SNOD1_Node026_Temp05_meas",
+          "datastream_attribute.sensor_elevation": 0.0,
+          "equipment_position.equipment_z_offset_m": "-0.15"
+        },
+        {
+          "table": "influxdb_SNOD1_Node026_Temp06_meas",
+          "datastream_attribute.sensor_elevation": 0.0,
+          "equipment_position.equipment_z_offset_m": "-0.2"
+        }
+      ],
+      "action": "Package uses odmx.equipment_position."
+    },
+    {
+      "id": "unknown_equipment",
+      "severity": "warning",
+      "category": "metadata",
+      "count": 3,
+      "description": "Datastreams whose equipment is registered as unknown (model \"unknown sensor\" and/or Unknown Manufacturer); for the battery voltage this is the node logger, described in the package as a sensor at the site.",
+      "examples": [
+        {
+          "table": "influxdb_SNOD1_Node026_V_batt_meas",
+          "sensor_name": "unknown logger",
+          "sensor_model": "unknown sensor",
+          "manufacturer": "Unknown Manufacturer",
+          "equipment_id": "2440"
+        },
+        {
+          "table": "influxdb_SNOD1_Node028_V_batt_meas",
+          "sensor_name": "unknown logger",
+          "sensor_model": "unknown sensor",
+          "manufacturer": "Unknown Manufacturer",
+          "equipment_id": "2454"
+        },
+        {
+          "table": "influxdb_SNOD1_Node030_V_batt_meas",
+          "sensor_name": "unknown logger",
+          "sensor_model": "unknown sensor",
+          "manufacturer": "Unknown Manufacturer",
+          "equipment_id": "2468"
+        }
+      ],
+      "action": "Described as registered; provider to supply details."
+    },
+    {
+      "id": "qa_f_values",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node026_SG-DTP26_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node026_Temp07_meas_data_value",
+        "influxdb_SNOD1_Node026_Temp08_meas_data_value",
+        "influxdb_SNOD1_Node026_Temp09_meas_data_value"
+      ],
+      "count": 8,
+      "description": "Values flagged outOfRange (qa_f) by the SSI ingest. Kept, with their flag, as stored.",
+      "examples": [
+        {
+          "datetime_measured": "2023-01-07T08:51:07Z",
+          "column": "influxdb_SNOD1_Node026_Temp07_meas_data_value",
+          "value": "3127.788"
+        },
+        {
+          "datetime_measured": "2023-01-07T08:51:07Z",
+          "column": "influxdb_SNOD1_Node026_Temp08_meas_data_value",
+          "value": "-106.98027"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:02:07Z",
+          "column": "influxdb_SNOD1_Node026_Temp07_meas_data_value",
+          "value": "3127.788"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:02:07Z",
+          "column": "influxdb_SNOD1_Node026_Temp09_meas_data_value",
+          "value": "-106.98027"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:18:11Z",
+          "column": "influxdb_SNOD1_Node026_Temp07_meas_data_value",
+          "value": "3127.788"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "empty_rows",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node026_SG-DTP26_soil_temperature.csv",
+      "count": 24170,
+      "description": "Rows in which every column is missing (-9999, flag qa_c): the feeder table has a row at that time but no value in any column. 23,920 of them are at times off the 15-minute grid (e.g. hh:09:07), which suggests messages without measurements.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-03T02:09:07Z"
+        },
+        {
+          "datetime_measured": "2022-10-03T02:24:07Z"
+        },
+        {
+          "datetime_measured": "2022-10-03T03:09:07Z"
+        },
+        {
+          "datetime_measured": "2022-10-03T03:24:07Z"
+        },
+        {
+          "datetime_measured": "2022-10-03T04:09:07Z"
+        }
+      ],
+      "share_of_rows": 0.2411,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node026_SG-DTP26_soil_temperature.csv",
+      "count": 23924,
+      "description": "Rows whose time is not on the 15-minute grid; 23,920 of the 23,924 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2023-01-07T08:51:07Z"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:02:07Z"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:18:11Z"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:18:53Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "empty_rows",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node026_SG-DTP26_battery_voltage.csv",
+      "count": 98282,
+      "description": "Rows in which every column is missing (-9999, flag qa_c): the feeder table has a row at that time but no value in any column. 23,924 of them are at times off the 15-minute grid (e.g. hh:09:07), which suggests messages without measurements.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-03T01:15:00Z"
+        },
+        {
+          "datetime_measured": "2022-10-03T01:30:00Z"
+        },
+        {
+          "datetime_measured": "2022-10-03T01:45:00Z"
+        },
+        {
+          "datetime_measured": "2022-10-03T02:00:00Z"
+        },
+        {
+          "datetime_measured": "2022-10-03T02:09:07Z"
+        }
+      ],
+      "share_of_rows": 0.9805,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node026_SG-DTP26_battery_voltage.csv",
+      "count": 23924,
+      "description": "Rows whose time is not on the 15-minute grid; 23,924 of the 23,924 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-03T02:09:07Z"
+        },
+        {
+          "datetime_measured": "2022-10-03T02:24:07Z"
+        },
+        {
+          "datetime_measured": "2022-10-03T03:09:07Z"
+        },
+        {
+          "datetime_measured": "2022-10-03T03:24:07Z"
+        },
+        {
+          "datetime_measured": "2022-10-03T04:09:07Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "sparse_Node026_V_batt",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node026_SG-DTP26_battery_voltage.csv",
+      "columns": [
+        "influxdb_SNOD1_Node026_V_batt_meas_data_value"
+      ],
+      "count": 1958,
+      "description": "The battery voltage has a value in 1,958 of 100,240 rows.",
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "qa_f_values",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node028_SG-DTP28_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node028_Temp07_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp08_meas_data_value",
+        "influxdb_SNOD1_Node028_Temp09_meas_data_value"
+      ],
+      "count": 6,
+      "description": "Values flagged outOfRange (qa_f) by the SSI ingest. Kept, with their flag, as stored.",
+      "examples": [
+        {
+          "datetime_measured": "2023-01-07T08:51:07Z",
+          "column": "influxdb_SNOD1_Node028_Temp07_meas_data_value",
+          "value": "3140.492262"
+        },
+        {
+          "datetime_measured": "2023-01-07T08:51:07Z",
+          "column": "influxdb_SNOD1_Node028_Temp08_meas_data_value",
+          "value": "-106.9802471"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:02:07Z",
+          "column": "influxdb_SNOD1_Node028_Temp07_meas_data_value",
+          "value": "3140.492262"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:02:07Z",
+          "column": "influxdb_SNOD1_Node028_Temp09_meas_data_value",
+          "value": "-106.9802471"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:18:11Z",
+          "column": "influxdb_SNOD1_Node028_Temp07_meas_data_value",
+          "value": "3140.492262"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "empty_rows",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node028_SG-DTP28_soil_temperature.csv",
+      "count": 30949,
+      "description": "Rows in which every column is missing (-9999, flag qa_c): the feeder table has a row at that time but no value in any column. 30,646 of them are at times off the 15-minute grid (e.g. hh:09:07), which suggests messages without measurements.",
+      "examples": [
+        {
+          "datetime_measured": "2022-09-29T18:09:49Z"
+        },
+        {
+          "datetime_measured": "2022-09-29T18:24:49Z"
+        },
+        {
+          "datetime_measured": "2022-09-29T20:09:49Z"
+        },
+        {
+          "datetime_measured": "2022-09-29T20:24:49Z"
+        },
+        {
+          "datetime_measured": "2022-09-29T21:09:49Z"
+        }
+      ],
+      "share_of_rows": 0.2585,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node028_SG-DTP28_soil_temperature.csv",
+      "count": 30649,
+      "description": "Rows whose time is not on the 15-minute grid; 30,646 of the 30,649 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2023-01-07T08:51:07Z"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:02:07Z"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:18:11Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "empty_rows",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node028_SG-DTP28_battery_voltage.csv",
+      "count": 117490,
+      "description": "Rows in which every column is missing (-9999, flag qa_c): the feeder table has a row at that time but no value in any column. 30,649 of them are at times off the 15-minute grid (e.g. hh:09:07), which suggests messages without measurements.",
+      "examples": [
+        {
+          "datetime_measured": "2022-09-29T17:15:00Z"
+        },
+        {
+          "datetime_measured": "2022-09-29T17:30:00Z"
+        },
+        {
+          "datetime_measured": "2022-09-29T17:45:00Z"
+        },
+        {
+          "datetime_measured": "2022-09-29T18:09:49Z"
+        },
+        {
+          "datetime_measured": "2022-09-29T18:24:49Z"
+        }
+      ],
+      "share_of_rows": 0.9815,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node028_SG-DTP28_battery_voltage.csv",
+      "count": 30649,
+      "description": "Rows whose time is not on the 15-minute grid; 30,649 of the 30,649 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2022-09-29T18:09:49Z"
+        },
+        {
+          "datetime_measured": "2022-09-29T18:24:49Z"
+        },
+        {
+          "datetime_measured": "2022-09-29T20:09:49Z"
+        },
+        {
+          "datetime_measured": "2022-09-29T20:24:49Z"
+        },
+        {
+          "datetime_measured": "2022-09-29T21:09:49Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "sparse_Node028_V_batt",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node028_SG-DTP28_battery_voltage.csv",
+      "columns": [
+        "influxdb_SNOD1_Node028_V_batt_meas_data_value"
+      ],
+      "count": 2220,
+      "description": "The battery voltage has a value in 2,220 of 119,710 rows.",
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "qa_f_values",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node030_SG-DTP30_soil_temperature.csv",
+      "columns": [
+        "influxdb_SNOD1_Node030_Temp01_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp07_meas_data_value",
+        "influxdb_SNOD1_Node030_Temp09_meas_data_value"
+      ],
+      "count": 7,
+      "description": "Values flagged outOfRange (qa_f) by the SSI ingest. Kept, with their flag, as stored.",
+      "examples": [
+        {
+          "datetime_measured": "2023-01-07T09:02:07Z",
+          "column": "influxdb_SNOD1_Node030_Temp07_meas_data_value",
+          "value": "3141.465727"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:02:07Z",
+          "column": "influxdb_SNOD1_Node030_Temp09_meas_data_value",
+          "value": "-106.9791384"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:18:11Z",
+          "column": "influxdb_SNOD1_Node030_Temp07_meas_data_value",
+          "value": "3141.465727"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:18:11Z",
+          "column": "influxdb_SNOD1_Node030_Temp09_meas_data_value",
+          "value": "-106.9791384"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:18:53Z",
+          "column": "influxdb_SNOD1_Node030_Temp07_meas_data_value",
+          "value": "3141.465727"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "empty_rows",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node030_SG-DTP30_soil_temperature.csv",
+      "count": 16318,
+      "description": "Rows in which every column is missing (-9999, flag qa_c): the feeder table has a row at that time but no value in any column. 6,172 of them are at times off the 15-minute grid (e.g. hh:09:07), which suggests messages without measurements.",
+      "examples": [
+        {
+          "datetime_measured": "2022-09-30T02:10:31Z"
+        },
+        {
+          "datetime_measured": "2022-09-30T02:25:31Z"
+        },
+        {
+          "datetime_measured": "2022-09-30T03:10:31Z"
+        },
+        {
+          "datetime_measured": "2022-09-30T03:25:31Z"
+        },
+        {
+          "datetime_measured": "2022-09-30T04:10:31Z"
+        }
+      ],
+      "share_of_rows": 0.5639,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node030_SG-DTP30_soil_temperature.csv",
+      "count": 6175,
+      "description": "Rows whose time is not on the 15-minute grid; 6,172 of the 6,175 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2023-01-07T09:02:07Z"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:18:11Z"
+        },
+        {
+          "datetime_measured": "2023-01-07T09:18:53Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "empty_rows",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node030_SG-DTP30_battery_voltage.csv",
+      "count": 28141,
+      "description": "Rows in which every column is missing (-9999, flag qa_c): the feeder table has a row at that time but no value in any column. 6,175 of them are at times off the 15-minute grid (e.g. hh:09:07), which suggests messages without measurements.",
+      "examples": [
+        {
+          "datetime_measured": "2022-09-30T01:15:00Z"
+        },
+        {
+          "datetime_measured": "2022-09-30T01:30:00Z"
+        },
+        {
+          "datetime_measured": "2022-09-30T01:45:00Z"
+        },
+        {
+          "datetime_measured": "2022-09-30T02:00:00Z"
+        },
+        {
+          "datetime_measured": "2022-09-30T02:10:31Z"
+        }
+      ],
+      "share_of_rows": 0.9725,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node030_SG-DTP30_battery_voltage.csv",
+      "count": 6175,
+      "description": "Rows whose time is not on the 15-minute grid; 6,175 of the 6,175 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2022-09-30T02:10:31Z"
+        },
+        {
+          "datetime_measured": "2022-09-30T02:25:31Z"
+        },
+        {
+          "datetime_measured": "2022-09-30T03:10:31Z"
+        },
+        {
+          "datetime_measured": "2022-09-30T03:25:31Z"
+        },
+        {
+          "datetime_measured": "2022-09-30T04:10:31Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "sparse_Node030_V_batt",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Node030_SG-DTP30_battery_voltage.csv",
+      "columns": [
+        "influxdb_SNOD1_Node030_V_batt_meas_data_value"
+      ],
+      "count": 796,
+      "description": "The battery voltage has a value in 796 of 28,937 rows.",
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "datastream_attribute_instrument",
+      "severity": "info",
+      "category": "metadata",
+      "count": 39,
+      "description": "datastream_attribute names the instrument \"unknown sensor\" although the attached sensor model is known. The package uses the attached sensor.",
+      "examples": [
+        {
+          "table": "influxdb_SNOD1_Node026_Temp01_meas",
+          "datastream_attribute.instrument": "unknown sensor",
+          "sensor_model": "LBNL TMP 117 Temperature Probe"
+        },
+        {
+          "table": "influxdb_SNOD1_Node026_Temp02_meas",
+          "datastream_attribute.instrument": "unknown sensor",
+          "sensor_model": "LBNL TMP 117 Temperature Probe"
+        },
+        {
+          "table": "influxdb_SNOD1_Node026_Temp03_meas",
+          "datastream_attribute.instrument": "unknown sensor",
+          "sensor_model": "LBNL TMP 117 Temperature Probe"
+        },
+        {
+          "table": "influxdb_SNOD1_Node026_Temp04_meas",
+          "datastream_attribute.instrument": "unknown sensor",
+          "sensor_model": "LBNL TMP 117 Temperature Probe"
+        },
+        {
+          "table": "influxdb_SNOD1_Node026_Temp05_meas",
+          "datastream_attribute.instrument": "unknown sensor",
+          "sensor_model": "LBNL TMP 117 Temperature Probe"
+        }
+      ],
+      "action": "Package uses the attached sensor (odmx.related_equipment isAttachedTo)."
+    },
+    {
+      "id": "no_serial_numbers",
+      "severity": "info",
+      "category": "metadata",
+      "columns": [
+        "influxdb_SNOD1_Node026_V_batt_meas",
+        "influxdb_SNOD1_Node026_Temp01_meas",
+        "influxdb_SNOD1_Node026_Temp02_meas",
+        "influxdb_SNOD1_Node026_Temp03_meas",
+        "influxdb_SNOD1_Node026_Temp04_meas",
+        "influxdb_SNOD1_Node026_Temp05_meas",
+        "influxdb_SNOD1_Node026_Temp06_meas",
+        "influxdb_SNOD1_Node026_Temp07_meas",
+        "influxdb_SNOD1_Node026_Temp08_meas",
+        "influxdb_SNOD1_Node026_Temp09_meas",
+        "influxdb_SNOD1_Node026_Temp10_meas",
+        "influxdb_SNOD1_Node026_Temp11_meas",
+        "influxdb_SNOD1_Node026_Temp12_meas",
+        "influxdb_SNOD1_Node026_Temp13_meas",
+        "influxdb_SNOD1_Node028_V_batt_meas",
+        "influxdb_SNOD1_Node028_Temp01_meas",
+        "influxdb_SNOD1_Node028_Temp02_meas",
+        "influxdb_SNOD1_Node028_Temp03_meas",
+        "influxdb_SNOD1_Node028_Temp04_meas",
+        "influxdb_SNOD1_Node028_Temp05_meas",
+        "influxdb_SNOD1_Node028_Temp06_meas",
+        "influxdb_SNOD1_Node028_Temp07_meas",
+        "influxdb_SNOD1_Node028_Temp08_meas",
+        "influxdb_SNOD1_Node028_Temp09_meas",
+        "influxdb_SNOD1_Node028_Temp10_meas",
+        "influxdb_SNOD1_Node028_Temp11_meas",
+        "influxdb_SNOD1_Node028_Temp12_meas",
+        "influxdb_SNOD1_Node028_Temp13_meas",
+        "influxdb_SNOD1_Node030_V_batt_meas",
+        "influxdb_SNOD1_Node030_Temp01_meas",
+        "influxdb_SNOD1_Node030_Temp02_meas",
+        "influxdb_SNOD1_Node030_Temp03_meas",
+        "influxdb_SNOD1_Node030_Temp04_meas",
+        "influxdb_SNOD1_Node030_Temp05_meas",
+        "influxdb_SNOD1_Node030_Temp06_meas",
+        "influxdb_SNOD1_Node030_Temp07_meas",
+        "influxdb_SNOD1_Node030_Temp08_meas",
+        "influxdb_SNOD1_Node030_Temp09_meas",
+        "influxdb_SNOD1_Node030_Temp10_meas",
+        "influxdb_SNOD1_Node030_Temp11_meas",
+        "influxdb_SNOD1_Node030_Temp12_meas",
+        "influxdb_SNOD1_Node030_Temp13_meas"
+      ],
+      "count": 42,
+      "description": "No serial number (odmx.equipment.equipment_serial_number) and no calibration record for these sensors.",
+      "action": "sensor_serial_number left empty in the attributes file."
+    },
+    {
+      "id": "measurement_count_metadata",
+      "severity": "info",
+      "category": "metadata",
+      "count": 42,
+      "description": "odmx total_measurement_numbers and last_measurement_date count only rows flagged good (qa_z); the datastream tables (and the package) also contain the qa_c (missing) and qa_f rows.",
+      "examples": [
+        {
+          "table": "influxdb_SNOD1_Node026_V_batt_meas",
+          "total_measurement_numbers": "1958"
+        },
+        {
+          "table": "influxdb_SNOD1_Node026_Temp01_meas",
+          "total_measurement_numbers": "75763"
+        },
+        {
+          "table": "influxdb_SNOD1_Node026_Temp02_meas",
+          "total_measurement_numbers": "75734"
+        },
+        {
+          "table": "influxdb_SNOD1_Node026_Temp03_meas",
+          "total_measurement_numbers": "75795"
+        },
+        {
+          "table": "influxdb_SNOD1_Node026_Temp04_meas",
+          "total_measurement_numbers": "75671"
+        }
+      ],
+      "action": "Not used by the package."
+    },
+    {
+      "id": "wkt_axis_order_SG-DTP26",
+      "severity": "info",
+      "category": "metadata",
+      "description": "odmx.sampling_features.feature_geometry_wkt for SG-DTP26 is POINT(38.926127 -106.98027), i.e. latitude first; WKT order is POINT(longitude latitude).",
+      "action": "Package uses the latitude and longitude columns."
+    },
+    {
+      "id": "wkt_axis_order_SG-DTP28",
+      "severity": "info",
+      "category": "metadata",
+      "description": "odmx.sampling_features.feature_geometry_wkt for SG-DTP28 is POINT(38.92611709 -106.9802471), i.e. latitude first; WKT order is POINT(longitude latitude).",
+      "action": "Package uses the latitude and longitude columns."
+    },
+    {
+      "id": "wkt_axis_order_SG-DTP30",
+      "severity": "info",
+      "category": "metadata",
+      "description": "odmx.sampling_features.feature_geometry_wkt for SG-DTP30 is POINT(38.92589266 -106.9791384), i.e. latitude first; WKT order is POINT(longitude latitude).",
+      "action": "Package uses the latitude and longitude columns."
+    },
+    {
+      "id": "soil_temperature_above_ground",
+      "severity": "info",
+      "category": "metadata",
+      "columns": [
+        "influxdb_SNOD1_Node026_Temp01_meas",
+        "influxdb_SNOD1_Node028_Temp01_meas",
+        "influxdb_SNOD1_Node030_Temp01_meas"
+      ],
+      "count": 3,
+      "description": "Probes registered as soil temperature but positioned above the ground surface.",
+      "action": "Noted in the data dictionary notes for these columns."
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+table_name	station	feeder_table	category_sensor	datastream	variable	units	good_measurements	first	last
+am_4_cr1000_airtc_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Air (temperature / humidity / pressure)	airtc_avg	airTemperature	degC; Cel	312740	2016-09-28	2023-03-20
+am_4_cr1000_bp_mbar_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Air (temperature / humidity / pressure)	bp_mbar_avg	airAtmosphericPressureAbsolute	Pa	306751	2016-09-28	2023-03-20
+am_4_cr1000_rh_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Air (temperature / humidity / pressure)	rh_avg	airRelativeHumidity	unitless	312740	2016-09-28	2023-03-20
+am_4_cr1000_tc_c_10_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Air (temperature / humidity / pressure)	tc_c_10_avg	airTemperature	degC; Cel	312740	2016-09-28	2023-03-20
+am_4_cr1000_tc_c_2_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Air (temperature / humidity / pressure)	tc_c_2_avg	airTemperature	degC; Cel	312740	2016-09-28	2023-03-20
+am_4_cr1000_batt_volt_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Logger battery	batt_volt_avg	batteryVoltage	V	312740	2016-09-28	2023-03-20
+am_4_cr1000_par_dn_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Radiation	par_dn_avg	solarRadiationReflectedPar	W/m^2	312740	2016-09-28	2023-03-20
+am_4_cr1000_par_up_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Radiation	par_up_avg	solarRadiationIncomingPar	W/m^2	312740	2016-09-28	2023-03-20
+am_4_cr1000_rlin_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Radiation	rlin_avg	solarRadiationIncomingLWIR	W/m^2	2901	2016-10-06	2023-03-16
+am_4_cr1000_rlout_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Radiation	rlout_avg	solarRadiationReflectedLWIR	W/m^2	130867	2016-09-28	2023-03-17
+am_4_cr1000_rs_kw_m2_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Radiation	rs_kw_m2_avg	solarRadiationIncomingBroadband	W/m^2	179840	2016-09-28	2023-03-20
+am_4_cr1000_rsin_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Radiation	rsin_avg	solarRadiationIncomingBroadband	W/m^2	170258	2016-09-28	2023-03-20
+am_4_cr1000_rsout_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Radiation	rsout_avg	solarRadiationReflectedBroadband	W/m^2	309090	2016-09-28	2023-03-20
+am_4_cr1000_snwdepth_in_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Snow depth	snwdepth_in_avg	snowThickness	m	300551	2016-09-28	2023-03-20
+am_4_cr1000_sm_cond_25_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Soil (temperature / moisture / conductivity)	sm_cond_25_avg	soilElectricalConductivity	uS/cm	312740	2016-09-28	2023-03-20
+am_4_cr1000_sm_cond_50_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Soil (temperature / moisture / conductivity)	sm_cond_50_avg	soilElectricalConductivity	uS/cm	312740	2016-09-28	2023-03-20
+am_4_cr1000_sm_cond_5_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Soil (temperature / moisture / conductivity)	sm_cond_5_avg	soilElectricalConductivity	uS/cm	312740	2016-09-28	2023-03-20
+am_4_cr1000_sm_wfv_25_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Soil (temperature / moisture / conductivity)	sm_wfv_25_avg	soilVolumetricWaterContent	unitless	312740	2016-09-28	2023-03-20
+am_4_cr1000_sm_wfv_50_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Soil (temperature / moisture / conductivity)	sm_wfv_50_avg	soilVolumetricWaterContent	unitless	312740	2016-09-28	2023-03-20
+am_4_cr1000_sm_wfv_5_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Soil (temperature / moisture / conductivity)	sm_wfv_5_avg	soilVolumetricWaterContent	unitless	267751	2016-09-28	2022-07-28
+am_4_cr1000_st_c_25_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Soil (temperature / moisture / conductivity)	st_c_25_avg	soilTemperature	degC; Cel	312740	2016-09-28	2023-03-20
+am_4_cr1000_st_c_50_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Soil (temperature / moisture / conductivity)	st_c_50_avg	soilTemperature	degC; Cel	312740	2016-09-28	2023-03-20
+am_4_cr1000_st_c_5_avg_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Soil (temperature / moisture / conductivity)	st_c_5_avg	soilTemperature	degC; Cel	312740	2016-09-28	2023-03-20
+am_4_cr1000_ws_mph_wvc(1)_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Wind	ws_mph_wvc(1)	windSpeed	m/s	312740	2016-09-28	2023-03-20
+am_4_cr1000_ws_mph_wvc(3)_meas	ER-AMT1 Almont Weather Station	am_4_cr1000	Wind	ws_mph_wvc(3)	windDirection	deg	312740	2016-09-28	2023-03-20
+bb_6_cr1000_airtc_avg_meas	ER-BLB1 Billy Barr Weather Station	bb_6_cr1000	Air (temperature / humidity / pressure)	airtc_avg	airTemperature	degC; Cel	282016	2016-09-27	2023-03-15
+bb_6_cr1000_bp_mbar_avg_meas	ER-BLB1 Billy Barr Weather Station	bb_6_cr1000	Air (temperature / humidity / pressure)	bp_mbar_avg	airAtmosphericPressureAbsolute	Pa	282016	2016-09-27	2023-03-15
+bb_6_cr1000_rh_avg_meas	ER-BLB1 Billy Barr Weather Station	bb_6_cr1000	Air (temperature / humidity / pressure)	rh_avg	airRelativeHumidity	unitless	282016	2016-09-27	2023-03-15
+bb_6_cr1000_tc_c_10_avg_meas	ER-BLB1 Billy Barr Weather Station	bb_6_cr1000	Air (temperature / humidity / pressure)	tc_c_10_avg	airTemperature	degC; Cel	282016	2016-09-27	2023-03-15
+bb_6_cr1000_tc_c_2_avg_meas	ER-BLB1 Billy Barr Weather Station	bb_6_cr1000	Air (temperature / humidity / pressure)	tc_c_2_avg	airTemperature	degC; Cel	282016	2016-09-27	2023-03-15
+bb_6_cr1000_batt_volt_avg_meas	ER-BLB1 Billy Barr Weather Station	bb_6_cr1000	Logger battery	batt_volt_avg	batteryVoltage	V	282016	2016-09-27	2023-03-15
+bb_6_cr1000_univ_lc_in_avg_meas	ER-BLB1 Billy Barr Weather Station	bb_6_cr1000	Precipitation	univ_lc_in_avg	rainPrecipitation10Minutes	m	258391	2016-09-27	2021-09-01
+bb_6_cr1000_rs_kw_m2_avg_meas	ER-BLB1 Billy Barr Weather Station	bb_6_cr1000	Radiation	rs_kw_m2_avg	solarRadiationIncomingBroadband	W/m^2	282016	2016-09-27	2023-03-15
+bb_6_cr1000_snwdepth_in_meas	ER-BLB1 Billy Barr Weather Station	bb_6_cr1000	Snow depth	snwdepth_in	snowThickness	m	276361	2016-09-27	2023-03-15
+bb_6_cr1000_sr50asnowdepth_avg_meas	ER-BLB1 Billy Barr Weather Station	bb_6_cr1000	Snow depth	sr50asnowdepth_avg	snowThickness	m	282016	2016-09-27	2023-03-15
+bb_6_cr1000_ws_mph_wvc(1)_meas	ER-BLB1 Billy Barr Weather Station	bb_6_cr1000	Wind	ws_mph_wvc(1)	windSpeed	m/s	282016	2016-09-27	2023-03-15
+bb_6_cr1000_ws_mph_wvc(3)_meas	ER-BLB1 Billy Barr Weather Station	bb_6_cr1000	Wind	ws_mph_wvc(3)	windDirection	deg	282016	2016-09-27	2023-03-15
+jf_3_cr1000_airtc_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Air (temperature / humidity / pressure)	airtc_avg	airTemperature	degC; Cel	339856	2016-09-27	2023-03-15
+jf_3_cr1000_bp_mbar_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Air (temperature / humidity / pressure)	bp_mbar_avg	airAtmosphericPressureAbsolute	Pa	339856	2016-09-27	2023-03-15
+jf_3_cr1000_rh_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Air (temperature / humidity / pressure)	rh_avg	airRelativeHumidity	unitless	339856	2016-09-27	2023-03-15
+jf_3_cr1000_tc_c_10_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Air (temperature / humidity / pressure)	tc_c_10_avg	airTemperature	degC; Cel	339849	2016-09-27	2023-03-15
+jf_3_cr1000_tc_c_2_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Air (temperature / humidity / pressure)	tc_c_2_avg	airTemperature	degC; Cel	339856	2016-09-27	2023-03-15
+jf_3_cr1000_batt_volt_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Logger battery	batt_volt_avg	batteryVoltage	V	339856	2016-09-27	2023-03-15
+jf_3_cr1000_par_dn_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Radiation	par_dn_avg	solarRadiationReflectedPar	W/m^2	339661	2016-09-27	2023-03-15
+jf_3_cr1000_par_up_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Radiation	par_up_avg	solarRadiationIncomingPar	W/m^2	339856	2016-09-27	2023-03-15
+jf_3_cr1000_rlin_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Radiation	rlin_avg	solarRadiationIncomingLWIR	W/m^2	90593	2016-09-27	2023-03-15
+jf_3_cr1000_rlout_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Radiation	rlout_avg	solarRadiationReflectedLWIR	W/m^2	26	2017-02-13	2022-08-27
+jf_3_cr1000_rs_kw_m2_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Radiation	rs_kw_m2_avg	solarRadiationIncomingBroadband	W/m^2	278220	2016-09-27	2022-10-04
+jf_3_cr1000_rsin_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Radiation	rsin_avg	solarRadiationIncomingBroadband	W/m^2	333512	2016-09-27	2023-03-15
+jf_3_cr1000_rso_kw_m2_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Radiation	rso_kw_m2_avg	solarRadiationReflectedBroadband	W/m^2	288563	2016-09-27	2022-03-24
+jf_3_cr1000_rsout_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Radiation	rsout_avg	solarRadiationReflectedBroadband	W/m^2	13794	2016-09-30	2023-03-15
+jf_3_cr1000_snwdepth_in_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Snow depth	snwdepth_in	snowThickness	m	125860	2016-09-27	2019-03-07
+jf_3_cr1000_sr50asnowdepth_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Snow depth	sr50asnowdepth_avg	snowThickness	m	68962	2016-09-27	2019-03-07
+jf_3_cr1000_ec_20_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	ec_20_avg	soilElectricalConductivity	uS/cm	339856	2016-09-27	2023-03-15
+jf_3_cr1000_ec_2_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	ec_2_avg	soilElectricalConductivity	uS/cm	339856	2016-09-27	2023-03-15
+jf_3_cr1000_ec_4_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	ec_4_avg	soilElectricalConductivity	uS/cm	339856	2016-09-27	2023-03-15
+jf_3_cr1000_ec_8_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	ec_8_avg	soilElectricalConductivity	uS/cm	339856	2016-09-27	2023-03-15
+jf_3_cr1000_sm_cond_25_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	sm_cond_25_avg	soilElectricalConductivity	uS/cm	247077	2018-07-02	2023-03-15
+jf_3_cr1000_sm_cond_50_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	sm_cond_50_avg	soilElectricalConductivity	uS/cm	339856	2016-09-27	2023-03-15
+jf_3_cr1000_sm_cond_5_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	sm_cond_5_avg	soilElectricalConductivity	uS/cm	339856	2016-09-27	2023-03-15
+jf_3_cr1000_sm_wfv_25_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	sm_wfv_25_avg	soilVolumetricWaterContent	unitless	127096	2016-09-27	2019-03-01
+jf_3_cr1000_sm_wfv_50_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	sm_wfv_50_avg	soilVolumetricWaterContent	unitless	128017	2016-09-27	2019-03-07
+jf_3_cr1000_sm_wfv_5_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	sm_wfv_5_avg	soilVolumetricWaterContent	unitless	128017	2016-09-27	2019-03-07
+jf_3_cr1000_st_20_c_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	st_20_c_avg	soilTemperature	degC; Cel	339856	2016-09-27	2023-03-15
+jf_3_cr1000_st_2_c_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	st_2_c_avg	soilTemperature	degC; Cel	339856	2016-09-27	2023-03-15
+jf_3_cr1000_st_4_c_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	st_4_c_avg	soilTemperature	degC; Cel	339856	2016-09-27	2023-03-15
+jf_3_cr1000_st_8_c_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	st_8_c_avg	soilTemperature	degC; Cel	339856	2016-09-27	2023-03-15
+jf_3_cr1000_st_c_25_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	st_c_25_avg	soilTemperature	degC; Cel	339856	2016-09-27	2023-03-15
+jf_3_cr1000_st_c_50_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	st_c_50_avg	soilTemperature	degC; Cel	339856	2016-09-27	2023-03-15
+jf_3_cr1000_st_c_5_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	st_c_5_avg	soilTemperature	degC; Cel	339856	2016-09-27	2023-03-15
+jf_3_cr1000_vwc20_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	vwc20_avg	soilVolumetricWaterContent	unitless	128017	2016-09-27	2019-03-07
+jf_3_cr1000_vwc2_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	vwc2_avg	soilVolumetricWaterContent	unitless	128017	2016-09-27	2019-03-07
+jf_3_cr1000_vwc4_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	vwc4_avg	soilVolumetricWaterContent	unitless	128017	2016-09-27	2019-03-07
+jf_3_cr1000_vwc8_avg_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Soil (temperature / moisture / conductivity)	vwc8_avg	soilVolumetricWaterContent	unitless	128017	2016-09-27	2019-03-07
+jf_3_cr1000_ws_mph_wvc(1)_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Wind	ws_mph_wvc(1)	windSpeed	m/s	339856	2016-09-27	2023-03-15
+jf_3_cr1000_ws_mph_wvc(3)_meas	ER-JDF1 Judd Falls Weather Station	jf_3_cr1000	Wind	ws_mph_wvc(3)	windDirection	deg	339856	2016-09-27	2023-03-15
+kp_2_cr1000_airtc_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Air (temperature / humidity / pressure)	airtc_avg	airTemperature	degC; Cel	221065	2016-09-26	2021-08-28
+kp_2_cr1000_bp_mbar_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Air (temperature / humidity / pressure)	bp_mbar_avg	airAtmosphericPressureAbsolute	Pa	4970	2016-10-20	2021-05-29
+kp_2_cr1000_rh_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Air (temperature / humidity / pressure)	rh_avg	airRelativeHumidity	unitless	221065	2016-09-26	2021-08-28
+kp_2_cr1000_tc_c_10_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Air (temperature / humidity / pressure)	tc_c_10_avg	airTemperature	degC; Cel	221065	2016-09-26	2021-08-28
+kp_2_cr1000_tc_c_2_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Air (temperature / humidity / pressure)	tc_c_2_avg	airTemperature	degC; Cel	221065	2016-09-26	2021-08-28
+kp_2_cr1000_batt_volt_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Logger battery	batt_volt_avg	batteryVoltage	V	221065	2016-09-26	2021-08-28
+kp_2_cr1000_univ_lc_in_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Precipitation	univ_lc_in_avg	rainPrecipitation10Minutes	m	221065	2016-09-26	2021-08-28
+kp_2_cr1000_par_dn_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Radiation	par_dn_avg	solarRadiationReflectedPar	W/m^2	221065	2016-09-26	2021-08-28
+kp_2_cr1000_par_up_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Radiation	par_up_avg	solarRadiationIncomingPar	W/m^2	221065	2016-09-26	2021-08-28
+kp_2_cr1000_rlin_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Radiation	rlin_avg	solarRadiationIncomingLWIR	W/m^2	7149	2016-09-30	2021-04-27
+kp_2_cr1000_rlout_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Radiation	rlout_avg	solarRadiationReflectedLWIR	W/m^2	42789	2016-09-26	2021-08-27
+kp_2_cr1000_rs_kw_m2_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Radiation	rs_kw_m2_avg	solarRadiationIncomingBroadband	W/m^2	221011	2016-09-26	2021-08-28
+kp_2_cr1000_rsin_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Radiation	rsin_avg	solarRadiationIncomingBroadband	W/m^2	127327	2016-09-26	2021-08-28
+kp_2_cr1000_rso_kw_m2_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Radiation	rso_kw_m2_avg	solarRadiationReflectedBroadband	W/m^2	221064	2016-09-26	2021-08-28
+kp_2_cr1000_rsout_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Radiation	rsout_avg	solarRadiationReflectedBroadband	W/m^2	213610	2016-09-26	2021-08-28
+kp_2_cr1000_snwdepth_in_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Snow depth	snwdepth_in	snowThickness	m	190310	2016-09-26	2021-08-28
+kp_2_cr1000_sr50asnowdepth_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Snow depth	sr50asnowdepth_avg	snowThickness	m	146137	2016-09-26	2021-08-28
+kp_2_cr1000_ec_20_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	ec_20_avg	soilElectricalConductivity	uS/cm	221065	2016-09-26	2021-08-28
+kp_2_cr1000_ec_2_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	ec_2_avg	soilElectricalConductivity	uS/cm	221065	2016-09-26	2021-08-28
+kp_2_cr1000_ec_40_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	ec_40_avg	soilElectricalConductivity	uS/cm	221065	2016-09-26	2021-08-28
+kp_2_cr1000_ec_4_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	ec_4_avg	soilElectricalConductivity	uS/cm	221065	2016-09-26	2021-08-28
+kp_2_cr1000_ec_8_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	ec_8_avg	soilElectricalConductivity	uS/cm	221065	2016-09-26	2021-08-28
+kp_2_cr1000_sm_cond_25_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	sm_cond_25_avg	soilElectricalConductivity	uS/cm	221065	2016-09-26	2021-08-28
+kp_2_cr1000_sm_cond_50_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	sm_cond_50_avg	soilElectricalConductivity	uS/cm	221065	2016-09-26	2021-08-28
+kp_2_cr1000_sm_cond_5_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	sm_cond_5_avg	soilElectricalConductivity	uS/cm	221065	2016-09-26	2021-08-28
+kp_2_cr1000_sm_wfv_25_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	sm_wfv_25_avg	soilVolumetricWaterContent	unitless	221065	2016-09-26	2021-08-28
+kp_2_cr1000_sm_wfv_50_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	sm_wfv_50_avg	soilVolumetricWaterContent	unitless	221065	2016-09-26	2021-08-28
+kp_2_cr1000_sm_wfv_5_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	sm_wfv_5_avg	soilVolumetricWaterContent	unitless	221065	2016-09-26	2021-08-28
+kp_2_cr1000_st_20_c_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	st_20_c_avg	soilTemperature	degC; Cel	221065	2016-09-26	2021-08-28
+kp_2_cr1000_st_2_c_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	st_2_c_avg	soilTemperature	degC; Cel	221065	2016-09-26	2021-08-28
+kp_2_cr1000_st_40_c_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	st_40_c_avg	soilTemperature	degC; Cel	221065	2016-09-26	2021-08-28
+kp_2_cr1000_st_4_c_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	st_4_c_avg	soilTemperature	degC; Cel	221065	2016-09-26	2021-08-28
+kp_2_cr1000_st_8_c_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	st_8_c_avg	soilTemperature	degC; Cel	221065	2016-09-26	2021-08-28
+kp_2_cr1000_st_c_25_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	st_c_25_avg	soilTemperature	degC; Cel	221065	2016-09-26	2021-08-28
+kp_2_cr1000_st_c_50_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	st_c_50_avg	soilTemperature	degC; Cel	221065	2016-09-26	2021-08-28
+kp_2_cr1000_st_c_5_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	st_c_5_avg	soilTemperature	degC; Cel	221065	2016-09-26	2021-08-28
+kp_2_cr1000_vwc20_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	vwc20_avg	soilVolumetricWaterContent	unitless	221065	2016-09-26	2021-08-28
+kp_2_cr1000_vwc2_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	vwc2_avg	soilVolumetricWaterContent	unitless	221065	2016-09-26	2021-08-28
+kp_2_cr1000_vwc40_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	vwc40_avg	soilVolumetricWaterContent	unitless	221065	2016-09-26	2021-08-28
+kp_2_cr1000_vwc4_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	vwc4_avg	soilVolumetricWaterContent	unitless	221065	2016-09-26	2021-08-28
+kp_2_cr1000_vwc8_avg_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Soil (temperature / moisture / conductivity)	vwc8_avg	soilVolumetricWaterContent	unitless	221065	2016-09-26	2021-08-28
+kp_2_cr1000_ws_mph_wvc(1)_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Wind	ws_mph_wvc(1)	windSpeed	m/s	221065	2016-09-26	2021-08-28
+kp_2_cr1000_ws_mph_wvc(3)_meas	ER-KLP1 Kettle Ponds Weather Station	kp_2_cr1000	Wind	ws_mph_wvc(3)	windDirection	deg	221065	2016-09-26	2021-08-28
+mc_cr1000_at_c_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Air (temperature / humidity / pressure)	at_c_avg	airTemperature	degC; Cel	225470	2016-09-26	2022-03-31
+mc_cr1000_bp_mb_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Air (temperature / humidity / pressure)	bp_mb_avg	airAtmosphericPressureAbsolute	Pa	236341	2016-09-26	2022-03-31
+mc_cr1000_rh_pct_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Air (temperature / humidity / pressure)	rh_pct_avg	airRelativeHumidity	unitless	236341	2016-09-26	2022-03-31
+mc_cr1000_tc_c_10_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Air (temperature / humidity / pressure)	tc_c_10_avg	airTemperature	degC; Cel	236341	2016-09-26	2022-03-31
+mc_cr1000_tc_c_2_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Air (temperature / humidity / pressure)	tc_c_2_avg	airTemperature	degC; Cel	236341	2016-09-26	2022-03-31
+mc_cr1000_batt_volt_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Logger battery	batt_volt_avg	batteryVoltage	V	236341	2016-09-26	2022-03-31
+mc_cr1000_par_dn_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Radiation	par_dn_avg	solarRadiationReflectedPar	W/m^2	236341	2016-09-26	2022-03-31
+mc_cr1000_par_up_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Radiation	par_up_avg	solarRadiationIncomingPar	W/m^2	236341	2016-09-26	2022-03-31
+mc_cr1000_rlin_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Radiation	rlin_avg	solarRadiationIncomingLWIR	W/m^2	1379	2017-10-09	2018-09-22
+mc_cr1000_rlout_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Radiation	rlout_avg	solarRadiationReflectedLWIR	W/m^2	13239	2016-09-26	2018-09-22
+mc_cr1000_rs_kw_m2_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Radiation	rs_kw_m2_avg	solarRadiationIncomingBroadband	W/m^2	36154	2016-09-26	2018-09-22
+mc_cr1000_rsin_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Radiation	rsin_avg	solarRadiationIncomingBroadband	W/m^2	32242	2016-09-26	2018-09-22
+mc_cr1000_rsout_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Radiation	rsout_avg	solarRadiationReflectedBroadband	W/m^2	50547	2016-09-26	2018-09-22
+mc_cr1000_snwdepth_in_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Snow depth	snwdepth_in_avg	snowThickness	m	210893	2016-09-26	2022-03-31
+mc_cr1000_sr50asnowdepth_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Snow depth	sr50asnowdepth_avg	snowThickness	m	206425	2016-09-27	2022-03-31
+mc_cr1000_sm_cond_25_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Soil (temperature / moisture / conductivity)	sm_cond_25_avg	soilElectricalConductivity	uS/cm	236341	2016-09-26	2022-03-31
+mc_cr1000_sm_cond_50_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Soil (temperature / moisture / conductivity)	sm_cond_50_avg	soilElectricalConductivity	uS/cm	236341	2016-09-26	2022-03-31
+mc_cr1000_sm_cond_5_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Soil (temperature / moisture / conductivity)	sm_cond_5_avg	soilElectricalConductivity	uS/cm	236341	2016-09-26	2022-03-31
+mc_cr1000_sm_wfv_25_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Soil (temperature / moisture / conductivity)	sm_wfv_25_avg	soilVolumetricWaterContent	unitless	236341	2016-09-26	2022-03-31
+mc_cr1000_sm_wfv_50_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Soil (temperature / moisture / conductivity)	sm_wfv_50_avg	soilVolumetricWaterContent	unitless	236341	2016-09-26	2022-03-31
+mc_cr1000_sm_wfv_5_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Soil (temperature / moisture / conductivity)	sm_wfv_5_avg	soilVolumetricWaterContent	unitless	236341	2016-09-26	2022-03-31
+mc_cr1000_st_c_25_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Soil (temperature / moisture / conductivity)	st_c_25_avg	soilTemperature	degC; Cel	236341	2016-09-26	2022-03-31
+mc_cr1000_st_c_50_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Soil (temperature / moisture / conductivity)	st_c_50_avg	soilTemperature	degC; Cel	236341	2016-09-26	2022-03-31
+mc_cr1000_st_c_5_avg_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Soil (temperature / moisture / conductivity)	st_c_5_avg	soilTemperature	degC; Cel	236341	2016-09-26	2022-03-31
+mc_cr1000_ws_mph_wvc(1)_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Wind	ws_mph_wvc(1)	windSpeed	m/s	236341	2016-09-26	2022-03-31
+mc_cr1000_ws_mph_wvc(3)_meas	ER-MXC1 Mexican Cut Weather Station	mc_cr1000	Wind	ws_mph_wvc(3)	windDirection	deg	236341	2016-09-26	2022-03-31
+cb_er_router_cr1000_ysi_cond_us_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	cond_us_avg	waterElectricalConductivity	uS/cm	835223	2015-10-05	2024-12-16
+cb_er_router_cr1000_ysi_fdom_qsu_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	fdom_qsu_avg	waterFdomQsu	RFU	344855	2015-11-11	2024-10-25
+cb_er_router_cr1000_ysi_fdom_rfu_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	fdom_rfu_avg	waterFdom	RFU	575779	2015-11-11	2024-12-16
+cb_er_router_cr1000_ysi_nlf_cond_us_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	nlf_cond_us_avg	waterElectricalConductivityNlf	uS/cm	825023	2015-11-11	2024-12-16
+cb_er_router_cr1000_ysi_odo_mgl_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	odo_mgl_avg	waterOpticalDissolvedOxygen	mg/L	825398	2015-11-11	2024-12-16
+cb_er_router_cr1000_ysi_odo_per_sat_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	odo_per_sat_avg	waterOpticalDissolvedOxygenPercentAirSaturation	unitless	790123	2015-10-05	2024-12-16
+cb_er_router_cr1000_ysi_orp_mv_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	orp_mv_avg	waterORP	V	811984	2015-10-05	2024-12-16
+cb_er_router_cr1000_ysi_ph_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	ph_avg	waterpH	unitless	771321	2015-10-05	2024-12-16
+cb_er_router_cr1000_ysi_ph_mv_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	ph_mv_avg	waterpHmv	V	835223	2015-10-05	2024-12-16
+cb_er_router_cr1000_ysi_psi_a_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	psi_a_avg	waterPressureAbsolute	Pa	825944	2015-11-11	2024-12-16
+cb_er_router_cr1000_ysi_sal_psu_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	sal_psu_avg	waterSalinity	unitless	834046	2015-10-05	2024-12-16
+cb_er_router_cr1000_ysi_spcond_us_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	spcond_us_avg	waterSpecificConductance	uS/cm	835223	2015-10-05	2024-12-16
+cb_er_router_cr1000_ysi_tds_mgl_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	tds_mgl_avg	waterTotalDissolvedSolids	kg/m^3	824979	2015-11-11	2024-12-16
+cb_er_router_cr1000_ysi_tempc_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	tempc_avg	waterTemperature	degC; Cel	795678	2015-10-05	2024-12-16
+cb_er_router_cr1000_ysi_tss_mgl_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	tss_mgl_avg	waterTotalSuspendedSolids	kg/m^3	798007	2016-04-15	2024-12-16
+cb_er_router_cr1000_ysi_turb_fnu_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	turb_fnu_avg	waterTurbidity	NTU	276251	2016-04-15	2024-11-30
+cb_er_router_cr1000_ysi_turb_ntu_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	turb_ntu_avg	waterTurbidityNTU	NTU	276247	2016-04-15	2024-11-30
+cb_er_router_cr1000_ysi_wl_m_avg_meas	ER-PHF0 Pumphouse ISCO	cb_er_router_cr1000_ysi	Water (YSI / level)	wl_m_avg	waterHeightAboveSensor	m	816503	2015-10-05	2024-12-16
+cb_er_router_cr1000_bp_mb_avg_meas	ER-PHF2 PH_SOLINST	cb_er_router_cr1000	Air (temperature / humidity / pressure)	bp_mb_avg	airAtmosphericPressureAbsolute	mbar	468327	2018-10-23	2023-05-11
+cb_er_router_cr1000_ptemp_meas	ER-PHF2 PH_SOLINST	cb_er_router_cr1000	Air (temperature / humidity / pressure)	ptemp	airTemperature	degC; Cel	468327	2018-10-23	2023-05-11
+cb_er_router_cr1000_batt_volt_min_meas	ER-PHF2 PH_SOLINST	cb_er_router_cr1000	Logger battery	batt_volt_min	batteryVoltage	V	468327	2018-10-23	2023-05-11
+sm_5_cr1000_airtempc_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Air (temperature / humidity / pressure)	airtempc_avg	airTemperature	degC; Cel	297699	2016-09-27	2022-08-05
+sm_5_cr1000_bp_mbar_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Air (temperature / humidity / pressure)	bp_mbar_avg	airAtmosphericPressureAbsolute	Pa	297719	2016-09-27	2022-08-05
+sm_5_cr1000_rh_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Air (temperature / humidity / pressure)	rh_avg	airRelativeHumidity	unitless	297676	2016-09-27	2022-08-05
+sm_5_cr1000_tc_c_10_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Air (temperature / humidity / pressure)	tc_c_10_avg	airTemperature	degC; Cel	297719	2016-09-27	2022-08-05
+sm_5_cr1000_tc_c_2_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Air (temperature / humidity / pressure)	tc_c_2_avg	airTemperature	degC; Cel	297719	2016-09-27	2022-08-05
+sm_5_cr1000_batt_volt_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Logger battery	batt_volt_avg	batteryVoltage	V	297719	2016-09-27	2022-08-05
+sm_5_cr1000_par_dn_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Radiation	par_dn_avg	solarRadiationReflectedPar	W/m^2	297713	2016-09-27	2022-08-05
+sm_5_cr1000_par_up_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Radiation	par_up_avg	solarRadiationIncomingPar	W/m^2	297719	2016-09-27	2022-08-05
+sm_5_cr1000_rlin_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Radiation	rlin_avg	solarRadiationIncomingLWIR	W/m^2	39563	2016-09-30	2022-07-29
+sm_5_cr1000_rlout_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Radiation	rlout_avg	solarRadiationReflectedLWIR	W/m^2	56691	2016-09-27	2022-08-04
+sm_5_cr1000_rs_kw_m2_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Radiation	rs_kw_m2_avg	solarRadiationIncomingBroadband	W/m^2	297719	2016-09-27	2022-08-05
+sm_5_cr1000_rsin_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Radiation	rsin_avg	solarRadiationIncomingBroadband	W/m^2	185607	2016-09-27	2022-08-05
+sm_5_cr1000_rso_kw_m2_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Radiation	rso_kw_m2_avg	solarRadiationReflectedBroadband	W/m^2	297719	2016-09-27	2022-08-05
+sm_5_cr1000_rsout_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Radiation	rsout_avg	solarRadiationReflectedBroadband	W/m^2	290685	2016-09-27	2022-08-05
+sm_5_cr1000_sr50asnowdepth_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Snow depth	sr50asnowdepth_avg	snowThickness	m	238168	2016-09-27	2022-08-05
+sm_5_cr1000_ec_20_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	ec_20_avg	soilElectricalConductivity	uS/cm	297719	2016-09-27	2022-08-05
+sm_5_cr1000_ec_2_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	ec_2_avg	soilElectricalConductivity	uS/cm	297719	2016-09-27	2022-08-05
+sm_5_cr1000_ec_40_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	ec_40_avg	soilElectricalConductivity	uS/cm	297719	2016-09-27	2022-08-05
+sm_5_cr1000_ec_4_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	ec_4_avg	soilElectricalConductivity	uS/cm	297719	2016-09-27	2022-08-05
+sm_5_cr1000_ec_8_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	ec_8_avg	soilElectricalConductivity	uS/cm	297719	2016-09-27	2022-08-05
+sm_5_cr1000_sm_cond_25_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	sm_cond_25_avg	soilElectricalConductivity	uS/cm	297719	2016-09-27	2022-08-05
+sm_5_cr1000_sm_cond_50_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	sm_cond_50_avg	soilElectricalConductivity	uS/cm	297719	2016-09-27	2022-08-05
+sm_5_cr1000_sm_cond_5_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	sm_cond_5_avg	soilElectricalConductivity	uS/cm	297719	2016-09-27	2022-08-05
+sm_5_cr1000_sm_wfv_25_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	sm_wfv_25_avg	soilVolumetricWaterContent	unitless	297714	2016-09-27	2022-08-05
+sm_5_cr1000_sm_wfv_50_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	sm_wfv_50_avg	soilVolumetricWaterContent	unitless	199835	2016-09-27	2022-02-07
+sm_5_cr1000_sm_wfv_5_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	sm_wfv_5_avg	soilVolumetricWaterContent	unitless	297719	2016-09-27	2022-08-05
+sm_5_cr1000_st_20_c_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	st_20_c_avg	soilTemperature	degC; Cel	297719	2016-09-27	2022-08-05
+sm_5_cr1000_st_2_c_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	st_2_c_avg	soilTemperature	degC; Cel	297719	2016-09-27	2022-08-05
+sm_5_cr1000_st_40_c_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	st_40_c_avg	soilTemperature	degC; Cel	297719	2016-09-27	2022-08-05
+sm_5_cr1000_st_4_c_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	st_4_c_avg	soilTemperature	degC; Cel	297719	2016-09-27	2022-08-05
+sm_5_cr1000_st_8_c_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	st_8_c_avg	soilTemperature	degC; Cel	297719	2016-09-27	2022-08-05
+sm_5_cr1000_st_c_25_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	st_c_25_avg	soilTemperature	degC; Cel	297719	2016-09-27	2022-08-05
+sm_5_cr1000_st_c_50_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	st_c_50_avg	soilTemperature	degC; Cel	297719	2016-09-27	2022-08-05
+sm_5_cr1000_st_c_5_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	st_c_5_avg	soilTemperature	degC; Cel	297719	2016-09-27	2022-08-05
+sm_5_cr1000_vwc20_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	vwc20_avg	soilVolumetricWaterContent	unitless	146392	2017-12-29	2022-05-03
+sm_5_cr1000_vwc2_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	vwc2_avg	soilVolumetricWaterContent	unitless	297719	2016-09-27	2022-08-05
+sm_5_cr1000_vwc40_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	vwc40_avg	soilVolumetricWaterContent	unitless	297719	2016-09-27	2022-08-05
+sm_5_cr1000_vwc4_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	vwc4_avg	soilVolumetricWaterContent	unitless	297719	2016-09-27	2022-08-05
+sm_5_cr1000_vwc8_avg_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Soil (temperature / moisture / conductivity)	vwc8_avg	soilVolumetricWaterContent	unitless	297719	2016-09-27	2022-08-05
+sm_5_cr1000_ws_mph_wvc(1)_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Wind	ws_mph_wvc(1)	windSpeed	m/s	297719	2016-09-27	2022-08-05
+sm_5_cr1000_ws_mph_wvc(3)_meas	SG-SMT1 Snodgrass Mountain Weather Station	sm_5_cr1000	Wind	ws_mph_wvc(3)	windDirection	deg	297719	2016-09-27	2022-08-05

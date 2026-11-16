@@ -1,0 +1,323 @@
+{
+  "tool": "ssi2essdive.py (essdive 0.1.0)",
+  "tool_sha256": "7cc5630dc9bfe96bd18666c1463195d17cc671ff467c9d716f6ac08ee2a31e04",
+  "command": "ssi2essdive.py sensor-full --export exports/tables_2026-10-26 --owner Wielandt --site =SG-EHS5 --site =TR-EHS1 --site =TR-EHS2 --prefix feeder_phenocam_cameras --title 'Phenocam greenness (GCC) and image channel means, Snodgrass and Trail Creek phenocams' --config configs/phenocam.json --column-names table --file-names feeder-site -o exports/essdive/stijn_wielandt/feeder_phenocam_cameras",
+  "created_utc": "2026-11-16 23:34:47",
+  "host": "34-b1-eb-e9-83-b3.dhcp.lbnl.us",
+  "source": {
+    "export": "exports/tables_2026-10-26",
+    "manifest.json": {
+      "sha256": "ac742e6eb36ea38278b6f1a2a00f7e9d3c18a155990369ebd426d5e1b89c8a56"
+    },
+    "dump": "ssi_2026-10-26_083001Z.dump",
+    "database": "odmx_lbnlsfa",
+    "DOWNLOAD.json": {
+      "sha256": "7ea1f9a32ff1a2f531dd87fb28717cc6105ab12feb644ce9213f91419595a600"
+    }
+  },
+  "selection": {
+    "owner": [
+      "Wielandt"
+    ],
+    "site": [
+      "=SG-EHS5",
+      "=TR-EHS1",
+      "=TR-EHS2"
+    ]
+  },
+  "start": null,
+  "end": null,
+  "config": {
+    "methods": {
+      "method_gcc_unknown_sensor": {
+        "description": "Green chromatic coordinate (GCC = G/(R+G+B), a vegetation greenness index; definition from odmx.variables) computed from digital camera images of three phenocams owned by Stijn Wielandt: Snodgrass Phenocam 1 at Snodgrass tower #5 (site SG-EHS5) and Trail Creek Phenocams 1 and 2 at Trail Creek ET towers #1 and #2 (sites TR-EHS1, TR-EHS2). Values are the SSI datastream values (tables feeder_phenocam_*_gcc_calc), dimensionless, unaltered. The database does not record the camera model, image region of interest, exposure settings or how the image means were computed; the feeder column image_url is empty for every image. Text compiled from the SSI database metadata; to be reviewed by the data provider before publication."
+      },
+      "method_red_channel_mean_unknown_sensor": {
+        "description": "Mean red channel value (0-255) of each digital camera image of the same three phenocams (definition from odmx.variables), as stored in the SSI ODMX database (tables feeder_phenocam_*_r_mean_calc), unaltered. Region of interest and processing are not recorded in the database. To be reviewed by the data provider before publication."
+      },
+      "method_green_channel_mean_unknown_sensor": {
+        "description": "Mean green channel value (0-255) of each digital camera image of the same three phenocams (definition from odmx.variables), as stored in the SSI ODMX database (tables feeder_phenocam_*_g_mean_calc), unaltered. Region of interest and processing are not recorded in the database. To be reviewed by the data provider before publication."
+      },
+      "method_blue_channel_mean_unknown_sensor": {
+        "description": "Mean blue channel value (0-255) of each digital camera image of the same three phenocams (definition from odmx.variables), as stored in the SSI ODMX database (tables feeder_phenocam_*_b_mean_calc), unaltered. Region of interest and processing are not recorded in the database. To be reviewed by the data provider before publication."
+      }
+    }
+  },
+  "column_names": "table",
+  "file_names": "feeder-site",
+  "split_variables": false,
+  "reporting_format": "ESS-DIVE Sensor Time Series - Full v1.0.0 + Location Metadata v2.0.0",
+  "datastreams": 12,
+  "rows": {
+    "feeder_phenocam_snodgrass1_sg_ehs5_SG-EHS5.csv": 234304,
+    "feeder_phenocam_trailcreek1_tr_ehs1_TR-EHS1.csv": 1575,
+    "feeder_phenocam_trailcreek2_tr_ehs2_TR-EHS2.csv": 351
+  },
+  "flags_used": [
+    "qa_z"
+  ],
+  "validation": {
+    "errors": [],
+    "warnings": []
+  },
+  "files": {
+    "feeder_phenocam_snodgrass1_sg_ehs5_SG-EHS5.csv": {
+      "bytes": 16097533,
+      "sha256": "40193087e840220c5fbd1f27b5cd64502a329d1c05bd393484ada3264f4c950b"
+    },
+    "feeder_phenocam_snodgrass1_sg_ehs5_SG-EHS5_dd.csv": {
+      "bytes": 3515,
+      "sha256": "2efa93dcc9c13992bfdb9dbae7af9316e1d4893411fc82af2f04b1e0f44bf198"
+    },
+    "feeder_phenocam_trailcreek1_tr_ehs1_TR-EHS1.csv": {
+      "bytes": 108413,
+      "sha256": "f8e35c37bc0af62316825fb86f060edec517f0e64946dbb888fa93e243d27360"
+    },
+    "feeder_phenocam_trailcreek1_tr_ehs1_TR-EHS1_dd.csv": {
+      "bytes": 3551,
+      "sha256": "0a63ec2a1755b3a734ff580a7f65f2803cb3dc0b0a6e3fb8c429396b9d8e994e"
+    },
+    "feeder_phenocam_trailcreek2_tr_ehs2_TR-EHS2.csv": {
+      "bytes": 25220,
+      "sha256": "0fd96e99d547365169f19f0cab1cd083101a72527ce1207c4eddaddb41795249"
+    },
+    "feeder_phenocam_trailcreek2_tr_ehs2_TR-EHS2_dd.csv": {
+      "bytes": 3551,
+      "sha256": "e6f715c69bfc69eea8afbf62fe84db427009f9d181f0dd841550770b70d5ab33"
+    },
+    "feeder_phenocam_cameras_sensor_attr.csv": {
+      "bytes": 3519,
+      "sha256": "49c407b5773c2af780719f707a20d4887064286310ac4637d394f00487c766ad"
+    },
+    "feeder_phenocam_cameras_sensor_attr_dd.csv": {
+      "bytes": 2248,
+      "sha256": "4ef0857f51575cce8a3c1891a6efa5215516f2a55f75e863a62253d65f8eaf8b"
+    },
+    "feeder_phenocam_cameras_locations.csv": {
+      "bytes": 2803,
+      "sha256": "82b3a16ef984ab86fb57daee2fb2014907cd0627a28fa90738cf83fd51ea2c9c"
+    },
+    "feeder_phenocam_cameras_flmd.csv": {
+      "bytes": 2579,
+      "sha256": "1a9cfb17e2e7215984ae5c90efc6c96850045240fb7370b87879749cc0b97dc0"
+    }
+  },
+  "source_tables": [
+    "feeder_phenocam_snodgrass1_sg_ehs5_b_mean_calc",
+    "feeder_phenocam_snodgrass1_sg_ehs5_g_mean_calc",
+    "feeder_phenocam_snodgrass1_sg_ehs5_gcc_calc",
+    "feeder_phenocam_snodgrass1_sg_ehs5_r_mean_calc",
+    "feeder_phenocam_trailcreek1_tr_ehs1_b_mean_calc",
+    "feeder_phenocam_trailcreek1_tr_ehs1_g_mean_calc",
+    "feeder_phenocam_trailcreek1_tr_ehs1_gcc_calc",
+    "feeder_phenocam_trailcreek1_tr_ehs1_r_mean_calc",
+    "feeder_phenocam_trailcreek2_tr_ehs2_b_mean_calc",
+    "feeder_phenocam_trailcreek2_tr_ehs2_g_mean_calc",
+    "feeder_phenocam_trailcreek2_tr_ehs2_gcc_calc",
+    "feeder_phenocam_trailcreek2_tr_ehs2_r_mean_calc"
+  ],
+  "problem_flags": null,
+  "problems_summary": {
+    "error": 0,
+    "warning": 1,
+    "info": 8
+  },
+  "problems": [
+    {
+      "id": "unknown_equipment",
+      "severity": "warning",
+      "category": "metadata",
+      "count": 12,
+      "description": "Datastreams whose equipment is registered as unknown (model \"unknown sensor\" and/or Unknown Manufacturer); for the battery voltage this is the node logger, described in the package as a sensor at the site.",
+      "examples": [
+        {
+          "table": "feeder_phenocam_snodgrass1_sg_ehs5_gcc_calc",
+          "sensor_name": "Snodgrass Phenocam 1",
+          "sensor_model": "unknown sensor",
+          "manufacturer": "Unknown Manufacturer",
+          "equipment_id": "2641"
+        },
+        {
+          "table": "feeder_phenocam_snodgrass1_sg_ehs5_r_mean_calc",
+          "sensor_name": "Snodgrass Phenocam 1",
+          "sensor_model": "unknown sensor",
+          "manufacturer": "Unknown Manufacturer",
+          "equipment_id": "2641"
+        },
+        {
+          "table": "feeder_phenocam_snodgrass1_sg_ehs5_g_mean_calc",
+          "sensor_name": "Snodgrass Phenocam 1",
+          "sensor_model": "unknown sensor",
+          "manufacturer": "Unknown Manufacturer",
+          "equipment_id": "2641"
+        },
+        {
+          "table": "feeder_phenocam_snodgrass1_sg_ehs5_b_mean_calc",
+          "sensor_name": "Snodgrass Phenocam 1",
+          "sensor_model": "unknown sensor",
+          "manufacturer": "Unknown Manufacturer",
+          "equipment_id": "2641"
+        },
+        {
+          "table": "feeder_phenocam_trailcreek1_tr_ehs1_gcc_calc",
+          "sensor_name": "Trail Creek Phenocam 1",
+          "sensor_model": "unknown sensor",
+          "manufacturer": "Unknown Manufacturer",
+          "equipment_id": "2642"
+        }
+      ],
+      "action": "Described as registered; provider to supply details."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "feeder_phenocam_snodgrass1_sg_ehs5_SG-EHS5.csv",
+      "count": 234302,
+      "description": "Rows whose time is not on the 15-minute grid; 0 of the 234,302 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2022-07-14T23:41:53Z"
+        },
+        {
+          "datetime_measured": "2022-07-14T23:50:01Z"
+        },
+        {
+          "datetime_measured": "2022-07-14T23:55:01Z"
+        },
+        {
+          "datetime_measured": "2022-07-15T00:00:01Z"
+        },
+        {
+          "datetime_measured": "2022-07-15T00:05:02Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "feeder_phenocam_trailcreek1_tr_ehs1_TR-EHS1.csv",
+      "count": 1575,
+      "description": "Rows whose time is not on the 15-minute grid; 0 of the 1,575 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2025-09-03T23:10:01Z"
+        },
+        {
+          "datetime_measured": "2025-09-03T23:15:01Z"
+        },
+        {
+          "datetime_measured": "2025-09-03T23:20:01Z"
+        },
+        {
+          "datetime_measured": "2025-09-03T23:25:01Z"
+        },
+        {
+          "datetime_measured": "2025-09-03T23:30:01Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "feeder_phenocam_trailcreek2_tr_ehs2_TR-EHS2.csv",
+      "count": 351,
+      "description": "Rows whose time is not on the 15-minute grid; 0 of the 351 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2025-09-04T22:00:01Z"
+        },
+        {
+          "datetime_measured": "2025-09-04T22:05:01Z"
+        },
+        {
+          "datetime_measured": "2025-09-05T22:00:01Z"
+        },
+        {
+          "datetime_measured": "2025-09-05T22:05:01Z"
+        },
+        {
+          "datetime_measured": "2025-09-11T00:00:01Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "no_serial_numbers",
+      "severity": "info",
+      "category": "metadata",
+      "columns": [
+        "feeder_phenocam_snodgrass1_sg_ehs5_gcc_calc",
+        "feeder_phenocam_snodgrass1_sg_ehs5_r_mean_calc",
+        "feeder_phenocam_snodgrass1_sg_ehs5_g_mean_calc",
+        "feeder_phenocam_snodgrass1_sg_ehs5_b_mean_calc",
+        "feeder_phenocam_trailcreek1_tr_ehs1_gcc_calc",
+        "feeder_phenocam_trailcreek1_tr_ehs1_r_mean_calc",
+        "feeder_phenocam_trailcreek1_tr_ehs1_g_mean_calc",
+        "feeder_phenocam_trailcreek1_tr_ehs1_b_mean_calc",
+        "feeder_phenocam_trailcreek2_tr_ehs2_gcc_calc",
+        "feeder_phenocam_trailcreek2_tr_ehs2_r_mean_calc",
+        "feeder_phenocam_trailcreek2_tr_ehs2_g_mean_calc",
+        "feeder_phenocam_trailcreek2_tr_ehs2_b_mean_calc"
+      ],
+      "count": 12,
+      "description": "No serial number (odmx.equipment.equipment_serial_number) and no calibration record for these sensors.",
+      "action": "sensor_serial_number left empty in the attributes file."
+    },
+    {
+      "id": "measurement_count_metadata",
+      "severity": "info",
+      "category": "metadata",
+      "count": 12,
+      "description": "odmx total_measurement_numbers and last_measurement_date count only rows flagged good (qa_z); the datastream tables (and the package) also contain the qa_c (missing) and qa_f rows.",
+      "examples": [
+        {
+          "table": "feeder_phenocam_snodgrass1_sg_ehs5_gcc_calc",
+          "total_measurement_numbers": "234304"
+        },
+        {
+          "table": "feeder_phenocam_snodgrass1_sg_ehs5_r_mean_calc",
+          "total_measurement_numbers": "234304"
+        },
+        {
+          "table": "feeder_phenocam_snodgrass1_sg_ehs5_g_mean_calc",
+          "total_measurement_numbers": "234304"
+        },
+        {
+          "table": "feeder_phenocam_snodgrass1_sg_ehs5_b_mean_calc",
+          "total_measurement_numbers": "234304"
+        },
+        {
+          "table": "feeder_phenocam_trailcreek1_tr_ehs1_gcc_calc",
+          "total_measurement_numbers": "1575"
+        }
+      ],
+      "action": "Not used by the package."
+    },
+    {
+      "id": "wkt_axis_order_SG-EHS5",
+      "severity": "info",
+      "category": "metadata",
+      "description": "odmx.sampling_features.feature_geometry_wkt for SG-EHS5 is POINT(38.92625 -106.98), i.e. latitude first; WKT order is POINT(longitude latitude).",
+      "action": "Package uses the latitude and longitude columns."
+    },
+    {
+      "id": "wkt_axis_order_TR-EHS1",
+      "severity": "info",
+      "category": "metadata",
+      "description": "odmx.sampling_features.feature_geometry_wkt for TR-EHS1 is POINT(38.91090287 -106.6084256), i.e. latitude first; WKT order is POINT(longitude latitude).",
+      "action": "Package uses the latitude and longitude columns."
+    },
+    {
+      "id": "wkt_axis_order_TR-EHS2",
+      "severity": "info",
+      "category": "metadata",
+      "description": "odmx.sampling_features.feature_geometry_wkt for TR-EHS2 is POINT(38.91164897 -106.6108387), i.e. latitude first; WKT order is POINT(longitude latitude).",
+      "action": "Package uses the latitude and longitude columns."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+family	Ecosystem / soil gas & energy flux	Hydrology (groundwater, stream, water quality)	Instrument / logger health	Meteorology (air, wind, surface temp, lightning)	Precipitation	Radiation	Snow	Soil (moisture, temperature, EC, water potential)	total
+cr1000_m1_m4	0	21	0	0	0	0	0	105	126
+cr1000_weather_stations	0	18	7	44	2	39	10	87	207
+decagon	0	0	78	130	26	13	0	348	595
+gradient_sm	0	0	0	0	0	0	0	24	24
+influxdb_ott_disdrometer	0	0	0	0	10	0	1	0	11
+influxdb_trail_towers	14	0	0	28	4	12	2	2	62
+metstation	0	0	0	5	1	4	1	15	26
+streamflow	0	16	0	0	0	0	0	0	16
+towers	46	0	0	34	2	76	18	2	178

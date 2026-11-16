@@ -1,0 +1,883 @@
+{
+  "tool": "ssi2essdive.py (essdive 0.1.0)",
+  "tool_sha256": "7cc5630dc9bfe96bd18666c1463195d17cc671ff467c9d716f6ac08ee2a31e04",
+  "command": "ssi2essdive.py sensor-full --export exports/tables_2026-10-26 --owner Wielandt --site =SG-RLY23 --site =SG-RLY33 --site =SG-RLY35 --site =SG-RLY37 --prefix influxdb_SNOD1_relays --title 'SNOD1 network health: LoRa repeater battery voltage and RSSI' --config configs/snod1_relays.json --column-names table --file-names feeder-site --split-variables --overwrite -o exports/essdive/stijn_wielandt/influxdb_SNOD1_relays",
+  "created_utc": "2026-11-16 23:24:31",
+  "host": "34-b1-eb-e9-83-b3.dhcp.lbnl.us",
+  "source": {
+    "export": "exports/tables_2026-10-26",
+    "manifest.json": {
+      "sha256": "ac742e6eb36ea38278b6f1a2a00f7e9d3c18a155990369ebd426d5e1b89c8a56"
+    },
+    "dump": "ssi_2026-10-26_083001Z.dump",
+    "database": "odmx_lbnlsfa",
+    "DOWNLOAD.json": {
+      "sha256": "7ea1f9a32ff1a2f531dd87fb28717cc6105ab12feb644ce9213f91419595a600"
+    }
+  },
+  "selection": {
+    "owner": [
+      "Wielandt"
+    ],
+    "site": [
+      "=SG-RLY23",
+      "=SG-RLY33",
+      "=SG-RLY35",
+      "=SG-RLY37"
+    ]
+  },
+  "start": null,
+  "end": null,
+  "config": {
+    "methods": {
+      "method_battery_voltage_unknown_sensor": {
+        "description": "Battery voltage of the SNOD1 LoRa signal repeaters (relays SNOD1_Relay023, _Relay033, _Relay035 and _Relay037 at sites SG-RLY23, SG-RLY33, SG-RLY35 and SG-RLY37 on the Snodgrass lower ERT transect; equipment owner Stijn Wielandt), feeder column V_batt, in volts, as stored in the SSI ODMX database. The database registers it to the relay logger (equipment model \"unknown sensor\"). It is a housekeeping value of the radio network, not an environmental measurement. Text compiled from the SSI database metadata; to be reviewed by the data provider before publication."
+      },
+      "method_rssi_unknown_sensor": {
+        "description": "Received signal strength indicator (RSSI) of the SNOD1 LoRa signal repeaters, feeder columns node_RSSi (radio link between the repeater and the sensor nodes) and base_RSSi (radio link between the repeater and the base station), as stored in the SSI ODMX database. The database gives the unit as unitless; RSSI is usually reported in dBm, which the data provider should confirm. The database does not record which sensor nodes each repeater serves. These are radio-network housekeeping values that help explain gaps in the SNOD1 temperature records. Text compiled from the SSI database metadata; to be reviewed by the data provider before publication."
+      }
+    }
+  },
+  "column_names": "table",
+  "file_names": "feeder-site",
+  "split_variables": true,
+  "reporting_format": "ESS-DIVE Sensor Time Series - Full v1.0.0 + Location Metadata v2.0.0",
+  "datastreams": 12,
+  "rows": {
+    "influxdb_SNOD1_Relay023_SG-RLY23_rssi.csv": 19118,
+    "influxdb_SNOD1_Relay023_SG-RLY23_battery_voltage.csv": 19118,
+    "influxdb_SNOD1_Relay033_SG-RLY33_rssi.csv": 11,
+    "influxdb_SNOD1_Relay033_SG-RLY33_battery_voltage.csv": 11,
+    "influxdb_SNOD1_Relay035_SG-RLY35_rssi.csv": 28309,
+    "influxdb_SNOD1_Relay035_SG-RLY35_battery_voltage.csv": 28309,
+    "influxdb_SNOD1_Relay037_SG-RLY37_rssi.csv": 34852,
+    "influxdb_SNOD1_Relay037_SG-RLY37_battery_voltage.csv": 34852
+  },
+  "flags_used": [
+    "qa_c",
+    "qa_f",
+    "qa_z"
+  ],
+  "validation": {
+    "errors": [],
+    "warnings": [
+      "influxdb_SNOD1_Relay023_SG-RLY23_battery_voltage_dd.csv:3: influxdb_SNOD1_Relay023_V_batt_meas_data_value: unit 'V' not in the unit vocabulary",
+      "influxdb_SNOD1_Relay033_SG-RLY33_battery_voltage_dd.csv:3: influxdb_SNOD1_Relay033_V_batt_meas_data_value: unit 'V' not in the unit vocabulary",
+      "influxdb_SNOD1_Relay035_SG-RLY35_battery_voltage_dd.csv:3: influxdb_SNOD1_Relay035_V_batt_meas_data_value: unit 'V' not in the unit vocabulary",
+      "influxdb_SNOD1_Relay037_SG-RLY37_battery_voltage_dd.csv:3: influxdb_SNOD1_Relay037_V_batt_meas_data_value: unit 'V' not in the unit vocabulary"
+    ]
+  },
+  "files": {
+    "influxdb_SNOD1_Relay023_SG-RLY23_rssi.csv": {
+      "bytes": 821401,
+      "sha256": "14db8c35b96f66ebd1b00ac4be91034ba425bf14a068a41cb523c105f8db166f"
+    },
+    "influxdb_SNOD1_Relay023_SG-RLY23_rssi_dd.csv": {
+      "bytes": 1966,
+      "sha256": "ef4348d377269292d905b62d75d63d0f4078a989b93c0acc05eaa96fc811a218"
+    },
+    "influxdb_SNOD1_Relay023_SG-RLY23_battery_voltage.csv": {
+      "bytes": 616920,
+      "sha256": "048030c463bbe5d3ec07a9e985da252492cc89e74d09399307c1f0d454008df1"
+    },
+    "influxdb_SNOD1_Relay023_SG-RLY23_battery_voltage_dd.csv": {
+      "bytes": 1203,
+      "sha256": "3b40e2c3e66877cb30ecffac790dc7e95f8638a07dcb156e8e111296d4be79a2"
+    },
+    "influxdb_SNOD1_Relay033_SG-RLY33_rssi.csv": {
+      "bytes": 701,
+      "sha256": "c90b08f52d76af6e601f0875e511cf96f43ebd61f8caeb1a4b0b8f3a03bb2fdc"
+    },
+    "influxdb_SNOD1_Relay033_SG-RLY33_rssi_dd.csv": {
+      "bytes": 1966,
+      "sha256": "fb5dcc9fe8e8bfd83096841fd309e5c32e8579753b857321ec17537e43c47688"
+    },
+    "influxdb_SNOD1_Relay033_SG-RLY33_battery_voltage.csv": {
+      "bytes": 471,
+      "sha256": "80ac36f815d5c367f4e73d4a82f49be2aae8ba53bfbf4f0518aca0b195689d4c"
+    },
+    "influxdb_SNOD1_Relay033_SG-RLY33_battery_voltage_dd.csv": {
+      "bytes": 1203,
+      "sha256": "a67cae4e3942755723de0f060d327043fd608a1665079fb3404eb053f6bc50ec"
+    },
+    "influxdb_SNOD1_Relay035_SG-RLY35_rssi.csv": {
+      "bytes": 1215695,
+      "sha256": "fcc3c7013dddb8dbcaa92e3959beed58d613d58076db40bacff7d9360e0f19ce"
+    },
+    "influxdb_SNOD1_Relay035_SG-RLY35_rssi_dd.csv": {
+      "bytes": 1966,
+      "sha256": "edc8b29ee4d86bb960e6f5b4e7f4d89b86442480cbcc0a86ad343a3944732a8c"
+    },
+    "influxdb_SNOD1_Relay035_SG-RLY35_battery_voltage.csv": {
+      "bytes": 909861,
+      "sha256": "f3f9909c4a1a6454959230a03ce94733641f867b0bd4ec2c40e686dad7a842e0"
+    },
+    "influxdb_SNOD1_Relay035_SG-RLY35_battery_voltage_dd.csv": {
+      "bytes": 1203,
+      "sha256": "b9ecbf6b122034cab35105eefd2508ef0c969527af752afc5439526f229dd584"
+    },
+    "influxdb_SNOD1_Relay037_SG-RLY37_rssi.csv": {
+      "bytes": 1496207,
+      "sha256": "c240fb135d4553e1234d46c8b96d32ea0de12311aa26667bd6e37cdbdf87eefe"
+    },
+    "influxdb_SNOD1_Relay037_SG-RLY37_rssi_dd.csv": {
+      "bytes": 1966,
+      "sha256": "fab3cfde71563a3ce80bc368b02e287e5af9b8d74ca493345ded8a6fa69367a8"
+    },
+    "influxdb_SNOD1_Relay037_SG-RLY37_battery_voltage.csv": {
+      "bytes": 1121177,
+      "sha256": "e9a05377e8e5ffea3a94c51eeb1494deea365e91b4a8bcd2772fbde1a7fd835a"
+    },
+    "influxdb_SNOD1_Relay037_SG-RLY37_battery_voltage_dd.csv": {
+      "bytes": 1203,
+      "sha256": "18bd854bbceabde1a5d1b1e2aee6da081d23c2132f05c48aadb2ec2d43feba79"
+    },
+    "influxdb_SNOD1_relays_sensor_attr.csv": {
+      "bytes": 3396,
+      "sha256": "3f78109fe04c1b772651cb19cf74d7447e88b9ca3f4ef927ef62db05160785e6"
+    },
+    "influxdb_SNOD1_relays_sensor_attr_dd.csv": {
+      "bytes": 2248,
+      "sha256": "4ef0857f51575cce8a3c1891a6efa5215516f2a55f75e863a62253d65f8eaf8b"
+    },
+    "influxdb_SNOD1_relays_locations.csv": {
+      "bytes": 2183,
+      "sha256": "f18f936d42ddb4eba53bf91541484b08a23fd8c79e99dcae2a85b679585348bb"
+    },
+    "influxdb_SNOD1_relays_flmd.csv": {
+      "bytes": 5420,
+      "sha256": "3849bdbd0bf5655fc5f8aab99b82bb3f1c3416c4a5747eef82a90cfecd3b350e"
+    }
+  },
+  "source_tables": [
+    "influxdb_SNOD1_Relay023_V_batt_meas",
+    "influxdb_SNOD1_Relay023_base_RSSi_meas",
+    "influxdb_SNOD1_Relay023_node_RSSi_meas",
+    "influxdb_SNOD1_Relay033_V_batt_meas",
+    "influxdb_SNOD1_Relay033_base_RSSi_meas",
+    "influxdb_SNOD1_Relay033_node_RSSi_meas",
+    "influxdb_SNOD1_Relay035_V_batt_meas",
+    "influxdb_SNOD1_Relay035_base_RSSi_meas",
+    "influxdb_SNOD1_Relay035_node_RSSi_meas",
+    "influxdb_SNOD1_Relay037_V_batt_meas",
+    "influxdb_SNOD1_Relay037_base_RSSi_meas",
+    "influxdb_SNOD1_Relay037_node_RSSi_meas"
+  ],
+  "problem_flags": null,
+  "problems_summary": {
+    "error": 0,
+    "warning": 5,
+    "info": 29
+  },
+  "problems": [
+    {
+      "id": "format_warning_1",
+      "severity": "warning",
+      "category": "format",
+      "description": "influxdb_SNOD1_Relay023_SG-RLY23_battery_voltage_dd.csv:3: influxdb_SNOD1_Relay023_V_batt_meas_data_value: unit 'V' not in the unit vocabulary. The Sensor Time Series - Full unit vocabulary (controlled_vocabulary.md, based on UCUM) has no entry for this unit; ESS-DIVE would need to add one, or the unit must be described otherwise.",
+      "action": "Unit written as stored in the database."
+    },
+    {
+      "id": "format_warning_2",
+      "severity": "warning",
+      "category": "format",
+      "description": "influxdb_SNOD1_Relay033_SG-RLY33_battery_voltage_dd.csv:3: influxdb_SNOD1_Relay033_V_batt_meas_data_value: unit 'V' not in the unit vocabulary. The Sensor Time Series - Full unit vocabulary (controlled_vocabulary.md, based on UCUM) has no entry for this unit; ESS-DIVE would need to add one, or the unit must be described otherwise.",
+      "action": "Unit written as stored in the database."
+    },
+    {
+      "id": "format_warning_3",
+      "severity": "warning",
+      "category": "format",
+      "description": "influxdb_SNOD1_Relay035_SG-RLY35_battery_voltage_dd.csv:3: influxdb_SNOD1_Relay035_V_batt_meas_data_value: unit 'V' not in the unit vocabulary. The Sensor Time Series - Full unit vocabulary (controlled_vocabulary.md, based on UCUM) has no entry for this unit; ESS-DIVE would need to add one, or the unit must be described otherwise.",
+      "action": "Unit written as stored in the database."
+    },
+    {
+      "id": "format_warning_4",
+      "severity": "warning",
+      "category": "format",
+      "description": "influxdb_SNOD1_Relay037_SG-RLY37_battery_voltage_dd.csv:3: influxdb_SNOD1_Relay037_V_batt_meas_data_value: unit 'V' not in the unit vocabulary. The Sensor Time Series - Full unit vocabulary (controlled_vocabulary.md, based on UCUM) has no entry for this unit; ESS-DIVE would need to add one, or the unit must be described otherwise.",
+      "action": "Unit written as stored in the database."
+    },
+    {
+      "id": "unknown_equipment",
+      "severity": "warning",
+      "category": "metadata",
+      "count": 12,
+      "description": "Datastreams whose equipment is registered as unknown (model \"unknown sensor\" and/or Unknown Manufacturer); for the battery voltage this is the node logger, described in the package as a sensor at the site.",
+      "examples": [
+        {
+          "table": "influxdb_SNOD1_Relay023_base_RSSi_meas",
+          "sensor_name": "unknown logger",
+          "sensor_model": "unknown sensor",
+          "manufacturer": "Unknown Manufacturer",
+          "equipment_id": "2610"
+        },
+        {
+          "table": "influxdb_SNOD1_Relay023_node_RSSi_meas",
+          "sensor_name": "unknown logger",
+          "sensor_model": "unknown sensor",
+          "manufacturer": "Unknown Manufacturer",
+          "equipment_id": "2610"
+        },
+        {
+          "table": "influxdb_SNOD1_Relay023_V_batt_meas",
+          "sensor_name": "unknown logger",
+          "sensor_model": "unknown sensor",
+          "manufacturer": "Unknown Manufacturer",
+          "equipment_id": "2610"
+        },
+        {
+          "table": "influxdb_SNOD1_Relay033_base_RSSi_meas",
+          "sensor_name": "unknown logger",
+          "sensor_model": "unknown sensor",
+          "manufacturer": "Unknown Manufacturer",
+          "equipment_id": "2611"
+        },
+        {
+          "table": "influxdb_SNOD1_Relay033_node_RSSi_meas",
+          "sensor_name": "unknown logger",
+          "sensor_model": "unknown sensor",
+          "manufacturer": "Unknown Manufacturer",
+          "equipment_id": "2611"
+        }
+      ],
+      "action": "Described as registered; provider to supply details."
+    },
+    {
+      "id": "qa_f_values",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay023_SG-RLY23_rssi.csv",
+      "columns": [
+        "influxdb_SNOD1_Relay023_base_RSSi_meas_data_value",
+        "influxdb_SNOD1_Relay023_node_RSSi_meas_data_value"
+      ],
+      "count": 386,
+      "description": "Values flagged outOfRange (qa_f) by the SSI ingest. Kept, with their flag, as stored.",
+      "examples": [
+        {
+          "datetime_measured": "2022-11-21T19:08:01Z",
+          "column": "influxdb_SNOD1_Relay023_node_RSSi_meas_data_value",
+          "value": "-121"
+        },
+        {
+          "datetime_measured": "2022-11-22T23:08:01Z",
+          "column": "influxdb_SNOD1_Relay023_node_RSSi_meas_data_value",
+          "value": "-121"
+        },
+        {
+          "datetime_measured": "2023-02-01T21:07:56Z",
+          "column": "influxdb_SNOD1_Relay023_node_RSSi_meas_data_value",
+          "value": "-121"
+        },
+        {
+          "datetime_measured": "2023-02-20T23:07:55Z",
+          "column": "influxdb_SNOD1_Relay023_base_RSSi_meas_data_value",
+          "value": "-121"
+        },
+        {
+          "datetime_measured": "2023-03-06T17:07:58Z",
+          "column": "influxdb_SNOD1_Relay023_base_RSSi_meas_data_value",
+          "value": "-121"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "empty_rows",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay023_SG-RLY23_rssi.csv",
+      "count": 18217,
+      "description": "Rows in which every column is missing (-9999, flag qa_c): the feeder table has a row at that time but no value in any column. 8,689 of them are at times off the 15-minute grid (e.g. hh:09:07), which suggests messages without measurements.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-14T05:08:03Z"
+        },
+        {
+          "datetime_measured": "2022-10-14T07:08:03Z"
+        },
+        {
+          "datetime_measured": "2022-10-15T07:08:03Z"
+        },
+        {
+          "datetime_measured": "2022-11-11T18:00:00Z"
+        },
+        {
+          "datetime_measured": "2022-11-11T19:08:04Z"
+        }
+      ],
+      "share_of_rows": 0.9529,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay023_SG-RLY23_rssi.csv",
+      "count": 9590,
+      "description": "Rows whose time is not on the 15-minute grid; 8,689 of the 9,590 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2022-11-18T23:08:07Z"
+        },
+        {
+          "datetime_measured": "2022-11-21T19:08:01Z"
+        },
+        {
+          "datetime_measured": "2022-11-22T11:08:01Z"
+        },
+        {
+          "datetime_measured": "2022-11-22T19:08:01Z"
+        },
+        {
+          "datetime_measured": "2022-11-22T23:08:01Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "empty_rows",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay023_SG-RLY23_battery_voltage.csv",
+      "count": 18258,
+      "description": "Rows in which every column is missing (-9999, flag qa_c): the feeder table has a row at that time but no value in any column. 9,589 of them are at times off the 15-minute grid (e.g. hh:09:07), which suggests messages without measurements.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-14T07:08:03Z"
+        },
+        {
+          "datetime_measured": "2022-10-15T07:08:03Z"
+        },
+        {
+          "datetime_measured": "2022-11-11T18:00:00Z"
+        },
+        {
+          "datetime_measured": "2022-11-11T19:08:04Z"
+        },
+        {
+          "datetime_measured": "2022-11-12T00:00:00Z"
+        }
+      ],
+      "share_of_rows": 0.955,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay023_SG-RLY23_battery_voltage.csv",
+      "count": 9590,
+      "description": "Rows whose time is not on the 15-minute grid; 9,589 of the 9,590 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-14T05:08:03Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "sparse_Relay023_V_batt",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay023_SG-RLY23_battery_voltage.csv",
+      "columns": [
+        "influxdb_SNOD1_Relay023_V_batt_meas_data_value"
+      ],
+      "count": 860,
+      "description": "The battery voltage has a value in 860 of 19,118 rows.",
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "empty_rows",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay033_SG-RLY33_rssi.csv",
+      "count": 11,
+      "description": "Rows in which every column is missing (-9999, flag qa_c): the feeder table has a row at that time but no value in any column. 9 of them are at times off the 15-minute grid (e.g. hh:09:07), which suggests messages without measurements.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-14T04:11:33Z"
+        },
+        {
+          "datetime_measured": "2022-10-14T05:11:33Z"
+        },
+        {
+          "datetime_measured": "2022-10-14T07:11:34Z"
+        },
+        {
+          "datetime_measured": "2022-11-11T18:00:00Z"
+        },
+        {
+          "datetime_measured": "2022-11-11T19:11:34Z"
+        }
+      ],
+      "share_of_rows": 1.0,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay033_SG-RLY33_rssi.csv",
+      "count": 9,
+      "description": "Rows whose time is not on the 15-minute grid; 9 of the 9 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-14T04:11:33Z"
+        },
+        {
+          "datetime_measured": "2022-10-14T05:11:33Z"
+        },
+        {
+          "datetime_measured": "2022-10-14T07:11:34Z"
+        },
+        {
+          "datetime_measured": "2022-11-11T19:11:34Z"
+        },
+        {
+          "datetime_measured": "2022-11-12T01:11:33Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "empty_rows",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay033_SG-RLY33_battery_voltage.csv",
+      "count": 10,
+      "description": "Rows in which every column is missing (-9999, flag qa_c): the feeder table has a row at that time but no value in any column. 8 of them are at times off the 15-minute grid (e.g. hh:09:07), which suggests messages without measurements.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-14T05:11:33Z"
+        },
+        {
+          "datetime_measured": "2022-10-14T07:11:34Z"
+        },
+        {
+          "datetime_measured": "2022-11-11T18:00:00Z"
+        },
+        {
+          "datetime_measured": "2022-11-11T19:11:34Z"
+        },
+        {
+          "datetime_measured": "2022-11-12T00:00:00Z"
+        }
+      ],
+      "share_of_rows": 0.9091,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay033_SG-RLY33_battery_voltage.csv",
+      "count": 9,
+      "description": "Rows whose time is not on the 15-minute grid; 8 of the 9 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-14T04:11:33Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "sparse_Relay033_V_batt",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay033_SG-RLY33_battery_voltage.csv",
+      "columns": [
+        "influxdb_SNOD1_Relay033_V_batt_meas_data_value"
+      ],
+      "count": 1,
+      "description": "The battery voltage has a value in 1 of 11 rows.",
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "qa_f_values",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay035_SG-RLY35_rssi.csv",
+      "columns": [
+        "influxdb_SNOD1_Relay035_base_RSSi_meas_data_value",
+        "influxdb_SNOD1_Relay035_node_RSSi_meas_data_value"
+      ],
+      "count": 172,
+      "description": "Values flagged outOfRange (qa_f) by the SSI ingest. Kept, with their flag, as stored.",
+      "examples": [
+        {
+          "datetime_measured": "2022-11-23T07:12:13Z",
+          "column": "influxdb_SNOD1_Relay035_node_RSSi_meas_data_value",
+          "value": "-121"
+        },
+        {
+          "datetime_measured": "2022-11-26T03:12:13Z",
+          "column": "influxdb_SNOD1_Relay035_node_RSSi_meas_data_value",
+          "value": "-121"
+        },
+        {
+          "datetime_measured": "2022-12-28T19:12:10Z",
+          "column": "influxdb_SNOD1_Relay035_node_RSSi_meas_data_value",
+          "value": "-121"
+        },
+        {
+          "datetime_measured": "2022-12-29T01:12:10Z",
+          "column": "influxdb_SNOD1_Relay035_node_RSSi_meas_data_value",
+          "value": "-121"
+        },
+        {
+          "datetime_measured": "2022-12-30T10:12:10Z",
+          "column": "influxdb_SNOD1_Relay035_base_RSSi_meas_data_value",
+          "value": "-123"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "empty_rows",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay035_SG-RLY35_rssi.csv",
+      "count": 27058,
+      "description": "Rows in which every column is missing (-9999, flag qa_c): the feeder table has a row at that time but no value in any column. 12,931 of them are at times off the 15-minute grid (e.g. hh:09:07), which suggests messages without measurements.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-14T07:12:15Z"
+        },
+        {
+          "datetime_measured": "2022-11-14T17:00:00Z"
+        },
+        {
+          "datetime_measured": "2022-11-14T18:12:19Z"
+        },
+        {
+          "datetime_measured": "2022-11-15T00:00:00Z"
+        },
+        {
+          "datetime_measured": "2022-11-15T01:12:18Z"
+        }
+      ],
+      "share_of_rows": 0.9558,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay035_SG-RLY35_rssi.csv",
+      "count": 14182,
+      "description": "Rows whose time is not on the 15-minute grid; 12,931 of the 14,182 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2022-11-22T13:12:13Z"
+        },
+        {
+          "datetime_measured": "2022-11-23T07:12:13Z"
+        },
+        {
+          "datetime_measured": "2022-11-24T05:12:13Z"
+        },
+        {
+          "datetime_measured": "2022-11-24T06:12:13Z"
+        },
+        {
+          "datetime_measured": "2022-11-26T03:12:13Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "empty_rows",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay035_SG-RLY35_battery_voltage.csv",
+      "count": 27057,
+      "description": "Rows in which every column is missing (-9999, flag qa_c): the feeder table has a row at that time but no value in any column. 14,182 of them are at times off the 15-minute grid (e.g. hh:09:07), which suggests messages without measurements.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-14T07:12:15Z"
+        },
+        {
+          "datetime_measured": "2022-11-14T17:00:00Z"
+        },
+        {
+          "datetime_measured": "2022-11-14T18:12:19Z"
+        },
+        {
+          "datetime_measured": "2022-11-15T00:00:00Z"
+        },
+        {
+          "datetime_measured": "2022-11-15T01:12:18Z"
+        }
+      ],
+      "share_of_rows": 0.9558,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay035_SG-RLY35_battery_voltage.csv",
+      "count": 14182,
+      "description": "Rows whose time is not on the 15-minute grid; 14,182 of the 14,182 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-14T07:12:15Z"
+        },
+        {
+          "datetime_measured": "2022-11-14T18:12:19Z"
+        },
+        {
+          "datetime_measured": "2022-11-15T01:12:18Z"
+        },
+        {
+          "datetime_measured": "2022-11-16T01:12:18Z"
+        },
+        {
+          "datetime_measured": "2022-11-16T21:12:18Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "sparse_Relay035_V_batt",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay035_SG-RLY35_battery_voltage.csv",
+      "columns": [
+        "influxdb_SNOD1_Relay035_V_batt_meas_data_value"
+      ],
+      "count": 1252,
+      "description": "The battery voltage has a value in 1,252 of 28,309 rows.",
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "qa_f_values",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay037_SG-RLY37_rssi.csv",
+      "columns": [
+        "influxdb_SNOD1_Relay037_base_RSSi_meas_data_value",
+        "influxdb_SNOD1_Relay037_node_RSSi_meas_data_value"
+      ],
+      "count": 146,
+      "description": "Values flagged outOfRange (qa_f) by the SSI ingest. Kept, with their flag, as stored.",
+      "examples": [
+        {
+          "datetime_measured": "2023-04-12T23:12:45Z",
+          "column": "influxdb_SNOD1_Relay037_node_RSSi_meas_data_value",
+          "value": "-121"
+        },
+        {
+          "datetime_measured": "2023-04-13T15:12:45Z",
+          "column": "influxdb_SNOD1_Relay037_node_RSSi_meas_data_value",
+          "value": "-121"
+        },
+        {
+          "datetime_measured": "2023-04-14T03:12:45Z",
+          "column": "influxdb_SNOD1_Relay037_node_RSSi_meas_data_value",
+          "value": "-121"
+        },
+        {
+          "datetime_measured": "2023-04-17T05:12:45Z",
+          "column": "influxdb_SNOD1_Relay037_node_RSSi_meas_data_value",
+          "value": "-121"
+        },
+        {
+          "datetime_measured": "2023-04-17T21:12:45Z",
+          "column": "influxdb_SNOD1_Relay037_node_RSSi_meas_data_value",
+          "value": "-121"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "empty_rows",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay037_SG-RLY37_rssi.csv",
+      "count": 32916,
+      "description": "Rows in which every column is missing (-9999, flag qa_c): the feeder table has a row at that time but no value in any column. 18,924 of them are at times off the 15-minute grid (e.g. hh:09:07), which suggests messages without measurements.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-14T05:12:57Z"
+        },
+        {
+          "datetime_measured": "2022-10-14T07:12:57Z"
+        },
+        {
+          "datetime_measured": "2022-11-11T18:00:00Z"
+        },
+        {
+          "datetime_measured": "2022-11-11T19:12:58Z"
+        },
+        {
+          "datetime_measured": "2022-11-12T00:00:00Z"
+        }
+      ],
+      "share_of_rows": 0.9445,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay037_SG-RLY37_rssi.csv",
+      "count": 20860,
+      "description": "Rows whose time is not on the 15-minute grid; 18,924 of the 20,860 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2022-11-15T01:13:00Z"
+        },
+        {
+          "datetime_measured": "2022-11-21T21:12:55Z"
+        },
+        {
+          "datetime_measured": "2022-11-22T03:12:55Z"
+        },
+        {
+          "datetime_measured": "2022-11-22T19:12:56Z"
+        },
+        {
+          "datetime_measured": "2022-11-23T05:12:55Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "empty_rows",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay037_SG-RLY37_battery_voltage.csv",
+      "count": 33499,
+      "description": "Rows in which every column is missing (-9999, flag qa_c): the feeder table has a row at that time but no value in any column. 20,859 of them are at times off the 15-minute grid (e.g. hh:09:07), which suggests messages without measurements.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-14T07:12:57Z"
+        },
+        {
+          "datetime_measured": "2022-11-11T18:00:00Z"
+        },
+        {
+          "datetime_measured": "2022-11-11T19:12:58Z"
+        },
+        {
+          "datetime_measured": "2022-11-12T00:00:00Z"
+        },
+        {
+          "datetime_measured": "2022-11-12T01:12:57Z"
+        }
+      ],
+      "share_of_rows": 0.9612,
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "off_grid_times",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay037_SG-RLY37_battery_voltage.csv",
+      "count": 20860,
+      "description": "Rows whose time is not on the 15-minute grid; 20,859 of the 20,860 have no value in any column.",
+      "examples": [
+        {
+          "datetime_measured": "2022-10-14T05:12:57Z"
+        }
+      ],
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "sparse_Relay037_V_batt",
+      "severity": "info",
+      "category": "data",
+      "file": "influxdb_SNOD1_Relay037_SG-RLY37_battery_voltage.csv",
+      "columns": [
+        "influxdb_SNOD1_Relay037_V_batt_meas_data_value"
+      ],
+      "count": 1353,
+      "description": "The battery voltage has a value in 1,353 of 34,852 rows.",
+      "action": "Values left exactly as stored in the database; to be resolved with the data provider."
+    },
+    {
+      "id": "no_serial_numbers",
+      "severity": "info",
+      "category": "metadata",
+      "columns": [
+        "influxdb_SNOD1_Relay023_base_RSSi_meas",
+        "influxdb_SNOD1_Relay023_node_RSSi_meas",
+        "influxdb_SNOD1_Relay023_V_batt_meas",
+        "influxdb_SNOD1_Relay033_base_RSSi_meas",
+        "influxdb_SNOD1_Relay033_node_RSSi_meas",
+        "influxdb_SNOD1_Relay033_V_batt_meas",
+        "influxdb_SNOD1_Relay035_base_RSSi_meas",
+        "influxdb_SNOD1_Relay035_node_RSSi_meas",
+        "influxdb_SNOD1_Relay035_V_batt_meas",
+        "influxdb_SNOD1_Relay037_base_RSSi_meas",
+        "influxdb_SNOD1_Relay037_node_RSSi_meas",
+        "influxdb_SNOD1_Relay037_V_batt_meas"
+      ],
+      "count": 12,
+      "description": "No serial number (odmx.equipment.equipment_serial_number) and no calibration record for these sensors.",
+      "action": "sensor_serial_number left empty in the attributes file."
+    },
+    {
+      "id": "measurement_count_metadata",
+      "severity": "info",
+      "category": "metadata",
+      "count": 12,
+      "description": "odmx total_measurement_numbers and last_measurement_date count only rows flagged good (qa_z); the datastream tables (and the package) also contain the qa_c (missing) and qa_f rows.",
+      "examples": [
+        {
+          "table": "influxdb_SNOD1_Relay023_base_RSSi_meas",
+          "total_measurement_numbers": "346"
+        },
+        {
+          "table": "influxdb_SNOD1_Relay023_node_RSSi_meas",
+          "total_measurement_numbers": "169"
+        },
+        {
+          "table": "influxdb_SNOD1_Relay023_V_batt_meas",
+          "total_measurement_numbers": "860"
+        },
+        {
+          "table": "influxdb_SNOD1_Relay033_base_RSSi_meas",
+          "total_measurement_numbers": "0"
+        },
+        {
+          "table": "influxdb_SNOD1_Relay033_node_RSSi_meas",
+          "total_measurement_numbers": "0"
+        }
+      ],
+      "action": "Not used by the package."
+    },
+    {
+      "id": "wkt_axis_order_SG-RLY23",
+      "severity": "info",
+      "category": "metadata",
+      "description": "odmx.sampling_features.feature_geometry_wkt for SG-RLY23 is POINT(38.93137184 -106.9813641), i.e. latitude first; WKT order is POINT(longitude latitude).",
+      "action": "Package uses the latitude and longitude columns."
+    },
+    {
+      "id": "wkt_axis_order_SG-RLY33",
+      "severity": "info",
+      "category": "metadata",
+      "description": "odmx.sampling_features.feature_geometry_wkt for SG-RLY33 is POINT(38.9230216 -106.9833148), i.e. latitude first; WKT order is POINT(longitude latitude).",
+      "action": "Package uses the latitude and longitude columns."
+    },
+    {
+      "id": "wkt_axis_order_SG-RLY35",
+      "severity": "info",
+      "category": "metadata",
+      "description": "odmx.sampling_features.feature_geometry_wkt for SG-RLY35 is POINT(38.9315202 -106.9812864), i.e. latitude first; WKT order is POINT(longitude latitude).",
+      "action": "Package uses the latitude and longitude columns."
+    },
+    {
+      "id": "wkt_axis_order_SG-RLY37",
+      "severity": "info",
+      "category": "metadata",
+      "description": "odmx.sampling_features.feature_geometry_wkt for SG-RLY37 is POINT(38.91875722 -106.9660152), i.e. latitude first; WKT order is POINT(longitude latitude).",
+      "action": "Package uses the latitude and longitude columns."
+    }
+  ]
+}

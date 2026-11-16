@@ -1,0 +1,17 @@
+table_name	station	site_type	latitude	longitude	feeder_table	datastream	variable	units	good_measurements	first	last
+avery_streamflow_streamflow_meas	ER-AVY1 Avery Creek	waterQualityStation	38.97521672	-106.9973282	avery_streamflow	streamflow	waterStreamDischarge	m^3/s	134474	2014-09-01	2017-10-04
+bradley_streamflow_streamflow_meas	ER-BRD1 Bradley Creek	waterQualityStation	38.98540925	-107.0048454	bradley_streamflow	streamflow	waterStreamDischarge	m^3/s	265961	2015-09-01	2021-10-01
+cement_streamflow_streamflow_meas	CE-CMT0 Cement Creek CQ Station	waterQualityStation	38.82413	-106.85377	cement_streamflow	streamflow	waterStreamDischarge	m^3/s	61122	2023-06-30	2025-10-24
+copper_streamflow_streamflow_meas	ER-CPR1 Copper Creek	waterQualityStation	38.95705903	-106.988286	copper_streamflow	streamflow	waterStreamDischarge	m^3/s	254686	2015-09-06	2025-11-14
+eaq_streamflow_streamflow_meas	ER-EAQ1 East River above Quigley Creek	waterQualityStation	38.99518558	-107.0145513	eaq_streamflow	streamflow	waterStreamDischarge	m^3/s	227850	2014-09-01	2021-10-01
+ebc_streamflow_streamflow_meas	ER-EBC1 East River below Copper Creek	waterQualityStation	38.95242537	-106.9894862	ebc_streamflow	streamflow	waterStreamDischarge	m^3/s	179745	2018-10-23	2025-11-14
+gothic_streamflow_streamflow_meas	ER-GTH1 Gothic Creek	waterQualityStation	38.97845224	-107.0045576	gothic_streamflow	streamflow	waterStreamDischarge	m^3/s	83323	2014-09-01	2016-10-14
+lottis_streamflow_streamflow_meas	LO-LOC1 Lottis Creek gauging station	waterQualityStation	38.769319	-106.621097	lottis_streamflow	streamflow	waterStreamDischarge	m^3/s	23686	2023-05-01	2023-10-13
+marmot_streamflow_streamflow_meas	ER-MMT1 Marmot Creek	waterQualityStation	38.97930968	-106.9978241	marmot_streamflow	streamflow	waterStreamDischarge	m^3/s	83326	2014-09-01	2016-10-14
+pumphouse_streamflow_streamflow_meas	ER-PHF0 Pumphouse ISCO	waterQualityStation	38.92244722	-106.9508278	pumphouse_streamflow	streamflow	waterStreamDischarge	m^3/s	255945	2014-10-01	2025-10-01
+quigley_streamflow_streamflow_meas	ER-QLY1 Quigley Creek	waterQualityStation	38.9934266	-107.0141949	quigley_streamflow	streamflow	waterStreamDischarge	m^3/s	68396	2014-09-01	2016-10-13
+rock_streamflow_streamflow_meas	ER-RCK1 Rock Creek	borehole	38.98166807	-107.0055887	rock_streamflow	streamflow	waterStreamDischarge	m^3/s	287340	2014-09-01	2021-10-01
+rustlers_streamflow_streamflow_meas	ER-RUS1 Rustlers Gulch	borehole	38.98893967	-107.007755	rustlers_streamflow	streamflow	waterStreamDischarge	m^3/s	312043	2015-10-19	2021-10-01
+trail_creek_streamflow_streamflow_meas	TR-TCG1 Trail Creek gauging station	waterQualityStation	38.91994	-106.61419	trail_creek_streamflow	streamflow	waterStreamDischarge	m^3/s	15591	2025-05-08	2025-10-01
+upper_flume_streamflow_streamflow_meas	SG-SUF1 Snodgrass Upper Flume	waterQualityStation	38.9225152	-106.9772066	upper_flume_streamflow	streamflow	waterStreamDischarge	m^3/s	46506	2023-05-19	2025-10-01
+upper_trail_creek_streamflow_streamflow_meas	TR-TCG2 Upper Trail Creek gauging station	site	38.904226	-106.619803	upper_trail_creek_streamflow	streamflow	waterStreamDischarge	m^3/s	15437	2025-05-08	2025-10-01

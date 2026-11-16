@@ -1,0 +1,127 @@
+table_name	station	feeder_table	category_sensor	datastream	variable	units	depth_attr	good_measurements	first	last
+m1_10_at200_m1_acond_avg_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Groundwater (well)	at200_m1_acond_avg	waterElectricalConductivity	uS/cm		619469	2016-11-30	2024-03-08
+m1_10_at200_m1_psi_avg_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Groundwater (well)	at200_m1_psi_avg	waterPressureVented	Pa		621692	2016-11-30	2024-03-08
+m1_10_at200_m1_spcond_avg_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Groundwater (well)	at200_m1_spcond_avg	waterSpecificConductance	uS/cm		619478	2016-11-30	2024-03-08
+m1_10_at200_m1_tempc_avg_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Groundwater (well)	at200_m1_tempc_avg	waterTemperature	degC; Cel		622023	2016-11-30	2024-03-08
+m1_10_at200_m1_wl_avg_calc	ER-PLM1 Hillslope Borehole (M1)	m1_10	Groundwater (well)	at200_m1_wl_avg	waterLevel	m		621964	2016-12-01	2024-03-09
+m1_10_at200_m1_wl_avg_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Groundwater (well)	at200_m1_wl_avg	waterHeightAboveSensor	m		621775	2016-11-30	2024-03-08
+m1_10_pt_360_psi_avg_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Groundwater (well)	pt_360_psi_avg	waterPressureVented	Pa		522131	2017-09-20	2022-10-12
+m1_10_pt_472_psi_avg_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Groundwater (well)	pt_472_psi_avg	waterPressureVented	Pa		522131	2017-09-20	2022-10-12
+m1_10_pt_689_psi_avg_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Groundwater (well)	pt_689_psi_avg	waterPressureVented	Pa		522131	2017-09-20	2022-10-12
+m1_10_ec_avg(1)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil conductivity	ec_avg(1)	soilElectricalConductivity	uS/cm		510648	2017-09-20	2022-10-12
+m1_10_ec_avg(2)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil conductivity	ec_avg(2)	soilElectricalConductivity	uS/cm		402271	2016-11-30	2020-10-24
+m1_10_ec_avg(3)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil conductivity	ec_avg(3)	soilElectricalConductivity	uS/cm		594846	2016-11-30	2022-10-12
+m1_10_ec_avg(4)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil conductivity	ec_avg(4)	soilElectricalConductivity	uS/cm		595170	2016-11-30	2022-10-12
+m1_10_ec_avg(5)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil conductivity	ec_avg(5)	soilElectricalConductivity	uS/cm		290017	2017-09-20	2022-10-05
+m1_10_ec_avg(6)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil conductivity	ec_avg(6)	soilElectricalConductivity	uS/cm		595157	2016-11-30	2022-10-12
+m1_10_vwc_avg(1)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil moisture	vwc_avg(1)	soilVolumetricWaterContent	unitless		510655	2017-09-20	2022-10-12
+m1_10_vwc_avg(2)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil moisture	vwc_avg(2)	soilVolumetricWaterContent	unitless		398311	2016-11-30	2020-10-24
+m1_10_vwc_avg(3)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil moisture	vwc_avg(3)	soilVolumetricWaterContent	unitless		590891	2016-11-30	2022-10-12
+m1_10_vwc_avg(4)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil moisture	vwc_avg(4)	soilVolumetricWaterContent	unitless		591215	2016-11-30	2022-10-12
+m1_10_vwc_avg(5)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil moisture	vwc_avg(5)	soilVolumetricWaterContent	unitless		290023	2017-09-20	2022-10-05
+m1_10_vwc_avg(6)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil moisture	vwc_avg(6)	soilVolumetricWaterContent	unitless		591202	2016-11-30	2022-10-12
+m1_10_temp_5te_avg(1)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil temperature	temp_5te_avg(1)	soilTemperature	degC; Cel		510709	2017-01-19	2022-10-12
+m1_10_temp_5te_avg(2)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil temperature	temp_5te_avg(2)	soilTemperature	degC; Cel		402333	2016-11-30	2022-08-24
+m1_10_temp_5te_avg(3)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil temperature	temp_5te_avg(3)	soilTemperature	degC; Cel		594905	2016-11-30	2022-10-12
+m1_10_temp_5te_avg(4)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil temperature	temp_5te_avg(4)	soilTemperature	degC; Cel		595229	2016-11-30	2022-10-12
+m1_10_temp_5te_avg(5)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil temperature	temp_5te_avg(5)	soilTemperature	degC; Cel		290086	2017-01-19	2022-10-05
+m1_10_temp_5te_avg(6)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil temperature	temp_5te_avg(6)	soilTemperature	degC; Cel		595217	2016-11-30	2022-10-12
+m1_10_temp_mps_avg(1)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil temperature	temp_mps_avg(1)	soilTemperature	degC; Cel		251433	2016-11-30	2022-04-24
+m1_10_temp_mps_avg(2)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil temperature	temp_mps_avg(2)	soilTemperature	degC; Cel		314971	2017-01-19	2022-04-24
+m1_10_temp_mps_avg(3)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil temperature	temp_mps_avg(3)	soilTemperature	degC; Cel		594983	2016-11-30	2022-10-12
+m1_10_temp_mps_avg(4)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil temperature	temp_mps_avg(4)	soilTemperature	degC; Cel		595231	2016-11-30	2022-10-12
+m1_10_temp_mps_avg(5)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil temperature	temp_mps_avg(5)	soilTemperature	degC; Cel		468743	2016-11-30	2022-04-24
+m1_10_temp_mps_avg(6)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil temperature	temp_mps_avg(6)	soilTemperature	degC; Cel		384487	2017-01-19	2022-04-24
+m1_10_wp_avg(1)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil water potential	wp_avg(1)	soilWaterPotential	KPa		251430	2016-11-30	2020-07-18
+m1_10_wp_avg(2)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil water potential	wp_avg(2)	soilWaterPotential	KPa		314965	2017-01-29	2020-10-28
+m1_10_wp_avg(3)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil water potential	wp_avg(3)	soilWaterPotential	KPa		594983	2016-11-30	2022-10-12
+m1_10_wp_avg(4)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil water potential	wp_avg(4)	soilWaterPotential	KPa		595231	2016-11-30	2022-10-12
+m1_10_wp_avg(5)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil water potential	wp_avg(5)	soilWaterPotential	KPa		468738	2016-11-30	2021-06-13
+m1_10_wp_avg(6)_meas	ER-PLM1 Hillslope Borehole (M1)	m1_10	Soil water potential	wp_avg(6)	soilWaterPotential	KPa		384478	2017-01-29	2021-06-13
+m2_20_pt_265_psi_avg_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Groundwater (well)	pt_265_psi_avg	waterPressureVented	Pa		424950	2017-09-20	2021-12-28
+m2_20_pt_462_psi_avg_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Groundwater (well)	pt_462_psi_avg	waterPressureVented	Pa		424950	2017-09-20	2021-12-28
+m2_20_pt_820_psi_avg_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Groundwater (well)	pt_820_psi_avg	waterPressureVented	Pa		424950	2017-09-20	2021-12-28
+m2_20_ec_avg(1)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil conductivity	ec_avg(1)	soilElectricalConductivity	uS/cm		492430	2016-11-30	2021-12-28
+m2_20_ec_avg(2)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil conductivity	ec_avg(2)	soilElectricalConductivity	uS/cm		492423	2016-11-30	2021-12-28
+m2_20_ec_avg(3)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil conductivity	ec_avg(3)	soilElectricalConductivity	uS/cm		492436	2016-11-30	2021-12-28
+m2_20_ec_avg(4)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil conductivity	ec_avg(4)	soilElectricalConductivity	uS/cm		492430	2016-11-30	2021-12-28
+m2_20_ec_avg(5)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil conductivity	ec_avg(5)	soilElectricalConductivity	uS/cm		253080	2016-11-30	2019-05-02
+m2_20_vwc_avg(1)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil moisture	vwc_avg(1)	soilVolumetricWaterContent	unitless		492430	2016-11-30	2021-12-28
+m2_20_vwc_avg(2)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil moisture	vwc_avg(2)	soilVolumetricWaterContent	unitless		492423	2016-11-30	2021-12-28
+m2_20_vwc_avg(3)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil moisture	vwc_avg(3)	soilVolumetricWaterContent	unitless		492436	2016-11-30	2021-12-28
+m2_20_vwc_avg(4)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil moisture	vwc_avg(4)	soilVolumetricWaterContent	unitless		492430	2016-11-30	2021-12-28
+m2_20_vwc_avg(5)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil moisture	vwc_avg(5)	soilVolumetricWaterContent	unitless		253080	2016-11-30	2019-05-02
+m2_20_temp_5te_avg(1)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil temperature	temp_5te_avg(1)	soilTemperature	degC; Cel		492430	2016-11-30	2021-12-28
+m2_20_temp_5te_avg(2)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil temperature	temp_5te_avg(2)	soilTemperature	degC; Cel		492423	2016-11-30	2021-12-28
+m2_20_temp_5te_avg(3)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil temperature	temp_5te_avg(3)	soilTemperature	degC; Cel		492436	2016-11-30	2021-12-28
+m2_20_temp_5te_avg(4)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil temperature	temp_5te_avg(4)	soilTemperature	degC; Cel		492430	2016-11-30	2021-12-28
+m2_20_temp_5te_avg(5)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil temperature	temp_5te_avg(5)	soilTemperature	degC; Cel		253080	2016-11-30	2019-05-02
+m2_20_temp_mps_avg(1)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil temperature	temp_mps_avg(1)	soilTemperature	degC; Cel		492447	2016-11-30	2021-12-28
+m2_20_temp_mps_avg(2)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil temperature	temp_mps_avg(2)	soilTemperature	degC; Cel		252985	2016-11-30	2019-04-29
+m2_20_temp_mps_avg(3)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil temperature	temp_mps_avg(3)	soilTemperature	degC; Cel		492446	2016-11-30	2021-12-28
+m2_20_temp_mps_avg(4)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil temperature	temp_mps_avg(4)	soilTemperature	degC; Cel		252985	2016-11-30	2019-04-29
+m2_20_temp_mps_avg(5)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil temperature	temp_mps_avg(5)	soilTemperature	degC; Cel		252985	2016-11-30	2019-04-29
+m2_20_temp_mps_avg(6)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil temperature	temp_mps_avg(6)	soilTemperature	degC; Cel		492446	2016-11-30	2021-12-28
+m2_20_temp_mps_avg(7)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil temperature	temp_mps_avg(7)	soilTemperature	degC; Cel		492443	2016-11-30	2021-12-28
+m2_20_temp_mps_avg(8)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil temperature	temp_mps_avg(8)	soilTemperature	degC; Cel		309185	2016-11-30	2020-05-04
+m2_20_wp_avg(1)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil water potential	wp_avg(1)	soilWaterPotential	KPa		492447	2016-11-30	2021-12-28
+m2_20_wp_avg(2)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil water potential	wp_avg(2)	soilWaterPotential	KPa		252985	2016-11-30	2019-04-29
+m2_20_wp_avg(3)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil water potential	wp_avg(3)	soilWaterPotential	KPa		492446	2016-11-30	2021-12-28
+m2_20_wp_avg(4)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil water potential	wp_avg(4)	soilWaterPotential	KPa		252985	2016-11-30	2019-04-29
+m2_20_wp_avg(5)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil water potential	wp_avg(5)	soilWaterPotential	KPa		252985	2016-11-30	2019-04-29
+m2_20_wp_avg(6)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil water potential	wp_avg(6)	soilWaterPotential	KPa		492446	2016-11-30	2021-12-28
+m2_20_wp_avg(7)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil water potential	wp_avg(7)	soilWaterPotential	KPa		492443	2016-11-30	2021-12-28
+m2_20_wp_avg(8)_meas	ER-PLM2 Hillslope Borehole (M2)	m2_20	Soil water potential	wp_avg(8)	soilWaterPotential	KPa		309185	2016-11-30	2020-05-04
+m3_30_pt_206_psi_avg_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Groundwater (well)	pt_206_psi_avg	waterPressureVented	Pa		527120	2017-09-20	2022-10-13
+m3_30_pt_435_psi_avg_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Groundwater (well)	pt_435_psi_avg	waterPressureVented	Pa		527120	2017-09-20	2022-10-13
+m3_30_pt_780_psi_avg_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Groundwater (well)	pt_780_psi_avg	waterPressureVented	Pa		527120	2017-09-20	2022-10-13
+m3_30_ec_avg(1)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil conductivity	ec_avg(1)	soilElectricalConductivity	uS/cm		195839	2016-11-30	2019-04-20
+m3_30_ec_avg(2)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil conductivity	ec_avg(2)	soilElectricalConductivity	uS/cm		541769	2016-11-30	2022-10-13
+m3_30_ec_avg(3)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil conductivity	ec_avg(3)	soilElectricalConductivity	uS/cm		542054	2016-11-30	2022-10-13
+m3_30_ec_avg(4)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil conductivity	ec_avg(4)	soilElectricalConductivity	uS/cm		454330	2016-11-30	2022-06-06
+m3_30_ec_avg(5)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil conductivity	ec_avg(5)	soilElectricalConductivity	uS/cm		542070	2016-11-30	2022-10-13
+m3_30_vwc_avg(1)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil moisture	vwc_avg(1)	soilVolumetricWaterContent	unitless		195840	2016-11-30	2019-04-16
+m3_30_vwc_avg(2)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil moisture	vwc_avg(2)	soilVolumetricWaterContent	unitless		508012	2016-11-30	2022-10-13
+m3_30_vwc_avg(3)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil moisture	vwc_avg(3)	soilVolumetricWaterContent	unitless		542055	2016-11-30	2022-10-13
+m3_30_vwc_avg(4)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil moisture	vwc_avg(4)	soilVolumetricWaterContent	unitless		451590	2016-11-30	2022-06-06
+m3_30_vwc_avg(5)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil moisture	vwc_avg(5)	soilVolumetricWaterContent	unitless		542085	2016-11-30	2022-10-13
+m3_30_temp_5te_avg(1)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil temperature	temp_5te_avg(1)	soilTemperature	degC; Cel		195896	2016-11-30	2022-10-05
+m3_30_temp_5te_avg(2)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil temperature	temp_5te_avg(2)	soilTemperature	degC; Cel		541815	2016-11-30	2022-10-13
+m3_30_temp_5te_avg(3)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil temperature	temp_5te_avg(3)	soilTemperature	degC; Cel		542100	2016-11-30	2022-10-13
+m3_30_temp_5te_avg(4)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil temperature	temp_5te_avg(4)	soilTemperature	degC; Cel		454380	2016-11-30	2022-10-05
+m3_30_temp_5te_avg(5)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil temperature	temp_5te_avg(5)	soilTemperature	degC; Cel		542130	2016-11-30	2022-10-13
+m3_30_temp_mps_avg(1)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil temperature	temp_mps_avg(1)	soilTemperature	degC; Cel		541770	2016-11-30	2022-10-13
+m3_30_temp_mps_avg(2)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil temperature	temp_mps_avg(2)	soilTemperature	degC; Cel		472730	2016-11-30	2022-10-13
+m3_30_temp_mps_avg(3)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil temperature	temp_mps_avg(3)	soilTemperature	degC; Cel		541714	2016-11-30	2022-10-13
+m3_30_temp_mps_avg(4)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil temperature	temp_mps_avg(4)	soilTemperature	degC; Cel		541974	2016-11-30	2022-10-13
+m3_30_temp_mps_avg(5)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil temperature	temp_mps_avg(5)	soilTemperature	degC; Cel		542178	2016-11-30	2022-10-13
+m3_30_temp_mps_avg(6)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil temperature	temp_mps_avg(6)	soilTemperature	degC; Cel		117829	2016-11-30	2021-12-20
+m3_30_temp_mps_avg(7)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil temperature	temp_mps_avg(7)	soilTemperature	degC; Cel		111250	2016-11-30	2021-12-20
+m3_30_wp_avg(1)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil water potential	wp_avg(1)	soilWaterPotential	KPa		541768	2016-11-30	2022-10-13
+m3_30_wp_avg(2)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil water potential	wp_avg(2)	soilWaterPotential	KPa		472727	2016-11-30	2022-10-13
+m3_30_wp_avg(3)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil water potential	wp_avg(3)	soilWaterPotential	KPa		541712	2016-11-30	2022-10-13
+m3_30_wp_avg(4)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil water potential	wp_avg(4)	soilWaterPotential	KPa		541972	2016-11-30	2022-10-13
+m3_30_wp_avg(5)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil water potential	wp_avg(5)	soilWaterPotential	KPa		542177	2016-11-30	2022-10-13
+m3_30_wp_avg(6)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil water potential	wp_avg(6)	soilWaterPotential	KPa		117814	2016-11-30	2018-10-14
+m3_30_wp_avg(7)_meas	ER-PLM3 Hillslope Borehole (M3)	m3_30	Soil water potential	wp_avg(7)	soilWaterPotential	KPa		111234	2016-11-30	2018-03-23
+m3_30_at200_m6_acond_avg_meas	ER-PLM6 Hillslope well (M6)	m3_30	Groundwater (well)	at200_m6_acond_avg	waterElectricalConductivity	uS/cm		619786	2016-11-30	2024-04-11
+m3_30_at200_m6_psi_avg_meas	ER-PLM6 Hillslope well (M6)	m3_30	Groundwater (well)	at200_m6_psi_avg	waterPressureVented	Pa		616405	2016-11-30	2024-04-11
+m3_30_at200_m6_spcond_avg_meas	ER-PLM6 Hillslope well (M6)	m3_30	Groundwater (well)	at200_m6_spcond_avg	waterSpecificConductance	uS/cm		621054	2016-11-30	2024-04-11
+m3_30_at200_m6_tempc_avg_meas	ER-PLM6 Hillslope well (M6)	m3_30	Groundwater (well)	at200_m6_tempc_avg	waterTemperature	degC; Cel		623701	2016-11-30	2024-04-11
+m3_30_at200_m6_wl_avg_calc	ER-PLM6 Hillslope well (M6)	m3_30	Groundwater (well)	at200_m6_wl_avg	waterLevel	m		623455	2016-12-01	2024-04-12
+m3_30_at200_m6_wl_avg_meas	ER-PLM6 Hillslope well (M6)	m3_30	Groundwater (well)	at200_m6_wl_avg	waterHeightAboveSensor	m		623435	2016-11-30	2024-04-11
+m4_40_ec_avg(1)_meas	ER-PLM4 Hillslope monitoring site (M4)	m4_40	Soil conductivity	ec_avg(1)	soilElectricalConductivity	uS/cm		485573	2016-11-30	2021-11-18
+m4_40_ec_avg(2)_meas	ER-PLM4 Hillslope monitoring site (M4)	m4_40	Soil conductivity	ec_avg(2)	soilElectricalConductivity	uS/cm		485815	2016-11-30	2021-11-18
+m4_40_ec_avg(3)_meas	ER-PLM4 Hillslope monitoring site (M4)	m4_40	Soil conductivity	ec_avg(3)	soilElectricalConductivity	uS/cm		485919	2016-11-30	2021-11-18
+m4_40_vwc_avg(1)_meas	ER-PLM4 Hillslope monitoring site (M4)	m4_40	Soil moisture	vwc_avg(1)	soilVolumetricWaterContent	unitless		485579	2016-11-30	2021-11-18
+m4_40_vwc_avg(2)_meas	ER-PLM4 Hillslope monitoring site (M4)	m4_40	Soil moisture	vwc_avg(2)	soilVolumetricWaterContent	unitless		485820	2016-11-30	2021-11-18
+m4_40_vwc_avg(3)_meas	ER-PLM4 Hillslope monitoring site (M4)	m4_40	Soil moisture	vwc_avg(3)	soilVolumetricWaterContent	unitless		485926	2016-11-30	2021-11-18
+m4_40_temp_5te_avg(1)_meas	ER-PLM4 Hillslope monitoring site (M4)	m4_40	Soil temperature	temp_5te_avg(1)	soilTemperature	degC; Cel		485596	2016-11-30	2021-12-31
+m4_40_temp_5te_avg(2)_meas	ER-PLM4 Hillslope monitoring site (M4)	m4_40	Soil temperature	temp_5te_avg(2)	soilTemperature	degC; Cel		485839	2016-11-30	2021-12-31
+m4_40_temp_5te_avg(3)_meas	ER-PLM4 Hillslope monitoring site (M4)	m4_40	Soil temperature	temp_5te_avg(3)	soilTemperature	degC; Cel		485945	2016-11-30	2021-12-31
+m4_40_temp_mps_avg(1)_meas	ER-PLM4 Hillslope monitoring site (M4)	m4_40	Soil temperature	temp_mps_avg(1)	soilTemperature	degC; Cel		383090	2016-11-30	2021-06-06
+m4_40_temp_mps_avg(2)_meas	ER-PLM4 Hillslope monitoring site (M4)	m4_40	Soil temperature	temp_mps_avg(2)	soilTemperature	degC; Cel		339192	2016-11-30	2021-06-06
+m4_40_temp_mps_avg(3)_meas	ER-PLM4 Hillslope monitoring site (M4)	m4_40	Soil temperature	temp_mps_avg(3)	soilTemperature	degC; Cel		486000	2016-11-30	2021-11-18
+m4_40_wp_avg(1)_meas	ER-PLM4 Hillslope monitoring site (M4)	m4_40	Soil water potential	wp_avg(1)	soilWaterPotential	KPa		383090	2016-11-30	2021-06-06
+m4_40_wp_avg(2)_meas	ER-PLM4 Hillslope monitoring site (M4)	m4_40	Soil water potential	wp_avg(2)	soilWaterPotential	KPa		339190	2016-11-30	2021-06-06
+m4_40_wp_avg(3)_meas	ER-PLM4 Hillslope monitoring site (M4)	m4_40	Soil water potential	wp_avg(3)	soilWaterPotential	KPa		486008	2016-11-30	2021-11-18

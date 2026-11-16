@@ -1,0 +1,25 @@
+table_name	station	feeder_table	datastream	variable	units	good_measurements	first	last
+gradient_sm_alpine_soil_moisture_10769160_meas	XX-ALA1 Alpine A1	gradient_sm_alpine	soil_moisture_10769160	soilVolumetricWaterContent	unitless	7510	2016-10-20	2017-08-29
+gradient_sm_alpine_soil_moisture_9731458_meas	XX-ALA1 Alpine A1	gradient_sm_alpine	soil_moisture_9731458	soilVolumetricWaterContent	unitless	7509	2016-10-20	2017-08-29
+gradient_sm_alpine_temperature_c_9713852_meas	XX-ALA1 Alpine A1	gradient_sm_alpine	temperature_c_9713852	soilTemperature	degC; Cel	7510	2016-10-20	2017-08-29
+gradient_sm_alpine_temperature_c_9719163_meas	XX-ALA1 Alpine A1	gradient_sm_alpine	temperature_c_9719163	soilTemperature	degC; Cel	7510	2016-10-20	2017-08-29
+gradient_sm_lm_soil_moisture_10769155_meas	ER-LMA1 Lower Montane A1	gradient_sm_lm	soil_moisture_10769155	soilVolumetricWaterContent	unitless	62537	2016-06-23	2018-04-25
+gradient_sm_lm_soil_moisture_10769161_meas	ER-LMA1 Lower Montane A1	gradient_sm_lm	soil_moisture_10769161	soilVolumetricWaterContent	unitless	62822	2016-06-23	2018-04-25
+gradient_sm_lm_temperature_c_2373630_meas	ER-LMA1 Lower Montane A1	gradient_sm_lm	temperature_c_2373630	soilTemperature	degC; Cel	62822	2016-06-23	2018-04-25
+gradient_sm_lm_temperature_c_9680601_meas	ER-LMA1 Lower Montane A1	gradient_sm_lm	temperature_c_9680601	soilTemperature	degC; Cel	62822	2016-06-23	2018-04-25
+gradient_sm_lmfloodplain_soil_moisture_2010180_meas	ER-AMC1 Floodplain A1	gradient_sm_lmfloodplain	soil_moisture_2010180	soilVolumetricWaterContent	unitless	151	2017-10-23	2017-11-14
+gradient_sm_lmfloodplain_soil_moisture_20152225_meas	ER-AMC1 Floodplain A1	gradient_sm_lmfloodplain	soil_moisture_20152225	soilVolumetricWaterContent	unitless	552	2017-10-22	2017-11-14
+gradient_sm_lmfloodplain_temperature_c_1_meas	ER-AMC1 Floodplain A1	gradient_sm_lmfloodplain	temperature_c_1	soilTemperature	degC; Cel	552	2017-10-22	2017-11-14
+gradient_sm_lmfloodplain_temperature_c_9719155_meas	ER-AMC1 Floodplain A1	gradient_sm_lmfloodplain	temperature_c_9719155	soilTemperature	degC; Cel	552	2017-10-22	2017-11-14
+gradient_sm_lsa_soil_moisture_10769163_meas	WG-LSB1 Lower Subalpine B1	gradient_sm_lsa	soil_moisture_10769163	soilVolumetricWaterContent	unitless	11417	2016-07-01	2018-07-13
+gradient_sm_lsa_soil_moisture_10769165_meas	WG-LSB1 Lower Subalpine B1	gradient_sm_lsa	soil_moisture_10769165	soilVolumetricWaterContent	unitless	11417	2016-07-01	2018-07-13
+gradient_sm_lsa_temperature_c_9719149_meas	WG-LSB1 Lower Subalpine B1	gradient_sm_lsa	temperature_c_9719149	soilTemperature	degC; Cel	11417	2016-07-01	2018-07-13
+gradient_sm_lsa_temperature_c_9719152_meas	WG-LSB1 Lower Subalpine B1	gradient_sm_lsa	temperature_c_9719152	soilTemperature	degC; Cel	11417	2016-07-01	2018-07-13
+gradient_sm_um_soil_moisture_10769156_meas	WG-UMA1 Upper Montane A1	gradient_sm_um	soil_moisture_10769156	soilVolumetricWaterContent	unitless	16358	2015-10-11	2017-08-22
+gradient_sm_um_soil_moisture_10769157_meas	WG-UMA1 Upper Montane A1	gradient_sm_um	soil_moisture_10769157	soilVolumetricWaterContent	unitless	16358	2015-10-11	2017-08-22
+gradient_sm_um_temperature_c_9719159_meas	WG-UMA1 Upper Montane A1	gradient_sm_um	temperature_c_9719159	soilTemperature	degC; Cel	16358	2015-10-11	2017-08-22
+gradient_sm_um_temperature_c_9719169_meas	WG-UMA1 Upper Montane A1	gradient_sm_um	temperature_c_9719169	soilTemperature	degC; Cel	16358	2015-10-11	2017-08-22
+gradient_sm_usa_soil_moisture_10769158_meas	ER-USA1 Upper Subalpine A1	gradient_sm_usa	soil_moisture_10769158	soilVolumetricWaterContent	unitless	9702	2016-07-01	2017-08-16
+gradient_sm_usa_soil_moisture_10769162_meas	ER-USA1 Upper Subalpine A1	gradient_sm_usa	soil_moisture_10769162	soilVolumetricWaterContent	unitless	10056	2016-07-01	2017-08-24
+gradient_sm_usa_temperature_c_9719151_meas	ER-USA1 Upper Subalpine A1	gradient_sm_usa	temperature_c_9719151	soilTemperature	degC; Cel	10056	2016-07-01	2017-08-24
+gradient_sm_usa_temperature_c_9719158_meas	ER-USA1 Upper Subalpine A1	gradient_sm_usa	temperature_c_9719158	soilTemperature	degC; Cel	10056	2016-07-01	2017-08-24

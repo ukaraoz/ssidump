@@ -1,0 +1,27 @@
+table_name	station	feeder_table	category_sensor	datastream	variable	units	good_measurements	first	last
+metstation_pb2_airtc_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Air (temperature / humidity / pressure)	airtc_avg	airTemperature	degC; Cel	236548	2017-03-03	2021-12-31
+metstation_pb2_bp_kpa_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Air (temperature / humidity / pressure)	bp_kpa_avg	airAtmosphericPressureAbsolute	Pa	236548	2017-03-03	2021-12-31
+metstation_pb2_rh_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Air (temperature / humidity / pressure)	rh	airRelativeHumidity	unitless	236465	2017-03-03	2021-12-31
+metstation_pb2_winddir_d1_wvt_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Wind	winddir_d1_wvt	windDirection	deg	236548	2017-03-03	2021-12-31
+metstation_pb2_ws_ms_s_wvt_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Wind	ws_ms_s_wvt	windSpeed	m/s	236548	2017-03-03	2021-12-31
+metstation_pb2_cg3dnco_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Radiation	cg3dnco_avg	solarRadiationReflectedLWIR	W/m^2	236548	2017-03-03	2021-12-31
+metstation_pb2_cg3upco_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Radiation	cg3upco_avg	solarRadiationIncomingLWIR	W/m^2	236548	2017-03-03	2021-12-31
+metstation_pb2_cm3dn_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Radiation	cm3dn_avg	solarRadiationReflectedBroadband	W/m^2	231540	2017-03-03	2021-12-31
+metstation_pb2_cm3up_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Radiation	cm3up_avg	solarRadiationIncomingBroadband	W/m^2	137066	2017-03-03	2021-12-31
+metstation_pb2_tcdt_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Snow depth	tcdt_avg	snowThickness	unknown	235978	2017-03-03	2021-12-31
+metstation_pb2_pluv2(4)_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Precipitation	pluv2(4)	rainPrecipitationCumulative	m	236547	2017-03-03	2021-12-31
+metstation_pb2_ec_20_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Soil (temperature / moisture / conductivity)	ec_20_avg	soilElectricalConductivity	uS/cm	236548	2017-03-03	2021-12-31
+metstation_pb2_ec_2_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Soil (temperature / moisture / conductivity)	ec_2_avg	soilElectricalConductivity	uS/cm	236548	2017-03-03	2021-12-31
+metstation_pb2_ec_40_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Soil (temperature / moisture / conductivity)	ec_40_avg	soilElectricalConductivity	uS/cm	236548	2017-03-03	2021-12-31
+metstation_pb2_ec_4_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Soil (temperature / moisture / conductivity)	ec_4_avg	soilElectricalConductivity	uS/cm	236548	2017-03-03	2021-12-31
+metstation_pb2_ec_8_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Soil (temperature / moisture / conductivity)	ec_8_avg	soilElectricalConductivity	uS/cm	236548	2017-03-03	2021-12-31
+metstation_pb2_st_20_c_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Soil (temperature / moisture / conductivity)	st_20_c_avg	soilTemperature	degC; Cel	236548	2017-03-03	2021-12-31
+metstation_pb2_st_2_c_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Soil (temperature / moisture / conductivity)	st_2_c_avg	soilTemperature	degC; Cel	236548	2017-03-03	2021-12-31
+metstation_pb2_st_40_c_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Soil (temperature / moisture / conductivity)	st_40_c_avg	soilTemperature	degC; Cel	236548	2017-03-03	2021-12-31
+metstation_pb2_st_4_c_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Soil (temperature / moisture / conductivity)	st_4_c_avg	soilTemperature	degC; Cel	236548	2017-03-03	2021-12-31
+metstation_pb2_st_8_c_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Soil (temperature / moisture / conductivity)	st_8_c_avg	soilTemperature	degC; Cel	236548	2017-03-03	2021-12-31
+metstation_pb2_vwc20_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Soil (temperature / moisture / conductivity)	vwc20_avg	soilVolumetricWaterContent	unitless	236532	2017-03-03	2021-12-31
+metstation_pb2_vwc2_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Soil (temperature / moisture / conductivity)	vwc2_avg	soilVolumetricWaterContent	unitless	236537	2017-03-03	2021-12-31
+metstation_pb2_vwc40_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Soil (temperature / moisture / conductivity)	vwc40_avg	soilVolumetricWaterContent	unitless	236531	2017-03-03	2021-12-31
+metstation_pb2_vwc4_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Soil (temperature / moisture / conductivity)	vwc4_avg	soilVolumetricWaterContent	unitless	203138	2017-03-03	2021-05-13
+metstation_pb2_vwc8_avg_meas	ER-CSMWS Pumphouse Weather station	metstation_pb2	Soil (temperature / moisture / conductivity)	vwc8_avg	soilVolumetricWaterContent	unitless	236534	2017-03-03	2021-12-31

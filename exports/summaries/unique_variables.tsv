@@ -1,0 +1,82 @@
+category	variable	units	families	n_families
+Meteorology	airAtmosphericPressureAbsolute	KPa | Pa | mbar	cr1000_weather_station, decagon, influxdb_trail_tower, metstation, towers	5
+Meteorology	airRelativeHumidity	% | degC; Cel | unitless	cr1000_weather_station, decagon, influxdb_trail_tower, metstation, towers	5
+Meteorology	airTemperature	degC; Cel	cr1000_weather_station, decagon, influxdb_trail_tower, metstation, towers	5
+Meteorology	airVaporPressure	KPa | Pa	decagon, influxdb_trail_tower, towers	3
+Meteorology	airVaporPressureDeficit	KPa | Pa	decagon, influxdb_trail_tower, towers	3
+Meteorology	gustSpeed	m/s	decagon, influxdb_trail_tower, towers	3
+Meteorology	lightningActivity	unknown	decagon	1
+Meteorology	lightningDistance	km	decagon	1
+Meteorology	surfaceTemperature	degC; Cel	influxdb_trail_tower, towers	2
+Meteorology	windDirection	deg | rad	cr1000_weather_station, decagon, influxdb_trail_tower, metstation, towers	5
+Meteorology	windDirectionStdDev	rad	influxdb_trail_tower	1
+Meteorology	windSpeed	m/s	cr1000_weather_station, decagon, influxdb_trail_tower, metstation, towers	5
+Radiation	solarRadiation	W/m^2	influxdb_trail_tower, towers	2
+Radiation	solarRadiationIncomingBroadband	W/m^2	cr1000_weather_station, decagon, metstation	3
+Radiation	solarRadiationIncomingLWIR	W/m^2	cr1000_weather_station, influxdb_trail_tower, metstation, towers	4
+Radiation	solarRadiationIncomingPar	W/m^2 | mol/(m^2*s)	cr1000_weather_station, influxdb_trail_tower, towers	3
+Radiation	solarRadiationIncomingSWIR	W/m^2	influxdb_trail_tower, towers	2
+Radiation	solarRadiationNetBroadband	W/m^2	towers	1
+Radiation	solarRadiationNetLWIR	W/m^2	towers	1
+Radiation	solarRadiationNetSWIR	W/m^2	towers	1
+Radiation	solarRadiationReflectedBroadband	W/m^2	cr1000_weather_station, metstation	2
+Radiation	solarRadiationReflectedLWIR	W/m^2	cr1000_weather_station, influxdb_trail_tower, metstation, towers	4
+Radiation	solarRadiationReflectedPar	W/m^2	cr1000_weather_station	1
+Radiation	solarRadiationReflectedSWIR	W/m^2	influxdb_trail_tower, towers	2
+Precipitation	meteorologicalOpticalRange	m	influxdb_ott_disdrometer	1
+Precipitation	numberParticles	mol	influxdb_ott_disdrometer	1
+Precipitation	precipitationMax	m	influxdb_trail_tower	1
+Precipitation	radarReflectivity	dB	influxdb_ott_disdrometer	1
+Precipitation	rainDropCount	mol	influxdb_ott_disdrometer	1
+Precipitation	rainDropKineticEngergy	J	influxdb_ott_disdrometer	1
+Precipitation	rainDropVelocity	m/s	influxdb_ott_disdrometer	1
+Precipitation	rainIntensity	m/s	influxdb_ott_disdrometer	1
+Precipitation	rainPrecipitation	m | mm	decagon, influxdb_ott_disdrometer, influxdb_trail_tower, towers	4
+Precipitation	rainPrecipitation10Minutes	m	cr1000_weather_station	1
+Precipitation	rainPrecipitationCumulative	m	influxdb_ott_disdrometer, metstation	2
+Precipitation	rainPrecipitationRate	mm/hr	decagon	1
+Precipitation	signalAmplitude	unitless	influxdb_ott_disdrometer	1
+Snow	snowDepthIntensity	m/s	influxdb_ott_disdrometer	1
+Snow	snowThickness	m | unknown	cr1000_weather_station, influxdb_trail_tower, metstation, towers	4
+Snow	sonicRangingDistance	m	towers	1
+Soil	soilElectricalConductivity	mS/cm | uS/cm	cr1000_m1_m4, cr1000_weather_station, decagon, metstation	4
+Soil	soilTemperature	degC; Cel	cr1000_m1_m4, cr1000_weather_station, decagon, gradient_sm, influxdb_trail_tower, metstation, towers	7
+Soil	soilVolumetricWaterContent	m^3/m^3 | unitless	cr1000_m1_m4, cr1000_weather_station, decagon, gradient_sm, metstation	5
+Soil	soilWaterPotential	KPa	cr1000_m1_m4, decagon	2
+Ecosystem / energy flux	carbonDioxideConcentration	unitless	towers	1
+Ecosystem / energy flux	evapotranspiration	m/s	influxdb_trail_tower, towers	2
+Ecosystem / energy flux	latentHeatFlux	W/m^2	influxdb_trail_tower, towers	2
+Ecosystem / energy flux	sensibleHeatFlux	W/m^2	influxdb_trail_tower, towers	2
+Ecosystem / energy flux	soilCarbonDioxideConcentration	unitless	towers	1
+Ecosystem / energy flux	soilCarbonDioxideConcentrationAverage	unitless	influxdb_trail_tower	1
+Ecosystem / energy flux	soilCarbonDioxideFlux	mol/(m^2*s)	towers	1
+Ecosystem / energy flux	soilCarbonDioxideFluxAverage	mol/(m^2*s)	influxdb_trail_tower	1
+Ecosystem / energy flux	soilHeatFlux	W/m^2	influxdb_trail_tower, towers	2
+Ecosystem / energy flux	soilOxygenConcentrationPercent	% | unitless	influxdb_trail_tower, towers	2
+Hydrology	waterElectricalConductivity	uS/cm	cr1000_m1_m4, cr1000_weather_station	2
+Hydrology	waterElectricalConductivityNlf	uS/cm	cr1000_weather_station	1
+Hydrology	waterFdom	RFU	cr1000_weather_station	1
+Hydrology	waterFdomQsu	RFU	cr1000_weather_station	1
+Hydrology	waterHeightAboveSensor	m	cr1000_m1_m4, cr1000_weather_station	2
+Hydrology	waterLevel	m	cr1000_m1_m4	1
+Hydrology	waterORP	V	cr1000_weather_station	1
+Hydrology	waterOpticalDissolvedOxygen	mg/L	cr1000_weather_station	1
+Hydrology	waterOpticalDissolvedOxygenPercentAirSaturation	unitless	cr1000_weather_station	1
+Hydrology	waterPressureAbsolute	Pa	cr1000_weather_station	1
+Hydrology	waterPressureVented	Pa	cr1000_m1_m4	1
+Hydrology	waterSalinity	unitless	cr1000_weather_station	1
+Hydrology	waterSpecificConductance	uS/cm	cr1000_m1_m4, cr1000_weather_station	2
+Hydrology	waterStreamDischarge	m^3/s	streamflow	1
+Hydrology	waterTemperature	degC; Cel	cr1000_m1_m4, cr1000_weather_station	2
+Hydrology	waterTotalDissolvedSolids	kg/m^3	cr1000_weather_station	1
+Hydrology	waterTotalSuspendedSolids	kg/m^3	cr1000_weather_station	1
+Hydrology	waterTurbidity	NTU	cr1000_weather_station	1
+Hydrology	waterTurbidityNTU	NTU	cr1000_weather_station	1
+Hydrology	waterpH	unitless	cr1000_weather_station	1
+Hydrology	waterpHmv	V	cr1000_weather_station	1
+Instrument / logger	batteryCharge	%	decagon	1
+Instrument / logger	batteryVoltage	V | mV	cr1000_weather_station, decagon	2
+Instrument / logger	instrumentOrientationX	deg	decagon	1
+Instrument / logger	instrumentOrientationY	deg	decagon	1
+Instrument / logger	referencePressure	KPa	decagon	1
+Instrument / logger	referenceTemperature	degC; Cel	decagon	1

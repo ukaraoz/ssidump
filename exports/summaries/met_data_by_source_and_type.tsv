@@ -1,0 +1,79 @@
+source	data_type	datastreams	sites	good_measurements	first	last	site_codes
+CR1000 stations	airTemperature	19	7	5526640	2016-09	2023-05	ER-AMT1,ER-BLB1,ER-JDF1,ER-KLP1,ER-MXC1,ER-PHF2,SG-SMT1
+CR1000 stations	solarRadiationIncomingBroadband	11	6	2143906	2016-09	2023-03	ER-AMT1,ER-BLB1,ER-JDF1,ER-KLP1,ER-MXC1,SG-SMT1
+CR1000 stations	snowThickness	10	6	2045683	2016-09	2023-03	ER-AMT1,ER-BLB1,ER-JDF1,ER-KLP1,ER-MXC1,SG-SMT1
+CR1000 stations	airAtmosphericPressureAbsolute	7	7	1935980	2016-09	2023-05	ER-AMT1,ER-BLB1,ER-JDF1,ER-KLP1,ER-MXC1,ER-PHF2,SG-SMT1
+CR1000 stations	windSpeed	6	6	1689737	2016-09	2023-03	ER-AMT1,ER-BLB1,ER-JDF1,ER-KLP1,ER-MXC1,SG-SMT1
+CR1000 stations	windDirection	6	6	1689737	2016-09	2023-03	ER-AMT1,ER-BLB1,ER-JDF1,ER-KLP1,ER-MXC1,SG-SMT1
+CR1000 stations	airRelativeHumidity	6	6	1689694	2016-09	2023-03	ER-AMT1,ER-BLB1,ER-JDF1,ER-KLP1,ER-MXC1,SG-SMT1
+CR1000 stations	solarRadiationReflectedBroadband	8	5	1685072	2016-09	2023-03	ER-AMT1,ER-JDF1,ER-KLP1,ER-MXC1,SG-SMT1
+CR1000 stations	solarRadiationIncomingPar	5	5	1407721	2016-09	2023-03	ER-AMT1,ER-JDF1,ER-KLP1,ER-MXC1,SG-SMT1
+CR1000 stations	solarRadiationReflectedPar	5	5	1407520	2016-09	2023-03	ER-AMT1,ER-JDF1,ER-KLP1,ER-MXC1,SG-SMT1
+CR1000 stations	rainPrecipitation10Minutes	2	2	479456	2016-09	2021-09	ER-BLB1,ER-KLP1
+CR1000 stations	solarRadiationReflectedLWIR	5	5	243612	2016-09	2023-03	ER-AMT1,ER-JDF1,ER-KLP1,ER-MXC1,SG-SMT1
+CR1000 stations	solarRadiationIncomingLWIR	5	5	141585	2016-09	2023-03	ER-AMT1,ER-JDF1,ER-KLP1,ER-MXC1,SG-SMT1
+Met station	solarRadiationIncomingLWIR	1	1	236548	2017-03	2021-12	ER-CSMWS
+Met station	solarRadiationReflectedLWIR	1	1	236548	2017-03	2021-12	ER-CSMWS
+Met station	airTemperature	1	1	236548	2017-03	2021-12	ER-CSMWS
+Met station	windSpeed	1	1	236548	2017-03	2021-12	ER-CSMWS
+Met station	windDirection	1	1	236548	2017-03	2021-12	ER-CSMWS
+Met station	airAtmosphericPressureAbsolute	1	1	236548	2017-03	2021-12	ER-CSMWS
+Met station	rainPrecipitationCumulative	1	1	236547	2017-03	2021-12	ER-CSMWS
+Met station	airRelativeHumidity	1	1	236465	2017-03	2021-12	ER-CSMWS
+Met station	snowThickness	1	1	235978	2017-03	2021-12	ER-CSMWS
+Met station	solarRadiationReflectedBroadband	1	1	231540	2017-03	2021-12	ER-CSMWS
+Met station	solarRadiationIncomingBroadband	1	1	137066	2017-03	2021-12	ER-CSMWS
+SNOTEL	airTemperature	5	5	953402	1997-10	2026-07	NRCS-1141,NRCS-380,NRCS-669,NRCS-680,NRCS-737
+SNOTEL	snowWaterEquivalent	5	5	821602	1997-10	2026-07	NRCS-1141,NRCS-380,NRCS-669,NRCS-680,NRCS-737
+SNOTEL	snowThickness	5	5	740066	1997-10	2026-07	NRCS-1141,NRCS-380,NRCS-669,NRCS-680,NRCS-737
+SNOTEL	windDirection	1	1	88076	2016-06	2026-07	NRCS-737
+SNOTEL	windSpeed	1	1	88076	2016-06	2026-07	NRCS-737
+SNOTEL	rainPrecipitationSnowAdjusted	5	5	42051	1997-10	2026-07	NRCS-1141,NRCS-380,NRCS-669,NRCS-680,NRCS-737
+SNOTEL	solarRadiationIncomingBroadband	1	1	17612	2022-07	2024-07	NRCS-737
+SNOTEL	rainPrecipitation	5	5	1391	1997-10	2026-07	NRCS-1141,NRCS-380,NRCS-669,NRCS-680,NRCS-737
+Flux/sensor towers	airTemperature	14	10	260297	2019-10	2026-03	ER-PHS1,ER-PHS2,ER-PHS3,ER-PHS4,SG-EHS5,SG-EHS6,SG-EHS7,SG-EHS8,TR-EHS1,TR-EHS2
+Flux/sensor towers	solarRadiationReflectedLWIR	10	10	247385	2019-10	2026-03	ER-PHS1,ER-PHS2,ER-PHS3,ER-PHS4,SG-EHS5,SG-EHS6,SG-EHS7,SG-EHS8,TR-EHS1,TR-EHS2
+Flux/sensor towers	solarRadiationIncomingLWIR	10	10	247382	2019-10	2026-03	ER-PHS1,ER-PHS2,ER-PHS3,ER-PHS4,SG-EHS5,SG-EHS6,SG-EHS7,SG-EHS8,TR-EHS1,TR-EHS2
+Flux/sensor towers	solarRadiationReflectedSWIR	10	10	246543	2019-10	2026-03	ER-PHS1,ER-PHS2,ER-PHS3,ER-PHS4,SG-EHS5,SG-EHS6,SG-EHS7,SG-EHS8,TR-EHS1,TR-EHS2
+Flux/sensor towers	solarRadiationIncomingPar	10	10	241258	2019-10	2026-03	ER-PHS1,ER-PHS2,ER-PHS3,ER-PHS4,SG-EHS5,SG-EHS6,SG-EHS7,SG-EHS8,TR-EHS1,TR-EHS2
+Flux/sensor towers	solarRadiationIncomingSWIR	10	10	238526	2019-10	2026-03	ER-PHS1,ER-PHS2,ER-PHS3,ER-PHS4,SG-EHS5,SG-EHS6,SG-EHS7,SG-EHS8,TR-EHS1,TR-EHS2
+Flux/sensor towers	solarRadiationNetSWIR	8	8	231004	2019-10	2025-10	ER-PHS1,ER-PHS2,ER-PHS3,ER-PHS4,SG-EHS5,SG-EHS6,SG-EHS7,SG-EHS8
+Flux/sensor towers	snowThickness	10	10	175804	2020-10	2026-03	ER-PHS1,ER-PHS2,ER-PHS3,ER-PHS4,SG-EHS5,SG-EHS6,SG-EHS7,SG-EHS8,TR-EHS1,TR-EHS2
+Flux/sensor towers	solarRadiationNetBroadband	8	8	98766	2019-10	2025-10	ER-PHS1,ER-PHS2,ER-PHS3,ER-PHS4,SG-EHS5,SG-EHS6,SG-EHS7,SG-EHS8
+Flux/sensor towers	airAtmosphericPressureAbsolute	4	2	30602	2025-09	2026-03	TR-EHS1,TR-EHS2
+Flux/sensor towers	airRelativeHumidity	4	2	30329	2025-09	2026-03	TR-EHS1,TR-EHS2
+Flux/sensor towers	solarRadiationNetLWIR	8	8	26762	2019-10	2025-09	ER-PHS1,ER-PHS2,ER-PHS3,ER-PHS4,SG-EHS5,SG-EHS6,SG-EHS7,SG-EHS8
+Flux/sensor towers	windDirection	2	2	16448	2025-09	2026-03	TR-EHS1,TR-EHS2
+Flux/sensor towers	airVaporPressureDeficit	2	2	16127	2025-09	2026-03	TR-EHS1,TR-EHS2
+Flux/sensor towers	rainPrecipitation	2	2	14215	2025-09	2026-03	TR-EHS1,TR-EHS2
+Flux/sensor towers	airVaporPressure	2	2	14215	2025-09	2026-03	TR-EHS1,TR-EHS2
+Flux/sensor towers	windSpeed	2	2	14203	2025-09	2026-03	TR-EHS1,TR-EHS2
+Flux/sensor towers	solarRadiation	2	2	9151	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	airTemperature	6	2	49010	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	airAtmosphericPressureAbsolute	4	2	30602	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	airRelativeHumidity	4	2	30329	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	windDirection	2	2	16448	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	solarRadiationIncomingLWIR	2	2	16384	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	solarRadiationReflectedLWIR	2	2	16384	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	solarRadiationIncomingPar	2	2	16107	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	solarRadiationReflectedSWIR	2	2	15537	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	rainPrecipitation	2	2	14215	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	precipitationMax	2	2	14215	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	windSpeed	2	2	14203	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	snowThickness	2	2	14088	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	windDirectionStdDev	2	2	13044	2025-10	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	solarRadiation	2	2	9151	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	solarRadiationIncomingSWIR	2	2	7522	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	airVaporPressureDeficit	2	2	2752	2025-09	2026-03	TR-EHS1,TR-EHS2
+InfluxDB Trail towers	airVaporPressure	2	2	360	2025-09	2026-03	TR-EHS1,TR-EHS2
+OTT disdrometer	meteorologicalOpticalRange	1	1	7442150	2023-09	2026-07	ER-MMW3
+OTT disdrometer	numberParticles	1	1	7442150	2023-09	2026-07	ER-MMW3
+OTT disdrometer	rainPrecipitation	1	1	7442150	2023-09	2026-07	ER-MMW3
+OTT disdrometer	rainPrecipitationCumulative	1	1	7442150	2023-09	2026-07	ER-MMW3
+OTT disdrometer	rainIntensity	1	1	7442150	2023-09	2026-07	ER-MMW3
+OTT disdrometer	snowDepthIntensity	1	1	7437576	2023-09	2026-07	ER-MMW3
+OTT disdrometer	signalAmplitude	1	1	7434400	2023-09	2026-07	ER-MMW3
+OTT disdrometer	radarReflectivity	1	1	7424272	2023-09	2026-07	ER-MMW3
+OTT disdrometer	rainDropKineticEngergy	1	1	6990823	2023-09	2026-07	ER-MMW3
+OTT disdrometer	rainDropCount	1	1	17878	2026-05	2026-05	ER-MMW3
+OTT disdrometer	rainDropVelocity	1	1	17878	2026-05	2026-05	ER-MMW3

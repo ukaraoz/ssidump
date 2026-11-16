@@ -12,5 +12,8 @@ claude_history/
 __pycache__/
 *_all.tsv
 *_all.tsv.gz
-exports/
+# exports: only the ESS-DIVE packages and summaries are tracked (the table export is not)
+exports/*
+!exports/essdive/
+!exports/summaries/
 resources/

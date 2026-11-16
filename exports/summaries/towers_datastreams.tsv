@@ -1,0 +1,179 @@
+table_name	station	feeder_table	category_sensor	datastream	variable	units	good_measurements	first	last
+feeder_er_phs1_er_phs1_infrared_temp_(c)_meas	ER-PHS1 PumpHouse sensor tower #1	feeder_er_phs1_er_phs1	Air	infrared_temp_(c)	airTemperature	degC; Cel	34244	2019-10-10	2024-09-29
+feeder_er_phs1_er_phs1_sonic_distance_(m)_meas	ER-PHS1 PumpHouse sensor tower #1	feeder_er_phs1_er_phs1	Other	sonic_distance_(m)	sonicRangingDistance	m	33584	2020-10-04	2024-09-29
+feeder_er_phs1_er_phs1_in_long_wave_(w_m2)_meas	ER-PHS1 PumpHouse sensor tower #1	feeder_er_phs1_er_phs1	Radiation	in_long_wave_(w_m2)	solarRadiationIncomingLWIR	W/m^2	41821	2019-10-10	2024-09-29
+feeder_er_phs1_er_phs1_in_short_wave_(w_m2)_meas	ER-PHS1 PumpHouse sensor tower #1	feeder_er_phs1_er_phs1	Radiation	in_short_wave_(w_m2)	solarRadiationIncomingSWIR	W/m^2	41821	2019-10-10	2024-09-29
+feeder_er_phs1_er_phs1_net_long_wave_(w_m2)_meas	ER-PHS1 PumpHouse sensor tower #1	feeder_er_phs1_er_phs1	Radiation	net_long_wave_(w_m2)	solarRadiationNetLWIR	W/m^2	2751	2019-10-18	2024-09-23
+feeder_er_phs1_er_phs1_net_rad_(w_m2)_meas	ER-PHS1 PumpHouse sensor tower #1	feeder_er_phs1_er_phs1	Radiation	net_rad_(w_m2)	solarRadiationNetBroadband	W/m^2	18701	2019-10-10	2024-09-29
+feeder_er_phs1_er_phs1_net_short_wave_(w_m2)_meas	ER-PHS1 PumpHouse sensor tower #1	feeder_er_phs1_er_phs1	Radiation	net_short_wave_(w_m2)	solarRadiationNetSWIR	W/m^2	41821	2019-10-10	2024-09-29
+feeder_er_phs1_er_phs1_out_long_wave_(w_m2)_meas	ER-PHS1 PumpHouse sensor tower #1	feeder_er_phs1_er_phs1	Radiation	out_long_wave_(w_m2)	solarRadiationReflectedLWIR	W/m^2	41821	2019-10-10	2024-09-29
+feeder_er_phs1_er_phs1_out_short_wave_(w_m2)_meas	ER-PHS1 PumpHouse sensor tower #1	feeder_er_phs1_er_phs1	Radiation	out_short_wave_(w_m2)	solarRadiationReflectedSWIR	W/m^2	41821	2019-10-10	2024-09-29
+feeder_er_phs1_er_phs1_par_(umol_m2s)_meas	ER-PHS1 PumpHouse sensor tower #1	feeder_er_phs1_er_phs1	Radiation	par_(umol_m2s)	solarRadiationIncomingPar	mol/(m^2*s)	41704	2019-10-10	2024-09-29
+feeder_er_phs1_er_phs1_snow_depth_sonic_(m)_meas	ER-PHS1 PumpHouse sensor tower #1	feeder_er_phs1_er_phs1	Snow depth	snow_depth_sonic_(m)	snowThickness	m	33584	2020-10-04	2024-09-29
+feeder_er_phs1_er_phs1_co2_conc_(ppm)_meas	ER-PHS1 PumpHouse sensor tower #1	feeder_er_phs1_er_phs1	Soil CO2	co2_conc_(ppm)	soilCarbonDioxideConcentration	unitless	9968	2019-10-12	2024-09-29
+feeder_er_phs1_er_phs1_co2_flux_(umol_m2s)_meas	ER-PHS1 PumpHouse sensor tower #1	feeder_er_phs1_er_phs1	Soil CO2	co2_flux_(umol_m2s)	soilCarbonDioxideFlux	mol/(m^2*s)	9968	2019-10-12	2024-09-29
+feeder_er_phs1_er_phs1_soil_heat_flux_(w_m2)_meas	ER-PHS1 PumpHouse sensor tower #1	feeder_er_phs1_er_phs1	Soil heat flux	soil_heat_flux_(w_m2)	soilHeatFlux	W/m^2	37684	2019-10-10	2024-09-29
+feeder_er_phs1_er_phs1_cal_oxygen_(percent)_meas	ER-PHS1 PumpHouse sensor tower #1	feeder_er_phs1_er_phs1	Soil oxygen	cal_oxygen_(percent)	soilOxygenConcentrationPercent	unitless	28416	2019-10-10	2024-09-29
+feeder_er_phs2_er_phs2_infrared_temp_(c)_meas	ER-PHS2 Pumphouse sensor tower #2	feeder_er_phs2_er_phs2	Air	infrared_temp_(c)	airTemperature	degC; Cel	28857	2019-10-10	2023-10-05
+feeder_er_phs2_er_phs2_sonic_distance_(m)_meas	ER-PHS2 Pumphouse sensor tower #2	feeder_er_phs2_er_phs2	Other	sonic_distance_(m)	sonicRangingDistance	m	21550	2020-10-04	2024-09-29
+feeder_er_phs2_er_phs2_in_long_wave_(w_m2)_meas	ER-PHS2 Pumphouse sensor tower #2	feeder_er_phs2_er_phs2	Radiation	in_long_wave_(w_m2)	solarRadiationIncomingLWIR	W/m^2	34144	2019-10-10	2023-10-05
+feeder_er_phs2_er_phs2_in_short_wave_(w_m2)_meas	ER-PHS2 Pumphouse sensor tower #2	feeder_er_phs2_er_phs2	Radiation	in_short_wave_(w_m2)	solarRadiationIncomingSWIR	W/m^2	34152	2019-10-10	2023-10-05
+feeder_er_phs2_er_phs2_net_long_wave_(w_m2)_meas	ER-PHS2 Pumphouse sensor tower #2	feeder_er_phs2_er_phs2	Radiation	net_long_wave_(w_m2)	solarRadiationNetLWIR	W/m^2	2263	2019-10-29	2023-08-13
+feeder_er_phs2_er_phs2_net_rad_(w_m2)_meas	ER-PHS2 Pumphouse sensor tower #2	feeder_er_phs2_er_phs2	Radiation	net_rad_(w_m2)	solarRadiationNetBroadband	W/m^2	14232	2019-10-10	2023-10-04
+feeder_er_phs2_er_phs2_net_short_wave_(w_m2)_meas	ER-PHS2 Pumphouse sensor tower #2	feeder_er_phs2_er_phs2	Radiation	net_short_wave_(w_m2)	solarRadiationNetSWIR	W/m^2	34152	2019-10-10	2023-10-05
+feeder_er_phs2_er_phs2_out_long_wave_(w_m2)_meas	ER-PHS2 Pumphouse sensor tower #2	feeder_er_phs2_er_phs2	Radiation	out_long_wave_(w_m2)	solarRadiationReflectedLWIR	W/m^2	34148	2019-10-10	2023-10-05
+feeder_er_phs2_er_phs2_out_short_wave_(w_m2)_meas	ER-PHS2 Pumphouse sensor tower #2	feeder_er_phs2_er_phs2	Radiation	out_short_wave_(w_m2)	solarRadiationReflectedSWIR	W/m^2	34152	2019-10-10	2023-10-05
+feeder_er_phs2_er_phs2_par_(umol_m2s)_meas	ER-PHS2 Pumphouse sensor tower #2	feeder_er_phs2_er_phs2	Radiation	par_(umol_m2s)	solarRadiationIncomingPar	mol/(m^2*s)	34330	2019-10-10	2023-10-05
+feeder_er_phs2_er_phs2_snow_depth_sonic_(m)_meas	ER-PHS2 Pumphouse sensor tower #2	feeder_er_phs2_er_phs2	Snow depth	snow_depth_sonic_(m)	snowThickness	m	21550	2020-10-04	2024-09-29
+feeder_er_phs2_er_phs2_co2_conc_(ppm)_meas	ER-PHS2 Pumphouse sensor tower #2	feeder_er_phs2_er_phs2	Soil CO2	co2_conc_(ppm)	soilCarbonDioxideConcentration	unitless	7177	2019-10-12	2023-09-26
+feeder_er_phs2_er_phs2_co2_flux_(umol_m2s)_meas	ER-PHS2 Pumphouse sensor tower #2	feeder_er_phs2_er_phs2	Soil CO2	co2_flux_(umol_m2s)	soilCarbonDioxideFlux	mol/(m^2*s)	7177	2019-10-12	2023-09-26
+feeder_er_phs2_er_phs2_soil_heat_flux_(w_m2)_meas	ER-PHS2 Pumphouse sensor tower #2	feeder_er_phs2_er_phs2	Soil heat flux	soil_heat_flux_(w_m2)	soilHeatFlux	W/m^2	40294	2019-10-10	2024-09-29
+feeder_er_phs2_er_phs2_cal_oxygen_(percent)_meas	ER-PHS2 Pumphouse sensor tower #2	feeder_er_phs2_er_phs2	Soil oxygen	cal_oxygen_(percent)	soilOxygenConcentrationPercent	unitless	24438	2019-10-10	2023-10-05
+feeder_er_phs3_er_phs3_infrared_temp_(c)_meas	ER-PHS3 Pumphouse sensor tower #3	feeder_er_phs3_er_phs3	Air	infrared_temp_(c)	airTemperature	degC; Cel	13482	2019-10-10	2021-09-28
+feeder_er_phs3_er_phs3_sonic_distance_(m)_meas	ER-PHS3 Pumphouse sensor tower #3	feeder_er_phs3_er_phs3	Other	sonic_distance_(m)	sonicRangingDistance	m	0		
+feeder_er_phs3_er_phs3_in_long_wave_(w_m2)_meas	ER-PHS3 Pumphouse sensor tower #3	feeder_er_phs3_er_phs3	Radiation	in_long_wave_(w_m2)	solarRadiationIncomingLWIR	W/m^2	15229	2019-10-10	2021-09-28
+feeder_er_phs3_er_phs3_in_short_wave_(w_m2)_meas	ER-PHS3 Pumphouse sensor tower #3	feeder_er_phs3_er_phs3	Radiation	in_short_wave_(w_m2)	solarRadiationIncomingSWIR	W/m^2	15227	2019-10-10	2021-09-28
+feeder_er_phs3_er_phs3_net_long_wave_(w_m2)_meas	ER-PHS3 Pumphouse sensor tower #3	feeder_er_phs3_er_phs3	Radiation	net_long_wave_(w_m2)	solarRadiationNetLWIR	W/m^2	1505	2019-10-18	2021-09-20
+feeder_er_phs3_er_phs3_net_rad_(w_m2)_meas	ER-PHS3 Pumphouse sensor tower #3	feeder_er_phs3_er_phs3	Radiation	net_rad_(w_m2)	solarRadiationNetBroadband	W/m^2	6008	2019-10-10	2021-09-28
+feeder_er_phs3_er_phs3_net_short_wave_(w_m2)_meas	ER-PHS3 Pumphouse sensor tower #3	feeder_er_phs3_er_phs3	Radiation	net_short_wave_(w_m2)	solarRadiationNetSWIR	W/m^2	15227	2019-10-10	2021-09-28
+feeder_er_phs3_er_phs3_out_long_wave_(w_m2)_meas	ER-PHS3 Pumphouse sensor tower #3	feeder_er_phs3_er_phs3	Radiation	out_long_wave_(w_m2)	solarRadiationReflectedLWIR	W/m^2	15229	2019-10-10	2021-09-28
+feeder_er_phs3_er_phs3_out_short_wave_(w_m2)_meas	ER-PHS3 Pumphouse sensor tower #3	feeder_er_phs3_er_phs3	Radiation	out_short_wave_(w_m2)	solarRadiationReflectedSWIR	W/m^2	15229	2019-10-10	2021-09-28
+feeder_er_phs3_er_phs3_par_(umol_m2s)_meas	ER-PHS3 Pumphouse sensor tower #3	feeder_er_phs3_er_phs3	Radiation	par_(umol_m2s)	solarRadiationIncomingPar	mol/(m^2*s)	15230	2019-10-10	2021-09-28
+feeder_er_phs3_er_phs3_snow_depth_sonic_(m)_meas	ER-PHS3 Pumphouse sensor tower #3	feeder_er_phs3_er_phs3	Snow depth	snow_depth_sonic_(m)	snowThickness	m	0		
+feeder_er_phs3_er_phs3_co2_conc_(ppm)_meas	ER-PHS3 Pumphouse sensor tower #3	feeder_er_phs3_er_phs3	Soil CO2	co2_conc_(ppm)	soilCarbonDioxideConcentration	unitless	398	2019-10-13	2019-12-01
+feeder_er_phs3_er_phs3_co2_flux_(umol_m2s)_meas	ER-PHS3 Pumphouse sensor tower #3	feeder_er_phs3_er_phs3	Soil CO2	co2_flux_(umol_m2s)	soilCarbonDioxideFlux	mol/(m^2*s)	398	2019-10-13	2019-12-01
+feeder_er_phs3_er_phs3_soil_heat_flux_(w_m2)_meas	ER-PHS3 Pumphouse sensor tower #3	feeder_er_phs3_er_phs3	Soil heat flux	soil_heat_flux_(w_m2)	soilHeatFlux	W/m^2	16783	2019-10-10	2021-09-28
+feeder_er_phs3_er_phs3_cal_oxygen_(percent)_meas	ER-PHS3 Pumphouse sensor tower #3	feeder_er_phs3_er_phs3	Soil oxygen	cal_oxygen_(percent)	soilOxygenConcentrationPercent	unitless	15229	2019-10-10	2021-09-28
+feeder_er_phs4_er_phs4_infrared_temp_(c)_meas	ER-PHS4 Pumphouse sensor tower #4	feeder_er_phs4_er_phs4	Air	infrared_temp_(c)	airTemperature	degC; Cel	12746	2019-10-11	2021-06-14
+feeder_er_phs4_er_phs4_sonic_distance_(m)_meas	ER-PHS4 Pumphouse sensor tower #4	feeder_er_phs4_er_phs4	Other	sonic_distance_(m)	sonicRangingDistance	m	5970	2020-10-08	2021-06-14
+feeder_er_phs4_er_phs4_in_long_wave_(w_m2)_meas	ER-PHS4 Pumphouse sensor tower #4	feeder_er_phs4_er_phs4	Radiation	in_long_wave_(w_m2)	solarRadiationIncomingLWIR	W/m^2	14676	2019-10-11	2021-06-14
+feeder_er_phs4_er_phs4_in_short_wave_(w_m2)_meas	ER-PHS4 Pumphouse sensor tower #4	feeder_er_phs4_er_phs4	Radiation	in_short_wave_(w_m2)	solarRadiationIncomingSWIR	W/m^2	14676	2019-10-11	2021-06-14
+feeder_er_phs4_er_phs4_net_long_wave_(w_m2)_meas	ER-PHS4 Pumphouse sensor tower #4	feeder_er_phs4_er_phs4	Radiation	net_long_wave_(w_m2)	solarRadiationNetLWIR	W/m^2	989	2019-10-29	2021-05-17
+feeder_er_phs4_er_phs4_net_rad_(w_m2)_meas	ER-PHS4 Pumphouse sensor tower #4	feeder_er_phs4_er_phs4	Radiation	net_rad_(w_m2)	solarRadiationNetBroadband	W/m^2	5675	2019-10-11	2021-06-14
+feeder_er_phs4_er_phs4_net_short_wave_(w_m2)_meas	ER-PHS4 Pumphouse sensor tower #4	feeder_er_phs4_er_phs4	Radiation	net_short_wave_(w_m2)	solarRadiationNetSWIR	W/m^2	14676	2019-10-11	2021-06-14
+feeder_er_phs4_er_phs4_out_long_wave_(w_m2)_meas	ER-PHS4 Pumphouse sensor tower #4	feeder_er_phs4_er_phs4	Radiation	out_long_wave_(w_m2)	solarRadiationReflectedLWIR	W/m^2	14676	2019-10-11	2021-06-14
+feeder_er_phs4_er_phs4_out_short_wave_(w_m2)_meas	ER-PHS4 Pumphouse sensor tower #4	feeder_er_phs4_er_phs4	Radiation	out_short_wave_(w_m2)	solarRadiationReflectedSWIR	W/m^2	14676	2019-10-11	2021-06-14
+feeder_er_phs4_er_phs4_par_(umol_m2s)_meas	ER-PHS4 Pumphouse sensor tower #4	feeder_er_phs4_er_phs4	Radiation	par_(umol_m2s)	solarRadiationIncomingPar	mol/(m^2*s)	14676	2019-10-11	2021-06-14
+feeder_er_phs4_er_phs4_snow_depth_sonic_(m)_meas	ER-PHS4 Pumphouse sensor tower #4	feeder_er_phs4_er_phs4	Snow depth	snow_depth_sonic_(m)	snowThickness	m	5970	2020-10-08	2021-06-14
+feeder_er_phs4_er_phs4_co2_conc_(ppm)_meas	ER-PHS4 Pumphouse sensor tower #4	feeder_er_phs4_er_phs4	Soil CO2	co2_conc_(ppm)	soilCarbonDioxideConcentration	unitless	3136	2019-10-14	2020-11-09
+feeder_er_phs4_er_phs4_co2_flux_(umol_m2s)_meas	ER-PHS4 Pumphouse sensor tower #4	feeder_er_phs4_er_phs4	Soil CO2	co2_flux_(umol_m2s)	soilCarbonDioxideFlux	mol/(m^2*s)	3136	2019-10-14	2020-11-09
+feeder_er_phs4_er_phs4_soil_heat_flux_(w_m2)_meas	ER-PHS4 Pumphouse sensor tower #4	feeder_er_phs4_er_phs4	Soil heat flux	soil_heat_flux_(w_m2)	soilHeatFlux	W/m^2	14675	2019-10-11	2021-06-14
+feeder_er_phs4_er_phs4_cal_oxygen_(percent)_meas	ER-PHS4 Pumphouse sensor tower #4	feeder_er_phs4_er_phs4	Soil oxygen	cal_oxygen_(percent)	soilOxygenConcentrationPercent	unitless	14668	2019-10-11	2021-06-14
+feeder_sg_ehs5_sg_ehs5_infrared_temp_(c)_meas	SG-EHS5 Snodgrass tower #5	feeder_sg_ehs5_sg_ehs5	Air	infrared_temp_(c)	airTemperature	degC; Cel	35242	2020-10-10	2025-10-08
+feeder_sg_ehs5_sg_ehs5_sonic_distance_(m)_meas	SG-EHS5 Snodgrass tower #5	feeder_sg_ehs5_sg_ehs5	Other	sonic_distance_(m)	sonicRangingDistance	m	35680	2020-10-10	2025-10-08
+feeder_sg_ehs5_sg_ehs5_in_long_wave_(w_m2)_meas	SG-EHS5 Snodgrass tower #5	feeder_sg_ehs5_sg_ehs5	Radiation	in_long_wave_(w_m2)	solarRadiationIncomingLWIR	W/m^2	34175	2020-10-10	2025-10-08
+feeder_sg_ehs5_sg_ehs5_in_short_wave_(w_m2)_meas	SG-EHS5 Snodgrass tower #5	feeder_sg_ehs5_sg_ehs5	Radiation	in_short_wave_(w_m2)	solarRadiationIncomingSWIR	W/m^2	34175	2020-10-10	2025-10-08
+feeder_sg_ehs5_sg_ehs5_net_long_wave_(w_m2)_meas	SG-EHS5 Snodgrass tower #5	feeder_sg_ehs5_sg_ehs5	Radiation	net_long_wave_(w_m2)	solarRadiationNetLWIR	W/m^2	2432	2020-10-26	2025-09-23
+feeder_sg_ehs5_sg_ehs5_net_rad_(w_m2)_meas	SG-EHS5 Snodgrass tower #5	feeder_sg_ehs5_sg_ehs5	Radiation	net_rad_(w_m2)	solarRadiationNetBroadband	W/m^2	11194	2020-10-10	2025-10-08
+feeder_sg_ehs5_sg_ehs5_net_short_wave_(w_m2)_meas	SG-EHS5 Snodgrass tower #5	feeder_sg_ehs5_sg_ehs5	Radiation	net_short_wave_(w_m2)	solarRadiationNetSWIR	W/m^2	34175	2020-10-10	2025-10-08
+feeder_sg_ehs5_sg_ehs5_out_long_wave_(w_m2)_meas	SG-EHS5 Snodgrass tower #5	feeder_sg_ehs5_sg_ehs5	Radiation	out_long_wave_(w_m2)	solarRadiationReflectedLWIR	W/m^2	34174	2020-10-10	2025-10-08
+feeder_sg_ehs5_sg_ehs5_out_short_wave_(w_m2)_meas	SG-EHS5 Snodgrass tower #5	feeder_sg_ehs5_sg_ehs5	Radiation	out_short_wave_(w_m2)	solarRadiationReflectedSWIR	W/m^2	34175	2020-10-10	2025-10-08
+feeder_sg_ehs5_sg_ehs5_par_(umol_m2s)_meas	SG-EHS5 Snodgrass tower #5	feeder_sg_ehs5_sg_ehs5	Radiation	par_(umol_m2s)	solarRadiationIncomingPar	mol/(m^2*s)	28290	2020-10-10	2025-10-08
+feeder_sg_ehs5_sg_ehs5_snow_depth_sonic_(m)_meas	SG-EHS5 Snodgrass tower #5	feeder_sg_ehs5_sg_ehs5	Snow depth	snow_depth_sonic_(m)	snowThickness	m	35680	2020-10-10	2025-10-08
+feeder_sg_ehs5_sg_ehs5_co2_conc_(ppm)_meas	SG-EHS5 Snodgrass tower #5	feeder_sg_ehs5_sg_ehs5	Soil CO2	co2_conc_(ppm)	soilCarbonDioxideConcentration	unitless	10694	2020-10-10	2025-08-08
+feeder_sg_ehs5_sg_ehs5_co2_flux_(umol_m2s)_meas	SG-EHS5 Snodgrass tower #5	feeder_sg_ehs5_sg_ehs5	Soil CO2	co2_flux_(umol_m2s)	soilCarbonDioxideFlux	mol/(m^2*s)	10694	2020-10-10	2025-08-08
+feeder_sg_ehs5_sg_ehs5_soil_heat_flux_(w_m2)_meas	SG-EHS5 Snodgrass tower #5	feeder_sg_ehs5_sg_ehs5	Soil heat flux	soil_heat_flux_(w_m2)	soilHeatFlux	W/m^2	27946	2020-10-10	2025-02-08
+feeder_sg_ehs5_sg_ehs5_cal_oxygen_(percent)_meas	SG-EHS5 Snodgrass tower #5	feeder_sg_ehs5_sg_ehs5	Soil oxygen	cal_oxygen_(percent)	soilOxygenConcentrationPercent	unitless	26951	2020-10-10	2025-10-08
+feeder_sg_ehs6_sg_ehs6_infrared_temp_(c)_meas	SG-EHS6 Snodgrass tower #6	feeder_sg_ehs6_sg_ehs6	Air	infrared_temp_(c)	airTemperature	degC; Cel	43233	2020-10-10	2025-10-08
+feeder_sg_ehs6_sg_ehs6_sonic_distance_(m)_meas	SG-EHS6 Snodgrass tower #6	feeder_sg_ehs6_sg_ehs6	Other	sonic_distance_(m)	sonicRangingDistance	m	42922	2020-10-10	2025-10-08
+feeder_sg_ehs6_sg_ehs6_in_long_wave_(w_m2)_meas	SG-EHS6 Snodgrass tower #6	feeder_sg_ehs6_sg_ehs6	Radiation	in_long_wave_(w_m2)	solarRadiationIncomingLWIR	W/m^2	43234	2020-10-10	2025-10-08
+feeder_sg_ehs6_sg_ehs6_in_short_wave_(w_m2)_meas	SG-EHS6 Snodgrass tower #6	feeder_sg_ehs6_sg_ehs6	Radiation	in_short_wave_(w_m2)	solarRadiationIncomingSWIR	W/m^2	43234	2020-10-10	2025-10-08
+feeder_sg_ehs6_sg_ehs6_net_long_wave_(w_m2)_meas	SG-EHS6 Snodgrass tower #6	feeder_sg_ehs6_sg_ehs6	Radiation	net_long_wave_(w_m2)	solarRadiationNetLWIR	W/m^2	11185	2020-10-11	2025-09-26
+feeder_sg_ehs6_sg_ehs6_net_rad_(w_m2)_meas	SG-EHS6 Snodgrass tower #6	feeder_sg_ehs6_sg_ehs6	Radiation	net_rad_(w_m2)	solarRadiationNetBroadband	W/m^2	20714	2020-10-10	2025-10-08
+feeder_sg_ehs6_sg_ehs6_net_short_wave_(w_m2)_meas	SG-EHS6 Snodgrass tower #6	feeder_sg_ehs6_sg_ehs6	Radiation	net_short_wave_(w_m2)	solarRadiationNetSWIR	W/m^2	43234	2020-10-10	2025-10-08
+feeder_sg_ehs6_sg_ehs6_out_long_wave_(w_m2)_meas	SG-EHS6 Snodgrass tower #6	feeder_sg_ehs6_sg_ehs6	Radiation	out_long_wave_(w_m2)	solarRadiationReflectedLWIR	W/m^2	43234	2020-10-10	2025-10-08
+feeder_sg_ehs6_sg_ehs6_out_short_wave_(w_m2)_meas	SG-EHS6 Snodgrass tower #6	feeder_sg_ehs6_sg_ehs6	Radiation	out_short_wave_(w_m2)	solarRadiationReflectedSWIR	W/m^2	43234	2020-10-10	2025-10-08
+feeder_sg_ehs6_sg_ehs6_par_(umol_m2s)_meas	SG-EHS6 Snodgrass tower #6	feeder_sg_ehs6_sg_ehs6	Radiation	par_(umol_m2s)	solarRadiationIncomingPar	mol/(m^2*s)	43787	2020-10-10	2025-10-08
+feeder_sg_ehs6_sg_ehs6_snow_depth_sonic_(m)_meas	SG-EHS6 Snodgrass tower #6	feeder_sg_ehs6_sg_ehs6	Snow depth	snow_depth_sonic_(m)	snowThickness	m	42922	2020-10-10	2025-10-08
+feeder_sg_ehs6_sg_ehs6_co2_conc_(ppm)_meas	SG-EHS6 Snodgrass tower #6	feeder_sg_ehs6_sg_ehs6	Soil CO2	co2_conc_(ppm)	soilCarbonDioxideConcentration	unitless	6893	2020-10-10	2023-02-19
+feeder_sg_ehs6_sg_ehs6_co2_flux_(umol_m2s)_meas	SG-EHS6 Snodgrass tower #6	feeder_sg_ehs6_sg_ehs6	Soil CO2	co2_flux_(umol_m2s)	soilCarbonDioxideFlux	mol/(m^2*s)	6893	2020-10-10	2023-02-19
+feeder_sg_ehs6_sg_ehs6_soil_heat_flux_(w_m2)_meas	SG-EHS6 Snodgrass tower #6	feeder_sg_ehs6_sg_ehs6	Soil heat flux	soil_heat_flux_(w_m2)	soilHeatFlux	W/m^2	30683	2020-10-10	2025-10-08
+feeder_sg_ehs6_sg_ehs6_cal_oxygen_(percent)_meas	SG-EHS6 Snodgrass tower #6	feeder_sg_ehs6_sg_ehs6	Soil oxygen	cal_oxygen_(percent)	soilOxygenConcentrationPercent	unitless	32257	2020-10-10	2024-07-29
+feeder_sg_ehs7_sg_ehs7_infrared_temp_(c)_meas	SG-EHS7 Snodgrass tower #7	feeder_sg_ehs7_sg_ehs7	Air	infrared_temp_(c)	airTemperature	degC; Cel	19868	2021-10-01	2025-10-04
+feeder_sg_ehs7_sg_ehs7_sonic_distance_(m)_meas	SG-EHS7 Snodgrass tower #7	feeder_sg_ehs7_sg_ehs7	Other	sonic_distance_(m)	sonicRangingDistance	m	0		
+feeder_sg_ehs7_sg_ehs7_in_long_wave_(w_m2)_meas	SG-EHS7 Snodgrass tower #7	feeder_sg_ehs7_sg_ehs7	Radiation	in_long_wave_(w_m2)	solarRadiationIncomingLWIR	W/m^2	19869	2021-10-01	2025-10-04
+feeder_sg_ehs7_sg_ehs7_in_short_wave_(w_m2)_meas	SG-EHS7 Snodgrass tower #7	feeder_sg_ehs7_sg_ehs7	Radiation	in_short_wave_(w_m2)	solarRadiationIncomingSWIR	W/m^2	19869	2021-10-01	2025-10-04
+feeder_sg_ehs7_sg_ehs7_net_long_wave_(w_m2)_meas	SG-EHS7 Snodgrass tower #7	feeder_sg_ehs7_sg_ehs7	Radiation	net_long_wave_(w_m2)	solarRadiationNetLWIR	W/m^2	2342	2021-10-02	2025-09-14
+feeder_sg_ehs7_sg_ehs7_net_rad_(w_m2)_meas	SG-EHS7 Snodgrass tower #7	feeder_sg_ehs7_sg_ehs7	Radiation	net_rad_(w_m2)	solarRadiationNetBroadband	W/m^2	9349	2021-10-01	2025-10-03
+feeder_sg_ehs7_sg_ehs7_net_short_wave_(w_m2)_meas	SG-EHS7 Snodgrass tower #7	feeder_sg_ehs7_sg_ehs7	Radiation	net_short_wave_(w_m2)	solarRadiationNetSWIR	W/m^2	19869	2021-10-01	2025-10-04
+feeder_sg_ehs7_sg_ehs7_out_long_wave_(w_m2)_meas	SG-EHS7 Snodgrass tower #7	feeder_sg_ehs7_sg_ehs7	Radiation	out_long_wave_(w_m2)	solarRadiationReflectedLWIR	W/m^2	19869	2021-10-01	2025-10-04
+feeder_sg_ehs7_sg_ehs7_out_short_wave_(w_m2)_meas	SG-EHS7 Snodgrass tower #7	feeder_sg_ehs7_sg_ehs7	Radiation	out_short_wave_(w_m2)	solarRadiationReflectedSWIR	W/m^2	19869	2021-10-01	2025-10-04
+feeder_sg_ehs7_sg_ehs7_par_(umol_m2s)_meas	SG-EHS7 Snodgrass tower #7	feeder_sg_ehs7_sg_ehs7	Radiation	par_(umol_m2s)	solarRadiationIncomingPar	mol/(m^2*s)	18371	2021-10-01	2024-08-21
+feeder_sg_ehs7_sg_ehs7_snow_depth_sonic_(m)_meas	SG-EHS7 Snodgrass tower #7	feeder_sg_ehs7_sg_ehs7	Snow depth	snow_depth_sonic_(m)	snowThickness	m	0		
+feeder_sg_ehs7_sg_ehs7_co2_conc_(ppm)_meas	SG-EHS7 Snodgrass tower #7	feeder_sg_ehs7_sg_ehs7	Soil CO2	co2_conc_(ppm)	soilCarbonDioxideConcentration	unitless	5423	2021-10-03	2023-11-02
+feeder_sg_ehs7_sg_ehs7_co2_flux_(umol_m2s)_meas	SG-EHS7 Snodgrass tower #7	feeder_sg_ehs7_sg_ehs7	Soil CO2	co2_flux_(umol_m2s)	soilCarbonDioxideFlux	mol/(m^2*s)	5423	2021-10-03	2023-11-02
+feeder_sg_ehs7_sg_ehs7_soil_heat_flux_(w_m2)_meas	SG-EHS7 Snodgrass tower #7	feeder_sg_ehs7_sg_ehs7	Soil heat flux	soil_heat_flux_(w_m2)	soilHeatFlux	W/m^2	18706	2021-10-01	2024-09-30
+feeder_sg_ehs7_sg_ehs7_cal_oxygen_(percent)_meas	SG-EHS7 Snodgrass tower #7	feeder_sg_ehs7_sg_ehs7	Soil oxygen	cal_oxygen_(percent)	soilOxygenConcentrationPercent	unitless	20361	2021-10-01	2025-10-04
+feeder_sg_ehs8_sg_ehs8_infrared_temp_(c)_meas	SG-EHS8 Snodgrass tower #8	feeder_sg_ehs8_sg_ehs8	Air	infrared_temp_(c)	airTemperature	degC; Cel	23615	2021-10-15	2025-10-08
+feeder_sg_ehs8_sg_ehs8_sonic_distance_(m)_meas	SG-EHS8 Snodgrass tower #8	feeder_sg_ehs8_sg_ehs8	Other	sonic_distance_(m)	sonicRangingDistance	m	22010	2021-10-15	2025-03-18
+feeder_sg_ehs8_sg_ehs8_in_long_wave_(w_m2)_meas	SG-EHS8 Snodgrass tower #8	feeder_sg_ehs8_sg_ehs8	Radiation	in_long_wave_(w_m2)	solarRadiationIncomingLWIR	W/m^2	27850	2021-10-15	2025-10-08
+feeder_sg_ehs8_sg_ehs8_in_short_wave_(w_m2)_meas	SG-EHS8 Snodgrass tower #8	feeder_sg_ehs8_sg_ehs8	Radiation	in_short_wave_(w_m2)	solarRadiationIncomingSWIR	W/m^2	27850	2021-10-15	2025-10-08
+feeder_sg_ehs8_sg_ehs8_net_long_wave_(w_m2)_meas	SG-EHS8 Snodgrass tower #8	feeder_sg_ehs8_sg_ehs8	Radiation	net_long_wave_(w_m2)	solarRadiationNetLWIR	W/m^2	3295	2021-10-15	2025-09-17
+feeder_sg_ehs8_sg_ehs8_net_rad_(w_m2)_meas	SG-EHS8 Snodgrass tower #8	feeder_sg_ehs8_sg_ehs8	Radiation	net_rad_(w_m2)	solarRadiationNetBroadband	W/m^2	12893	2021-10-15	2025-10-08
+feeder_sg_ehs8_sg_ehs8_net_short_wave_(w_m2)_meas	SG-EHS8 Snodgrass tower #8	feeder_sg_ehs8_sg_ehs8	Radiation	net_short_wave_(w_m2)	solarRadiationNetSWIR	W/m^2	27850	2021-10-15	2025-10-08
+feeder_sg_ehs8_sg_ehs8_out_long_wave_(w_m2)_meas	SG-EHS8 Snodgrass tower #8	feeder_sg_ehs8_sg_ehs8	Radiation	out_long_wave_(w_m2)	solarRadiationReflectedLWIR	W/m^2	27850	2021-10-15	2025-10-08
+feeder_sg_ehs8_sg_ehs8_out_short_wave_(w_m2)_meas	SG-EHS8 Snodgrass tower #8	feeder_sg_ehs8_sg_ehs8	Radiation	out_short_wave_(w_m2)	solarRadiationReflectedSWIR	W/m^2	27850	2021-10-15	2025-10-08
+feeder_sg_ehs8_sg_ehs8_par_(umol_m2s)_meas	SG-EHS8 Snodgrass tower #8	feeder_sg_ehs8_sg_ehs8	Radiation	par_(umol_m2s)	solarRadiationIncomingPar	mol/(m^2*s)	28763	2021-10-15	2025-10-08
+feeder_sg_ehs8_sg_ehs8_snow_depth_sonic_(m)_meas	SG-EHS8 Snodgrass tower #8	feeder_sg_ehs8_sg_ehs8	Snow depth	snow_depth_sonic_(m)	snowThickness	m	22010	2021-10-15	2025-03-18
+feeder_sg_ehs8_sg_ehs8_co2_conc_(ppm)_meas	SG-EHS8 Snodgrass tower #8	feeder_sg_ehs8_sg_ehs8	Soil CO2	co2_conc_(ppm)	soilCarbonDioxideConcentration	unitless	3947	2021-10-17	2023-11-17
+feeder_sg_ehs8_sg_ehs8_co2_flux_(umol_m2s)_meas	SG-EHS8 Snodgrass tower #8	feeder_sg_ehs8_sg_ehs8	Soil CO2	co2_flux_(umol_m2s)	soilCarbonDioxideFlux	mol/(m^2*s)	3947	2021-10-17	2023-11-17
+feeder_sg_ehs8_sg_ehs8_soil_heat_flux_(w_m2)_meas	SG-EHS8 Snodgrass tower #8	feeder_sg_ehs8_sg_ehs8	Soil heat flux	soil_heat_flux_(w_m2)	soilHeatFlux	W/m^2	20848	2021-10-15	2025-06-23
+feeder_sg_ehs8_sg_ehs8_cal_oxygen_(percent)_meas	SG-EHS8 Snodgrass tower #8	feeder_sg_ehs8_sg_ehs8	Soil oxygen	cal_oxygen_(percent)	soilOxygenConcentrationPercent	unitless	26311	2021-10-15	2025-10-08
+feeder_tr_ehs1_trail_tr_ehs1_air_temperature_atmos_av_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Air	air_temperature_atmos_av	airTemperature	degC; Cel	8530	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_air_temperature_licor_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Air	air_temperature_licor	airTemperature	degC; Cel	8406	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_air_temperature_sonic_av_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Air	air_temperature_sonic_av	airTemperature	degC; Cel	8470	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_atmospheric_pressure_atm_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Air	atmospheric_pressure_atm	airAtmosphericPressureAbsolute	KPa	6298	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_atmospheric_pressure_lic_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Air	atmospheric_pressure_lic	airAtmosphericPressureAbsolute	KPa	8476	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_relative_humidity_atmos_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Air	relative_humidity_atmos	airRelativeHumidity	%	6298	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_relative_humidity_licor_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Air	relative_humidity_licor	airRelativeHumidity	%	8325	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_vapor_pressure_atmos_avg_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Air	vapor_pressure_atmos_avg	airVaporPressure	KPa	6298	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_vapor_pressure_deficit_l_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Air	vapor_pressure_deficit_l	airVaporPressureDeficit	KPa	8331	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_actual_evapotranspiratio_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	ET / energy flux	actual_evapotranspiratio	evapotranspiration	m/s	5159	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_latent_heat_flux_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	ET / energy flux	latent_heat_flux	latentHeatFlux	W/m^2	8318	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_sensible_heat_flux_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	ET / energy flux	sensible_heat_flux	sensibleHeatFlux	W/m^2	8317	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_co2_concentration_avg_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Other	co2_concentration_avg	carbonDioxideConcentration	unitless	8449	2025-09-04	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_precipitation_tot_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Precipitation	precipitation_tot	rainPrecipitation	m	6298	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_incoming_longwave_avg_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Radiation	incoming_longwave_avg	solarRadiationIncomingLWIR	W/m^2	8478	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_incoming_shortwave_avg_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Radiation	incoming_shortwave_avg	solarRadiationIncomingSWIR	W/m^2	3889	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_outgoing_longwave_avg_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Radiation	outgoing_longwave_avg	solarRadiationReflectedLWIR	W/m^2	8478	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_outgoing_shortwave_avg_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Radiation	outgoing_shortwave_avg	solarRadiationReflectedSWIR	W/m^2	7788	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_par_avg_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Radiation	par_avg	solarRadiationIncomingPar	mol/(m^2*s)	8310	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_solar_radiation_atmos_av_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Radiation	solar_radiation_atmos_av	solarRadiation	W/m^2	4072	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_sonic_distance_avg_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Snow depth	sonic_distance_avg	snowThickness	m	6236	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_co2_flux_avg_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Soil CO2	co2_flux_avg	soilCarbonDioxideFlux	mol/(m^2*s)	8451	2025-09-04	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_soil_heat_flux_avg_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Soil heat flux	soil_heat_flux_avg	soilHeatFlux	W/m^2	8515	2025-09-04	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_soil_oxygen_avg_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Soil oxygen	soil_oxygen_avg	soilOxygenConcentrationPercent	%	5493	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_soil_oxygen_sensor_tempe_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Soil temperature / moisture	soil_oxygen_sensor_tempe	soilTemperature	degC; Cel	8521	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_target_temperature_avg_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Surface temperature	target_temperature_avg	surfaceTemperature	degC; Cel	8528	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_gust_speed_max_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Wind	gust_speed_max	gustSpeed	m/s	6288	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_wind_direction_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Wind	wind_direction	windDirection	rad	8531	2025-09-05	2026-03-06
+feeder_tr_ehs1_trail_tr_ehs1_wind_speed_meas	TR-EHS1 Trail Creek ET Tower #1	feeder_tr_ehs1_trail_tr_ehs1	Wind	wind_speed	windSpeed	m/s	6286	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_air_temperature_atmos_av_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Air	air_temperature_atmos_av	airTemperature	degC; Cel	7917	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_air_temperature_licor_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Air	air_temperature_licor	airTemperature	degC; Cel	7835	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_air_temperature_sonic_av_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Air	air_temperature_sonic_av	airTemperature	degC; Cel	7852	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_atmospheric_pressure_atm_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Air	atmospheric_pressure_atm	airAtmosphericPressureAbsolute	KPa	7917	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_atmospheric_pressure_lic_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Air	atmospheric_pressure_lic	airAtmosphericPressureAbsolute	KPa	7911	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_relative_humidity_atmos_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Air	relative_humidity_atmos	airRelativeHumidity	%	7917	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_relative_humidity_licor_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Air	relative_humidity_licor	airRelativeHumidity	%	7789	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_vapor_pressure_atmos_avg_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Air	vapor_pressure_atmos_avg	airVaporPressure	KPa	7917	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_vapor_pressure_deficit_l_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Air	vapor_pressure_deficit_l	airVaporPressureDeficit	KPa	7796	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_actual_evapotranspiratio_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	ET / energy flux	actual_evapotranspiratio	evapotranspiration	m/s	6792	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_latent_heat_flux_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	ET / energy flux	latent_heat_flux	latentHeatFlux	W/m^2	7432	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_sensible_heat_flux_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	ET / energy flux	sensible_heat_flux	sensibleHeatFlux	W/m^2	7432	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_co2_concentration_avg_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Other	co2_concentration_avg	carbonDioxideConcentration	unitless	5558	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_precipitation_tot_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Precipitation	precipitation_tot	rainPrecipitation	m	7917	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_incoming_longwave_avg_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Radiation	incoming_longwave_avg	solarRadiationIncomingLWIR	W/m^2	7906	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_incoming_shortwave_avg_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Radiation	incoming_shortwave_avg	solarRadiationIncomingSWIR	W/m^2	3633	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_outgoing_longwave_avg_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Radiation	outgoing_longwave_avg	solarRadiationReflectedLWIR	W/m^2	7906	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_outgoing_shortwave_avg_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Radiation	outgoing_shortwave_avg	solarRadiationReflectedSWIR	W/m^2	7749	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_par_avg_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Radiation	par_avg	solarRadiationIncomingPar	mol/(m^2*s)	7797	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_solar_radiation_atmos_av_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Radiation	solar_radiation_atmos_av	solarRadiation	W/m^2	5079	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_sonic_distance_avg_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Snow depth	sonic_distance_avg	snowThickness	m	7852	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_co2_flux_avg_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Soil CO2	co2_flux_avg	soilCarbonDioxideFlux	mol/(m^2*s)	7888	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_soil_heat_flux_avg_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Soil heat flux	soil_heat_flux_avg	soilHeatFlux	W/m^2	7894	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_soil_oxygen_avg_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Soil oxygen	soil_oxygen_avg	soilOxygenConcentrationPercent	%	7893	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_soil_oxygen_sensor_tempe_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Soil temperature / moisture	soil_oxygen_sensor_tempe	soilTemperature	degC; Cel	7893	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_target_temperature_avg_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Surface temperature	target_temperature_avg	surfaceTemperature	degC; Cel	7805	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_gust_speed_max_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Wind	gust_speed_max	gustSpeed	m/s	7917	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_wind_direction_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Wind	wind_direction	windDirection	rad	7917	2025-09-05	2026-03-06
+feeder_tr_ehs2_trail_tr_ehs2_wind_speed_meas	TR-EHS2 Trail Creek ET Tower #2	feeder_tr_ehs2_trail_tr_ehs2	Wind	wind_speed	windSpeed	m/s	7917	2025-09-05	2026-03-06
