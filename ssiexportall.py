@@ -4,7 +4,7 @@
 Needs the server running (`ssidump.py start`). Python 3 standard library only; uses psql.
 
     ssiexportall.py --schema odmx --schema knowledge --schema feeder --schema datastreams \\
-                    --exclude 'datastreams:^sentinel_' --out exports/full_2026-10-26 -j 6
+                    --exclude 'datastreams:^sentinel_' --out exports/tables_2026-10-26 -j 6
 
 Writes  OUT/<schema>/<table>.csv.gz   (header row; NULL = empty field, empty string = "",
                                        NaN = NaN, geometry = hex WKB)
