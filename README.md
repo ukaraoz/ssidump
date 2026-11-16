@@ -158,10 +158,10 @@ export writes three files, so it can be checked and rerun:
 ```bash
 ssiselect.py options --owner Wielandt                     # what this owner has: data types, sensors, sites
 ssiselect.py catalog --owner Wielandt -o stijn_catalog.tsv
-ssiselect.py hierarchy --owner Wielandt -o exports/stijn_wielandt/hierarchy.json   # site -> device -> sensors
+ssiselect.py hierarchy --owner Wielandt -o stijn_hierarchy.json   # site -> device -> sensors
 ssiselect.py export  --owner Wielandt --data-type soilTemperature --sensor-type "TMP 117" \
-                     -o exports/stijn_wielandt/soil_temperature.tsv.gz
-ssiselect.py export  --config exports/stijn_wielandt/soil_temperature.manifest.json -o rerun.tsv.gz
+                     -o soil_temperature.tsv.gz
+ssiselect.py export  --config soil_temperature.manifest.json -o rerun.tsv.gz
 ```
 
 Selection options are repeatable (OR within an option, AND between options):
@@ -194,7 +194,7 @@ cd /global/cfs/cdirs/m4915/roelef_ssidump
 ./run_restore_export.sh                # log in run.log; JOBS=16 ./run_restore_export.sh for fewer parallel tables
 ```
 
-It exports `datastreams`, `odmx`, `knowledge` and `feeder` to `exports/full_<dump date>/`, skips the
+It exports `datastreams`, `odmx`, `knowledge` and `feeder` to `exports/tables_<dump date>/`, skips the
 Sentinel tables (`^sentinel_`) in `datastreams` and `feeder`, and exports InfluxDB tables first. Each
 schema folder has `<table>.csv.gz` files (header row; NULL = empty field, empty string = `""`,
 NaN = `NaN`, geometry = hex WKB) and a `_tables.tsv` of rows, bytes and SHA-256; `manifest.json` records
@@ -209,6 +209,56 @@ ssiexportall.py --schema datastreams --exclude 'datastreams:^sentinel_' \
 
 The 2026-10-26 dump restored and exported in about 10 minutes on a login node with 40 parallel tables:
 8,962 datastreams tables (338 M rows), 247 odmx, 4 knowledge and 150 feeder tables (22.6 M rows), 1.9 GB.
+
+## ESS-DIVE packages (`essdive/`, `ssi2essdive.py`)
+
+`essdive/` is a small standard-library package for writing ESS-DIVE reporting-format packages, kept
+separate from the database so other sources can reuse it. It implements the **Sensor Time Series -
+Full v1.0.0** format with **Location Metadata v2.0.0** (both from the
+[ESS-DIVE Workspace](https://github.com/ess-dive-workspace); the official templates are vendored in
+`essdive/templates/`).
+
+| Module | Role |
+|---|---|
+| `essdive/spec.py` | column orders and verbatim definitions (read from the templates), controlled vocabularies |
+| `essdive/model.py` | source-independent package description: locations, attributes, data files, columns |
+| `essdive/vocab.py` | SSI units / variables / quality codes to ESS-DIVE vocabularies (extend as needed) |
+| `essdive/writers.py` | writes data files, data dictionaries, methods and attributes, locations, FLMD |
+| `essdive/validate.py` | checks a written package (`python3 -m essdive.validate DIR`) |
+| `essdive/ssi_source.py` | builds a package from `ssiselect.py` catalog rows and the datastream tables |
+| `tests/test_essdive.py` | unit tests without a database (`python3 -m unittest discover -s tests`) |
+
+```bash
+# SNOD1 soil nodes 026, 028, 030: from the table export (no server), all tables of the three nodes,
+# columns named after the database tables, one file per node and variable
+P=influxdb_SNOD1_soil_nodes
+ssi2essdive.py sensor-full --export exports/tables_2026-10-26 --owner Wielandt \
+    --site =SG-DTP26 --site =SG-DTP28 --site =SG-DTP30 \
+    --prefix $P --title "SNOD1 soil temperature and battery voltage, nodes 026, 028, 030" \
+    --config configs/snod1_soil_temperature.json \
+    --column-names table --file-names feeder-site --split-variables \
+    -o exports/essdive/stijn_wielandt/$P
+# database metadata of the same tables, one row per table
+ssi2essdive.py metadata --export exports/tables_2026-10-26 --owner Wielandt \
+    --site =SG-DTP26 --site =SG-DTP28 --site =SG-DTP30 -o exports/essdive/stijn_wielandt/$P/source_tables_metadata
+```
+
+Options: `--column-names table` names columns `<datastream table>_data_value`; `--file-names feeder-site`
+names data files `<feeder table>_<site code>`; `--split-variables` writes one data file per logger and
+variable; `--problem-flags` adds suspect flags (see below). Defaults keep `<prefix>_<site>` files with
+`<variable>_<sensor>` columns.
+
+Each package has one data file and data dictionary per logger (one column per sensor, sorted by
+height, with a `_flag` column carrying the SSI `qa_flag` as `qa_<code>`), a `_sensor_attr.csv`
+(methods, sensors, flags), a `_locations.csv` (each site, and each sensor position as a child
+location with `vertical_position`), and a `_flmd.csv`. Times are ISO 8601 UTC, missing values
+`-9999`. The package is validated after writing, and `<prefix>_manifest.json` beside it records the
+command, source, selection, validation result, checksums and the problems found by `essdive/checks.py`
+(data, metadata and format issues, each with severity and examples; values are never changed).
+`--problem-flags` (off by default) also marks the suspect cells in the data files by adding a flag after
+the database flag, e.g. `qa_z; suspect_shifted_column`, defined in the attributes file. `--config` supplies method descriptions and
+bounds (see `configs/`); generated descriptions should be reviewed by the data provider before
+publishing.
 
 ## The server: rules to know
 
@@ -273,7 +323,7 @@ lookup tables and each schema's `_tables.tsv` row counts); tables missing from t
 empty row count.
 
 ```bash
-python3 schema_map/table_inventory.py schema_only.sql exports/full_2026-10-26/ table_inventory/
+python3 schema_map/table_inventory.py schema_only.sql exports/tables_2026-10-26/ table_inventory/
 ```
 
 Table lists, columns, keys and counts all come from the dump. The schema-flow diagram
@@ -305,7 +355,7 @@ python3 coverage/build_index.py          # rebuild coverage/index.html
 ```
 
 The export files named below were made on 2026-11-02 and have since been deleted; rebuilding a
-page means re-exporting on Perlmutter (`ssiexport.py`, or the tables in `exports/full_<date>/`).
+page means re-exporting on Perlmutter (`ssiexport.py`, or the tables in `exports/tables_<date>/`).
 
 | Dataset | Export selection | Local export file |
 |---|---|---|
@@ -334,3 +384,4 @@ and push the rebuilt HTML to update GitHub Pages.
 |---|---|
 | [`resources/FY27Q1_SSI_Data_Stream_Datasets.md`](resources/FY27Q1_SSI_Data_Stream_Datasets.md) | Potential ESS-DIVE datasets that hold data from the SSI dump, grouped by source (CR1000, M1–M4, Decagon, met station, towers, streamflow, ESS-DIVE, PhenoCam, gradient, geochem). Each source links to its coverage page and the matching ESS-DIVE DOIs, and notes locations or publication status still to confirm. Markdown copy of the FY27Q1 Google Doc, November 2026; the Google Doc is the live version. |
 | [East-Taylor Watershed Community Observatory Sensors](https://docs.google.com/spreadsheets/d/1bo6cMNUiqaIpHKeiXn_2ttl9FGDUw5Go70WRkmZ1iYM/edit) (Google Sheet) | Sensor registry for the Watershed Function SFA in the East River and Taylor River watersheds: one row per deployed sensor with its location, instrument model and the variables it records (`sensor_registration_template` sheet). The `data_dictionary` sheet defines each column and says whether it is required. Use it to look up the instruments behind the `feeder` and `datastreams` tables. |
+| [ESS-DIVE reporting formats](https://ess-dive.lbl.gov/data-reporting-formats/) ([documentation](https://docs.ess-dive.lbl.gov/contributing-data/data-reporting-formats), [GitHub: ESS-DIVE Workspace](https://github.com/ess-dive-workspace)) | Community (meta)data reporting formats for publishing on ESS-DIVE. The ones relevant to exports from this database: **Sample Data** (lab data from physical samples, as a set of samples or a time series on one sample): [Full](https://github.com/ess-dive-workspace/essdive-sample-data-full), [Lite](https://github.com/ess-dive-workspace/essdive-sample-data-lite); **Sensor Time Series** (time series from stationary field sensors): [Full](https://github.com/ess-dive-workspace/essdive-sensor-time-series-full), [Lite](https://github.com/ess-dive-workspace/essdive-sensor-time-series-lite); **Location Metadata** (metadata about point and non-point locations): [GitHub](https://github.com/ess-dive-workspace/essdive-location-metadata). The four Full/Lite formats were marked "in development" on GitHub as of November 2026. |

@@ -1,0 +1,10 @@
+{
+  "methods": {
+    "method_battery_voltage_unknown_sensor": {
+      "description": "Battery voltage of the SNOD1 LoRa signal repeaters (relays SNOD1_Relay023, _Relay033, _Relay035 and _Relay037 at sites SG-RLY23, SG-RLY33, SG-RLY35 and SG-RLY37 on the Snodgrass lower ERT transect; equipment owner Stijn Wielandt), feeder column V_batt, in volts, as stored in the SSI ODMX database. The database registers it to the relay logger (equipment model \"unknown sensor\"). It is a housekeeping value of the radio network, not an environmental measurement. Text compiled from the SSI database metadata; to be reviewed by the data provider before publication."
+    },
+    "method_rssi_unknown_sensor": {
+      "description": "Received signal strength indicator (RSSI) of the SNOD1 LoRa signal repeaters, feeder columns node_RSSi (radio link between the repeater and the sensor nodes) and base_RSSi (radio link between the repeater and the base station), as stored in the SSI ODMX database. The database gives the unit as unitless; RSSI is usually reported in dBm, which the data provider should confirm. The database does not record which sensor nodes each repeater serves. These are radio-network housekeeping values that help explain gaps in the SNOD1 temperature records. Text compiled from the SSI database metadata; to be reviewed by the data provider before publication."
+    }
+  }
+}

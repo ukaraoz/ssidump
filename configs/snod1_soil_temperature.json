@@ -1,0 +1,10 @@
+{
+  "methods": {
+    "method_soil_temperature_lbnl_tmp_117_temperature_probe": {
+      "description": "Soil temperature profiles from the SNOD1 sensor network at the Snodgrass lower ERT transect (sites SG-DTP26, SG-DTP28 and SG-DTP30; equipment owner Stijn Wielandt). Each site has one node with 13 TMP 117 temperature probes built by LBNL, mounted from 0.05 m above to 0.75 m below the ground surface: +0.05 and 0.00 m, then every 0.05 m down to -0.35 m, then every 0.10 m down to -0.75 m. Readings reach the SSI ODMX database through InfluxDB (feeder tables influxdb_SNOD1_Node026, _Node028 and _Node030). Most timestamps have values for only some probes; missing values are reported as -9999 with flag qa_c. Known issue under review: in rows where only Temp01 to Temp05 (sometimes also Temp06) have values, those values match Temp09 to Temp13 of the nearest reading in which all 13 probes report, and the Temp06 value matches the node battery voltage, which suggests these partial readings were stored in the wrong columns. Values are reported here exactly as stored in the database. Values are the SSI datastream values in degrees Celsius, unaltered. Probe heights come from odmx.equipment_position. The two probes at +0.05 and 0.00 m sit at or above the ground surface but are labelled soil temperature in the database. Text compiled from the SSI database metadata; to be reviewed by the data provider before publication."
+    },
+    "method_battery_voltage_unknown_sensor": {
+      "description": "Battery voltage of the SNOD1 sensor node (feeder column V_batt), in volts, as stored in the SSI ODMX database. The database registers it to the node logger (equipment model \"unknown sensor\"); it is a housekeeping value, not an environmental measurement. Text compiled from the SSI database metadata; to be reviewed by the data provider before publication."
+    }
+  }
+}

@@ -1,0 +1,16 @@
+column_or_row_name,unit,definition,measured_variable,material_measured,method_id,location_id,sensor_id,treatment_id,unit_basis,column_or_row_long_name,data_type,missing_value_code,representation_temporal,statistic_measurement,statistic_measurement_number,statistic_spatial,statistic_spatial_number,statistic_temporal,statistic_temporal_number,statistic_detail,notes
+datetime_measured,N/A,"Date and time of measurement, to known specificity.",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,datetime,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+datetime_measured_start,N/A,"Date and time of the start of the measurement, to known specificity.",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,datetime,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+datetime_measured_end,N/A,"Date and time of the end of the measurement, to known specificity.",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,datetime,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+{measurement_column_name}_flag,N/A,User-defined identifier that indicates a flag for the individual measurement in the corresponding measurement_column_name.,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,text,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+notes,N/A,Free text notes field.,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,text,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+attr_id,N/A,"Attribute identifier associated with either a method ID, flag, treatment ID, or sensor ID.",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,text,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+attr_type,N/A,Attribute identifier type,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,text,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+attr_description,N/A,Description of the attribute identifier provided within the attr_id field. The description should hold enough detail to pass peer review in a journal article methods section.,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,text,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+analysis_detection_limit,N/A,"Detection limit associated with the analysis (i.e., the lowest / smallest quantity that can be measured), in the units of the reported measurement",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,text,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+analysis_precision,N/A,"Precision associated with the analysis (i.e., how close repeated measures are to each other), in the units of the reported measurement",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,text,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+instrument_precision,N/A,"Precision of the instrument/sensor (i.e., the smallest difference between measurements that the instrument can resolve), in the units of the reported measurement",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,text,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+lower_bound,N/A,"Lower bound of expected data values, in the units of the reported measurement",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,text,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+upper_bound,N/A,"Upper bound of expected data values, in the units of the reported measurement",N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,text,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+sensor_model,N/A,Model of sensor,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,text,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+sensor_serial_number,N/A,Serial number of sensor,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,text,,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A

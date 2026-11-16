@@ -1,0 +1,16 @@
+{
+  "methods": {
+    "method_gcc_unknown_sensor": {
+      "description": "Green chromatic coordinate (GCC = G/(R+G+B), a vegetation greenness index; definition from odmx.variables) computed from digital camera images of three phenocams owned by Stijn Wielandt: Snodgrass Phenocam 1 at Snodgrass tower #5 (site SG-EHS5) and Trail Creek Phenocams 1 and 2 at Trail Creek ET towers #1 and #2 (sites TR-EHS1, TR-EHS2). Values are the SSI datastream values (tables feeder_phenocam_*_gcc_calc), dimensionless, unaltered. The database does not record the camera model, image region of interest, exposure settings or how the image means were computed; the feeder column image_url is empty for every image. Text compiled from the SSI database metadata; to be reviewed by the data provider before publication."
+    },
+    "method_red_channel_mean_unknown_sensor": {
+      "description": "Mean red channel value (0-255) of each digital camera image of the same three phenocams (definition from odmx.variables), as stored in the SSI ODMX database (tables feeder_phenocam_*_r_mean_calc), unaltered. Region of interest and processing are not recorded in the database. To be reviewed by the data provider before publication."
+    },
+    "method_green_channel_mean_unknown_sensor": {
+      "description": "Mean green channel value (0-255) of each digital camera image of the same three phenocams (definition from odmx.variables), as stored in the SSI ODMX database (tables feeder_phenocam_*_g_mean_calc), unaltered. Region of interest and processing are not recorded in the database. To be reviewed by the data provider before publication."
+    },
+    "method_blue_channel_mean_unknown_sensor": {
+      "description": "Mean blue channel value (0-255) of each digital camera image of the same three phenocams (definition from odmx.variables), as stored in the SSI ODMX database (tables feeder_phenocam_*_b_mean_calc), unaltered. Region of interest and processing are not recorded in the database. To be reviewed by the data provider before publication."
+    }
+  }
+}

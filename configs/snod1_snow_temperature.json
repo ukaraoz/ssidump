@@ -1,0 +1,10 @@
+{
+  "methods": {
+    "method_snow_temperature_lbnl_tmp_117_temperature_probe": {
+      "description": "Snow temperature profiles from the SNOD1 sensor network (equipment owner Stijn Wielandt): 20 nodes at the Snodgrass lower ERT transect (sites SG-DTP1 to SG-DTP16, SG-DTP32, SG-DTP34, SG-DTP36 and SG-DTP38; 13 nodes with 31 probes, 7 with 29) carrying TMP 117 temperature probes built by LBNL, mounted from 0.02 m to 1.87 m above the ground surface (every 0.05 m from 0.02 to 1.17 m, then every 0.10 m to 1.87 m; the 29-probe nodes lack the 0.02 and 1.87 m positions), and one node at the Pumphouse north-facing slope (site ER-DTP22) with a single probe at 0.00 m. Readings reach the SSI ODMX database through InfluxDB (feeder tables influxdb_SNOD1_Node001 to _Node038). The database labels every probe snow temperature whatever the snow depth, so probes above the snowpack measure air temperature. Values are the SSI datastream values in degrees Celsius, unaltered. Probe heights come from odmx.equipment_position. Text compiled from the SSI database metadata; to be reviewed by the data provider before publication."
+    },
+    "method_battery_voltage_unknown_sensor": {
+      "description": "Battery voltage of the SNOD1 sensor node (feeder column V_batt), in volts, as stored in the SSI ODMX database. The database registers it to the node logger (equipment model \"unknown sensor\"); it is a housekeeping value, not an environmental measurement. Text compiled from the SSI database metadata; to be reviewed by the data provider before publication."
+    }
+  }
+}
