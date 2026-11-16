@@ -32,6 +32,9 @@ Commands:
   ssiselect.py catalog  [selection] -o cat.tsv one row per matching datastream with all metadata
   ssiselect.py hierarchy [selection] -o h.json site -> device -> attached sensors -> datastreams,
                                               with a data summary per site
+  ssiselect.py feeder   [selection] -o raw.tsv.gz the raw feeder rows behind the selection: one row per
+                                              feeder row, one column per selected feeder column,
+                                              plus device and site metadata
   ssiselect.py export   [selection] -o data.tsv.gz
                                               one row per measurement, joined to the catalog;
                                               also writes data.catalog.tsv and data.manifest.json
@@ -46,6 +49,7 @@ Examples:
                        --start 2023-01-01 --end 2024-01-01 -o soil_2023.tsv.gz
 """
 import argparse
+import csv
 import datetime
 import fnmatch
 import gzip
@@ -95,8 +99,15 @@ def utc(epoch):
 
 # ---------------------------------------------------------------- catalog from the database
 
-def load_catalog():
-    """Every datastream in the datastreams schema, resolved to logger, sensor, owners and feeder column."""
+def load_catalog(export=None):
+    """Every datastream in the datastreams schema, resolved to logger, sensor, owners and feeder column.
+
+    Reads the database, or with export=DIR an ssiexportall table export (exports/tables_<date>/);
+    from an export, only datastream tables present in DIR/datastreams are listed."""
+    return _build_catalog(**(_export_tables(export) if export else _db_tables()))
+
+
+def _db_tables():
     ds = sx.q("""
         select d.datastream_id, d.datastream_tablename, d.datastream_type, d.equipment_id,
                d.first_measurement_date, d.last_measurement_date, d.total_measurement_numbers,
@@ -110,7 +121,7 @@ def load_catalog():
         left join odmx.sampling_features sf on sf.sampling_feature_id = d.sampling_feature_id
         where d.datastream_database = 'datastreams'""")
     eq = {r['equipment_id']: r for r in sx.q("""
-        select e.equipment_id, e.equipment_code, e.equipment_name, e.equipment_description,
+        select e.equipment_id, e.equipment_code, e.equipment_name, e.equipment_description, e.equipment_serial_number,
                e.equipment_documentation_link, m.equipment_model_name,
                m.equipment_model_part_number, m.equipment_type_cv, o.organization_name as manufacturer
         from odmx.equipment e
@@ -133,10 +144,94 @@ def load_catalog():
     for r in sx.q("""select table_name, column_name from information_schema.columns
                      where table_schema = 'feeder'"""):
         fcols[r['table_name']][r['column_name'].lower()] = r['column_name']
-    ftables = sorted(fcols, key=len, reverse=True)
     existing = {r['table_name'] for r in sx.q(
         "select table_name from information_schema.tables where table_schema = 'datastreams' and table_type = 'BASE TABLE'")}
+    return dict(ds=ds, eq=eq, children=children, owners=owners, pos=pos, fcols=fcols, existing=existing)
 
+
+def read_export_table(export, schema, table):
+    """Rows of one exported table as dicts; NULL and empty string both become None."""
+    base = Path(export) / schema / table
+    path = base.with_name(table + '.csv')
+    if not path.exists():
+        path = base.with_name(table + '.csv.gz')
+    opener = gzip.open if path.suffix == '.gz' else open
+    with opener(path, 'rt', encoding='utf-8', newline='') as fh:
+        for r in csv.DictReader(fh):
+            yield {k: (v if v != '' else None) for k, v in r.items()}
+
+
+def export_table_names(export, schema):
+    """Tables listed in <schema>/_tables.tsv (written by ssiexportall.py) whose file is present."""
+    d = Path(export) / schema
+    with open(d / '_tables.tsv', encoding='utf-8') as fh:
+        names = [line.split('\t', 1)[0] for line in fh.read().splitlines()[1:] if line]
+    return [t for t in names if (d / f'{t}.csv').exists() or (d / f'{t}.csv.gz').exists()]
+
+
+def _export_header(export, schema, table):
+    base = Path(export) / schema
+    path = base / f'{table}.csv'
+    if path.exists():
+        with open(path, encoding='utf-8', newline='') as fh:
+            return next(csv.reader(fh))
+    with gzip.open(base / f'{table}.csv.gz', 'rt', encoding='utf-8', newline='') as fh:
+        return next(csv.reader(fh))
+
+
+def _export_tables(export):
+    """The same inputs as _db_tables(), joined in Python from the exported odmx and feeder CSVs."""
+    t = lambda name: list(read_export_table(export, 'odmx', name))   # noqa: E731
+    by = lambda rows, key: {r[key]: r for r in rows}                  # noqa: E731
+    variables, units = by(t('variables'), 'variable_id'), by(t('cv_units'), 'units_id')
+    sf = by(t('sampling_features'), 'sampling_feature_id')
+    ds = []
+    for d in t('sampling_feature_timeseries_datastreams'):
+        if d['datastream_database'] != 'datastreams':
+            continue
+        v, u, s = variables.get(d['variable_id'], {}), units.get(d['units_id'], {}), sf.get(d['sampling_feature_id'], {})
+        ds.append({**{k: d[k] for k in ('datastream_id', 'datastream_tablename', 'datastream_type', 'equipment_id',
+                                        'first_measurement_date', 'last_measurement_date', 'total_measurement_numbers',
+                                        'datastream_attribute')},
+                   'variable_term': v.get('variable_term'), 'variable_name': v.get('variable_name'),
+                   'units': u.get('units_abbreviation') or u.get('term'),
+                   **{k: s.get(k) for k in ('sampling_feature_code', 'sampling_feature_name', 'sampling_feature_type_cv',
+                                            'latitude', 'longitude', 'elevation_m')}})
+    models, orgs = by(t('equipment_models'), 'equipment_model_id'), by(t('organizations'), 'organization_id')
+    eq = {}
+    for e in t('equipment'):
+        m = models.get(e['equipment_model_id'], {})
+        eq[e['equipment_id']] = {
+            **{k: e[k] for k in ('equipment_id', 'equipment_code', 'equipment_name', 'equipment_description',
+                                 'equipment_serial_number', 'equipment_documentation_link')},
+            **{k: m.get(k) for k in ('equipment_model_name', 'equipment_model_part_number', 'equipment_type_cv')},
+            'manufacturer': orgs.get(m.get('equipment_model_manufacturer_id'), {}).get('organization_name')}
+    children = defaultdict(list)
+    for r in t('related_equipment'):
+        if r['relationship_type_cv'] == 'isAttachedTo':
+            children[r['related_equipment_id']].append(r['equipment_id'])
+    persons = by(t('persons'), 'person_id')
+    owners = defaultdict(list)
+    for b in t('equipment_persons_bridge'):
+        p = persons.get(b['person_id'])
+        if p:
+            name = ' '.join(x for x in (p['person_first_name'], p['person_middle_name'], p['person_last_name']) if x)
+            owners[b['equipment_id']].append({'equipment_id': b['equipment_id'], 'person_role_cv': b['person_role_cv'],
+                                              'person_id': p['person_id'], 'name': name.strip()})
+    pos = {}
+    for r in sorted(t('equipment_position'), key=lambda r: (int(r['equipment_id']), r['position_start_date_utc'] is None,
+                                                            float(r['position_start_date_utc'] or 0))):
+        pos[r['equipment_id']] = r          # latest position wins
+    fcols = defaultdict(dict)
+    for ft in export_table_names(export, 'feeder'):
+        for c in _export_header(export, 'feeder', ft):
+            fcols[ft][c.lower()] = c
+    existing = set(export_table_names(export, 'datastreams'))
+    return dict(ds=ds, eq=eq, children=children, owners=owners, pos=pos, fcols=fcols, existing=existing)
+
+
+def _build_catalog(ds, eq, children, owners, pos, fcols, existing):
+    ftables = sorted(fcols, key=len, reverse=True)
     rows = []
     for d in ds:
         t = d['datastream_tablename']
@@ -192,9 +287,11 @@ def load_catalog():
 # ---------------------------------------------------------------- selection
 
 def match_text(pattern, values):
-    """Case-insensitive: glob if the pattern has * ? [, else exact-or-substring."""
+    """Case-insensitive: '=X' matches X exactly; glob if the pattern has * ? [; else substring."""
     p = pattern.lower()
     vals = [str(v).lower() for v in values if v not in (None, '')]
+    if p.startswith('='):
+        return p[1:] in vals
     if any(c in p for c in '*?['):
         return any(fnmatch.fnmatchcase(v, p) for v in vals)
     return any(p in v for v in vals)
@@ -236,7 +333,7 @@ def selection_from(args):
         v = getattr(args, k, None)
         if v:
             sel[k] = v
-    for k in ('start', 'end', 'qa', 'drop_missing', 'valid_min', 'valid_max', 'slim'):
+    for k in ('start', 'end', 'qa', 'drop_missing', 'valid_min', 'valid_max', 'slim', 'all_columns'):
         v = getattr(args, k, None)
         if v not in (None, False, []):
             sel[k] = v
@@ -469,6 +566,88 @@ def export(rows, sel, out):
 
 # ---------------------------------------------------------------- CLI
 
+FEEDER_META = ['feeder_table', 'logger_equipment_id', 'logger_name', 'logger_model', 'site_code', 'site_name',
+               'site_type', 'latitude', 'longitude', 'site_elevation_m', 'logger_owner']
+
+
+def export_feeder(rows, sel, out):
+    """Raw feeder rows for the selected datastreams: one row per feeder row, one column per
+    selected feeder column (union across tables, empty where a table lacks it), plus the
+    logger/site metadata of the table. Feeder timestamps are UTC."""
+    out = Path(out)
+    stem = out.name.split('.')[0]
+    cat_path, man_path = out.with_name(stem + '.catalog.tsv'), out.with_name(stem + '.manifest.json')
+    by_table = {}
+    for r in rows:
+        if r['feeder_table'] and r['feeder_column']:
+            by_table.setdefault(r['feeder_table'].split('.', 1)[1], []).append(r)
+    if not by_table:
+        die('none of the selected datastreams has a feeder table')
+    names = sorted(by_table)
+    order = {(t['table_name'], t['column_name']): int(t['ordinal_position']) for t in sx.q(
+        "select table_name, column_name, ordinal_position from information_schema.columns "
+        "where table_schema = 'feeder' and table_name in (" + ', '.join(sx.lit(n) for n in names) + ")")}
+    value_cols = []                                   # union, in feeder column order of first appearance
+    for n in names:
+        for c in sorted({r['feeder_column'] for r in by_table[n]}, key=lambda c: order.get((n, c), 0)):
+            if c not in value_cols:
+                value_cols.append(c)
+    extra = []
+    if sel.get('all_columns'):                        # the rest of each table's columns, e.g. index, image_url
+        for n in names:
+            for (tn, c), _ in sorted(order.items(), key=lambda kv: kv[1]):
+                if tn == n and c != 'timestamp' and c not in value_cols and c not in extra:
+                    extra.append(c)
+    meta_cols = ['feeder_table'] if sel.get('slim') else FEEDER_META
+    conds = []
+    if sel.get('start'):
+        conds.append(f'"timestamp" >= {sx.lit(sel["start"])}::timestamp')
+    if sel.get('end'):
+        conds.append(f'"timestamp" < {sx.lit(sel["end"])}::timestamp')
+    where = (' where ' + ' and '.join(conds)) if conds else ''
+    lines = []
+    for n in names:
+        r0 = by_table[n][0]
+        have = {c for (tn, c) in order if tn == n}
+        cols = ', '.join(sx.ident(c) if c in have else 'null' for c in value_cols + extra)
+        meta = {**r0, 'feeder_table': f'feeder.{n}'}
+        lits = ', '.join('null' if meta.get(c) is None else sx.lit(meta[c]) for c in meta_cols)
+        lines.append(
+            f"COPY (select to_char(\"timestamp\", 'YYYY-MM-DD HH24:MI:SS'), "
+            f"extract(epoch from \"timestamp\" at time zone 'UTC')::bigint, {cols}, {lits} "
+            f"from feeder.{sx.ident(n)}{where} order by \"timestamp\") "
+            f"TO STDOUT WITH (FORMAT csv, DELIMITER E'\\t', NULL '');")
+    header = ['datetime_utc', 'utc_time'] + value_cols + extra + meta_cols
+    log(f'exporting {len(names):,} feeder tables ({len(value_cols)} value columns) to {out} ...')
+    t0 = datetime.datetime.now()
+    sx.stream_copy(lines, out, header=header)
+    write_tsv(cat_path, CATALOG_COLS, rows)
+    fi = header.index('feeder_table')
+    per_table = Counter()
+    with (gzip.open(out, 'rt', encoding='utf-8') if out.suffix == '.gz' else open(out, encoding='utf-8')) as fh:
+        next(fh, None)
+        for line in fh:
+            per_table[line.rstrip('\n').split('\t')[fi]] += 1
+    n = sum(per_table.values())
+    json.dump({
+        'tool': f'ssiselect.py {VERSION}', 'tool_sha256': sha256(Path(__file__).resolve()),
+        'command': shlex.join([Path(sys.argv[0]).name] + sys.argv[1:]),
+        'created_utc': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S'),
+        'host': socket.gethostname(), 'database': sx.DB, 'source': 'feeder tables',
+        'selection': sel, 'filters_sql': conds,
+        'rows': n, 'rows_by_feeder_table': dict(sorted(per_table.items())),
+        'feeder_tables': [f'feeder.{x}' for x in names], 'value_columns': value_cols, 'extra_columns': extra,
+        'datastreams': len(rows),
+        'files': {out.name: {'bytes': out.stat().st_size, 'sha256': sha256(out)},
+                  cat_path.name: {'bytes': cat_path.stat().st_size, 'sha256': sha256(cat_path)}},
+        'columns': header,
+        'notes': ['One row per feeder row, ordered by feeder table, then time. Feeder timestamps are UTC.',
+                  'Values are the raw feeder columns (no unit conversion, no qa_flag); NaN is written as NaN.',
+                  'The catalog maps each feeder column (feeder_column) to its datastream, variable and units.'],
+    }, open(man_path, 'w'), indent=2)
+    log(f'{n:,} rows in {(datetime.datetime.now() - t0).seconds} s\n  {out}\n  {cat_path}\n  {man_path}')
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split('\n\n')[0], formatter_class=argparse.RawDescriptionHelpFormatter,
                                  epilog=__doc__.split('\n', 2)[2])
@@ -486,6 +665,13 @@ def main():
     p.add_argument('-o', '--out', required=True)
     p = sub.add_parser('hierarchy', help='write site -> device -> sensor JSON'); common(p)
     p.add_argument('-o', '--out', required=True, help='output .json')
+    p = sub.add_parser('feeder', help='write the raw feeder rows behind the selected datastreams'); common(p)
+    p.add_argument('-o', '--out', required=True, help='output file (.tsv or .tsv.gz)')
+    p.add_argument('--start', help='first UTC time to include')
+    p.add_argument('--end', help='UTC time to stop before')
+    p.add_argument('--all-columns', dest='all_columns', action='store_true',
+                   help='also write the feeder columns that are not selected datastreams (e.g. index, image_url)')
+    p.add_argument('--slim', action='store_true', help='only feeder_table beside the values (join the catalog yourself)')
     p = sub.add_parser('export', help='write one row per measurement'); common(p)
     p.add_argument('-o', '--out', required=True, help='output file (.tsv or .tsv.gz)')
     p.add_argument('--start', help='first UTC time to include, e.g. 2023-01-01 or "2023-01-01 06:00"')
@@ -518,6 +704,9 @@ def main():
         Path(args.out).parent.mkdir(parents=True, exist_ok=True)
         json.dump(doc, open(args.out, 'w'), indent=2)
         log(f"wrote {args.out}: {json.dumps(doc['counts'])}")
+        return
+    if args.cmd == 'feeder':
+        export_feeder(rows, sel, args.out)
         return
     n = sum(int(r['n_measurements'] or 0) for r in rows)
     if n > 50_000_000 and not args.yes:
