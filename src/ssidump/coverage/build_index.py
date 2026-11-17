@@ -34,6 +34,27 @@ tr = '\n'.join(
     f'<td><code>{html.escape(r["sel"])}</code></td></tr>' for r in rows)
 total = sum(r['total'] for r in rows)
 
+# cross-source pages (built by build_site_variable.py), listed when present
+cross = [(f, t, d) for f, t, d in (
+    ('site_variable_heatmap', 'Sampling features × variables',
+     'which variables each sampling feature has, coloured by length of record'),
+    ('site_variable_date_ranges', 'Date ranges × variables',
+     'the same pairs arranged by their first – last month')) if (root / f'{f}.html').exists()]
+cross_html = ''
+if cross:
+    items = '\n'.join(
+        f'      <li><a href="{f}.html">{t}</a>'
+        + (f' (<a href="{f}.png">PNG</a>)' if (root / f'{f}.png').exists() else '')
+        + f': {d}.</li>' for f, t, d in cross)
+    cross_html = f"""
+  <section>
+    <h2>Across sources</h2>
+    <p>Built from the per-table summaries in <code>exports/summaries/</code> (sampling feature × variable pairs).</p>
+    <ul>
+{items}
+    </ul>
+  </section>"""
+
 out = f'''<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -62,6 +83,9 @@ thead th.n{{text-align:right}}
 code{{font-family:var(--f-data);font-size:11.5px;color:var(--ink-2)}}
 tfoot td,tfoot th{{font-weight:600;border-top:2px solid var(--line)}}
 .foot{{font-size:12px;color:var(--ink-3)}}
+h2{{font-size:16px;margin:4px 0 6px}}
+section ul{{margin:8px 0 0;padding-left:20px;color:var(--ink-2)}}
+section li{{margin:4px 0}}
 </style>
 <div class="wrap">
   <header>
@@ -76,7 +100,7 @@ tfoot td,tfoot th{{font-weight:600;border-top:2px solid var(--line)}}
 {tr}
     </tbody>
     <tfoot><tr><th>All sources</th><td class="n">{total:,}</td><td></td><td></td><td></td><td></td><td></td></tr></tfoot>
-  </table></div>
+  </table></div>{cross_html}
   <p class="foot">Built from <code>ssiexport export datastreams … --drop-nan</code> exports (geochem without <code>--drop-nan</code>) of the 2026-10-26 dump. Sentinel satellite streams are not included. Schema map: <a href="../schema_map/ssi_schemas.html">ssi_schemas.html</a>.</p>
 </div>
 '''

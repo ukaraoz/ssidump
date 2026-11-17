@@ -395,6 +395,20 @@ datasets without fixed bins get bins from the quantiles of their cell counts. To
 source, add an entry there, export it, and run `build.sh` and `build_index.py`. Commit
 and push the rebuilt HTML to update GitHub Pages.
 
+Two cross-source pages come from the summary tables instead of exports
+(`exports/summaries/site_variable_pairs.tsv` and `unique_variables.tsv`), with no server or pandas:
+[sampling features × variables](https://ukaraoz.github.io/ssidump/coverage/site_variable_heatmap.html)
+(colour = years between first and last good value) and
+[date ranges × variables](https://ukaraoz.github.io/ssidump/coverage/site_variable_date_ranges.html).
+
+```bash
+python3 src/ssidump/coverage/build_site_variable.py --png   # coverage/site_variable_*.html and .png (PNG needs Chrome)
+python3 src/ssidump/coverage/build_index.py                 # adds them to coverage/index.html
+```
+
+`_config.yml` keeps the code and the ESS-DIVE package data (`exports/essdive/`, about 1 GB) out of
+the GitHub Pages build.
+
 ## Resources
 
 | File | Contents |

@@ -1,0 +1,12 @@
+# GitHub Pages (classic Jekyll build from the root of main).
+# The site only needs README.md, coverage/ and schema_map/; keep the code and the
+# ~1 GB of ESS-DIVE package data out of the build (Pages sites are limited to 1 GB).
+exclude:
+  - exports/essdive
+  - exports/tables_*
+  - src
+  - tests
+  - configs
+  - modulefiles
+  - pyproject.toml
+  - "*.egg-info"

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Site × Variable Availability</title>
+<style>
+:root{
+  color-scheme:light;
+  --surface:#fcfcfb; --surface-2:#f4f3f0; --line:#e3e2dd; --grid:#ecebe7;
+  --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#7a7974;
+  --b1:#86b6ef; --b2:#5598e7; --b3:#2a78d6; --b4:#1c5cab; --b5:#0d366b;
+  --unknown:#a8a7a0; --hatch:#fcfcfb; --focus:#2a78d6;
+}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme:dark;
+    --surface:#1a1a19; --surface-2:#222220; --line:#383835; --grid:#2a2a28;
+    --text-primary:#f0efec; --text-secondary:#c3c2b7; --text-muted:#8e8d86;
+    --b1:#184f95; --b2:#256abf; --b3:#3987e5; --b4:#6da7ec; --b5:#b7d3f6;
+    --unknown:#6b6a64; --hatch:#1a1a19; --focus:#6da7ec;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --surface:#1a1a19; --surface-2:#222220; --line:#383835; --grid:#2a2a28;
+  --text-primary:#f0efec; --text-secondary:#c3c2b7; --text-muted:#8e8d86;
+  --b1:#184f95; --b2:#256abf; --b3:#3987e5; --b4:#6da7ec; --b5:#b7d3f6;
+  --unknown:#6b6a64; --hatch:#1a1a19; --focus:#6da7ec;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface);color:var(--text-primary);
+  font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+main{max-width:1460px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:20px;margin:0 0 4px;font-weight:600}
+.sub{color:var(--text-secondary);margin:0 0 16px}
+.controls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin:0 0 12px}
+.controls label{color:var(--text-secondary);font-size:13px;display:flex;gap:6px;align-items:center}
+select{font:inherit;font-size:13px;color:var(--text-primary);background:var(--surface);border:1px solid var(--line);
+  border-radius:6px;padding:4px 8px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-size:12px;color:var(--text-secondary);margin:0 0 12px}
+.legend .k{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border-radius:3px;display:inline-block}
+.sw.none{background:var(--surface);border:1px solid var(--line)}
+.scroll{overflow:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface);max-height:80vh}
+svg{display:block}
+svg text{fill:var(--text-secondary);font-size:10.5px}
+svg .grp{fill:var(--text-primary);font-size:11px;font-weight:600}
+svg .rowlab:hover,svg .collab:hover{fill:var(--text-primary)}
+.cell{cursor:default}
+.cell:focus{outline:none;stroke:var(--focus);stroke-width:2}
+.hl{fill:var(--text-primary)!important;font-weight:600}
+#tip{position:fixed;pointer-events:none;z-index:10;max-width:360px;background:var(--surface);color:var(--text-primary);
+  border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;box-shadow:0 4px 16px rgba(0,0,0,.18);display:none}
+#tip b{font-weight:600}
+#tip .m{color:var(--text-secondary)}
+details{margin-top:20px}
+summary{cursor:pointer;color:var(--text-secondary)}
+table{border-collapse:collapse;font-size:12px;margin-top:8px;width:100%}
+th,td{text-align:left;padding:4px 8px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{color:var(--text-secondary);font-weight:600;position:sticky;top:0;background:var(--surface)}
+.tablewrap{overflow:auto;max-height:60vh;border:1px solid var(--line);border-radius:8px}
+.foot{color:var(--text-muted);font-size:12px;margin-top:16px}
+</style>
+</head>
+<body>
+<main>
+  <h1>Data availability: sampling features × variables</h1>
+  <p class="sub" id="sub"></p>
+
+  <div class="controls">
+    <label>Sampling feature type
+      <select id="ftype"><option value="">All</option></select></label>
+    <label>Variable category
+      <select id="fcat"><option value="">All</option></select></label>
+    <label>Rows
+      <select id="rsort"><option value="type">grouped by type</option><option value="count">most variables first</option></select></label>
+  </div>
+
+  <div class="legend" aria-label="Legend">
+    <span>Years between first and last good value:</span>
+    <span class="k"><span class="sw" style="background:var(--b1)"></span>&lt; 1</span>
+    <span class="k"><span class="sw" style="background:var(--b2)"></span>1–2</span>
+    <span class="k"><span class="sw" style="background:var(--b3)"></span>2–5</span>
+    <span class="k"><span class="sw" style="background:var(--b4)"></span>5–10</span>
+    <span class="k"><span class="sw" style="background:var(--b5)"></span>≥ 10</span>
+    <span class="k"><svg width="14" height="14" aria-hidden="true"><rect width="14" height="14" rx="3" fill="url(#hatch-l)"/></svg>data, dates not in summary</span>
+    <span class="k"><span class="sw none"></span>no data</span>
+  </div>
+
+  <div class="scroll" id="scroll"><svg id="chart" role="img" aria-labelledby="sub"></svg></div>
+
+  <details>
+    <summary>Table view (all pairs)</summary>
+    <div class="tablewrap"><table id="tbl"><thead><tr>
+      <th>Sampling feature</th><th>Type</th><th>Variable</th><th>Category</th><th>Units</th><th>Tables</th><th>Sources</th><th>First</th><th>Last</th>
+    </tr></thead><tbody></tbody></table></div>
+  </details>
+
+  <p class="foot" id="foot"></p>
+</main>
+<div id="tip" role="tooltip"></div>
+<script>
+const D = __DATA__;
+const CELL = 11, GAP = 2, LEFT = 196, TOP = 196, GROUP_GAP = 8;
+const svg = document.getElementById('chart'), tip = document.getElementById('tip');
+const NS = 'http://www.w3.org/2000/svg';
+const byKey = new Map(D.cells.map(c => [c.s + '\u0000' + c.v, c]));
+const site = new Map(D.sites.map(s => [s.code, s]));
+const vcat = new Map(D.variables.map(v => [v.v, v.c]));
+
+document.getElementById('sub').textContent =
+  `${D.sites.length} sampling features, ${D.variables.length} variables, ${D.cells.length} feature–variable pairs ` +
+  `(${D.cells.reduce((a, c) => a + c.n, 0).toLocaleString()} datastream tables). Colour = length of record.`;
+document.getElementById('foot').textContent =
+  `Source: exports/summaries/site_variable_pairs.tsv (built ${D.built}) from the SSI odmx_lbnlsfa dump of 2026-10-26. ` +
+  `Covers the sources with per-table summaries; geochem, sentinel, snotel, ess_dive and nwis are not included. ` +
+  `OTT disdrometer and InfluxDB TRAIL tower summaries have no dates.`;
+
+for (const t of D.types) document.getElementById('ftype').append(new Option(t, t));
+for (const c of D.cats) document.getElementById('fcat').append(new Option(c, c));
+
+function bin(y) {
+  if (y === null) return null;
+  return y < 1 ? 'var(--b1)' : y < 2 ? 'var(--b2)' : y < 5 ? 'var(--b3)' : y < 10 ? 'var(--b4)' : 'var(--b5)';
+}
+function el(name, attrs, text) {
+  const e = document.createElementNS(NS, name);
+  for (const [k, v] of Object.entries(attrs || {})) e.setAttribute(k, v);
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+
+function render() {
+  const ft = document.getElementById('ftype').value, fc = document.getElementById('fcat').value;
+  const sortBy = document.getElementById('rsort').value;
+  const vars = D.variables.filter(v => !fc || v.c === fc);
+  const vset = new Set(vars.map(v => v.v));
+  let rows = D.sites.filter(s => (!ft || s.type === ft) && D.cells.some(c => c.s === s.code && vset.has(c.v)));
+  const count = s => D.cells.filter(c => c.s === s.code && vset.has(c.v)).length;
+  if (sortBy === 'count') rows = rows.slice().sort((a, b) => count(b) - count(a) || a.code.localeCompare(b.code));
+  const usedVars = vars.filter(v => rows.some(s => byKey.has(s.code + '\u0000' + v.v)));
+
+  // x positions with a gap between categories; y positions with a gap between types (when grouped)
+  const xs = [], ys = [];
+  let x = LEFT, prevC = null;
+  for (const v of usedVars) { if (prevC !== null && v.c !== prevC) x += GROUP_GAP; xs.push(x); x += CELL + GAP; prevC = v.c; }
+  let y = TOP, prevT = null;
+  for (const s of rows) { if (sortBy === 'type' && prevT !== null && s.type !== prevT) y += GROUP_GAP + 14; ys.push(y); y += CELL + GAP; prevT = s.type; }
+  const W = x + 70, H = y + 16;   // right margin for the last rotated labels
+  svg.setAttribute('width', W); svg.setAttribute('height', H); svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.replaceChildren();
+  const defs = el('defs');
+  const pat = el('pattern', {id: 'hatch', patternUnits: 'userSpaceOnUse', width: 4, height: 4, patternTransform: 'rotate(45)'});
+  pat.append(el('rect', {width: 4, height: 4, fill: 'var(--unknown)'}), el('line', {x1: 0, y1: 0, x2: 0, y2: 4, stroke: 'var(--hatch)', 'stroke-width': 1.5}));
+  defs.append(pat); svg.append(defs);
+
+  // category labels over the column groups
+  let start = 0;
+  for (let i = 0; i <= usedVars.length; i++) {
+    if (i === usedVars.length || (i > 0 && usedVars[i].c !== usedVars[i - 1].c)) {
+      const c = usedVars[start].c, x0 = xs[start], x1 = xs[i - 1] + CELL;
+      svg.append(el('line', {x1: x0, x2: x1, y1: 22, y2: 22, stroke: 'var(--line)'}));
+      const t = el('text', {x: x0, y: 16, class: 'grp'}, c.length * 6.4 <= (x1 - x0) + GROUP_GAP ? c : c.split(/[ /(]/)[0]);
+      t.append(el('title', {}, c));
+      svg.append(t); start = i;
+    }
+  }
+  // column labels
+  usedVars.forEach((v, i) => {
+    const name = v.v.length > 30 ? v.v.slice(0, 29) + '…' : v.v;
+    const t = el('text', {x: xs[i] + CELL / 2 + 3, y: TOP - 6, class: 'collab', 'data-v': v.v,
+      transform: `rotate(-60 ${xs[i] + CELL / 2 + 3} ${TOP - 6})`}, name);
+    t.append(el('title', {}, v.v));
+    svg.append(t);
+  });
+  // row group labels and row labels
+  prevT = null;
+  rows.forEach((s, j) => {
+    if (sortBy === 'type' && s.type !== prevT) svg.append(el('text', {x: 8, y: ys[j] - 5, class: 'grp'}, s.type));
+    prevT = s.type;
+    const label = `${s.code}  ${s.name}`;
+    const rl = el('text', {x: 8, y: ys[j] + CELL - 2, class: 'rowlab', 'data-s': s.code}, label.length > 31 ? label.slice(0, 30) + '…' : label);
+    rl.append(el('title', {}, label));
+    svg.append(rl);
+    // faint row guide
+    svg.append(el('rect', {x: LEFT, y: ys[j] + CELL / 2, width: x - LEFT, height: 0.5, fill: 'var(--grid)'}));
+  });
+  // cells
+  rows.forEach((s, j) => usedVars.forEach((v, i) => {
+    const c = byKey.get(s.code + '\u0000' + v.v);
+    if (!c) return;
+    const r = el('rect', {x: xs[i], y: ys[j], width: CELL, height: CELL, rx: 2, class: 'cell', tabindex: 0,
+      fill: bin(c.y) || 'url(#hatch)', 'data-k': s.code + '\u0000' + v.v,
+      'aria-label': `${s.code} ${v.v}: ${c.f ? c.f + ' to ' + c.l : 'dates not in summary'}, ${c.n} table(s)`});
+    svg.append(r);
+  }));
+}
+
+function showTip(e, k) {
+  const c = byKey.get(k), s = site.get(c.s);
+  const span = c.y === null ? 'dates not in summary' : `${c.f} → ${c.l} (${c.y.toFixed(1)} yr)`;
+  tip.innerHTML = `<b>${s.code}</b> <span class="m">${s.name} · ${s.type}</span><br>` +
+    `<b>${c.v}</b> <span class="m">${vcat.get(c.v)} · ${c.u}</span><br>` +
+    `${span}<br><span class="m">${c.n} table(s) · ${c.src}</span>`;
+  tip.style.display = 'block';
+  const r = tip.getBoundingClientRect();
+  let x = e.clientX + 14, y = e.clientY + 14;
+  if (x + r.width > innerWidth - 8) x = e.clientX - r.width - 14;
+  if (y + r.height > innerHeight - 8) y = e.clientY - r.height - 14;
+  tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  svg.querySelectorAll('.hl').forEach(n => n.classList.remove('hl'));
+  svg.querySelector(`.rowlab[data-s="${CSS.escape(c.s)}"]`)?.classList.add('hl');
+  svg.querySelector(`.collab[data-v="${CSS.escape(c.v)}"]`)?.classList.add('hl');
+}
+function hideTip() { tip.style.display = 'none'; svg.querySelectorAll('.hl').forEach(n => n.classList.remove('hl')); }
+svg.addEventListener('mousemove', e => { const k = e.target.dataset?.k; k ? showTip(e, k) : hideTip(); });
+svg.addEventListener('mouseleave', hideTip);
+svg.addEventListener('focusin', e => { const k = e.target.dataset?.k; if (k) { const b = e.target.getBoundingClientRect(); showTip({clientX: b.right, clientY: b.bottom}, k); } });
+svg.addEventListener('focusout', hideTip);
+for (const id of ['ftype', 'fcat', 'rsort']) document.getElementById(id).addEventListener('change', render);
+
+// legend hatch swatch (same pattern, in the legend's own svg)
+(() => {
+  const s = document.querySelector('.legend svg');
+  const defs = el('defs'), pat = el('pattern', {id: 'hatch-l', patternUnits: 'userSpaceOnUse', width: 4, height: 4, patternTransform: 'rotate(45)'});
+  pat.append(el('rect', {width: 4, height: 4, fill: 'var(--unknown)'}), el('line', {x1: 0, y1: 0, x2: 0, y2: 4, stroke: 'var(--hatch)', 'stroke-width': 1.5}));
+  defs.append(pat); s.prepend(defs);
+})();
+
+// table view
+document.querySelector('#tbl tbody').append(...D.cells.slice()
+  .sort((a, b) => a.s.localeCompare(b.s) || a.v.localeCompare(b.v))
+  .map(c => {
+    const tr = document.createElement('tr'), s = site.get(c.s);
+    for (const v of [c.s, s.type, c.v, vcat.get(c.v), c.u, c.n, c.src, c.f || '—', c.l || '—']) {
+      const td = document.createElement('td'); td.textContent = v; tr.append(td);
+    }
+    return tr;
+  }));
+render();
+</script>
+</body>
+</html>

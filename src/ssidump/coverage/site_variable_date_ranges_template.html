@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Date Range Availability</title>
+<style>
+:root{
+  color-scheme:light;
+  --surface:#fcfcfb; --line:#e3e2dd; --grid:#ecebe7; --band:#f4f3f0;
+  --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#7a7974;
+  --mark:#2a78d6; --focus:#0b0b0b;
+}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme:dark;
+    --surface:#1a1a19; --line:#383835; --grid:#2a2a28; --band:#222220;
+    --text-primary:#f0efec; --text-secondary:#c3c2b7; --text-muted:#8e8d86;
+    --mark:#3987e5; --focus:#f0efec;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --surface:#1a1a19; --line:#383835; --grid:#2a2a28; --band:#222220;
+  --text-primary:#f0efec; --text-secondary:#c3c2b7; --text-muted:#8e8d86;
+  --mark:#3987e5; --focus:#f0efec;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface);color:var(--text-primary);
+  font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+main{max-width:1460px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:20px;margin:0 0 4px;font-weight:600}
+.sub{color:var(--text-secondary);margin:0 0 16px}
+.controls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin:0 0 12px}
+.controls label{color:var(--text-secondary);font-size:13px;display:flex;gap:6px;align-items:center}
+select{font:inherit;font-size:13px;color:var(--text-primary);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:4px 8px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-size:12px;color:var(--text-secondary);margin:0 0 12px}
+.sw{width:12px;height:12px;border-radius:2px;display:inline-block;vertical-align:-2px;margin-right:6px}
+.frame{display:flex;border:1px solid var(--line);border-radius:8px;background:var(--surface);overflow:hidden}
+.left{flex:0 0 auto;border-right:1px solid var(--line)}
+.right{flex:1 1 auto;overflow-x:auto;overflow-y:hidden}
+svg{display:block}
+svg text{fill:var(--text-secondary);font-size:10.5px}
+svg .grp{fill:var(--text-primary);font-weight:600;font-size:11px}
+svg .rng{fill:var(--text-primary);font-size:10.5px}
+.cell{fill:var(--mark)}
+.cell:focus{outline:none;stroke:var(--focus);stroke-width:1.5}
+.hl{fill:var(--text-primary)!important;font-weight:600}
+#tip{position:fixed;pointer-events:none;z-index:10;max-width:380px;background:var(--surface);color:var(--text-primary);
+  border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;box-shadow:0 4px 16px rgba(0,0,0,.18);display:none}
+#tip .m{color:var(--text-secondary)}
+details{margin-top:20px}
+summary{cursor:pointer;color:var(--text-secondary)}
+table{border-collapse:collapse;font-size:12px;margin-top:8px;width:100%}
+th,td{text-align:left;padding:4px 8px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{color:var(--text-secondary);font-weight:600;position:sticky;top:0;background:var(--surface)}
+.tablewrap{overflow:auto;max-height:60vh;border:1px solid var(--line);border-radius:8px}
+.foot{color:var(--text-muted);font-size:12px;margin-top:16px}
+</style>
+</head>
+<body>
+<main>
+  <h1>Data availability by date range</h1>
+  <p class="sub" id="sub"></p>
+  <div class="controls">
+    <label>Sampling feature type <select id="ftype"><option value="">All</option></select></label>
+    <label>Variable category <select id="fcat"><option value="">All</option></select></label>
+    <label>Start year <select id="fyear"><option value="">All</option></select></label>
+  </div>
+  <div class="legend">
+    <span><span class="sw" style="background:var(--mark)"></span>data from the range's first to last month (first and last good value; gaps inside are not shown)</span>
+    <span>Columns: date range (first – last month), then the variables sharing it. Scroll sideways for later ranges.</span>
+  </div>
+  <div class="frame">
+    <div class="left"><svg id="labels" aria-hidden="true"></svg></div>
+    <div class="right" id="right"><svg id="chart" role="img" aria-labelledby="sub"></svg></div>
+  </div>
+  <details>
+    <summary>Table view (all pairs with dates)</summary>
+    <div class="tablewrap"><table id="tbl"><thead><tr>
+      <th>Date range</th><th>Variable</th><th>Category</th><th>Sampling feature</th><th>Type</th><th>Units</th><th>Tables</th><th>Sources</th><th>First</th><th>Last</th>
+    </tr></thead><tbody></tbody></table></div>
+  </details>
+  <p class="foot" id="foot"></p>
+</main>
+<div id="tip" role="tooltip"></div>
+<script>
+const D = __DATA__;
+const CELL = 9, GAP = 2, LEFTW = 206, TOP = 300, VARH = 150, RANGE_GAP = 6, TYPE_GAP = 20;
+const NS = 'http://www.w3.org/2000/svg';
+const chart = document.getElementById('chart'), labels = document.getElementById('labels'), tip = document.getElementById('tip');
+const site = new Map(D.sites.map(s => [s.code, s]));
+const vcat = new Map(D.variables.map(v => [v.v, v.c]));
+const cells = D.cells.filter(c => c.f);       // pairs with dates
+const rkey = c => c.f.slice(0, 7) + ' – ' + c.l.slice(0, 7);
+
+document.getElementById('sub').textContent =
+  `${new Set(cells.map(rkey)).size} date ranges (first – last month), ${cells.length} sampling-feature × variable pairs, ` +
+  `${new Set(cells.map(c => c.s)).size} sampling features.`;
+document.getElementById('foot').textContent =
+  `Source: exports/summaries/site_variable_pairs.tsv (built ${D.built}) from the SSI odmx_lbnlsfa dump of 2026-10-26. ` +
+  `${D.cells.length - cells.length} pairs without dates (OTT disdrometer, InfluxDB TRAIL towers) are not shown.`;
+for (const t of D.types) document.getElementById('ftype').append(new Option(t, t));
+for (const c of D.cats) document.getElementById('fcat').append(new Option(c, c));
+for (const y of [...new Set(cells.map(c => c.f.slice(0, 4)))].sort()) document.getElementById('fyear').append(new Option(y, y));
+
+function el(name, attrs, text) {
+  const e = document.createElementNS(NS, name);
+  for (const [k, v] of Object.entries(attrs || {})) e.setAttribute(k, v);
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+
+function render() {
+  const ft = document.getElementById('ftype').value, fc = document.getElementById('fcat').value, fy = document.getElementById('fyear').value;
+  const sel = cells.filter(c => (!ft || site.get(c.s).type === ft) && (!fc || vcat.get(c.v) === fc) && (!fy || c.f.startsWith(fy)));
+  // columns: (range, variable), ranges by start then end month, variables by category order then name
+  const catIdx = c => D.cats.indexOf(vcat.get(c));
+  const cols = [...new Map(sel.map(c => [rkey(c) + '\u0000' + c.v, {r: rkey(c), v: c.v, f: c.f.slice(0, 7), l: c.l.slice(0, 7)}])).values()]
+    .sort((a, b) => a.f.localeCompare(b.f) || a.l.localeCompare(b.l) || catIdx(a.v) - catIdx(b.v) || a.v.localeCompare(b.v));
+  const rows = D.sites.filter(s => sel.some(c => c.s === s.code));
+  const xs = [], ys = [];
+  let x = 8, prev = null;
+  for (const c of cols) { if (prev !== null && c.r !== prev) x += RANGE_GAP; xs.push(x); x += CELL + GAP; prev = c.r; }
+  let y = TOP, prevT = null;
+  for (const s of rows) { if (prevT !== null && s.type !== prevT) y += TYPE_GAP; ys.push(y); y += CELL + GAP; prevT = s.type; }
+  const W = x + 100, H = y + 12;   // right margin for the last rotated range label
+  for (const s of [chart, labels]) s.replaceChildren();
+  chart.setAttribute('width', W); chart.setAttribute('height', H); chart.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  labels.setAttribute('width', LEFTW); labels.setAttribute('height', H); labels.setAttribute('viewBox', `0 0 ${LEFTW} ${H}`);
+
+  // alternating bands per date range + range labels (rotated), variable labels beneath
+  let start = 0, band = 0;
+  for (let i = 0; i <= cols.length; i++) {
+    if (i === cols.length || (i > 0 && cols[i].r !== cols[i - 1].r)) {
+      const x0 = xs[start] - 2, x1 = xs[i - 1] + CELL + 2;
+      if (band++ % 2 === 0) chart.append(el('rect', {x: x0, y: TOP - VARH - 4, width: x1 - x0, height: H - (TOP - VARH - 4), fill: 'var(--band)'}));
+      const cx = (x0 + x1) / 2 + 3, cy = TOP - VARH - 10;
+      const t = el('text', {x: cx, y: cy, class: 'rng', transform: `rotate(-60 ${cx} ${cy})`}, cols[start].r);
+      t.append(el('title', {}, `${cols[start].r}: ${i - start} variable(s)`));
+      chart.append(t);
+      start = i;
+    }
+  }
+  cols.forEach((c, i) => {
+    const cx = xs[i] + CELL / 2 + 3, cy = TOP - 6;
+    const name = c.v.length > 26 ? c.v.slice(0, 25) + '…' : c.v;
+    const t = el('text', {x: cx, y: cy, class: 'collab', 'data-col': i, transform: `rotate(-90 ${cx} ${cy})`}, name);
+    t.append(el('title', {}, `${c.v} (${vcat.get(c.v)})`));
+    chart.append(t);
+  });
+  // row labels (left pane) and row guides
+  prevT = null;
+  rows.forEach((s, j) => {
+    if (s.type !== prevT) labels.append(el('text', {x: 8, y: ys[j] - 6, class: 'grp'}, s.type));
+    prevT = s.type;
+    const label = `${s.code}  ${s.name}`;
+    const t = el('text', {x: 8, y: ys[j] + CELL - 1, class: 'rowlab', 'data-s': s.code}, label.length > 33 ? label.slice(0, 32) + '…' : label);
+    t.append(el('title', {}, label));
+    labels.append(t);
+    chart.append(el('rect', {x: 0, y: ys[j] + CELL / 2, width: W, height: 0.5, fill: 'var(--grid)'}));
+  });
+  labels.append(el('text', {x: 8, y: TOP - 34, class: 'grp'}, 'Sampling feature'));
+  // cells
+  const colIdx = new Map(cols.map((c, i) => [c.r + '\u0000' + c.v, i]));
+  const rowIdx = new Map(rows.map((s, j) => [s.code, j]));
+  for (const c of sel) {
+    const i = colIdx.get(rkey(c) + '\u0000' + c.v), j = rowIdx.get(c.s);
+    chart.append(el('rect', {x: xs[i], y: ys[j], width: CELL, height: CELL, rx: 2, class: 'cell', tabindex: 0,
+      'data-k': D.cells.indexOf(c), 'data-col': i, 'aria-label': `${c.s} ${c.v} ${c.f} to ${c.l}`}));
+  }
+}
+
+function showTip(e, k) {
+  const c = D.cells[k], s = site.get(c.s);
+  tip.innerHTML = `<b>${rkey(c)}</b> <span class="m">(${c.f} → ${c.l})</span><br>` +
+    `<b>${c.v}</b> <span class="m">${vcat.get(c.v)} · ${c.u}</span><br>` +
+    `<b>${s.code}</b> <span class="m">${s.name} · ${s.type}</span><br>` +
+    `<span class="m">${c.n} table(s) · ${c.src}</span>`;
+  tip.style.display = 'block';
+  const r = tip.getBoundingClientRect();
+  let x = e.clientX + 14, y = e.clientY + 14;
+  if (x + r.width > innerWidth - 8) x = e.clientX - r.width - 14;
+  if (y + r.height > innerHeight - 8) y = e.clientY - r.height - 14;
+  tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  document.querySelectorAll('.hl').forEach(n => n.classList.remove('hl'));
+  labels.querySelector(`.rowlab[data-s="${CSS.escape(c.s)}"]`)?.classList.add('hl');
+  chart.querySelector(`.collab[data-col="${e.target?.dataset?.col}"]`)?.classList.add('hl');
+}
+function hideTip() { tip.style.display = 'none'; document.querySelectorAll('.hl').forEach(n => n.classList.remove('hl')); }
+chart.addEventListener('mousemove', e => { const k = e.target.dataset?.k; k !== undefined ? showTip(e, +k) : hideTip(); });
+chart.addEventListener('mouseleave', hideTip);
+chart.addEventListener('focusin', e => { const k = e.target.dataset?.k; if (k !== undefined) { const b = e.target.getBoundingClientRect(); showTip({clientX: b.right, clientY: b.bottom, target: e.target}, +k); } });
+chart.addEventListener('focusout', hideTip);
+for (const id of ['ftype', 'fcat', 'fyear']) document.getElementById(id).addEventListener('change', render);
+
+document.querySelector('#tbl tbody').append(...cells.slice()
+  .sort((a, b) => a.f.slice(0, 7).localeCompare(b.f.slice(0, 7)) || a.l.slice(0, 7).localeCompare(b.l.slice(0, 7)) || a.v.localeCompare(b.v) || a.s.localeCompare(b.s))
+  .map(c => {
+    const tr = document.createElement('tr'), s = site.get(c.s);
+    for (const v of [rkey(c), c.v, vcat.get(c.v), c.s, s.type, c.u, c.n, c.src, c.f, c.l]) {
+      const td = document.createElement('td'); td.textContent = v; tr.append(td);
+    }
+    return tr;
+  }));
+render();
+</script>
+</body>
+</html>
