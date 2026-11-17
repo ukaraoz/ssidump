@@ -86,7 +86,16 @@ th{color:var(--text-secondary);font-weight:600;position:sticky;top:0;background:
 <div id="tip" role="tooltip"></div>
 <script>
 const D = __DATA__;
-const CELL = 9, GAP = 2, LEFTW = 206, TOP = 300, VARH = 150, RANGE_GAP = 6, TYPE_GAP = 20;
+const CELL = 9, GAP = 2, RANGE_GAP = 6, TYPE_GAP = 20;
+let LEFTW = 206;  // set in render() from the longest site label
+let TOP = 300, VARH = 150;   // set in render() from the longest variable and range labels
+// width of a label in the SVG label font (to size the header so no name is cut off)
+const _ctx = document.createElement('canvas').getContext('2d');
+function textW(s, px = 10.5) {
+  _ctx.font = `${px}px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif`;
+  return _ctx.measureText(s).width;
+}
+
 const NS = 'http://www.w3.org/2000/svg';
 const chart = document.getElementById('chart'), labels = document.getElementById('labels'), tip = document.getElementById('tip');
 const site = new Map(D.sites.map(s => [s.code, s]));
@@ -119,6 +128,9 @@ function render() {
   const cols = [...new Map(sel.map(c => [rkey(c) + '\u0000' + c.v, {r: rkey(c), v: c.v, f: c.f.slice(0, 7), l: c.l.slice(0, 7)}])).values()]
     .sort((a, b) => a.f.localeCompare(b.f) || a.l.localeCompare(b.l) || catIdx(a.v) - catIdx(b.v) || a.v.localeCompare(b.v));
   const rows = D.sites.filter(s => sel.some(c => c.s === s.code));
+  VARH = Math.ceil(Math.max(0, ...cols.map(c => textW(c.v)))) + 12;
+  LEFTW = 8 + Math.ceil(Math.max(0, ...rows.map(s => textW(`${s.code} ${s.name}`)), textW('Sampling feature', 11))) + 14;
+  TOP = VARH + Math.ceil(Math.max(0, ...cols.map(c => textW(c.r)))) + 30;
   const xs = [], ys = [];
   let x = 8, prev = null;
   for (const c of cols) { if (prev !== null && c.r !== prev) x += RANGE_GAP; xs.push(x); x += CELL + GAP; prev = c.r; }
@@ -139,12 +151,17 @@ function render() {
       const t = el('text', {x: cx, y: cy, class: 'rng', transform: `rotate(-90 ${cx} ${cy})`}, cols[start].r);   // vertical
       t.append(el('title', {}, `${cols[start].r}: ${i - start} variable(s)`));
       chart.append(t);
+      // thin line between date-range groups
+      if (i < cols.length) {
+        const lx = xs[i] - RANGE_GAP / 2 - GAP / 2;
+        chart.append(el('line', {x1: lx, x2: lx, y1: 4, y2: H, stroke: 'var(--line)', 'stroke-width': 1}));
+      }
       start = i;
     }
   }
   cols.forEach((c, i) => {
     const cx = xs[i] + CELL / 2 + 3, cy = TOP - 6;
-    const name = c.v.length > 26 ? c.v.slice(0, 25) + '…' : c.v;
+    const name = c.v;   // full name; the header is sized to fit
     const t = el('text', {x: cx, y: cy, class: 'collab', 'data-col': i, transform: `rotate(-90 ${cx} ${cy})`}, name);
     t.append(el('title', {}, `${c.v} (${vcat.get(c.v)})`));
     chart.append(t);
@@ -155,7 +172,7 @@ function render() {
     if (s.type !== prevT) labels.append(el('text', {x: 8, y: ys[j] - 6, class: 'grp'}, s.type));
     prevT = s.type;
     const label = `${s.code}  ${s.name}`;
-    const t = el('text', {x: 8, y: ys[j] + CELL - 1, class: 'rowlab', 'data-s': s.code}, label.length > 33 ? label.slice(0, 32) + '…' : label);
+    const t = el('text', {x: 8, y: ys[j] + CELL - 1, class: 'rowlab', 'data-s': s.code}, label);   // full label; the column is sized to fit
     t.append(el('title', {}, label));
     labels.append(t);
     chart.append(el('rect', {x: 0, y: ys[j] + CELL / 2, width: W, height: 0.5, fill: 'var(--grid)'}));

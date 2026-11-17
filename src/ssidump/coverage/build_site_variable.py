@@ -25,10 +25,10 @@ CHROME = os.environ.get('CHROME', '/Applications/Google Chrome.app/Contents/MacO
 # print versions for the PNGs: whole figure, no controls / table view
 PRINT_CSS = {
     'site_variable_heatmap.html': ('.scroll{max-height:none!important;overflow:visible!important}.controls,details{display:none!important}'
-                                   'main{padding-bottom:12px;max-width:1460px!important}', (1500, 1680)),
+                                   'main{padding-bottom:12px;max-width:1660px!important}', (1680, 1770)),
     'site_variable_date_ranges.html': ('.right{overflow:visible!important}.frame{overflow:visible!important;display:inline-flex!important}'
                                        'main{max-width:none!important;padding-bottom:12px}.controls,details{display:none!important}',
-                                       (6030, 1640)),
+                                       (6220, 1690)),
 }
 
 

@@ -31,7 +31,7 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--surface);color:var(--text-primary);
   font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-main{max-width:1460px;margin:0 auto;padding:24px 16px 48px}
+main{max-width:1680px;margin:0 auto;padding:24px 16px 48px}
 h1{font-size:20px;margin:0 0 4px;font-weight:600}
 .sub{color:var(--text-secondary);margin:0 0 16px}
 .controls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin:0 0 12px}
@@ -102,7 +102,16 @@ th{color:var(--text-secondary);font-weight:600;position:sticky;top:0;background:
 <div id="tip" role="tooltip"></div>
 <script>
 const D = __DATA__;
-const CELL = 11, GAP = 2, LEFT = 196, TOP = 214, GROUP_GAP = 8;
+const CELL = 11, GAP = 2, GROUP_GAP = 8;
+let LEFT = 196;  // set in render() from the longest site label
+let TOP = 214;   // set in render() from the longest variable name
+// width of a label in the SVG label font (to size the header so no name is cut off)
+const _ctx = document.createElement('canvas').getContext('2d');
+function textW(s, px = 10.5) {
+  _ctx.font = `${px}px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif`;
+  return _ctx.measureText(s).width;
+}
+
 const svg = document.getElementById('chart'), tip = document.getElementById('tip');
 const NS = 'http://www.w3.org/2000/svg';
 const byKey = new Map(D.cells.map(c => [c.s + '\u0000' + c.v, c]));
@@ -141,6 +150,8 @@ function render() {
   if (sortBy === 'count') rows = rows.slice().sort((a, b) => count(b) - count(a) || a.code.localeCompare(b.code));
   const usedVars = vars.filter(v => rows.some(s => byKey.has(s.code + '\u0000' + v.v)));
 
+  TOP = 36 + Math.ceil(Math.max(0, ...usedVars.map(v => textW(v.v)))) + 10;
+  LEFT = 8 + Math.ceil(Math.max(0, ...rows.map(s => textW(`${s.code} ${s.name}`)), textW('waterQualityStation', 11))) + 14;
   // x positions with a gap between categories; y positions with a gap between types (when grouped)
   const xs = [], ys = [];
   let x = LEFT, prevC = null;
@@ -163,12 +174,18 @@ function render() {
       svg.append(el('line', {x1: x0, x2: x1, y1: 22, y2: 22, stroke: 'var(--line)'}));
       const t = el('text', {x: x0, y: 16, class: 'grp'}, c.length * 6.4 <= (x1 - x0) + GROUP_GAP ? c : c.split(/[ /(]/)[0]);
       t.append(el('title', {}, c));
-      svg.append(t); start = i;
+      svg.append(t);
+      // thin line between variable groups, through the header and the grid
+      if (i < usedVars.length) {
+        const lx = xs[i] - GROUP_GAP / 2 - GAP / 2;
+        svg.append(el('line', {x1: lx, x2: lx, y1: 6, y2: H - 10, stroke: 'var(--line)', 'stroke-width': 1}));
+      }
+      start = i;
     }
   }
   // column labels
   usedVars.forEach((v, i) => {
-    const name = v.v.length > 30 ? v.v.slice(0, 29) + '…' : v.v;
+    const name = v.v;   // full name; the header is sized to fit
     const t = el('text', {x: xs[i] + CELL / 2 + 3.5, y: TOP - 6, class: 'collab', 'data-v': v.v,
       transform: `rotate(-90 ${xs[i] + CELL / 2 + 3.5} ${TOP - 6})`}, name);   // vertical, read bottom to top
     t.append(el('title', {}, v.v));
@@ -180,7 +197,7 @@ function render() {
     if (sortBy === 'type' && s.type !== prevT) svg.append(el('text', {x: 8, y: ys[j] - 5, class: 'grp'}, s.type));
     prevT = s.type;
     const label = `${s.code}  ${s.name}`;
-    const rl = el('text', {x: 8, y: ys[j] + CELL - 2, class: 'rowlab', 'data-s': s.code}, label.length > 31 ? label.slice(0, 30) + '…' : label);
+    const rl = el('text', {x: 8, y: ys[j] + CELL - 2, class: 'rowlab', 'data-s': s.code}, label);   // full label; the column is sized to fit
     rl.append(el('title', {}, label));
     svg.append(rl);
     // faint row guide
