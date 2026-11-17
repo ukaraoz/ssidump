@@ -1,0 +1,13 @@
+table_name	station	feeder_table	category_sensor	datastream	variable	units	good_measurements	first	last
+feeder_phenocam_snodgrass1_sg_ehs5_b_mean_calc	SG-EHS5 Snodgrass tower #5	feeder_phenocam_snodgrass1_sg_ehs5	Image channel mean (RGB)	b_mean	blueChannelMean	-	234304	2022-07-14	2025-09-03
+feeder_phenocam_snodgrass1_sg_ehs5_g_mean_calc	SG-EHS5 Snodgrass tower #5	feeder_phenocam_snodgrass1_sg_ehs5	Image channel mean (RGB)	g_mean	greenChannelMean	-	234304	2022-07-14	2025-09-03
+feeder_phenocam_snodgrass1_sg_ehs5_gcc_calc	SG-EHS5 Snodgrass tower #5	feeder_phenocam_snodgrass1_sg_ehs5	Vegetation greenness (GCC)	gcc	GCC	-	234304	2022-07-14	2025-09-03
+feeder_phenocam_snodgrass1_sg_ehs5_r_mean_calc	SG-EHS5 Snodgrass tower #5	feeder_phenocam_snodgrass1_sg_ehs5	Image channel mean (RGB)	r_mean	redChannelMean	-	234304	2022-07-14	2025-09-03
+feeder_phenocam_trailcreek1_tr_ehs1_b_mean_calc	TR-EHS1 Trail Creek ET Tower #1	feeder_phenocam_trailcreek1_tr_ehs1	Image channel mean (RGB)	b_mean	blueChannelMean	-	1575	2025-09-03	2026-03-06
+feeder_phenocam_trailcreek1_tr_ehs1_g_mean_calc	TR-EHS1 Trail Creek ET Tower #1	feeder_phenocam_trailcreek1_tr_ehs1	Image channel mean (RGB)	g_mean	greenChannelMean	-	1575	2025-09-03	2026-03-06
+feeder_phenocam_trailcreek1_tr_ehs1_gcc_calc	TR-EHS1 Trail Creek ET Tower #1	feeder_phenocam_trailcreek1_tr_ehs1	Vegetation greenness (GCC)	gcc	GCC	-	1575	2025-09-03	2026-03-06
+feeder_phenocam_trailcreek1_tr_ehs1_r_mean_calc	TR-EHS1 Trail Creek ET Tower #1	feeder_phenocam_trailcreek1_tr_ehs1	Image channel mean (RGB)	r_mean	redChannelMean	-	1575	2025-09-03	2026-03-06
+feeder_phenocam_trailcreek2_tr_ehs2_b_mean_calc	TR-EHS2 Trail Creek ET Tower #2	feeder_phenocam_trailcreek2_tr_ehs2	Image channel mean (RGB)	b_mean	blueChannelMean	-	351	2025-09-04	2026-03-06
+feeder_phenocam_trailcreek2_tr_ehs2_g_mean_calc	TR-EHS2 Trail Creek ET Tower #2	feeder_phenocam_trailcreek2_tr_ehs2	Image channel mean (RGB)	g_mean	greenChannelMean	-	351	2025-09-04	2026-03-06
+feeder_phenocam_trailcreek2_tr_ehs2_gcc_calc	TR-EHS2 Trail Creek ET Tower #2	feeder_phenocam_trailcreek2_tr_ehs2	Vegetation greenness (GCC)	gcc	GCC	-	351	2025-09-04	2026-03-06
+feeder_phenocam_trailcreek2_tr_ehs2_r_mean_calc	TR-EHS2 Trail Creek ET Tower #2	feeder_phenocam_trailcreek2_tr_ehs2	Image channel mean (RGB)	r_mean	redChannelMean	-	351	2025-09-04	2026-03-06
