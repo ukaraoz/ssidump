@@ -32,7 +32,7 @@ PLAUSIBLE = {
     'airTemperature': (-50.0, 50.0),
     'batteryVoltage': (0.0, 5.0),
 }
-# Optional per-cell flags (ssi2essdive.py --problem-flags): added after the database flag in the
+# Optional per-cell flags (ssi2essdive --problem-flags): added after the database flag in the
 # _flag column, separated by '; ' as the format allows, and defined as flag_id attributes.
 PROBLEM_FLAGS = {
     'suspect_shifted_column': 'Suspect: this value matches the reading of another probe further down the profile in the '

@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """Convert SSI datastreams to an ESS-DIVE Sensor Time Series - Full package.
 
-Reads either a table export written by ssiexportall.py (--export exports/tables_<date>; no server
-needed) or the live database (server running: `ssidump.py start`). Python 3 standard library only.
+Reads either a table export written by ssiexportall (--export exports/tables_<date>; no server
+needed) or the live database (server running: `ssidump start`). Python 3 standard library only.
 
-    ssi2essdive.py sensor-full --export exports/tables_2026-10-26 \\
+    ssi2essdive sensor-full --export exports/tables_2026-10-26 \\
         --owner Wielandt --data-type soilTemperature --sensor-type "TMP 117" \\
         --prefix snod1_soil_temperature --title "SNOD1 soil temperature" \\
         --config configs/snod1_soil_temperature.json -o exports/essdive/stijn_wielandt/snod1_soil_temperature
 
-    ssi2essdive.py validate exports/essdive/stijn_wielandt/influxdb_SNOD1_soil_nodes
+    ssi2essdive validate exports/essdive/stijn_wielandt/influxdb_SNOD1_soil_nodes
 
-Selection options are those of ssiselect.py (--owner, --data-type, --sensor-type, --site, --role).
+Selection options are those of ssiselect (--owner, --data-type, --sensor-type, --site, --role).
 --start/--end (UTC) limit the time window. --config is an optional JSON file:
 
     {"methods": {"<method_id>": {"description": "...", "lower_bound": -40, "upper_bound": 60,
@@ -32,10 +32,9 @@ import socket
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-import ssiexport as sx          # noqa: E402
-import ssiselect as sel         # noqa: E402
-from essdive import checks, metadata, ssi_source, validate, writers, __version__   # noqa: E402
+from . import export as sx
+from . import selection as sel
+from .essdive import checks, metadata, ssi_source, validate, writers, __version__
 
 
 def sha256(path):
@@ -102,7 +101,7 @@ def cmd_sensor_full(args):
     sev = {k: sum(p['severity'] == k for p in problems) for k in ('error', 'warning', 'info')}
     print(f"problems: {sev['error']} error, {sev['warning']} warning, {sev['info']} info", file=sys.stderr)
     record = {
-        'tool': f'ssi2essdive.py (essdive {__version__})', 'tool_sha256': sha256(Path(__file__).resolve()),
+        'tool': f'ssi2essdive (essdive {__version__})', 'tool_sha256': sha256(Path(__file__).resolve()),
         'command': shlex.join([Path(sys.argv[0]).name] + sys.argv[1:]),
         'created_utc': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S'),
         'host': socket.gethostname(), 'source': source, 'selection': selection,

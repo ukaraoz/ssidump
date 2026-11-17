@@ -1,17 +1,16 @@
-"""Write coverage/index.html: one row per dataset whose pages have been built.
+"""Write <pages>/index.html: one row per dataset whose pages have been built.
 
-    python3 coverage/build_index.py
+    python3 src/ssidump/coverage/build_index.py [PAGES_DIR]      # default: <repository>/coverage
 
-Reads the data embedded in each built <dataset>_coverage.html in coverage/, so run it
-after coverage/build.sh.
+Reads the data embedded in each built <dataset>_coverage.html in PAGES_DIR, so run it
+after build.sh.
 """
-import html, json, re
+import html, json, re, sys
 from pathlib import Path
 
 from build_data import DATASETS
 
-root = Path(__file__).resolve().parent
-repo = root.parent
+root = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path(__file__).resolve().parents[3] / 'coverage'
 rows = []
 for key, cfg in DATASETS.items():
     page = root / f'{key}_coverage.html'
@@ -78,7 +77,7 @@ tfoot td,tfoot th{{font-weight:600;border-top:2px solid var(--line)}}
     </tbody>
     <tfoot><tr><th>All sources</th><td class="n">{total:,}</td><td></td><td></td><td></td><td></td><td></td></tr></tfoot>
   </table></div>
-  <p class="foot">Built from <code>ssiexport.py export datastreams … --drop-nan</code> exports (geochem without <code>--drop-nan</code>) of the 2026-10-26 dump. Sentinel satellite streams are not included. Schema map: <a href="../schema_map/ssi_schemas.html">ssi_schemas.html</a>.</p>
+  <p class="foot">Built from <code>ssiexport export datastreams … --drop-nan</code> exports (geochem without <code>--drop-nan</code>) of the 2026-10-26 dump. Sentinel satellite streams are not included. Schema map: <a href="../schema_map/ssi_schemas.html">ssi_schemas.html</a>.</p>
 </div>
 '''
 (root / 'index.html').write_text(out, encoding='utf-8')

@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ssidump"
+version = "1.0.0"
+description = "Local server, exports and ESS-DIVE packages for the SSI odmx_lbnlsfa database dump"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []   # Python standard library only; PostgreSQL client tools come from pgenv/
+
+[project.scripts]
+ssidump = "ssidump.server:main"
+ssiexport = "ssidump.export:main"
+ssiexportall = "ssidump.exportall:main"
+ssiselect = "ssidump.selection:main"
+ssi2essdive = "ssidump.essdive_cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"ssidump.essdive" = ["templates/*.md", "templates/*/*.csv"]
+"ssidump.schema_map" = ["*.html", "*.sh"]
+"ssidump.coverage" = ["*.html", "*.sh"]
+"ssidump.scripts" = ["*.sh"]

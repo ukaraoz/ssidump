@@ -1,6 +1,6 @@
 """Check a written Sensor Time Series - Full package against the reporting formats.
 
-    python3 -m essdive.validate <package_dir>        # exit status 1 if there are errors
+    python3 -m ssidump.essdive.validate <package_dir>        # exit status 1 if there are errors
 
 Reads the files back from disk (independent of the code that wrote them). Errors are rule
 violations; warnings are things to review, such as units outside the controlled vocabulary.

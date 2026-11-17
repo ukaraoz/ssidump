@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Write per-schema table inventories (TSV) from a schema-only SQL file.
 
-    python3 schema_map/table_inventory.py schema_only.sql exports/tables_2026-10-26/ table_inventory/
+    python3 src/ssidump/schema_map/table_inventory.py schema_only.sql exports/tables_2026-10-26/ table_inventory/
 
 Needs no server. Uses:
   - schema_only.sql          tables, columns, keys, views and COMMENT ON descriptions
-  - exports/tables_<date>/     a table export made by ssiexportall.py:
+  - exports/tables_<date>/     a table export made by ssiexportall:
         odmx/*.csv(.gz)      the tables that describe each datastream (site, variable,
                              units, depth, dates, count)
         <schema>/_tables.tsv row counts; tables that were not exported (e.g. Sentinel,
@@ -49,7 +49,7 @@ def assigned_literal(path, name):
 # ---- odmx themes (schema map rules) and datastream families (ssiexport rules)
 MODULES = assigned_literal(os.path.join(here, 'build_data.py'), 'MODULES')
 FAMILIES = [(f, re.compile(p, re.I))
-            for f, p in assigned_literal(os.path.join(here, '..', 'ssiexport.py'), 'FAMILIES')]
+            for f, p in assigned_literal(os.path.join(here, '..', 'export.py'), 'FAMILIES')]
 
 
 def theme(name):
@@ -117,7 +117,7 @@ def one_line(s):
     return re.sub(r'\s+', ' ', s or '').strip()
 
 
-# ---- row counts and datastream descriptions from the table export (ssiexportall.py)
+# ---- row counts and datastream descriptions from the table export (ssiexportall)
 rowcounts = defaultdict(dict)           # schema -> table -> rows
 for schema in ('odmx', 'knowledge', 'feeder', 'datastreams'):
     idx = os.path.join(export_dir, schema, '_tables.tsv')
@@ -134,7 +134,7 @@ def open_table(schema, name):
         return gzip.open(base + '.csv.gz', 'rt', encoding='utf-8', newline='')
     if os.path.exists(base + '.csv'):
         return open(base + '.csv', encoding='utf-8', newline='')
-    sys.exit(f'table_inventory: {base}.csv.gz not found; export the odmx schema first (ssiexportall.py --schema odmx)')
+    sys.exit(f'table_inventory: {base}.csv.gz not found; export the odmx schema first (ssiexportall --schema odmx)')
 
 
 def read_csv(name, key):

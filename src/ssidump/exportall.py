@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Export every table of chosen schemas to gzipped CSV, one file per table, with a manifest.
 
-Needs the server running (`ssidump.py start`). Python 3 standard library only; uses psql.
+Needs the server running (`ssidump start`). Python 3 standard library only; uses psql.
 
-    ssiexportall.py --schema odmx --schema knowledge --schema feeder --schema datastreams \\
+    ssiexportall --schema odmx --schema knowledge --schema feeder --schema datastreams \\
                     --exclude 'datastreams:^sentinel_' --out exports/tables_2026-10-26 -j 6
 
 Writes  OUT/<schema>/<table>.csv.gz   (header row; NULL = empty field, empty string = "",
@@ -30,8 +30,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-import ssiexport as sx  # noqa: E402  (psql_cmd, q, check_server)
+from . import export as sx  # psql_cmd, q, check_server
 
 
 def log(msg):
@@ -169,7 +168,7 @@ def main():
     old_schemas = old.get('schemas', {})
     old_schemas.update(totals)
     json.dump({
-        'tool': 'ssiexportall.py', 'tool_sha256': sha256(Path(__file__).resolve()),
+        'tool': 'ssiexportall', 'tool_sha256': sha256(Path(__file__).resolve()),
         'command': shlex.join([Path(sys.argv[0]).name] + sys.argv[1:]),
         'started_utc': started.strftime('%Y-%m-%d %H:%M:%S'),
         'finished_utc': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S'),

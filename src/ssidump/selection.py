@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Select datastreams by equipment owner, data type and sensor type, and export them.
 
-Queries the odmx_lbnlsfa database directly (start the server first: `ssidump.py start`).
-Python 3 standard library only; uses ssiexport.py's psql helpers.
+Queries the odmx_lbnlsfa database directly (start the server first: `ssidump start`).
+Python 3 standard library only; uses ssiexport's psql helpers.
 
 Every datastream is resolved to the equipment that made it:
 
@@ -27,25 +27,25 @@ Selection (each option repeatable; OR within an option, AND between options):
 
 Commands:
 
-  ssiselect.py options  [selection]           what owners, data types, sensor types and sites
+  ssiselect options  [selection]           what owners, data types, sensor types and sites
                                               the current selection still contains
-  ssiselect.py catalog  [selection] -o cat.tsv one row per matching datastream with all metadata
-  ssiselect.py hierarchy [selection] -o h.json site -> device -> attached sensors -> datastreams,
+  ssiselect catalog  [selection] -o cat.tsv one row per matching datastream with all metadata
+  ssiselect hierarchy [selection] -o h.json site -> device -> attached sensors -> datastreams,
                                               with a data summary per site
-  ssiselect.py feeder   [selection] -o raw.tsv.gz the raw feeder rows behind the selection: one row per
+  ssiselect feeder   [selection] -o raw.tsv.gz the raw feeder rows behind the selection: one row per
                                               feeder row, one column per selected feeder column,
                                               plus device and site metadata
-  ssiselect.py export   [selection] -o data.tsv.gz
+  ssiselect export   [selection] -o data.tsv.gz
                                               one row per measurement, joined to the catalog;
                                               also writes data.catalog.tsv and data.manifest.json
 
-  ssiselect.py export --config data.manifest.json -o again.tsv.gz    # rerun a saved selection
+  ssiselect export --config data.manifest.json -o again.tsv.gz    # rerun a saved selection
 
 Examples:
 
-  ssiselect.py options --owner Wielandt
-  ssiselect.py catalog --owner Wielandt --data-type soilTemperature -o soil_catalog.tsv
-  ssiselect.py export  --owner Wielandt --data-type soilTemperature --sensor-type "TMP 117" \\
+  ssiselect options --owner Wielandt
+  ssiselect catalog --owner Wielandt --data-type soilTemperature -o soil_catalog.tsv
+  ssiselect export  --owner Wielandt --data-type soilTemperature --sensor-type "TMP 117" \\
                        --start 2023-01-01 --end 2024-01-01 -o soil_2023.tsv.gz
 """
 import argparse
@@ -63,8 +63,7 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-import ssiexport as sx  # noqa: E402  (psql helpers: q, lit, ident, stream_copy, check_server)
+from . import export as sx  # psql helpers: q, lit, ident, stream_copy, check_server
 
 VERSION = '1.0'
 SEL_KEYS = ('owner', 'data_type', 'sensor_type', 'site', 'role')
@@ -162,7 +161,7 @@ def read_export_table(export, schema, table):
 
 
 def export_table_names(export, schema):
-    """Tables listed in <schema>/_tables.tsv (written by ssiexportall.py) whose file is present."""
+    """Tables listed in <schema>/_tables.tsv (written by ssiexportall) whose file is present."""
     d = Path(export) / schema
     with open(d / '_tables.tsv', encoding='utf-8') as fh:
         names = [line.split('\t', 1)[0] for line in fh.read().splitlines()[1:] if line]
@@ -489,7 +488,7 @@ def hierarchy(rows, sel):
     loggers = {d['equipment_id'] for s in out_sites for d in s['devices']}
     sensors = {sn['equipment_id'] for s in out_sites for d in s['devices'] for sn in d['sensors']}
     return {
-        'tool': f'ssiselect.py {VERSION}', 'tool_sha256': sha256(Path(__file__).resolve()),
+        'tool': f'ssiselect {VERSION}', 'tool_sha256': sha256(Path(__file__).resolve()),
         'command': shlex.join([Path(sys.argv[0]).name] + sys.argv[1:]),
         'created_utc': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S'),
         'host': socket.gethostname(), 'database': sx.DB,
@@ -543,7 +542,7 @@ def export(rows, sel, out):
             n += 1
             by_flag[line.split('\t', 4)[3]] += 1
     manifest = {
-        'tool': f'ssiselect.py {VERSION}', 'git_commit': git_commit(),
+        'tool': f'ssiselect {VERSION}', 'git_commit': git_commit(),
         'command': shlex.join([Path(sys.argv[0]).name] + sys.argv[1:]),
         'tool_sha256': sha256(Path(__file__).resolve()),
         'created_utc': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S'),
@@ -630,7 +629,7 @@ def export_feeder(rows, sel, out):
             per_table[line.rstrip('\n').split('\t')[fi]] += 1
     n = sum(per_table.values())
     json.dump({
-        'tool': f'ssiselect.py {VERSION}', 'tool_sha256': sha256(Path(__file__).resolve()),
+        'tool': f'ssiselect {VERSION}', 'tool_sha256': sha256(Path(__file__).resolve()),
         'command': shlex.join([Path(sys.argv[0]).name] + sys.argv[1:]),
         'created_utc': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%S'),
         'host': socket.gethostname(), 'database': sx.DB, 'source': 'feeder tables',
@@ -693,7 +692,7 @@ def main():
         print_summary(sel, rows)
         return
     if not rows:
-        die('no datastreams match the selection; run `ssiselect.py options` with fewer filters')
+        die('no datastreams match the selection; run `ssiselect options` with fewer filters')
     if args.cmd == 'catalog':
         write_tsv(args.out, CATALOG_COLS, rows)
         print_summary(sel, rows)

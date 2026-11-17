@@ -8,8 +8,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from essdive import spec, ssi_source, validate, writers   # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))   # run without installing
+from ssidump.essdive import spec, ssi_source, validate, writers   # noqa: E402
 
 
 def catalog_row(site, logger, sensor_id, name, z, table, ds_id):
@@ -170,7 +170,7 @@ class TableColumnNames(unittest.TestCase):
 
 class ProblemFlags(unittest.TestCase):
     def test_apply_problem_flags(self):
-        from essdive import checks
+        from ssidump.essdive import checks
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp) / 'pkg'
             pkg = ssi_source.build_package(ROWS, prefix='t', title='T', fetch=fetch, quality_codes=CODES, sites=SITES)

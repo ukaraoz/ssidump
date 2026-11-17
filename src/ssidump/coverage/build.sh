@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Build the two coverage pages (all years, and by year) for one datastreams export.
 #
-#   ssiexport.py export datastreams --family geochem --out geochemdata_all.tsv
-#   coverage/build.sh geochem    geochemdata_all.tsv       coverage/
-#   coverage/build.sh decagon    decagon_all.tsv.gz        coverage/
-#   coverage/build.sh streamflow streamflow_all.tsv        coverage/
+#   ssiexport export datastreams --family geochem --out geochemdata_all.tsv
+#   src/ssidump/coverage/build.sh geochem    geochemdata_all.tsv       coverage/
+#   src/ssidump/coverage/build.sh decagon    decagon_all.tsv.gz        coverage/
+#   src/ssidump/coverage/build.sh streamflow streamflow_all.tsv        coverage/
 #
 # Writes <dataset>_coverage.html and <dataset>_coverage_by_year.html into the output
 # folder. Datasets and their page text are defined in build_data.py (DATASETS).
@@ -29,7 +29,7 @@ k, label, col, cols = m['key'], m['label'], m['col'], m['cols']
 code = lambda s: f'<code style="font-family:var(--f-data);font-size:12.5px">{html.escape(s)}</code>'
 all_page, year_page = f'{k}_coverage.html', f'{k}_coverage_by_year.html'
 link = lambda href, text: f'<a href="{href}" style="color:var(--accent)">{html.escape(text)}</a>'
-cmd = f'ssiexport.py export datastreams {m["select"]}'
+cmd = f'ssiexport export datastreams {m["select"]}'
 note = html.escape(m['note'])
 pages = {
     'all': dict(tpl='template.html', data='all.json', out=all_page,

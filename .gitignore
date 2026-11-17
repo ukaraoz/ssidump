@@ -17,3 +17,5 @@ exports/*
 !exports/essdive/
 !exports/summaries/
 resources/
+*.egg-info/
+build/

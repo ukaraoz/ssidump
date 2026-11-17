@@ -10,11 +10,11 @@ Everything lives under ROOT (default: the directory holding this script):
 
 Typical use:
 
-    ssidump.py setup                      # once: conda env + cluster
-    ssidump.py restore --replace          # restore the newest ssi_*.dump in ROOT
-    ssidump.py export-csv --schema odmx   # dump tables straight to CSV, no server needed
-    ssidump.py start | stop | status
-    ssidump.py psql                       # interactive shell on the database
+    ssidump setup                      # once: conda env + cluster
+    ssidump restore --replace          # restore the newest ssi_*.dump in ROOT
+    ssidump export-csv --schema odmx   # dump tables straight to CSV, no server needed
+    ssidump start | stop | status
+    ssidump psql                       # interactive shell on the database
 
 The server should run on one node at a time; `start` refuses to run if the
 cluster looks like it is already running on another host (override with --force).
@@ -29,7 +29,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(os.environ.get('SSIDUMP_ROOT', Path(__file__).resolve().parent))
+from .paths import ROOT  # noqa: E402  ($SSIDUMP_ROOT, else the repository, else the current folder)
 PORT = int(os.environ.get('SSIDUMP_PORT', 54329))
 USER = 'ssi'
 DB = 'odmx_lbnlsfa'
@@ -43,7 +43,7 @@ LOGS = ROOT / 'logs'
 HOST_FILE = DATA / 'ssidump_host'
 
 SERVER_CONF = f"""
-# --- added by ssidump.py ---
+# --- added by ssidump ---
 listen_addresses = ''
 port = {PORT}
 unix_socket_directories = '{RUN}'
@@ -64,7 +64,7 @@ def die(msg):
 def pgbin(name):
     exe = ENV / 'bin' / name
     if not exe.exists():
-        die(f'{exe} not found; run `ssidump.py setup` first')
+        die(f'{exe} not found; run `ssidump setup` first')
     return str(exe)
 
 

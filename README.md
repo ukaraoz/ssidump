@@ -30,8 +30,8 @@ status. Copied from a Google Doc in November 2026. See [Resources](#resources).
 module use /global/cfs/cdirs/m4915/roelef_ssidump/modulefiles
 module load ssidump
 
-ssidump.py status        # is the server up?
-ssidump.py start         # if not
+ssidump status        # is the server up?
+ssidump start         # if not
 psql                     # connects to odmx_lbnlsfa
 ```
 
@@ -42,7 +42,7 @@ You can add the `module use` line to `~/.bashrc` so that `module load ssidump` w
 Copy the new `ssi_*.dump` into this directory, then run:
 
 ```bash
-ssidump.py restore --replace
+ssidump restore --replace
 ```
 
 This picks the newest `ssi_*.dump`, unless you pass a path. It restores into a
@@ -55,19 +55,19 @@ useful options:
 
 | Option | Effect |
 |---|---|
-| `ssidump.py restore path/to/x.dump` | Restore a specific dump |
+| `ssidump restore path/to/x.dump` | Restore a specific dump |
 | `--db NAME` | Restore under a different database name, e.g. to keep two dates side by side |
 | `--schema odmx` | Restore only some schemas (repeatable). Foreign keys into schemas you leave out are skipped with a warning. |
 | `-j 8` | Number of parallel restore jobs (default 4) |
 
-`ssidump.py status` shows each database's size and which dump it came from.
+`ssidump status` shows each database's size and which dump it came from.
 
 ## Exporting CSVs without a server
 
 ```bash
-ssidump.py export-csv                                   # all odmx tables -> ./odmx_csv/
-ssidump.py export-csv --table results --table sampling_features
-ssidump.py export-csv --schema feeder --out /some/dir
+ssidump export-csv                                   # all odmx tables -> ./odmx_csv/
+ssidump export-csv --table results --table sampling_features
+ssidump export-csv --schema feeder --out /some/dir
 ```
 
 Each table becomes `<table>.csv` with a header row. Row counts go to `_rowcounts.tsv`.
@@ -92,8 +92,8 @@ If you don't load the module, use this connection string:
 postgresql://ssi@/odmx_lbnlsfa?host=/global/cfs/cdirs/m4915/roelef_ssidump/pgrun&port=54329
 ```
 
-You can also open a shell with `ssidump.py psql`. Arguments after `psql` are passed
-through, e.g. `ssidump.py psql -c "select count(*) from odmx.results"`.
+You can also open a shell with `ssidump psql`. Arguments after `psql` are passed
+through, e.g. `ssidump psql -c "select count(*) from odmx.results"`.
 
 ## What's in the database
 
@@ -110,9 +110,9 @@ which maps sites to their `datastreams` tables.
 Data quirk: `sampling_features.feature_geometry_wkt` stores `POINT(lat lon)`, which
 is reversed from the usual order. Use the `latitude`/`longitude` columns or `feature_geometry` instead.
 
-## Summaries and exports by table family (`ssiexport.py`)
+## Summaries and exports by table family (`ssiexport`)
 
-`ssiexport.py` (standard library only; needs the server running) writes text summaries and
+`ssiexport` (standard library only; needs the server running) writes text summaries and
 TSV exports for groups of tables. It knows three sources:
 
 | Source | What it reads |
@@ -122,29 +122,29 @@ TSV exports for groups of tables. It knows three sources:
 | `samples` | the original geochem specimen results in `odmx` (value + standard deviation + nonDetect/quality codes, specimen and site) |
 
 ```bash
-ssiexport.py families                                           # families, table counts, sizes
-ssiexport.py summary feeder --family influxdb -o influxdb_summary.txt     # stats, column stats, 15 sample rows
-ssiexport.py summary datastreams --family geochem -o geochem_datastreams_summary.txt
-ssiexport.py summary samples --geochem-only -o geochem_samples_summary.txt
-ssiexport.py export feeder --family snotel --out snotel_tables/            # one TSV per table + _manifest.tsv
-ssiexport.py export feeder --family snotel --layout long --out snotel.tsv.gz   # table,index,timestamp,column,value
-ssiexport.py export datastreams --family geochem --out geochemdata_all.tsv
-ssiexport.py export datastreams --family geochem --variables Calcium --sites Evans --fill blank --out ca.tsv
-ssiexport.py export samples --geochem-only --fill blank --out geochem_samples.tsv
+ssiexport families                                           # families, table counts, sizes
+ssiexport summary feeder --family influxdb -o influxdb_summary.txt     # stats, column stats, 15 sample rows
+ssiexport summary datastreams --family geochem -o geochem_datastreams_summary.txt
+ssiexport summary samples --geochem-only -o geochem_samples_summary.txt
+ssiexport export feeder --family snotel --out snotel_tables/            # one TSV per table + _manifest.tsv
+ssiexport export feeder --family snotel --layout long --out snotel.tsv.gz   # table,index,timestamp,column,value
+ssiexport export datastreams --family geochem --out geochemdata_all.tsv
+ssiexport export datastreams --family geochem --variables Calcium --sites Evans --fill blank --out ca.tsv
+ssiexport export samples --geochem-only --fill blank --out geochem_samples.tsv
 ```
 
 Families: `geochem sentinel influxdb decagon ess_dive phenocam flux_stations streamflow nwis snotel
-gradient_sm cr1000` (see `ssiexport.py families` for the patterns). Instead of `--family` you can
+gradient_sm cr1000` (see `ssiexport families` for the patterns). Instead of `--family` you can
 use `--pattern REGEX` or `--table NAME`. Other options: `--rows N` (sample rows, default 15),
 `--start/--end` (time window), `--drop-empty-rows`, `--drop-nan`, `--fill keep|blank|drop` (-9999 codes),
-`--nondetect keep|blank`. Output names ending in `.gz` are compressed. `ssiexport.py <cmd> <source> -h` for all options.
+`--nondetect keep|blank`. Output names ending in `.gz` are compressed. `ssiexport <cmd> <source> -h` for all options.
 
 Geochem caveats: non-detects are stored as 0 (only `samples` carries `censor_code`); -9999 is a
 fill code in some values and SDs; datastream times are local sample time + 7 h.
 
-## Selecting data by owner, data type and sensor (`ssiselect.py`)
+## Selecting data by owner, data type and sensor (`ssiselect`)
 
-`ssiselect.py` (standard library only; needs the server running) picks datastreams by who owns
+`ssiselect` (standard library only; needs the server running) picks datastreams by who owns
 the equipment, what it measures and what sensor made it, and exports them in long format: one
 row per measurement with its site, logger, sensor, owner and feeder table beside it. Every
 export writes three files, so it can be checked and rerun:
@@ -156,12 +156,12 @@ export writes three files, so it can be checked and rerun:
 | `NAME.manifest.json` | the command, selection, SQL filters, database, host, script SHA-256, row count and file checksums |
 
 ```bash
-ssiselect.py options --owner Wielandt                     # what this owner has: data types, sensors, sites
-ssiselect.py catalog --owner Wielandt -o stijn_catalog.tsv
-ssiselect.py hierarchy --owner Wielandt -o stijn_hierarchy.json   # site -> device -> sensors
-ssiselect.py export  --owner Wielandt --data-type soilTemperature --sensor-type "TMP 117" \
+ssiselect options --owner Wielandt                     # what this owner has: data types, sensors, sites
+ssiselect catalog --owner Wielandt -o stijn_catalog.tsv
+ssiselect hierarchy --owner Wielandt -o stijn_hierarchy.json   # site -> device -> sensors
+ssiselect export  --owner Wielandt --data-type soilTemperature --sensor-type "TMP 117" \
                      -o soil_temperature.tsv.gz
-ssiselect.py export  --config soil_temperature.manifest.json -o rerun.tsv.gz
+ssiselect export  --config soil_temperature.manifest.json -o rerun.tsv.gz
 ```
 
 Selection options are repeatable (OR within an option, AND between options):
@@ -183,15 +183,15 @@ feeder table, with empty values flagged `c` (kept by default; `--drop-missing` r
 latitude/longitude/elevation values written into SNOD1 temperature columns on 2023-01-07
 (off-minute timestamps). Filter those with `--valid-min/--valid-max` or after export.
 
-## Full database export (`ssiexportall.py`, `run_restore_export.sh`)
+## Full database export (`ssiexportall`, `run_restore_export.sh`)
 
-`ssiexportall.py` writes every table of the chosen schemas to its own gzipped CSV, in parallel, with
-row counts and checksums. `run_restore_export.sh` does the whole job from the dump in this folder:
+`ssiexportall` writes every table of the chosen schemas to its own gzipped CSV, in parallel, with
+row counts and checksums. `src/ssidump/scripts/run_restore_export.sh` does the whole job from the dump in the project root:
 set up PostgreSQL, restore the dump (skipped if the database already exists), export, stop the server.
 
 ```bash
 cd /global/cfs/cdirs/m4915/roelef_ssidump
-./run_restore_export.sh                # log in run.log; JOBS=16 ./run_restore_export.sh for fewer parallel tables
+src/ssidump/scripts/run_restore_export.sh > run.log 2>&1   # JOBS=16 ... for fewer parallel tables
 ```
 
 It exports `datastreams`, `odmx`, `knowledge` and `feeder` to `exports/tables_<dump date>/`, skips the
@@ -202,44 +202,46 @@ the command, dump, host and per-schema totals. A table that gives no result for 
 and listed as failed; rerunning resumes and retries only what is missing.
 
 ```bash
-ssiexportall.py --schema odmx --out exports/odmx_only -j 8          # any subset by hand
-ssiexportall.py --schema datastreams --exclude 'datastreams:^sentinel_' \
+ssiexportall --schema odmx --out exports/odmx_only -j 8          # any subset by hand
+ssiexportall --schema datastreams --exclude 'datastreams:^sentinel_' \
                 --first 'datastreams:^influxdb_' --out exports/ds -j 40
 ```
 
 The 2026-10-26 dump restored and exported in about 10 minutes on a login node with 40 parallel tables:
 8,962 datastreams tables (338 M rows), 247 odmx, 4 knowledge and 150 feeder tables (22.6 M rows), 1.9 GB.
 
-## ESS-DIVE packages (`essdive/`, `ssi2essdive.py`)
+## ESS-DIVE packages (`src/ssidump/essdive/`, `ssi2essdive`)
 
-`essdive/` is a small standard-library package for writing ESS-DIVE reporting-format packages, kept
+`src/ssidump/essdive/` is a small standard-library package for writing ESS-DIVE reporting-format packages, kept
 separate from the database so other sources can reuse it. It implements the **Sensor Time Series -
 Full v1.0.0** format with **Location Metadata v2.0.0** (both from the
 [ESS-DIVE Workspace](https://github.com/ess-dive-workspace); the official templates are vendored in
-`essdive/templates/`).
+`src/ssidump/essdive/templates/`).
 
 | Module | Role |
 |---|---|
-| `essdive/spec.py` | column orders and verbatim definitions (read from the templates), controlled vocabularies |
-| `essdive/model.py` | source-independent package description: locations, attributes, data files, columns |
-| `essdive/vocab.py` | SSI units / variables / quality codes to ESS-DIVE vocabularies (extend as needed) |
-| `essdive/writers.py` | writes data files, data dictionaries, methods and attributes, locations, FLMD |
-| `essdive/validate.py` | checks a written package (`python3 -m essdive.validate DIR`) |
-| `essdive/ssi_source.py` | builds a package from `ssiselect.py` catalog rows and the datastream tables |
+| `src/ssidump/essdive/spec.py` | column orders and verbatim definitions (read from the templates), controlled vocabularies |
+| `src/ssidump/essdive/model.py` | source-independent package description: locations, attributes, data files, columns |
+| `src/ssidump/essdive/vocab.py` | SSI units / variables / quality codes to ESS-DIVE vocabularies (extend as needed) |
+| `src/ssidump/essdive/writers.py` | writes data files, data dictionaries, methods and attributes, locations, FLMD |
+| `src/ssidump/essdive/validate.py` | checks a written package (`python3 -m ssidump.essdive.validate DIR`) |
+| `src/ssidump/essdive/ssi_source.py` | builds a package from `ssiselect` catalog rows and the datastream tables |
+| `src/ssidump/essdive/checks.py` | problem checks recorded in the manifest; `--problem-flags` cell flags |
+| `src/ssidump/essdive/metadata.py` | one TSV row of database metadata per source table (`ssi2essdive metadata`) |
 | `tests/test_essdive.py` | unit tests without a database (`python3 -m unittest discover -s tests`) |
 
 ```bash
 # SNOD1 soil nodes 026, 028, 030: from the table export (no server), all tables of the three nodes,
 # columns named after the database tables, one file per node and variable
 P=influxdb_SNOD1_soil_nodes
-ssi2essdive.py sensor-full --export exports/tables_2026-10-26 --owner Wielandt \
+ssi2essdive sensor-full --export exports/tables_2026-10-26 --owner Wielandt \
     --site =SG-DTP26 --site =SG-DTP28 --site =SG-DTP30 \
     --prefix $P --title "SNOD1 soil temperature and battery voltage, nodes 026, 028, 030" \
     --config configs/snod1_soil_temperature.json \
     --column-names table --file-names feeder-site --split-variables \
     -o exports/essdive/stijn_wielandt/$P
 # database metadata of the same tables, one row per table
-ssi2essdive.py metadata --export exports/tables_2026-10-26 --owner Wielandt \
+ssi2essdive metadata --export exports/tables_2026-10-26 --owner Wielandt \
     --site =SG-DTP26 --site =SG-DTP28 --site =SG-DTP30 -o exports/essdive/stijn_wielandt/$P/source_tables_metadata
 ```
 
@@ -253,7 +255,7 @@ height, with a `_flag` column carrying the SSI `qa_flag` as `qa_<code>`), a `_se
 (methods, sensors, flags), a `_locations.csv` (each site, and each sensor position as a child
 location with `vertical_position`), and a `_flmd.csv`. Times are ISO 8601 UTC, missing values
 `-9999`. The package is validated after writing, and `<prefix>_manifest.json` beside it records the
-command, source, selection, validation result, checksums and the problems found by `essdive/checks.py`
+command, source, selection, validation result, checksums and the problems found by `src/ssidump/essdive/checks.py`
 (data, metadata and format issues, each with severity and examples; values are never changed).
 `--problem-flags` (off by default) also marks the suspect cells in the data files by adding a flag after
 the database flag, e.g. `qa_z; suspect_shifted_column`, defined in the attributes file. `--config` supplies method descriptions and
@@ -265,65 +267,80 @@ publishing.
 - **Run it on one node at a time.** It accepts connections only through a socket file
   in `pgrun/` on the shared filesystem, with no network listener. So it's only reachable from
   the node it was started on, and two servers on the same data would corrupt it.
-  `ssidump.py start` refuses if it was last started on another node and not stopped.
-  If that node is gone (e.g. after a reboot), use `ssidump.py start --force`.
-- **It stops when its node reboots.** Run `ssidump.py start` again; your data is safe in `pgdata/`.
-- **Run `ssidump.py stop` when you're done for a while.** This matters especially on login nodes.
+  `ssidump start` refuses if it was last started on another node and not stopped.
+  If that node is gone (e.g. after a reboot), use `ssidump start --force`.
+- **It stops when its node reboots.** Run `ssidump start` again; your data is safe in `pgdata/`.
+- **Run `ssidump stop` when you're done for a while.** This matters especially on login nodes.
 - **There are no passwords.** Access is limited by who can read this directory (you and your group).
 - **Heavy jobs:** `-j 4` restores are fine on a login node. For long analyses, start the
-  server inside an interactive or batch job (`ssidump.py start` on the compute node)
+  server inside an interactive or batch job (`ssidump start` on the compute node)
   and stop it before the job ends.
 
 ## Files
 
+Code is in `src/` (an installable Python package, standard library only); everything else is
+data, configuration or output.
+
 ```
-ssidump.py              the tool (Python 3 standard library only)
-ssiexport.py            family summaries and TSV exports (feeder / datastreams / odmx samples)
-ssiselect.py            selection by owner / data type / sensor type, long-format exports with manifests
-ssiexportall.py         every table of chosen schemas to gzipped CSV, with row counts and checksums
-run_restore_export.sh   setup + restore + full export + stop, from the dump in this folder (log: run.log)
-exports/                ssiselect.py outputs (not in git)
-modulefiles/ssidump.lua Lmod module: PATH + PG* connection variables
-ssi_*.dump              dumps (input)
-pgenv/                  conda env with PostgreSQL 17 + PostGIS
-pgdata/                 database cluster (server.log is in here)
-pgrun/                  server socket
-logs/                   restore logs
+pyproject.toml          package definition and the five commands
+src/ssidump/            the code
+  server.py               ssidump       local PostgreSQL server: setup, start, stop, restore
+  export.py               ssiexport     family summaries and TSV exports (feeder / datastreams / odmx samples)
+  selection.py            ssiselect     selection by owner / data type / sensor type, exports with manifests
+  exportall.py            ssiexportall  every table of chosen schemas to CSV, with row counts and checksums
+  essdive_cli.py          ssi2essdive   ESS-DIVE Sensor Time Series - Full packages, table metadata, validation
+  paths.py                where the project root is ($SSIDUMP_ROOT, else this repository, else the current folder)
+  essdive/                ESS-DIVE package model, writers, validator, checks, vendored templates
+  schema_map/             builds schema_map/ssi_schemas.html and table inventories
+  coverage/               builds the coverage/ pages
+  scripts/run_restore_export.sh   setup + restore + full export + stop
+tests/                  unit tests (no database needed)
+configs/                method descriptions and bounds for ESS-DIVE packages
+modulefiles/ssidump.lua Lmod module: commands, PYTHONPATH and PG* connection variables
+schema_map/ssi_schemas.html, coverage/*.html   published pages (GitHub Pages)
+exports/                essdive/ and summaries/ in git; tables_<date>/ (the table export) not
+resources/              reference documents (not in git)
+ssi_*.dump              dumps (input, not in git)
+pgenv/  pgdata/  pgrun/  logs/   PostgreSQL env, cluster (server.log inside), socket, restore logs (not in git)
 ```
+
+Install the commands with `python3 -m pip install -e .` (editable: changes in `src/` take effect
+immediately). Without installing, run any module with `PYTHONPATH=src python3 -m ssidump.<module> ...`.
 
 ## Setting up from scratch / for someone else
 
-To set this up in a new directory, copy `ssidump.py` there and run:
+Clone the repository (or copy `src/` and `pyproject.toml`) into the new directory, install it and run:
 
 ```bash
-export SSIDUMP_ROOT=/path/to/dir                 # defaults to the script's directory
+python3 -m pip install -e .                      # or: export PYTHONPATH=$PWD/src
+export SSIDUMP_ROOT=/path/to/dir                 # defaults to the repository the code is in
 export SSIDUMP_CONDA=/path/to/miniconda3/bin/conda
 export SSIDUMP_PORT=54330                        # choose a free port if others run one too
-python3 ssidump.py setup                         # creates pgenv/ and pgdata/
-python3 ssidump.py restore
+ssidump setup                                    # creates pgenv/ and pgdata/
+ssidump restore
 ```
 
 Then edit `root` (and `PGPORT`, if you changed the port) in a copy of `modulefiles/ssidump.lua`.
 
 ## Schema map
 
-`schema_map/` builds a single HTML page that maps the five schemas in a dump, with a
+`src/ssidump/schema_map/` builds a single HTML page that maps the five schemas in a dump, with a
 clickable explorer for the `odmx` tables. It needs only Python 3 and the schema, not
 a running server:
 
 ```bash
 pg_restore -s -f schema_only.sql ssi_2026-10-26_083001Z.dump   # from pgenv/bin on Perlmutter
-schema_map/build.sh schema_only.sql schema_map/ssi_schemas.html
+src/ssidump/schema_map/build.sh schema_only.sql schema_map/ssi_schemas.html
 ```
 
-`schema_map/table_inventory.py` writes per-schema table inventories (TSV): one row per table
+`src/ssidump/schema_map/table_inventory.py` writes per-schema table inventories (TSV): one row per table
 with its description, columns and keys, and for `datastreams` the site, variable, units and dates
-of each stream. It reads the schema file and a table export from `ssiexportall.py` (for the `odmx`
+of each stream. It reads the schema file and a table export from `ssiexportall` (for the `odmx`
 lookup tables and each schema's `_tables.tsv` row counts); tables missing from the export get an
 empty row count.
 
 ```bash
-python3 schema_map/table_inventory.py schema_only.sql exports/tables_2026-10-26/ table_inventory/
+python3 src/ssidump/schema_map/table_inventory.py schema_only.sql exports/tables_2026-10-26/ table_inventory/
 ```
 
 Table lists, columns, keys and counts all come from the dump. The schema-flow diagram
@@ -337,8 +354,8 @@ rebuilt `schema_map/ssi_schemas.html` to update it.
 
 ## Coverage pages
 
-`coverage/` builds heatmap pages of data-point counts from datastreams exports made
-with `ssiexport.py`. Each source gets two pages: one row per site × depth
+`src/ssidump/coverage/` builds heatmap pages (into `coverage/`) of data-point counts from datastreams exports made
+with `ssiexport`. Each source gets two pages: one row per site × depth
 (`<dataset>_coverage.html`), and one that adds a row for each year under every
 site × depth (`<dataset>_coverage_by_year.html`). Columns are variables (analytes for
 geochem). **Start at the index: <https://ukaraoz.github.io/ssidump/coverage/index.html>**.
@@ -348,14 +365,14 @@ It needs Python 3 with pandas, not a running server. Exports are read in chunks,
 
 ```bash
 # on Perlmutter (server running)
-ssiexport.py export datastreams --family decagon --drop-nan --out decagon_all.tsv.gz
+ssiexport export datastreams --family decagon --drop-nan --out decagon_all.tsv.gz
 # locally, after copying the export
-coverage/build.sh decagon decagon_all.tsv.gz coverage/
-python3 coverage/build_index.py          # rebuild coverage/index.html
+src/ssidump/coverage/build.sh decagon decagon_all.tsv.gz coverage/
+python3 src/ssidump/coverage/build_index.py          # rebuild coverage/index.html
 ```
 
 The export files named below were made on 2026-11-02 and have since been deleted; rebuilding a
-page means re-exporting on Perlmutter (`ssiexport.py`, or the tables in `exports/tables_<date>/`).
+page means re-exporting on Perlmutter (`ssiexport`, or the tables in `exports/tables_<date>/`).
 
 | Dataset | Export selection | Local export file |
 |---|---|---|
@@ -373,7 +390,7 @@ page means re-exporting on Perlmutter (`ssiexport.py`, or the tables in `exports
 | `nwis` | `--family nwis` | `nwis_all.tsv.gz` |
 
 All but geochem use `--drop-nan`. Sentinel and InfluxDB have no pages yet. Page text,
-column groups and colour bins per dataset are in `coverage/build_data.py` (`DATASETS`);
+column groups and colour bins per dataset are in `src/ssidump/coverage/build_data.py` (`DATASETS`);
 datasets without fixed bins get bins from the quantiles of their cell counts. To add a
 source, add an entry there, export it, and run `build.sh` and `build_index.py`. Commit
 and push the rebuilt HTML to update GitHub Pages.

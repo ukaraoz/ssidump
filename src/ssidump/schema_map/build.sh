@@ -2,7 +2,7 @@
 # Build the schema map page from a schema-only SQL file.
 #
 #   pg_restore -s -f schema_only.sql ssi_YYYY-MM-DD_HHMMSSZ.dump
-#   schema_map/build.sh schema_only.sql ssi_schemas.html
+#   src/ssidump/schema_map/build.sh schema_only.sql ssi_schemas.html
 set -euo pipefail
 
 sql=${1:?usage: build.sh schema_only.sql out.html}

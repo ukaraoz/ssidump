@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Summarize and export table families from the odmx_lbnlsfa database.
 
-Needs the local server from ssidump.py to be running (`ssidump.py start`).
+Needs the local server from ssidump to be running (`ssidump start`).
 Python 3 standard library only; talks to the server through the bundled psql.
 
 Three data sources:
@@ -16,19 +16,19 @@ Three data sources:
 
 Examples:
 
-  ssiexport.py families                                   # table families in feeder + datastreams
-  ssiexport.py summary feeder --family influxdb -o influxdb_summary.txt
-  ssiexport.py summary datastreams --family geochem -o geochem_summary.txt
-  ssiexport.py summary samples --geochem-only -o geochem_samples_summary.txt
-  ssiexport.py export feeder --family influxdb --out influxdb_tables/          # one TSV per table
-  ssiexport.py export feeder --family snotel --layout long --out snotel_long.tsv.gz
-  ssiexport.py export datastreams --family geochem --out geochemdata_all.tsv
-  ssiexport.py export samples --geochem-only --out geochem_samples.tsv
-  ssiexport.py export datastreams --family geochem --variables Calcium Sodium --sites Evans
+  ssiexport families                                   # table families in feeder + datastreams
+  ssiexport summary feeder --family influxdb -o influxdb_summary.txt
+  ssiexport summary datastreams --family geochem -o geochem_summary.txt
+  ssiexport summary samples --geochem-only -o geochem_samples_summary.txt
+  ssiexport export feeder --family influxdb --out influxdb_tables/          # one TSV per table
+  ssiexport export feeder --family snotel --layout long --out snotel_long.tsv.gz
+  ssiexport export datastreams --family geochem --out geochemdata_all.tsv
+  ssiexport export samples --geochem-only --out geochem_samples.tsv
+  ssiexport export datastreams --family geochem --variables Calcium Sodium --sites Evans
 
 Table selection (feeder / datastreams): --family NAME (repeatable), --pattern REGEX
 (Python regex, case-insensitive, matched against table names), --table NAME (repeatable).
-Output files ending in .gz are gzip-compressed. Run `ssiexport.py <cmd> -h` for options.
+Output files ending in .gz are gzip-compressed. Run `ssiexport <cmd> -h` for options.
 """
 import argparse
 import csv
@@ -45,7 +45,7 @@ import tempfile
 from collections import Counter, defaultdict
 from pathlib import Path
 
-ROOT = Path(os.environ.get('SSIDUMP_ROOT', Path(__file__).resolve().parent))
+from .paths import ROOT  # noqa: E402  ($SSIDUMP_ROOT, else the repository, else the current folder)
 PORT = int(os.environ.get('SSIDUMP_PORT', os.environ.get('PGPORT', 54329)))
 USER = 'ssi'
 DB = os.environ.get('SSIEXPORT_DB', 'odmx_lbnlsfa')
@@ -245,7 +245,7 @@ def check_server():
     p = subprocess.run(psql_cmd('-Atc', 'select 1'), capture_output=True, text=True)
     if p.returncode:
         die(f'cannot connect to {DB} via {RUN} port {PORT}: {p.stderr.strip()}\n'
-            f'  start the server first:  ssidump.py start')
+            f'  start the server first:  ssidump start')
 
 
 # ---------------------------------------------------------------- table selection
@@ -388,7 +388,7 @@ def feeder_selection(args):
     tabs = {t['name']: t for t in schema_tables('feeder')}
     names = pick(sorted(tabs), args)
     if not names:
-        die('no feeder tables match the selection (see `ssiexport.py families`)')
+        die('no feeder tables match the selection (see `ssiexport families`)')
     return names, tabs
 
 
