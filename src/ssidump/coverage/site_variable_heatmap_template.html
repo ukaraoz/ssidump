@@ -102,7 +102,7 @@ th{color:var(--text-secondary);font-weight:600;position:sticky;top:0;background:
 <div id="tip" role="tooltip"></div>
 <script>
 const D = __DATA__;
-const CELL = 11, GAP = 2, LEFT = 196, TOP = 196, GROUP_GAP = 8;
+const CELL = 11, GAP = 2, LEFT = 196, TOP = 214, GROUP_GAP = 8;
 const svg = document.getElementById('chart'), tip = document.getElementById('tip');
 const NS = 'http://www.w3.org/2000/svg';
 const byKey = new Map(D.cells.map(c => [c.s + '\u0000' + c.v, c]));
@@ -147,7 +147,7 @@ function render() {
   for (const v of usedVars) { if (prevC !== null && v.c !== prevC) x += GROUP_GAP; xs.push(x); x += CELL + GAP; prevC = v.c; }
   let y = TOP, prevT = null;
   for (const s of rows) { if (sortBy === 'type' && prevT !== null && s.type !== prevT) y += GROUP_GAP + 14; ys.push(y); y += CELL + GAP; prevT = s.type; }
-  const W = x + 70, H = y + 16;   // right margin for the last rotated labels
+  const W = x + 20, H = y + 16;
   svg.setAttribute('width', W); svg.setAttribute('height', H); svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   svg.replaceChildren();
   const defs = el('defs');
@@ -169,8 +169,8 @@ function render() {
   // column labels
   usedVars.forEach((v, i) => {
     const name = v.v.length > 30 ? v.v.slice(0, 29) + '…' : v.v;
-    const t = el('text', {x: xs[i] + CELL / 2 + 3, y: TOP - 6, class: 'collab', 'data-v': v.v,
-      transform: `rotate(-60 ${xs[i] + CELL / 2 + 3} ${TOP - 6})`}, name);
+    const t = el('text', {x: xs[i] + CELL / 2 + 3.5, y: TOP - 6, class: 'collab', 'data-v': v.v,
+      transform: `rotate(-90 ${xs[i] + CELL / 2 + 3.5} ${TOP - 6})`}, name);   // vertical, read bottom to top
     t.append(el('title', {}, v.v));
     svg.append(t);
   });

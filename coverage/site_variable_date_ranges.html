@@ -124,7 +124,7 @@ function render() {
   for (const c of cols) { if (prev !== null && c.r !== prev) x += RANGE_GAP; xs.push(x); x += CELL + GAP; prev = c.r; }
   let y = TOP, prevT = null;
   for (const s of rows) { if (prevT !== null && s.type !== prevT) y += TYPE_GAP; ys.push(y); y += CELL + GAP; prevT = s.type; }
-  const W = x + 100, H = y + 12;   // right margin for the last rotated range label
+  const W = x + 20, H = y + 12;
   for (const s of [chart, labels]) s.replaceChildren();
   chart.setAttribute('width', W); chart.setAttribute('height', H); chart.setAttribute('viewBox', `0 0 ${W} ${H}`);
   labels.setAttribute('width', LEFTW); labels.setAttribute('height', H); labels.setAttribute('viewBox', `0 0 ${LEFTW} ${H}`);
@@ -135,8 +135,8 @@ function render() {
     if (i === cols.length || (i > 0 && cols[i].r !== cols[i - 1].r)) {
       const x0 = xs[start] - 2, x1 = xs[i - 1] + CELL + 2;
       if (band++ % 2 === 0) chart.append(el('rect', {x: x0, y: TOP - VARH - 4, width: x1 - x0, height: H - (TOP - VARH - 4), fill: 'var(--band)'}));
-      const cx = (x0 + x1) / 2 + 3, cy = TOP - VARH - 10;
-      const t = el('text', {x: cx, y: cy, class: 'rng', transform: `rotate(-60 ${cx} ${cy})`}, cols[start].r);
+      const cx = (x0 + x1) / 2 + 3.5, cy = TOP - VARH - 10;
+      const t = el('text', {x: cx, y: cy, class: 'rng', transform: `rotate(-90 ${cx} ${cy})`}, cols[start].r);   // vertical
       t.append(el('title', {}, `${cols[start].r}: ${i - start} variable(s)`));
       chart.append(t);
       start = i;
