@@ -1,19 +1,19 @@
-source	description	datastream_tables	feeder_tables	sites	variables	good_measurements	first	last
-geochem	Geochemistry (lab samples)	6961	0	121	48	415905	2010-06	2026-07
-sentinel	Sentinel-2 satellite indices	6785	1357	1357	5	421324	2016-01	2026-07
-influxdb: SNOD1 nodes	SNOD1 snow/soil temperature nodes	670	24	24	3	26587889	2022-09	2025-09
-influxdb: SNOD1 relays	SNOD1 radio relays	12	4	4	2	6850	2022-10	2025-09
-influxdb: OTT disdrometer	Precipitation disdrometer	11	1	1	11	66533577	2023-09	2026-07
-influxdb: TRAIL towers	Trail Creek ET towers A/B (new feed)	62	18	2	27	430894	2025-09	2026-03
-influxdb: cameras	ALPHA/TRAIL camera status	0	4	0	0	0		
-decagon	Decagon soil sensors	595	28	23	23	12598646	2016-10	2024-07
-ess_dive	ESS-DIVE published datasets	26	13	13	2	1842622	2015-10	2019-10
-phenocam	PhenoCam cameras	12	3	3	4	944920	2022-07	2026-03
-towers	Flux / sensor towers	178	12	10	30	2962798	2019-10	2026-03
-metstation	Pumphouse met station	26	1	1	14	6011636	2017-03	2021-12
-streamflow	Stream gauges	16	16	16	1	2315431	2014-09	2025-11
-nwis	USGS NWIS gauges	8	3	3	4	1446326	2007-10	2026-07
-snotel	NRCS SNOTEL	28	5	5	8	2752276	1997-10	2026-07
-gradient_sm	Soil-moisture gradient	24	6	6	2	433819	2015-10	2018-07
-cr1000: weather stations	CR1000 weather stations / loggers	207	8	8	35	59800957	2015-10	2024-12
-cr1000: M1-M4	M1-M4 hillslope loggers (CR1000)	126	4	5	10	58109035	2016-11	2024-04
+source	description	datastream_tables	feeder_tables	sites	variables	good_measurements	first	last	summary_file
+geochem	Geochemistry (lab samples)	6961	0	121	48	415905	2010-06	2026-07	
+sentinel	Sentinel-2 satellite indices	6785	1357	1357	5	421324	2016-01	2026-07	
+influxdb: SNOD1 nodes	SNOD1 snow/soil temperature nodes	670	24	24	3	26587889	2022-09	2025-09	influxdb_snod1_nodes_datastreams.tsv
+influxdb: SNOD1 relays	SNOD1 radio relays	12	4	4	2	6850	2022-10	2025-09	influxdb_snod1_relays_datastreams.tsv
+influxdb: OTT disdrometer	Precipitation disdrometer	11	1	1	11	66533577	2023-09	2026-07	influxdb_ott_disdrometer_datastreams.tsv
+influxdb: TRAIL towers	Trail Creek ET towers A/B (new feed)	62	18	2	27	430894	2025-09	2026-03	influxdb_trail_tower_datastreams.tsv
+influxdb: cameras	ALPHA/TRAIL camera image logs (capture times; feeder tables only)	0	4	0	0	0			influxdb_cameras_feeder.tsv
+decagon	Decagon soil sensors	595	28	23	23	12598646	2016-10	2024-07	decagon_datastreams.tsv
+ess_dive	ESS-DIVE published datasets	26	13	13	2	1842622	2015-10	2019-10	
+phenocam	PhenoCam cameras	12	3	3	4	944920	2022-07	2026-03	phenocam_datastreams.tsv
+towers	Flux / sensor towers	178	12	10	30	2962798	2019-10	2026-03	towers_datastreams.tsv
+metstation	Pumphouse met station	26	1	1	14	6011636	2017-03	2021-12	metstation_datastreams.tsv
+streamflow	Stream gauges	16	16	16	1	2315431	2014-09	2025-11	streamflow_datastreams.tsv
+nwis	USGS NWIS gauges	8	3	3	4	1446326	2007-10	2026-07	
+snotel	NRCS SNOTEL	28	5	5	8	2752276	1997-10	2026-07	
+gradient_sm	Soil-moisture gradient	24	6	6	2	433819	2015-10	2018-07	gradient_sm_datastreams.tsv
+cr1000: weather stations	CR1000 weather stations / loggers	207	8	8	35	59800957	2015-10	2024-12	cr1000_weather_station_datastreams.tsv
+cr1000: M1-M4	M1-M4 hillslope loggers (CR1000)	126	4	5	10	58109035	2016-11	2024-04	cr1000_m1_m4_datastreams.tsv

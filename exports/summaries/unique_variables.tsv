@@ -37,10 +37,11 @@ Precipitation	rainPrecipitationCumulative	m	influxdb_ott_disdrometer, metstation
 Precipitation	rainPrecipitationRate	mm/hr	decagon	1
 Precipitation	signalAmplitude	unitless	influxdb_ott_disdrometer	1
 Snow	snowDepthIntensity	m/s	influxdb_ott_disdrometer	1
+Snow	snowTemperature	degC; Cel	influxdb_snod1_nodes	1
 Snow	snowThickness	m | unknown	cr1000_weather_station, influxdb_trail_tower, metstation, towers	4
 Snow	sonicRangingDistance	m	towers	1
 Soil	soilElectricalConductivity	mS/cm | uS/cm	cr1000_m1_m4, cr1000_weather_station, decagon, metstation	4
-Soil	soilTemperature	degC; Cel	cr1000_m1_m4, cr1000_weather_station, decagon, gradient_sm, influxdb_trail_tower, metstation, towers	7
+Soil	soilTemperature	degC; Cel	cr1000_m1_m4, cr1000_weather_station, decagon, gradient_sm, influxdb_snod1_nodes, influxdb_trail_tower, metstation, towers	8
 Soil	soilVolumetricWaterContent	m^3/m^3 | unitless	cr1000_m1_m4, cr1000_weather_station, decagon, gradient_sm, metstation	5
 Soil	soilWaterPotential	KPa	cr1000_m1_m4, decagon	2
 Ecosystem / energy flux	carbonDioxideConcentration	unitless	towers	1
@@ -75,8 +76,13 @@ Hydrology	waterTurbidityNTU	NTU	cr1000_weather_station	1
 Hydrology	waterpH	unitless	cr1000_weather_station	1
 Hydrology	waterpHmv	V	cr1000_weather_station	1
 Instrument / logger	batteryCharge	%	decagon	1
-Instrument / logger	batteryVoltage	V | mV	cr1000_weather_station, decagon	2
+Instrument / logger	batteryVoltage	V | mV	cr1000_weather_station, decagon, influxdb_snod1_nodes, influxdb_snod1_relays	4
 Instrument / logger	instrumentOrientationX	deg	decagon	1
 Instrument / logger	instrumentOrientationY	deg	decagon	1
 Instrument / logger	referencePressure	KPa	decagon	1
 Instrument / logger	referenceTemperature	degC; Cel	decagon	1
+Instrument / logger	rssi	unitless	influxdb_snod1_relays	1
+Vegetation (phenology)	GCC	-	phenocam	1
+Vegetation (phenology)	blueChannelMean	-	phenocam	1
+Vegetation (phenology)	greenChannelMean	-	phenocam	1
+Vegetation (phenology)	redChannelMean	-	phenocam	1

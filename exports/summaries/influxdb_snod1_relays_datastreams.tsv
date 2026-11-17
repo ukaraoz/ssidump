@@ -1,0 +1,13 @@
+table_name	station	feeder_table	category_sensor	datastream	variable	units	good_measurements	first	last
+influxdb_SNOD1_Relay023_base_RSSi_meas	SG-RLY23 Snodgrass lower ERT transect	influxdb_SNOD1_Relay023	Radio network (RSSI)	base_RSSi	rssi	unitless	346	2022-11-18	2025-09-04
+influxdb_SNOD1_Relay023_node_RSSi_meas	SG-RLY23 Snodgrass lower ERT transect	influxdb_SNOD1_Relay023	Radio network (RSSI)	node_RSSi	rssi	unitless	169	2022-11-23	2025-05-03
+influxdb_SNOD1_Relay023_V_batt_meas	SG-RLY23 Snodgrass lower ERT transect	influxdb_SNOD1_Relay023	Instrument / logger health (battery)	V_batt	batteryVoltage	V	860	2022-10-14	2025-09-06
+influxdb_SNOD1_Relay033_base_RSSi_meas	SG-RLY33 Snodgrass lower ERT transect	influxdb_SNOD1_Relay033	Radio network (RSSI)	base_RSSi	rssi	unitless	0		
+influxdb_SNOD1_Relay033_node_RSSi_meas	SG-RLY33 Snodgrass lower ERT transect	influxdb_SNOD1_Relay033	Radio network (RSSI)	node_RSSi	rssi	unitless	0		
+influxdb_SNOD1_Relay033_V_batt_meas	SG-RLY33 Snodgrass lower ERT transect	influxdb_SNOD1_Relay033	Instrument / logger health (battery)	V_batt	batteryVoltage	V	1	2022-10-14	2022-10-14
+influxdb_SNOD1_Relay035_base_RSSi_meas	SG-RLY35 Snodgrass lower ERT transect	influxdb_SNOD1_Relay035	Radio network (RSSI)	base_RSSi	rssi	unitless	502	2022-11-24	2025-09-07
+influxdb_SNOD1_Relay035_node_RSSi_meas	SG-RLY35 Snodgrass lower ERT transect	influxdb_SNOD1_Relay035	Radio network (RSSI)	node_RSSi	rssi	unitless	577	2022-11-22	2025-09-06
+influxdb_SNOD1_Relay035_V_batt_meas	SG-RLY35 Snodgrass lower ERT transect	influxdb_SNOD1_Relay035	Instrument / logger health (battery)	V_batt	batteryVoltage	V	1252	2022-11-16	2025-09-07
+influxdb_SNOD1_Relay037_base_RSSi_meas	SG-RLY37 Snodgrass lower ERT transect	influxdb_SNOD1_Relay037	Radio network (RSSI)	base_RSSi	rssi	unitless	1364	2022-11-22	2025-09-07
+influxdb_SNOD1_Relay037_node_RSSi_meas	SG-RLY37 Snodgrass lower ERT transect	influxdb_SNOD1_Relay037	Radio network (RSSI)	node_RSSi	rssi	unitless	426	2022-11-15	2025-09-08
+influxdb_SNOD1_Relay037_V_batt_meas	SG-RLY37 Snodgrass lower ERT transect	influxdb_SNOD1_Relay037	Instrument / logger health (battery)	V_batt	batteryVoltage	V	1353	2022-10-14	2025-09-08
